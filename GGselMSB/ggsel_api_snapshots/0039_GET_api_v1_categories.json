@@ -1,0 +1,171 @@
+{
+  "captured_at": "2026-08-13T06:01:01",
+  "method": "GET",
+  "scheme": "https",
+  "host": "seller.ggsel.com",
+  "port": 443,
+  "path": "/api/v1/categories",
+  "url": "https://seller.ggsel.com/api/v1/categories",
+  "request": {
+    "headers": {
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:153.0) Gecko/20100101 Firefox/153.0",
+      "accept": "application/json",
+      "accept-language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
+      "accept-encoding": "gzip, deflate, br, zstd",
+      "referer": "https://seller.ggsel.com/",
+      "x-request-id": "877ffde5-939b-43d7-8192-78620eeb94d1",
+      "locale": "ru",
+      "sentry-trace": "4d73360d6cceaff92d4118192e091edf-9296130be654e826-0",
+      "baggage": "sentry-environment=prod,sentry-public_key=fb774b38cc975e4c64019900e2dd7434,sentry-trace_id=4d73360d6cceaff92d4118192e091edf,sentry-sampled=false,sentry-sample_rand=0.09906615041178202,sentry-sample_rate=0.01",
+      "sec-gpc": "1",
+      "cookie": "_ym_uid=1785148607143170336, _ym_d=1785148607, REFRESH_TOKEN=eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..ZdXO_Aft_QnMPkzo.SCglJg1dQ5gMDss4AW0YuXbXLPgD2yrMUWOefd9odVNdaDCPfof5DfxPAj9-ocPyzIXfrq4q-9UBnfbt9tVVJnVaQ7ppi-yIKfeA0FTT0PBkII7Iz3n9O6tmeS2eG8m6HfmrftlYELTgWZ-xrJo.pc8Ps3bFC070bb939hdTAw, _ym_isad=1, ACCESS_TOKEN=eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..8gBJV9yo_2-2cZ_F.4o4a2qAYtrfbrFg6yqh_pXImnRlY072xbwe2GAuM5cAj-x5LscorIhayyjtxo0CNXaytkl1UYKZParjpNcNQXL9lR2Vud7DA6AbmvtZLLiIu2Gxm9PlCz_fD_NHzxWNsjFGaHpNewCYc51UR6xYOXidh4Xmci_QMU1xi1YMC1ELfvbuXE6CSHmvJbMYMADe7l3st077Hjd6JFJ2n49cs0XeKlbvSNRFYsvYIOPhm29NGJgqbFKKDz0bQ-dtuWt7IOMO-DDD3g6fGXUK3vHTe7udXq18i7Y4_YcF0Hl91V7bXnsEhhwrSyajg2vLClkn2SHxYJTN9XqoWXv8OMbChxfj3N0mCHHzyKmBB5XmF-cK-r1qezdaelTqq5rcjdCDvXgDuqJaslF7_GsXTSQZ4pmdhF2fKhNfDaff2v8MTy5WmdWiOOiMD1qpNe6YBNNsyPdbaHDjlABNYQpZGWRBvMD6Fc8ERkeBNPwO85IlzP5M7bQ.zXlBbtQqEA9xrX3brtvXPA, CHAT_TOKEN=eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnZ3NlbCIsInN1YiI6NzI1NDg4OCwiaWF0IjoxNzg2NTM3ODc1LCJleHAiOjE3ODkyMTYyNzUsImp0aSI6ImRlMDc3M2FjLTlkYjQtNDFmZS04MWUzLTY4MTczZDJlZDczMSIsInVzZXIiOnsiaWQiOjcyNTQ4ODgsImVtYWlsIjoiYXRyZXVtLjUyMDJAZ21haWwuY29tIn0sIm5hbWVzcGFjZSI6IndzX2FwaV9zZWxsZXJfb2ZmaWNlIn0.CpOG7wAfD6Y71i8DXUcidspsYlWYsRSFDM6Iq3DZgYI, mdd=0, _ym_visorc=w, user-role=seller, qrator_ssid2=v2.0.1786586459.522.d94c0d6fHEDHbAMZ|DS9LvCKTJRYFM4L9|6GTAEl53JortADXbnSORHhws7gKjciodtuZ6T1xXMM0JjU2cqpqbbOHoeOPI4S5BTkHcgzjJ55Zdy/bCZpPtCA==-403SllPNEtDIiYwTR7dM0dJPVvo=",
+      "sec-fetch-dest": "empty",
+      "sec-fetch-mode": "cors",
+      "sec-fetch-site": "same-origin",
+      "te": "trailers"
+    },
+    "cookies": {
+      "_ym_uid": "1785148607143170336",
+      "_ym_d": "1785148607",
+      "REFRESH_TOKEN": "eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..ZdXO_Aft_QnMPkzo.SCglJg1dQ5gMDss4AW0YuXbXLPgD2yrMUWOefd9odVNdaDCPfof5DfxPAj9-ocPyzIXfrq4q-9UBnfbt9tVVJnVaQ7ppi-yIKfeA0FTT0PBkII7Iz3n9O6tmeS2eG8m6HfmrftlYELTgWZ-xrJo.pc8Ps3bFC070bb939hdTAw",
+      "_ym_isad": "1",
+      "ACCESS_TOKEN": "eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..8gBJV9yo_2-2cZ_F.4o4a2qAYtrfbrFg6yqh_pXImnRlY072xbwe2GAuM5cAj-x5LscorIhayyjtxo0CNXaytkl1UYKZParjpNcNQXL9lR2Vud7DA6AbmvtZLLiIu2Gxm9PlCz_fD_NHzxWNsjFGaHpNewCYc51UR6xYOXidh4Xmci_QMU1xi1YMC1ELfvbuXE6CSHmvJbMYMADe7l3st077Hjd6JFJ2n49cs0XeKlbvSNRFYsvYIOPhm29NGJgqbFKKDz0bQ-dtuWt7IOMO-DDD3g6fGXUK3vHTe7udXq18i7Y4_YcF0Hl91V7bXnsEhhwrSyajg2vLClkn2SHxYJTN9XqoWXv8OMbChxfj3N0mCHHzyKmBB5XmF-cK-r1qezdaelTqq5rcjdCDvXgDuqJaslF7_GsXTSQZ4pmdhF2fKhNfDaff2v8MTy5WmdWiOOiMD1qpNe6YBNNsyPdbaHDjlABNYQpZGWRBvMD6Fc8ERkeBNPwO85IlzP5M7bQ.zXlBbtQqEA9xrX3brtvXPA",
+      "CHAT_TOKEN": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnZ3NlbCIsInN1YiI6NzI1NDg4OCwiaWF0IjoxNzg2NTM3ODc1LCJleHAiOjE3ODkyMTYyNzUsImp0aSI6ImRlMDc3M2FjLTlkYjQtNDFmZS04MWUzLTY4MTczZDJlZDczMSIsInVzZXIiOnsiaWQiOjcyNTQ4ODgsImVtYWlsIjoiYXRyZXVtLjUyMDJAZ21haWwuY29tIn0sIm5hbWVzcGFjZSI6IndzX2FwaV9zZWxsZXJfb2ZmaWNlIn0.CpOG7wAfD6Y71i8DXUcidspsYlWYsRSFDM6Iq3DZgYI",
+      "mdd": "0",
+      "_ym_visorc": "w",
+      "user-role": "seller",
+      "qrator_ssid2": "v2.0.1786586459.522.d94c0d6fHEDHbAMZ|DS9LvCKTJRYFM4L9|6GTAEl53JortADXbnSORHhws7gKjciodtuZ6T1xXMM0JjU2cqpqbbOHoeOPI4S5BTkHcgzjJ55Zdy/bCZpPtCA==-403SllPNEtDIiYwTR7dM0dJPVvo="
+    },
+    "query": {},
+    "body_text": "",
+    "body_json": null
+  },
+  "response": {
+    "status": 200,
+    "reason": "",
+    "headers": {
+      "server": "QRATOR",
+      "date": "Thu, 13 Aug 2026 02:01:02 GMT",
+      "content-type": "application/json; charset=utf-8",
+      "vary": "Accept-Encoding, rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch",
+      "locale": "ru",
+      "x-request-id": "877ffde5-939b-43d7-8192-78620eeb94d1",
+      "strict-transport-security": "max-age=31536000; includeSubDomains",
+      "content-encoding": "br",
+      "x-xss-protection": "1; mode=block",
+      "referrer-policy": "origin"
+    },
+    "content_type": "application/json; charset=utf-8",
+    "body_text": "{\"data\":[{\"id\":2,\"title\":\"Программное обеспечение\",\"title_with_ancestors\":\"Программное обеспечение\",\"content_type\":\"soft\",\"fee\":0.15,\"kind\":\"main\",\"ggsel_digi_catalog\":23835,\"status\":\"active\",\"ancestor_ids\":[],\"has_children\":true,\"default_payment_system_fee\":0.027,\"text_for_sellers\":null,\"unit\":null},{\"id\":4,\"title\":\"Цифровые товары\",\"title_with_ancestors\":\"Цифровые товары\",\"content_type\":\"other\",\"fee\":0.15,\"kind\":\"main\",\"ggsel_digi_catalog\":28685,\"status\":\"active\",\"ancestor_ids\":[],\"has_children\":true,\"default_payment_system_fee\":0.027,\"text_for_sellers\":null,\"unit\":null},{\"id\":5,\"title\":\"Игры\",\"title_with_ancestors\":\"Игры\",\"content_type\":\"platform\",\"fee\":0.15,\"kind\":\"main\",\"ggsel_digi_catalog\":33627,\"status\":\"active\",\"ancestor_ids\":[],\"has_children\":true,\"default_payment_system_fee\":0.027,\"text_for_sellers\":null,\"unit\":{\"name\":null,\"count\":1,\"only_integer\":true}},{\"id\":27,\"title\":\"Сервисы и соцсети\",\"title_with_ancestors\":\"Сервисы и соцсети\",\"content_type\":\"platform\",\"fee\":0.15,\"kind\":\"main\",\"ggsel_digi_catalog\":33749,\"status\":\"active\",\"ancestor_ids\":[],\"has_children\":true,\"default_payment_system_fee\":0.027,\"text_for_sellers\":null,\"unit\":{\"name\":null,\"count\":1,\"only_integer\":true}},{\"id\":6279,\"title\":\"Новые ниши\",\"title_with_ancestors\":\"Новые ниши\",\"content_type\":\"service\",\"fee\":0.15,\"kind\":\"main\",\"ggsel_digi_catalog\":44264,\"status\":\"active\",\"ancestor_ids\":[],\"has_children\":true,\"default_payment_system_fee\":0.027,\"text_for_sellers\":null,\"unit\":null},{\"id\":30507,\"title\":\"Крипто-индустрия\",\"title_with_ancestors\":\"Крипто-индустрия\",\"content_type\":\"platform\",\"fee\":0.15,\"kind\":\"main\",\"ggsel_digi_catalog\":117160,\"status\":\"active\",\"ancestor_ids\":[],\"has_children\":true,\"default_payment_system_fee\":0.027,\"text_for_sellers\":null,\"unit\":null}],\"pagination\":{\"page\":1,\"limit\":100,\"total_pages\":1,\"total_count\":6}}",
+    "body_json": {
+      "data": [
+        {
+          "id": 2,
+          "title": "Программное обеспечение",
+          "title_with_ancestors": "Программное обеспечение",
+          "content_type": "soft",
+          "fee": 0.15,
+          "kind": "main",
+          "ggsel_digi_catalog": 23835,
+          "status": "active",
+          "ancestor_ids": [],
+          "has_children": true,
+          "default_payment_system_fee": 0.027,
+          "text_for_sellers": null,
+          "unit": null
+        },
+        {
+          "id": 4,
+          "title": "Цифровые товары",
+          "title_with_ancestors": "Цифровые товары",
+          "content_type": "other",
+          "fee": 0.15,
+          "kind": "main",
+          "ggsel_digi_catalog": 28685,
+          "status": "active",
+          "ancestor_ids": [],
+          "has_children": true,
+          "default_payment_system_fee": 0.027,
+          "text_for_sellers": null,
+          "unit": null
+        },
+        {
+          "id": 5,
+          "title": "Игры",
+          "title_with_ancestors": "Игры",
+          "content_type": "platform",
+          "fee": 0.15,
+          "kind": "main",
+          "ggsel_digi_catalog": 33627,
+          "status": "active",
+          "ancestor_ids": [],
+          "has_children": true,
+          "default_payment_system_fee": 0.027,
+          "text_for_sellers": null,
+          "unit": {
+            "name": null,
+            "count": 1,
+            "only_integer": true
+          }
+        },
+        {
+          "id": 27,
+          "title": "Сервисы и соцсети",
+          "title_with_ancestors": "Сервисы и соцсети",
+          "content_type": "platform",
+          "fee": 0.15,
+          "kind": "main",
+          "ggsel_digi_catalog": 33749,
+          "status": "active",
+          "ancestor_ids": [],
+          "has_children": true,
+          "default_payment_system_fee": 0.027,
+          "text_for_sellers": null,
+          "unit": {
+            "name": null,
+            "count": 1,
+            "only_integer": true
+          }
+        },
+        {
+          "id": 6279,
+          "title": "Новые ниши",
+          "title_with_ancestors": "Новые ниши",
+          "content_type": "service",
+          "fee": 0.15,
+          "kind": "main",
+          "ggsel_digi_catalog": 44264,
+          "status": "active",
+          "ancestor_ids": [],
+          "has_children": true,
+          "default_payment_system_fee": 0.027,
+          "text_for_sellers": null,
+          "unit": null
+        },
+        {
+          "id": 30507,
+          "title": "Крипто-индустрия",
+          "title_with_ancestors": "Крипто-индустрия",
+          "content_type": "platform",
+          "fee": 0.15,
+          "kind": "main",
+          "ggsel_digi_catalog": 117160,
+          "status": "active",
+          "ancestor_ids": [],
+          "has_children": true,
+          "default_payment_system_fee": 0.027,
+          "text_for_sellers": null,
+          "unit": null
+        }
+      ],
+      "pagination": {
+        "page": 1,
+        "limit": 100,
+        "total_pages": 1,
+        "total_count": 6
+      }
+    },
+    "size": 455
+  },
+  "n": 39
+}

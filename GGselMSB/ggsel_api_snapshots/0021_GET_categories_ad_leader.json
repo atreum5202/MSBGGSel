@@ -1,0 +1,204 @@
+{
+  "captured_at": "2026-08-13T05:58:19",
+  "method": "GET",
+  "scheme": "https",
+  "host": "api.ggsel.com",
+  "port": 443,
+  "path": "/categories/ad/leader?lang=ru&url=%2F&is_russian_ip=0",
+  "url": "https://api.ggsel.com/categories/ad/leader?lang=ru&url=%2F&is_russian_ip=0",
+  "request": {
+    "headers": {
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:153.0) Gecko/20100101 Firefox/153.0",
+      "accept": "application/json, text/plain, */*",
+      "accept-language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
+      "accept-encoding": "gzip, deflate, br, zstd",
+      "referer": "https://ggsel.net/",
+      "authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnZ3NlbCIsInN1YiI6NzI1NDg4OCwiaWF0IjoxNzg1MTQ4NTg0LCJleHAiOjE3ODc4MjY5ODQsImp0aSI6ImU1ZWM0OGI1LWEzYzMtNGJmZC04YzRmLWFmZWM2NTRhMDI2YyIsInVzZXIiOnsiaWQiOjcyNTQ4ODgsImVtYWlsIjoiYXRyZXVtLjUyMDJAZ21haWwuY29tIn0sIm5hbWVzcGFjZSI6ImFwaV9jdXN0b21lciJ9.se62otYgvcZIfZ3_eHj_r22bVH0vo-36iCv7QwqEXRY",
+      "origin": "https://ggsel.net",
+      "sec-gpc": "1",
+      "sec-fetch-dest": "empty",
+      "sec-fetch-mode": "cors",
+      "sec-fetch-site": "cross-site",
+      "te": "trailers"
+    },
+    "cookies": {},
+    "query": {
+      "lang": "ru",
+      "url": "/",
+      "is_russian_ip": "0"
+    },
+    "body_text": "",
+    "body_json": null
+  },
+  "response": {
+    "status": 200,
+    "reason": "",
+    "headers": {
+      "server": "QRATOR",
+      "date": "Thu, 13 Aug 2026 01:58:19 GMT",
+      "content-type": "application/json",
+      "vary": "Accept-Encoding",
+      "cache-control": "no-cache, private, no-cache, no-store, must-revalidate",
+      "access-control-allow-origin": "*",
+      "access-control-allow-methods": "*",
+      "access-control-allow-headers": "*",
+      "access-control-allow-credentials": "true",
+      "strict-transport-security": "max-age=31536000; includeSubDomains",
+      "content-encoding": "br",
+      "referrer-policy": "origin",
+      "x-xss-protection": "1; mode=block",
+      "pragma": "no-cache",
+      "expires": "0",
+      "set-cookie": "qrator_msid2=v2.0.1786586299.025.d94c0d6frklkg2bv|h2V3pG1ckneUyLSh|kAoYOgUUibHJTbhFl/+q3Mi2y+Y3WecEAmlzV17+LPCtszCSXNDM9VZainrxUHXjSNkzwOTfJrkho+bknUR1yA==-MnZvzXsYQfKMNAGNDlYmYs6weZI=; Max-Age=1000; Path=/; HttpOnly;  Domain=.ggsel.com;"
+    },
+    "content_type": "application/json",
+    "body_text": "{\"data\":{\"id_goods\":4718810,\"url\":\"avtomaticeskoe-popolnenie-steam-rub-uah-kzt-sng-4718810\",\"id_section\":28831,\"name\":\"\\u0410\\u0412\\u0422\\u041e\\u041c\\u0410\\u0422\\u0418\\u0427\\u0415\\u0421\\u041a\\u041e\\u0415 \\u041f\\u041e\\u041f\\u041e\\u041b\\u041d\\u0415\\u041d\\u0418\\u0415 STEAM RUB UAH KZT \\u0421\\u041d\\u0413\",\"images\":\"https:\\/\\/img.ggsel.net\\/4718810\\/original\\/250x250\\/7163334_imgwebp.webp\",\"cnt_sell\":449589,\"rating\":4.9,\"cnt_responses\":4192,\"sale\":null,\"price_brl\":\"1.1\",\"price_wmr\":\"1.1\",\"price_wmz\":\"0.0133\",\"price_wme\":\"0.0115\",\"from_gsellers\":true,\"autoselling\":false,\"discount\":0,\"content_type_id\":6,\"base_category_type_id\":9,\"options\":[{\"id\":209945,\"name\":\"option_text_209945\",\"type\":\"text\",\"label\":\"\\u041b\\u043e\\u0433\\u0438\\u043d \\u0430\\u043a\\u043a\\u0430\\u0443\\u043d\\u0442\\u0430 Steam\",\"comment\":\"\\u0423\\u043a\\u0430\\u0436\\u0438\\u0442\\u0435 \\u043b\\u043e\\u0433\\u0438\\u043d, \\u043a\\u043e\\u0442\\u043e\\u0440\\u044b\\u0439 \\u0438\\u0441\\u043f\\u043e\\u043b\\u044c\\u0437\\u0443\\u0439\\u0442\\u0435 \\u0434\\u043b\\u044f \\u0432\\u0445\\u043e\\u0434\\u0430 \\u0432 \\u0430\\u043a\\u043a\\u0430\\u0443\\u043d\\u0442 Steam\",\"required\":1,\"variants\":[],\"modifier_visible\":0,\"separate_content\":0}],\"options_check\":false,\"collection\":\"unit\",\"prices_unit\":{\"unit_cnt\":1,\"unit_name\":\"Steam RUB\",\"unit_fixed\":false,\"unit_amount\":\"1.1\",\"unit_cnt_max\":50000,\"unit_cnt_min\":50,\"unit_name_en\":\"Steam RUB\",\"unit_name_ru\":\"Steam RUB\",\"unit_currency\":\"RUB\",\"unit_only_int\":true,\"unit_amount_max\":\"55000\",\"unit_amount_min\":\"55\"},\"name_section\":\"\\u0420\\u043e\\u0441\\u0441\\u0438\\u044f\",\"max_cnt_sell\":null,\"unit_name\":\"Steam RUB\",\"price_brl_for_one\":\"1.10\",\"price_wmr_for_one\":\"1.10\",\"price_wmz_for_one\":\"0.0133\",\"price_wme_for_one\":\"0.0115\",\"is_calculator\":false,\"payment_url\":null,\"id_seller\":507217,\"name_seller\":\"Global Games\",\"configurations\":{\"tabs\":[{\"title\":\"Steam\",\"icon\":\"https:\\/\\/img.ggsel.net\\/production\\/uploads\\/leader_goods_platforms\\/full\\/a9d52c00159875a09ac49725bea7030d.svg\"},{\"title\":\"Playstation\",\"icon\":\"https:\\/\\/img.ggsel.net\\/production\\/uploads\\/leader_goods_platforms\\/full\\/8837b259044d3f28a28da64c9fb11341.svg\"},{\"title\":\"Telegram\",\"icon\":\"https:\\/\\/img.ggsel.net\\/production\\/uploads\\/leader_goods_platforms\\/full\\/df26309d988b82f1610b90f46233864e.svg\"},{\"title\":\"Apple\",\"icon\":\"https:\\/\\/img.ggsel.net\\/production\\/uploads\\/leader_goods_platforms\\/full\\/a693165a2259ddd6cd5b79a8fbece0d6.svg\"}],\"currency_types\":[\"RUB\",\"USD\",\"KZT\"],\"active_tab\":\"Steam\",\"active_currency\":\"RUB\",\"title\":\"\\u041f\\u043e\\u043f\\u043e\\u043b\\u043d\\u0435\\u043d\\u0438\\u0435 Steam\",\"redirect_for_filling\":false,\"goods_type\":\"unit\",\"input_info_label\":null,\"popup_info_title\":null,\"popup_info_description\":null,\"select_region_label\":null,\"popup_region_title\":null,\"popup_region_description\":null,\"input_placeholder\":\"\\u041b\\u043e\\u0433\\u0438\\u043d Steam\",\"default_get_amount\":1000,\"active_currency_info\":{\"currency\":\"RUB\",\"name\":\"RU\",\"symbol\":\"\\u20bd\",\"icon\":\"https:\\/\\/img.ggsel.net\\/production\\/uploads\\/leader_goods\\/full\\/a0df390b7fe5c3859fdf850c1e51cc58.png\"},\"currency_info\":[{\"currency\":\"RUB\",\"name\":\"RU\",\"symbol\":\"\\u20bd\",\"icon\":\"https:\\/\\/img.ggsel.net\\/production\\/uploads\\/leader_goods\\/full\\/a0df390b7fe5c3859fdf850c1e51cc58.png\"},{\"currency\":\"USD\",\"name\":\"\\u0421\\u041d\\u0413\",\"symbol\":\"$\",\"icon\":\"https:\\/\\/img.ggsel.net\\/production\\/uploads\\/leader_goods\\/full\\/96721bbcea1eb7ba389ebb0201aa0bc4.png\"},{\"currency\":\"KZT\",\"name\":\"KZ\",\"symbol\":\"\\u20b8\",\"icon\":\"https:\\/\\/img.ggsel.net\\/production\\/uploads\\/leader_goods\\/full\\/a1f012996829b7e933d6a200175ef047.png\"}],\"quick_fill\":[{\"value\":\"200\",\"symbol\":\"\\u20bd\",\"name\":\"200 \\u20bd\"},{\"value\":\"500\",\"symbol\":\"\\u20bd\",\"name\":\"500 \\u20bd\"},{\"value\":\"1000\",\"symbol\":\"\\u20bd\",\"name\":\"1000 \\u20bd\"}],\"leader_layout\":\"horizontal\"}},\"success\":true}",
+    "body_json": {
+      "data": {
+        "id_goods": 4718810,
+        "url": "avtomaticeskoe-popolnenie-steam-rub-uah-kzt-sng-4718810",
+        "id_section": 28831,
+        "name": "АВТОМАТИЧЕСКОЕ ПОПОЛНЕНИЕ STEAM RUB UAH KZT СНГ",
+        "images": "https://img.ggsel.net/4718810/original/250x250/7163334_imgwebp.webp",
+        "cnt_sell": 449589,
+        "rating": 4.9,
+        "cnt_responses": 4192,
+        "sale": null,
+        "price_brl": "1.1",
+        "price_wmr": "1.1",
+        "price_wmz": "0.0133",
+        "price_wme": "0.0115",
+        "from_gsellers": true,
+        "autoselling": false,
+        "discount": 0,
+        "content_type_id": 6,
+        "base_category_type_id": 9,
+        "options": [
+          {
+            "id": 209945,
+            "name": "option_text_209945",
+            "type": "text",
+            "label": "Логин аккаунта Steam",
+            "comment": "Укажите логин, который используйте для входа в аккаунт Steam",
+            "required": 1,
+            "variants": [],
+            "modifier_visible": 0,
+            "separate_content": 0
+          }
+        ],
+        "options_check": false,
+        "collection": "unit",
+        "prices_unit": {
+          "unit_cnt": 1,
+          "unit_name": "Steam RUB",
+          "unit_fixed": false,
+          "unit_amount": "1.1",
+          "unit_cnt_max": 50000,
+          "unit_cnt_min": 50,
+          "unit_name_en": "Steam RUB",
+          "unit_name_ru": "Steam RUB",
+          "unit_currency": "RUB",
+          "unit_only_int": true,
+          "unit_amount_max": "55000",
+          "unit_amount_min": "55"
+        },
+        "name_section": "Россия",
+        "max_cnt_sell": null,
+        "unit_name": "Steam RUB",
+        "price_brl_for_one": "1.10",
+        "price_wmr_for_one": "1.10",
+        "price_wmz_for_one": "0.0133",
+        "price_wme_for_one": "0.0115",
+        "is_calculator": false,
+        "payment_url": null,
+        "id_seller": 507217,
+        "name_seller": "Global Games",
+        "configurations": {
+          "tabs": [
+            {
+              "title": "Steam",
+              "icon": "https://img.ggsel.net/production/uploads/leader_goods_platforms/full/a9d52c00159875a09ac49725bea7030d.svg"
+            },
+            {
+              "title": "Playstation",
+              "icon": "https://img.ggsel.net/production/uploads/leader_goods_platforms/full/8837b259044d3f28a28da64c9fb11341.svg"
+            },
+            {
+              "title": "Telegram",
+              "icon": "https://img.ggsel.net/production/uploads/leader_goods_platforms/full/df26309d988b82f1610b90f46233864e.svg"
+            },
+            {
+              "title": "Apple",
+              "icon": "https://img.ggsel.net/production/uploads/leader_goods_platforms/full/a693165a2259ddd6cd5b79a8fbece0d6.svg"
+            }
+          ],
+          "currency_types": [
+            "RUB",
+            "USD",
+            "KZT"
+          ],
+          "active_tab": "Steam",
+          "active_currency": "RUB",
+          "title": "Пополнение Steam",
+          "redirect_for_filling": false,
+          "goods_type": "unit",
+          "input_info_label": null,
+          "popup_info_title": null,
+          "popup_info_description": null,
+          "select_region_label": null,
+          "popup_region_title": null,
+          "popup_region_description": null,
+          "input_placeholder": "Логин Steam",
+          "default_get_amount": 1000,
+          "active_currency_info": {
+            "currency": "RUB",
+            "name": "RU",
+            "symbol": "₽",
+            "icon": "https://img.ggsel.net/production/uploads/leader_goods/full/a0df390b7fe5c3859fdf850c1e51cc58.png"
+          },
+          "currency_info": [
+            {
+              "currency": "RUB",
+              "name": "RU",
+              "symbol": "₽",
+              "icon": "https://img.ggsel.net/production/uploads/leader_goods/full/a0df390b7fe5c3859fdf850c1e51cc58.png"
+            },
+            {
+              "currency": "USD",
+              "name": "СНГ",
+              "symbol": "$",
+              "icon": "https://img.ggsel.net/production/uploads/leader_goods/full/96721bbcea1eb7ba389ebb0201aa0bc4.png"
+            },
+            {
+              "currency": "KZT",
+              "name": "KZ",
+              "symbol": "₸",
+              "icon": "https://img.ggsel.net/production/uploads/leader_goods/full/a1f012996829b7e933d6a200175ef047.png"
+            }
+          ],
+          "quick_fill": [
+            {
+              "value": "200",
+              "symbol": "₽",
+              "name": "200 ₽"
+            },
+            {
+              "value": "500",
+              "symbol": "₽",
+              "name": "500 ₽"
+            },
+            {
+              "value": "1000",
+              "symbol": "₽",
+              "name": "1000 ₽"
+            }
+          ],
+          "leader_layout": "horizontal"
+        }
+      },
+      "success": true
+    },
+    "size": 1247
+  },
+  "n": 21
+}

@@ -1,0 +1,250 @@
+{
+  "list": [
+    {
+      "id": 2,
+      "title": "Программное обеспечение",
+      "title_with_ancestors": "Программное обеспечение",
+      "content_type": "soft",
+      "fee": 0.15,
+      "kind": "main",
+      "ggsel_digi_catalog": 23835,
+      "status": "active",
+      "ancestor_ids": [],
+      "has_children": true,
+      "default_payment_system_fee": 0.027,
+      "text_for_sellers": null,
+      "unit": null
+    },
+    {
+      "id": 4,
+      "title": "Цифровые товары",
+      "title_with_ancestors": "Цифровые товары",
+      "content_type": "other",
+      "fee": 0.15,
+      "kind": "main",
+      "ggsel_digi_catalog": 28685,
+      "status": "active",
+      "ancestor_ids": [],
+      "has_children": true,
+      "default_payment_system_fee": 0.027,
+      "text_for_sellers": null,
+      "unit": null
+    },
+    {
+      "id": 5,
+      "title": "Игры",
+      "title_with_ancestors": "Игры",
+      "content_type": "platform",
+      "fee": 0.15,
+      "kind": "main",
+      "ggsel_digi_catalog": 33627,
+      "status": "active",
+      "ancestor_ids": [],
+      "has_children": true,
+      "default_payment_system_fee": 0.027,
+      "text_for_sellers": null,
+      "unit": {
+        "name": null,
+        "count": 1,
+        "only_integer": true
+      }
+    },
+    {
+      "id": 27,
+      "title": "Сервисы и соцсети",
+      "title_with_ancestors": "Сервисы и соцсети",
+      "content_type": "platform",
+      "fee": 0.15,
+      "kind": "main",
+      "ggsel_digi_catalog": 33749,
+      "status": "active",
+      "ancestor_ids": [],
+      "has_children": true,
+      "default_payment_system_fee": 0.027,
+      "text_for_sellers": null,
+      "unit": {
+        "name": null,
+        "count": 1,
+        "only_integer": true
+      }
+    },
+    {
+      "id": 6279,
+      "title": "Новые ниши",
+      "title_with_ancestors": "Новые ниши",
+      "content_type": "service",
+      "fee": 0.15,
+      "kind": "main",
+      "ggsel_digi_catalog": 44264,
+      "status": "active",
+      "ancestor_ids": [],
+      "has_children": true,
+      "default_payment_system_fee": 0.027,
+      "text_for_sellers": null,
+      "unit": null
+    },
+    {
+      "id": 30507,
+      "title": "Крипто-индустрия",
+      "title_with_ancestors": "Крипто-индустрия",
+      "content_type": "platform",
+      "fee": 0.15,
+      "kind": "main",
+      "ggsel_digi_catalog": 117160,
+      "status": "active",
+      "ancestor_ids": [],
+      "has_children": true,
+      "default_payment_system_fee": 0.027,
+      "text_for_sellers": null,
+      "unit": null
+    }
+  ],
+  "trees": [
+    {
+      "category_id": 2,
+      "title": "Программное обеспечение",
+      "tree": {
+        "data": [
+          {
+            "id": 2,
+            "title": "Программное обеспечение",
+            "title_with_ancestors": "Программное обеспечение",
+            "content_type": "soft",
+            "fee": 0.15,
+            "kind": "main",
+            "ggsel_digi_catalog": 23835,
+            "status": "active",
+            "ancestor_ids": [],
+            "has_children": true,
+            "default_payment_system_fee": 0.027,
+            "text_for_sellers": null,
+            "unit": null
+          }
+        ]
+      }
+    },
+    {
+      "category_id": 4,
+      "title": "Цифровые товары",
+      "tree": {
+        "data": [
+          {
+            "id": 4,
+            "title": "Цифровые товары",
+            "title_with_ancestors": "Цифровые товары",
+            "content_type": "other",
+            "fee": 0.15,
+            "kind": "main",
+            "ggsel_digi_catalog": 28685,
+            "status": "active",
+            "ancestor_ids": [],
+            "has_children": true,
+            "default_payment_system_fee": 0.027,
+            "text_for_sellers": null,
+            "unit": null
+          }
+        ]
+      }
+    },
+    {
+      "category_id": 5,
+      "title": "Игры",
+      "tree": {
+        "data": [
+          {
+            "id": 5,
+            "title": "Игры",
+            "title_with_ancestors": "Игры",
+            "content_type": "platform",
+            "fee": 0.15,
+            "kind": "main",
+            "ggsel_digi_catalog": 33627,
+            "status": "active",
+            "ancestor_ids": [],
+            "has_children": true,
+            "default_payment_system_fee": 0.027,
+            "text_for_sellers": null,
+            "unit": {
+              "name": null,
+              "count": 1,
+              "only_integer": true
+            }
+          }
+        ]
+      }
+    },
+    {
+      "category_id": 27,
+      "title": "Сервисы и соцсети",
+      "tree": {
+        "data": [
+          {
+            "id": 27,
+            "title": "Сервисы и соцсети",
+            "title_with_ancestors": "Сервисы и соцсети",
+            "content_type": "platform",
+            "fee": 0.15,
+            "kind": "main",
+            "ggsel_digi_catalog": 33749,
+            "status": "active",
+            "ancestor_ids": [],
+            "has_children": true,
+            "default_payment_system_fee": 0.027,
+            "text_for_sellers": null,
+            "unit": {
+              "name": null,
+              "count": 1,
+              "only_integer": true
+            }
+          }
+        ]
+      }
+    },
+    {
+      "category_id": 6279,
+      "title": "Новые ниши",
+      "tree": {
+        "data": [
+          {
+            "id": 6279,
+            "title": "Новые ниши",
+            "title_with_ancestors": "Новые ниши",
+            "content_type": "service",
+            "fee": 0.15,
+            "kind": "main",
+            "ggsel_digi_catalog": 44264,
+            "status": "active",
+            "ancestor_ids": [],
+            "has_children": true,
+            "default_payment_system_fee": 0.027,
+            "text_for_sellers": null,
+            "unit": null
+          }
+        ]
+      }
+    },
+    {
+      "category_id": 30507,
+      "title": "Крипто-индустрия",
+      "tree": {
+        "data": [
+          {
+            "id": 30507,
+            "title": "Крипто-индустрия",
+            "title_with_ancestors": "Крипто-индустрия",
+            "content_type": "platform",
+            "fee": 0.15,
+            "kind": "main",
+            "ggsel_digi_catalog": 117160,
+            "status": "active",
+            "ancestor_ids": [],
+            "has_children": true,
+            "default_payment_system_fee": 0.027,
+            "text_for_sellers": null,
+            "unit": null
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,85 @@
+{
+  "items": [
+    {
+      "id": 20611828,
+      "description": "Вывод средств через cardlink",
+      "created_at": "2026-06-29T16:21:26.774+03:00",
+      "currency_code": "$",
+      "amount": 33.09,
+      "amount_usdt": -33.09,
+      "operation_type": "User withdrawal request"
+    },
+    {
+      "id": 20538339,
+      "description": "Продажа товара, заказ №34544911",
+      "created_at": "2026-06-28T23:30:10.819+03:00",
+      "currency_code": "$",
+      "amount": 11.62414992272025,
+      "amount_usdt": 11.62414992272025,
+      "operation_type": "Orders seller reward"
+    },
+    {
+      "id": 20356560,
+      "description": "Продажа товара, заказ №34360908",
+      "created_at": "2026-06-27T21:30:23.075+03:00",
+      "currency_code": "$",
+      "amount": 11.62414992272025,
+      "amount_usdt": 11.62414992272025,
+      "operation_type": "Orders seller reward"
+    },
+    {
+      "id": 19980910,
+      "description": "Оплата ставки за дату 2026-06-26 на сумму 0.6 для товара [№2388488]\n",
+      "created_at": "2026-06-25T18:48:25.225+03:00",
+      "currency_code": "$",
+      "amount": 0.6,
+      "amount_usdt": -0.6,
+      "operation_type": "Offer summpay"
+    },
+    {
+      "id": 19980846,
+      "description": "Оплата ставки за дату 2026-06-27 на сумму 0.4 для товара [№2388488]\n",
+      "created_at": "2026-06-25T18:47:45.991+03:00",
+      "currency_code": "$",
+      "amount": 0.4,
+      "amount_usdt": -0.4,
+      "operation_type": "Offer summpay"
+    },
+    {
+      "id": 19980845,
+      "description": "Оплата ставки за дату 2026-06-26 на сумму 0.4 для товара [№2388488]\n",
+      "created_at": "2026-06-25T18:47:45.842+03:00",
+      "currency_code": "$",
+      "amount": 0.4,
+      "amount_usdt": -0.4,
+      "operation_type": "Offer summpay"
+    },
+    {
+      "id": 19968079,
+      "description": "Продажа товара, заказ №33982616",
+      "created_at": "2026-06-25T17:00:08.334+03:00",
+      "currency_code": "$",
+      "amount": 12.26186112545173,
+      "amount_usdt": 12.26186112545173,
+      "operation_type": "Orders seller reward"
+    }
+  ],
+  "pages": [
+    {
+      "page": 1,
+      "count": 7,
+      "pagination": {
+        "page": 1,
+        "limit": 50,
+        "total_pages": 999,
+        "total_count": 999
+      }
+    }
+  ],
+  "params": {
+    "page": 1,
+    "limit": 50,
+    "filter[date][from]": "2025-01-01",
+    "filter[date][to]": "2026-08-12"
+  }
+}

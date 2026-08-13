@@ -1,0 +1,995 @@
+{
+  "captcha": {
+    "enabled": true,
+    "max_retries": 1
+  },
+  "cat_fees_updated": 1785484327,
+  "gemini_browser_group": "Gmail",
+  "gemini": {
+    "available": false,
+    "error": 0,
+    "exhausted": 0,
+    "keys": [],
+    "ok": 0,
+    "total": 0
+  },
+  "ggsel": {
+    "api_key_set": true,
+    "base_url": "https://seller.ggsel.com",
+    "retries": 2,
+    "seller_id": 114509777,
+    "timeout": 30
+  },
+  "hard_cap_quantity": 100,
+  "leaf_categories": [
+    {
+      "content_type": "rent",
+      "fee": 0.2,
+      "full_path": "Игры → Dead by Daylight → Аренда аккаунтов → Steam",
+      "id": 62459,
+      "is_leaf": true,
+      "title": "Steam",
+      "url": "/catalog/62459"
+    },
+    {
+      "content_type": "rent",
+      "fee": 0.2,
+      "full_path": "Игры → Tiny Tina's Wonderlands → Аренда аккаунтов → Epic Games Store",
+      "id": 64794,
+      "is_leaf": true,
+      "title": "Epic Games Store",
+      "url": "/catalog/64794"
+    },
+    {
+      "content_type": "keys",
+      "fee": 0.15,
+      "full_path": "Программное обеспечение → Adobe Creative Cloud → Ключи → 2 месяца",
+      "id": 185227,
+      "is_leaf": true,
+      "title": "2 месяца",
+      "url": "/catalog/185227"
+    },
+    {
+      "content_type": "Activation",
+      "fee": 0.04,
+      "full_path": "Игры → Elden Ring → Услуги активации → Steam → SOTE Edition",
+      "id": 100321155,
+      "is_leaf": true,
+      "title": "SOTE Edition",
+      "url": "/catalog/100321155"
+    },
+    {
+      "content_type": "accounts",
+      "fee": 0.14,
+      "full_path": "Игры → Clash of Clans → Аккаунты → 18 TX",
+      "id": 100310159,
+      "is_leaf": true,
+      "title": "18 TX",
+      "url": "/catalog/100310159"
+    },
+    {
+      "content_type": "Purchase-to-your-account",
+      "fee": 0.02,
+      "full_path": "Игры → Battlefield 2042 → Покупка на ваш аккаунт → Origin",
+      "id": 107116,
+      "is_leaf": true,
+      "title": "Origin",
+      "url": "/catalog/107116"
+    },
+    {
+      "content_type": "gift-card",
+      "fee": 0.02,
+      "full_path": "Игры → Fortnite → Gift Cards",
+      "id": 48129,
+      "is_leaf": true,
+      "title": "Gift Cards",
+      "url": "/catalog/48129"
+    },
+    {
+      "content_type": "currency",
+      "fee": 0.04,
+      "full_path": "Игры → Mobile Legends: Bang Bang → Diamonds → Россия → 165",
+      "id": 100319011,
+      "is_leaf": true,
+      "title": "165",
+      "url": "/catalog/100319011"
+    },
+    {
+      "content_type": "service",
+      "fee": 0.07,
+      "full_path": "Игры → Forza Horizon 5 → Прокачка",
+      "id": 37693,
+      "is_leaf": true,
+      "title": "Прокачка",
+      "url": "/catalog/37693"
+    },
+    {
+      "content_type": "accounts",
+      "fee": 0.14,
+      "full_path": "Сервисы и соцсети → UFC Fight Pass → Аккаунты",
+      "id": 46405,
+      "is_leaf": true,
+      "title": "Аккаунты",
+      "url": "/catalog/46405"
+    },
+    {
+      "content_type": "rent",
+      "fee": 0.2,
+      "full_path": "Игры → Cyberpunk 2077 → Аренда аккаунтов → Xbox / Microsoft Store",
+      "id": 55817,
+      "is_leaf": true,
+      "title": "Xbox / Microsoft Store",
+      "url": "/catalog/55817"
+    },
+    {
+      "content_type": "item",
+      "fee": 0.001,
+      "full_path": "Игры → Roblox → Toilet Tower Defense → Юниты → Godly",
+      "id": 120745,
+      "is_leaf": true,
+      "title": "Godly",
+      "url": "/catalog/120745"
+    },
+    {
+      "content_type": "accounts",
+      "fee": 0.001,
+      "full_path": "Игры → Roblox → ZO SAMURAI SWORD FIGHTING → Аккаунты",
+      "id": 168379,
+      "is_leaf": true,
+      "title": "Аккаунты",
+      "url": "/catalog/168379"
+    },
+    {
+      "content_type": "currency",
+      "fee": 0.001,
+      "full_path": "Игры → Roblox → Rebirth Champions: Ultimate → Токены",
+      "id": 156931,
+      "is_leaf": true,
+      "title": "Токены",
+      "url": "/catalog/156931"
+    },
+    {
+      "content_type": "keys",
+      "fee": 0.02,
+      "full_path": "Игры → Elden Ring → Ключи и гифты → PlayStation → Deluxe Edition",
+      "id": 100320475,
+      "is_leaf": true,
+      "title": "Deluxe Edition",
+      "url": "/catalog/100320475"
+    },
+    {
+      "content_type": "dlc",
+      "fee": 0.04,
+      "full_path": "Игры → Dead by Daylight → DLC → Steam → All Things Wicked Chapter",
+      "id": 117794,
+      "is_leaf": true,
+      "title": "All Things Wicked Chapter",
+      "url": "/catalog/117794"
+    },
+    {
+      "content_type": "rent",
+      "fee": 0.2,
+      "full_path": "Игры → Chivalry 2 → Аренда аккаунтов → Xbox / Microsoft Store",
+      "id": 70292,
+      "is_leaf": true,
+      "title": "Xbox / Microsoft Store",
+      "url": "/catalog/70292"
+    },
+    {
+      "content_type": "cards",
+      "fee": 0.05,
+      "full_path": "Сервисы и соцсети → Netflix → Карты оплаты → Switzerland",
+      "id": 138374,
+      "is_leaf": true,
+      "title": "Switzerland",
+      "url": "/catalog/138374"
+    },
+    {
+      "content_type": "accounts",
+      "fee": 0.14,
+      "full_path": "Сервисы и соцсети → Netflix → Личные аккаунты → Basic → 6 месяцев",
+      "id": 138635,
+      "is_leaf": true,
+      "title": "6 месяцев",
+      "url": "/catalog/138635"
+    },
+    {
+      "content_type": "dlc",
+      "fee": 0.04,
+      "full_path": "Игры → Dead by Daylight → DLC → Steam → Chucky Chapter",
+      "id": 117799,
+      "is_leaf": true,
+      "title": "Chucky Chapter",
+      "url": "/catalog/117799"
+    },
+    {
+      "content_type": "accounts",
+      "fee": 0.14,
+      "full_path": "Игры → Diablo 3 → Аккаунты → Nintendo Switch",
+      "id": 26761,
+      "is_leaf": true,
+      "title": "Nintendo Switch",
+      "url": "/catalog/26761"
+    },
+    {
+      "content_type": "item",
+      "fee": 0.02,
+      "full_path": "Сервисы и соцсети → Telegram → Подарки → Perfume Bottle",
+      "id": 145495,
+      "is_leaf": true,
+      "title": "Perfume Bottle",
+      "url": "/catalog/145495"
+    },
+    {
+      "content_type": "promocods",
+      "fee": 0.02,
+      "full_path": "Сервисы и соцсети → Google Ads → Промокоды",
+      "id": 25940,
+      "is_leaf": true,
+      "title": "Промокоды",
+      "url": "/catalog/25940"
+    },
+    {
+      "content_type": "dlc",
+      "fee": 0.02,
+      "full_path": "Игры → Destiny 2 → DLC → Xbox / Microsoft Store → Коллекция Арсенал",
+      "id": 167369,
+      "is_leaf": true,
+      "title": "Коллекция Арсенал",
+      "url": "/catalog/167369"
+    },
+    {
+      "content_type": "Activation",
+      "fee": 0.02,
+      "full_path": "Сервисы и соцсети → Discord → Украшения → Arcade",
+      "id": 124206,
+      "is_leaf": true,
+      "title": "Arcade",
+      "url": "/catalog/124206"
+    },
+    {
+      "content_type": "item",
+      "fee": 0.001,
+      "full_path": "Игры → Roblox → Grow a Garden → Game Pass",
+      "id": 165117,
+      "is_leaf": true,
+      "title": "Game Pass",
+      "url": "/catalog/165117"
+    },
+    {
+      "content_type": "dlc",
+      "fee": 0.02,
+      "full_path": "Игры → Sherlock Holmes Chapter One → DLC → PlayStation",
+      "id": 51218,
+      "is_leaf": true,
+      "title": "PlayStation",
+      "url": "/catalog/51218"
+    },
+    {
+      "content_type": "Purchase-to-your-account",
+      "fee": 0.02,
+      "full_path": "Игры → Webbed → Покупка на ваш аккаунт → Xbox / Microsoft Store",
+      "id": 120216,
+      "is_leaf": true,
+      "title": "Xbox / Microsoft Store",
+      "url": "/catalog/120216"
+    },
+    {
+      "content_type": "offline-accounts",
+      "fee": 0.2,
+      "full_path": "Игры → Tiny Tina's Wonderlands → Оффлайн аккаунты → Epic Games Store",
+      "id": 61521,
+      "is_leaf": true,
+      "title": "Epic Games Store",
+      "url": "/catalog/61521"
+    },
+    {
+      "content_type": "currency",
+      "fee": 0.04,
+      "full_path": "Игры → Mobile Legends: Bang Bang → Diamonds → Россия → 1155",
+      "id": 100319017,
+      "is_leaf": true,
+      "title": "1155",
+      "url": "/catalog/100319017"
+    },
+    {
+      "content_type": "item",
+      "fee": 0.025,
+      "full_path": "Игры → Калибр → Донат → Наборы",
+      "id": 162373,
+      "is_leaf": true,
+      "title": "Наборы",
+      "url": "/catalog/162373"
+    },
+    {
+      "content_type": "subscription-services",
+      "fee": 0.2,
+      "full_path": "Программное обеспечение → Canva Pro → Инвайты",
+      "id": 44109,
+      "is_leaf": true,
+      "title": "Инвайты",
+      "url": "/catalog/44109"
+    },
+    {
+      "content_type": "currency",
+      "fee": 0.025,
+      "full_path": "Игры → Clash of Clans → Гемы → 500",
+      "id": 134293,
+      "is_leaf": true,
+      "title": "500",
+      "url": "/catalog/134293"
+    },
+    {
+      "content_type": "service",
+      "fee": 0.07,
+      "full_path": "Игры → Assassins Creed (2007) → Услуги",
+      "id": 27934,
+      "is_leaf": true,
+      "title": "Услуги",
+      "url": "/catalog/27934"
+    },
+    {
+      "content_type": "rent",
+      "fee": 0.2,
+      "full_path": "Игры → Among Us → Аренда аккаунтов → Epic Games Store",
+      "id": 65069,
+      "is_leaf": true,
+      "title": "Epic Games Store",
+      "url": "/catalog/65069"
+    },
+    {
+      "content_type": "service",
+      "fee": 0.025,
+      "full_path": "Игры → Clash of Clans → Прокачка → Деревня строителя",
+      "id": 61579,
+      "is_leaf": true,
+      "title": "Деревня строителя",
+      "url": "/catalog/61579"
+    },
+    {
+      "content_type": "keys",
+      "fee": 0.02,
+      "full_path": "Игры → Far Cry 6 → Ключи и гифты → Xbox / Microsoft Store → GOTY Edition",
+      "id": 89039,
+      "is_leaf": true,
+      "title": "GOTY Edition",
+      "url": "/catalog/89039"
+    },
+    {
+      "content_type": "service",
+      "fee": 0.05,
+      "full_path": "Сервисы и соцсети → X(Twitter) → Накрутка → Комментарии",
+      "id": 100314305,
+      "is_leaf": true,
+      "title": "Комментарии",
+      "url": "/catalog/100314305"
+    },
+    {
+      "content_type": "accounts",
+      "fee": 0.2,
+      "full_path": "Игры → Age of Empires II : HD Edition → Аккаунты → Steam",
+      "id": 23029,
+      "is_leaf": true,
+      "title": "Steam",
+      "url": "/catalog/23029"
+    },
+    {
+      "content_type": "keys",
+      "fee": 0.08,
+      "full_path": "Программное обеспечение → JetBrains → ReSharper → Ключи",
+      "id": 140347,
+      "is_leaf": true,
+      "title": "Ключи",
+      "url": "/catalog/140347"
+    },
+    {
+      "content_type": "item",
+      "fee": 0.001,
+      "full_path": "Игры → Roblox → Jailbreak → Предметы",
+      "id": 156846,
+      "is_leaf": true,
+      "title": "Предметы",
+      "url": "/catalog/156846"
+    },
+    {
+      "content_type": "item",
+      "fee": 0.001,
+      "full_path": "Игры → Roblox → Criminality → Game Pass",
+      "id": 156805,
+      "is_leaf": true,
+      "title": "Game Pass",
+      "url": "/catalog/156805"
+    },
+    {
+      "content_type": "offline-accounts",
+      "fee": 0.2,
+      "full_path": "Игры → NBA 2K22 → Оффлайн аккаунты → PlayStation",
+      "id": 62648,
+      "is_leaf": true,
+      "title": "PlayStation",
+      "url": "/catalog/62648"
+    },
+    {
+      "content_type": "Activation",
+      "fee": 0.02,
+      "full_path": "Игры → Beyond Good and Evil → Услуги активации → Xbox / Microsoft Store",
+      "id": 102150,
+      "is_leaf": true,
+      "title": "Xbox / Microsoft Store",
+      "url": "/catalog/102150"
+    },
+    {
+      "content_type": "keys",
+      "fee": 0.02,
+      "full_path": "Программное обеспечение → Revo Uninstaller → Revo Uninstaller Pro → Ключи",
+      "id": 38844,
+      "is_leaf": true,
+      "title": "Ключи",
+      "url": "/catalog/38844"
+    },
+    {
+      "content_type": "keys",
+      "fee": 0.02,
+      "full_path": "Игры → God of War → Ключи и гифты → Playstation",
+      "id": 137990,
+      "is_leaf": true,
+      "title": "Playstation",
+      "url": "/catalog/137990"
+    },
+    {
+      "content_type": "rent",
+      "fee": 0.2,
+      "full_path": "Игры → The Riftbreaker → Аренда аккаунтов → Steam",
+      "id": 77596,
+      "is_leaf": true,
+      "title": "Steam",
+      "url": "/catalog/77596"
+    },
+    {
+      "content_type": "item",
+      "fee": 0.01,
+      "full_path": "Игры → Counter-Strike 2 (CS 2) → Скины → Пистолеты-пулемёты → MAC-10",
+      "id": 77643,
+      "is_leaf": true,
+      "title": "MAC-10",
+      "url": "/catalog/77643"
+    },
+    {
+      "content_type": "currency",
+      "fee": 0.04,
+      "full_path": "Игры → Mobile Legends: Bang Bang → Diamonds → Malaysia → 140",
+      "id": 100319033,
+      "is_leaf": true,
+      "title": "140",
+      "url": "/catalog/100319033"
+    },
+    {
+      "content_type": "currency",
+      "fee": 0.04,
+      "full_path": "Игры → Mobile Legends: Bang Bang → Diamonds → Indonesia → 408",
+      "id": 100318945,
+      "is_leaf": true,
+      "title": "408",
+      "url": "/catalog/100318945"
+    },
+    {
+      "content_type": "keys",
+      "fee": 0.02,
+      "full_path": "Игры → Elden Ring → Ключи и гифты → Xbox / Microsoft Store → Standard Edition",
+      "id": 33959,
+      "is_leaf": true,
+      "title": "Standard Edition",
+      "url": "/catalog/33959"
+    },
+    {
+      "content_type": "accounts",
+      "fee": 0.2,
+      "full_path": "Игры → Jurassic World Evolution 2 → Аккаунты → Steam",
+      "id": 33687,
+      "is_leaf": true,
+      "title": "Steam",
+      "url": "/catalog/33687"
+    },
+    {
+      "content_type": "rent",
+      "fee": 0.2,
+      "full_path": "Игры → Tales of Arise → Аренда аккаунтов → Xbox / Microsoft Store",
+      "id": 72770,
+      "is_leaf": true,
+      "title": "Xbox / Microsoft Store",
+      "url": "/catalog/72770"
+    },
+    {
+      "content_type": "keys",
+      "fee": 0.09,
+      "full_path": "Программное обеспечение → OkayFreedom Premium VPN → Ключи активации",
+      "id": 38770,
+      "is_leaf": true,
+      "title": "Ключи активации",
+      "url": "/catalog/38770"
+    },
+    {
+      "content_type": "keys",
+      "fee": 0.09,
+      "full_path": "Програмное обеспечение → ZPN → Ключи",
+      "id": 47807,
+      "is_leaf": true,
+      "title": "Ключи",
+      "url": "/catalog/47807"
+    },
+    {
+      "content_type": "currency",
+      "fee": 0.001,
+      "full_path": "Игры → Roblox → Adopt Me! → Баксы",
+      "id": 122944,
+      "is_leaf": true,
+      "title": "Баксы",
+      "url": "/catalog/122944"
+    },
+    {
+      "content_type": "keys",
+      "fee": 0.025,
+      "full_path": "Игры → Grand Theft Auto: The Trilogy → Ключи и гифты → Nintendo Switch",
+      "id": 58967,
+      "is_leaf": true,
+      "title": "Nintendo Switch",
+      "url": "/catalog/58967"
+    },
+    {
+      "content_type": "accounts",
+      "fee": 0.001,
+      "full_path": "Игры → Roblox → Tower Defense RNG → Аккаунты",
+      "id": 168451,
+      "is_leaf": true,
+      "title": "Аккаунты",
+      "url": "/catalog/168451"
+    },
+    {
+      "content_type": "keys",
+      "fee": 0.02,
+      "full_path": "Игры → Escape from Tarkov → Ключи и гифты → Battlestate Games → Prepare for Escape Edition",
+      "id": 88998,
+      "is_leaf": true,
+      "title": "Prepare for Escape Edition",
+      "url": "/catalog/88998"
+    },
+    {
+      "content_type": "subscription-services",
+      "fee": 0.04,
+      "full_path": "Сервисы и соцсети → Google Play → Подарочные карты → Другие страны",
+      "id": 121069,
+      "is_leaf": true,
+      "title": "Другие страны",
+      "url": "/catalog/121069"
+    },
+    {
+      "content_type": "accounts",
+      "fee": 0.14,
+      "full_path": "Сервисы и соцсети → GeForce Now → Аккаунты → 1 час",
+      "id": 106379,
+      "is_leaf": true,
+      "title": "1 час",
+      "url": "/catalog/106379"
+    },
+    {
+      "content_type": "currency",
+      "fee": 0.015,
+      "full_path": "Игры → Clash Royale → Комбо-наборы",
+      "id": 100307601,
+      "is_leaf": true,
+      "title": "Комбо-наборы",
+      "url": "/catalog/100307601"
+    },
+    {
+      "content_type": "Purchase-to-your-account",
+      "fee": 0.03,
+      "full_path": "Игры → Call of Duty: Vanguard (2021) → Покупка на ваш аккаунт → Battle.net",
+      "id": 114283,
+      "is_leaf": true,
+      "title": "Battle.net",
+      "url": "/catalog/114283"
+    },
+    {
+      "content_type": "service",
+      "fee": 0.3,
+      "full_path": "Крипто-индустрия → OKX Racer → Рефералы",
+      "id": 120243,
+      "is_leaf": true,
+      "title": "Рефералы",
+      "url": "/catalog/120243"
+    },
+    {
+      "content_type": "service",
+      "fee": 0.3,
+      "full_path": "Крипто-индустрия → PAWS → Рефералы",
+      "id": 127574,
+      "is_leaf": true,
+      "title": "Рефералы",
+      "url": "/catalog/127574"
+    },
+    {
+      "content_type": "keys",
+      "fee": 0.02,
+      "full_path": "Игры → Darkest Dungeon 2 → Ключи и гифты → Xbox / Microsoft Store → Oblivion Edition",
+      "id": 100317687,
+      "is_leaf": true,
+      "title": "Oblivion Edition",
+      "url": "/catalog/100317687"
+    },
+    {
+      "content_type": "rent",
+      "fee": 0.2,
+      "full_path": "Игры → Tiny Tina's Wonderlands → Аренда аккаунтов → Steam",
+      "id": 64791,
+      "is_leaf": true,
+      "title": "Steam",
+      "url": "/catalog/64791"
+    },
+    {
+      "content_type": "cards",
+      "fee": 0.05,
+      "full_path": "Сервисы и соцсети → Netflix → Карты оплаты → США",
+      "id": 114317,
+      "is_leaf": true,
+      "title": "США",
+      "url": "/catalog/114317"
+    },
+    {
+      "content_type": "Purchase-to-your-account",
+      "fee": 0.02,
+      "full_path": "Игры → Gears of War → Покупка на ваш аккаунт → Xbox / Microsoft Store",
+      "id": 116905,
+      "is_leaf": true,
+      "title": "Xbox / Microsoft Store",
+      "url": "/catalog/116905"
+    },
+    {
+      "content_type": "rent",
+      "fee": 0.2,
+      "full_path": "Игры → Riders Republic → Аренда аккаунтов → Epic Games Store",
+      "id": 101435,
+      "is_leaf": true,
+      "title": "Epic Games Store",
+      "url": "/catalog/101435"
+    },
+    {
+      "content_type": "accounts",
+      "fee": 0.2,
+      "full_path": "Игры → Riders Republic → Аккаунты → Epic Games Store",
+      "id": 33812,
+      "is_leaf": true,
+      "title": "Epic Games Store",
+      "url": "/catalog/33812"
+    },
+    {
+      "content_type": "dlc",
+      "fee": 0.03,
+      "full_path": "Игры → Riders Republic → DLC → Ubisoft Store",
+      "id": 50352,
+      "is_leaf": true,
+      "title": "Ubisoft Store",
+      "url": "/catalog/50352"
+    },
+    {
+      "content_type": "keys",
+      "fee": 0.02,
+      "full_path": "Игры → Borderlands 3 → Ключи и гифты → Xbox / Microsoft Store → Next Level Edition",
+      "id": 87509,
+      "is_leaf": true,
+      "title": "Next Level Edition",
+      "url": "/catalog/87509"
+    },
+    {
+      "content_type": "Activation",
+      "fee": 0.025,
+      "full_path": "Игры → Калибр → Донат → Премиум",
+      "id": 162377,
+      "is_leaf": true,
+      "title": "Премиум",
+      "url": "/catalog/162377"
+    },
+    {
+      "content_type": "dlc",
+      "fee": 0.04,
+      "full_path": "Игры → Dead by Daylight → DLC → Steam → The Saw Chapter",
+      "id": 117813,
+      "is_leaf": true,
+      "title": "The Saw Chapter",
+      "url": "/catalog/117813"
+    },
+    {
+      "content_type": "dlc",
+      "fee": 0.03,
+      "full_path": "Игры → Dying Light 2: Stay Human → DLC → Epic Games Store",
+      "id": 49485,
+      "is_leaf": true,
+      "title": "Epic Games Store",
+      "url": "/catalog/49485"
+    },
+    {
+      "content_type": "Purchase-to-your-account",
+      "fee": 0.03,
+      "full_path": "Игры → Cyberpunk 2077 → Покупка на ваш аккаунт → GOG → Standard Edition",
+      "id": 112936,
+      "is_leaf": true,
+      "title": "Standard Edition",
+      "url": "/catalog/112936"
+    },
+    {
+      "content_type": "accounts",
+      "fee": 0.2,
+      "full_path": "Игры → Diablo 3 → Аккаунты → Xbox / Microsoft Store",
+      "id": 36496,
+      "is_leaf": true,
+      "title": "Xbox / Microsoft Store",
+      "url": "/catalog/36496"
+    },
+    {
+      "content_type": "rent",
+      "fee": 0.2,
+      "full_path": "Игры → DayZ → Аренда аккаунтов → PlayStation",
+      "id": 56530,
+      "is_leaf": true,
+      "title": "PlayStation",
+      "url": "/catalog/56530"
+    },
+    {
+      "content_type": "rent",
+      "fee": 0.2,
+      "full_path": "Игры → Age of Empires II : Definitive Edition → Аренда аккаунтов → Steam",
+      "id": 77201,
+      "is_leaf": true,
+      "title": "Steam",
+      "url": "/catalog/77201"
+    },
+    {
+      "content_type": "service",
+      "fee": 0.07,
+      "full_path": "Сервисы и соцсети → Google Play → Смена региона",
+      "id": 105766,
+      "is_leaf": true,
+      "title": "Смена региона",
+      "url": "/catalog/105766"
+    },
+    {
+      "content_type": "accounts",
+      "fee": 0.3,
+      "full_path": "Сервисы и соцсети → Disney → Аккаунты",
+      "id": 43151,
+      "is_leaf": true,
+      "title": "Аккаунты",
+      "url": "/catalog/43151"
+    },
+    {
+      "content_type": "Purchase-to-your-account",
+      "fee": 0.02,
+      "full_path": "Сервисы и соцсети → Udemy → Покупка на ваш аккаунт",
+      "id": 180585,
+      "is_leaf": true,
+      "title": "Покупка на ваш аккаунт",
+      "url": "/catalog/180585"
+    },
+    {
+      "content_type": "currency",
+      "fee": 0.04,
+      "full_path": "Игры → Mobile Legends: Bang Bang → Diamonds → Turkey → 494",
+      "id": 100319125,
+      "is_leaf": true,
+      "title": "494",
+      "url": "/catalog/100319125"
+    },
+    {
+      "content_type": "accounts",
+      "fee": 0.14,
+      "full_path": "Сервисы и соцсети → Udemy → Аккаунты",
+      "id": 47851,
+      "is_leaf": true,
+      "title": "Аккаунты",
+      "url": "/catalog/47851"
+    },
+    {
+      "content_type": "item",
+      "fee": 0.02,
+      "full_path": "Игры → Guild Wars 2 → Внутриигровые предметы",
+      "id": 27984,
+      "is_leaf": true,
+      "title": "Внутриигровые предметы",
+      "url": "/catalog/27984"
+    },
+    {
+      "content_type": "bonus-codes",
+      "fee": 0.045,
+      "full_path": "Сервисы и соцсети → Steam Wallet → Пополнение скинами → Китай",
+      "id": 128158,
+      "is_leaf": true,
+      "title": "Китай",
+      "url": "/catalog/128158"
+    },
+    {
+      "content_type": "other",
+      "fee": 0.02,
+      "full_path": "Цифровые товары → Дизайн-проекты → Стикеры на заказ",
+      "id": 100323853,
+      "is_leaf": true,
+      "title": "Стикеры на заказ",
+      "url": "/catalog/100323853"
+    },
+    {
+      "content_type": "accounts",
+      "fee": 0.2,
+      "full_path": "Игры → Warframe → Аккаунты → Steam",
+      "id": 22980,
+      "is_leaf": true,
+      "title": "Steam",
+      "url": "/catalog/22980"
+    },
+    {
+      "content_type": "item",
+      "fee": 0.001,
+      "full_path": "Игры → Roblox → Jujutsu Shenanigans → Game Pass",
+      "id": 156864,
+      "is_leaf": true,
+      "title": "Game Pass",
+      "url": "/catalog/156864"
+    },
+    {
+      "content_type": "Activation",
+      "fee": 0.02,
+      "full_path": "Сервисы и соцсети → Discord → Украшения → Elements",
+      "id": 124203,
+      "is_leaf": true,
+      "title": "Elements",
+      "url": "/catalog/124203"
+    },
+    {
+      "content_type": "random-account",
+      "fee": 0.49,
+      "full_path": "Игры → Dota 2 → Случайные аккаунты",
+      "id": 24145,
+      "is_leaf": true,
+      "title": "Случайные аккаунты",
+      "url": "/catalog/24145"
+    },
+    {
+      "content_type": "keys",
+      "fee": 0.02,
+      "full_path": "Игры → Biomutant → Ключи и гифты → Xbox / Microsoft Store",
+      "id": 32755,
+      "is_leaf": true,
+      "title": "Xbox / Microsoft Store",
+      "url": "/catalog/32755"
+    },
+    {
+      "content_type": "Purchase-to-your-account",
+      "fee": 0.02,
+      "full_path": "Игры → Biomutant → Покупка на ваш аккаунт → Xbox / Microsoft Store",
+      "id": 101109,
+      "is_leaf": true,
+      "title": "Xbox / Microsoft Store",
+      "url": "/catalog/101109"
+    },
+    {
+      "content_type": "service",
+      "fee": 0.07,
+      "full_path": "Игры → Fortnite → Поиск тиммейта",
+      "id": 100320253,
+      "is_leaf": true,
+      "title": "Поиск тиммейта",
+      "url": "/catalog/100320253"
+    },
+    {
+      "content_type": "accounts",
+      "fee": 0.2,
+      "full_path": "Игры → Halo Infinite → Аккаунты → Xbox / Microsoft Store",
+      "id": 33737,
+      "is_leaf": true,
+      "title": "Xbox / Microsoft Store",
+      "url": "/catalog/33737"
+    },
+    {
+      "content_type": "other",
+      "fee": 0.02,
+      "full_path": "Цифровые товары → Видеоконтент → Обучающее видео",
+      "id": 121720,
+      "is_leaf": true,
+      "title": "Обучающее видео",
+      "url": "/catalog/121720"
+    },
+    {
+      "content_type": "service",
+      "fee": 0.001,
+      "full_path": "Игры → Roblox → Tower Defense Simulator → Game Pass",
+      "id": 156952,
+      "is_leaf": true,
+      "title": "Game Pass",
+      "url": "/catalog/156952"
+    },
+    {
+      "content_type": "item",
+      "fee": 0.02,
+      "full_path": "Игры → Blade & Soul → Предметы → EU, NA",
+      "id": 34349,
+      "is_leaf": true,
+      "title": "EU, NA",
+      "url": "/catalog/34349"
+    },
+    {
+      "content_type": "accounts",
+      "fee": 0.07,
+      "full_path": "Игры → Dota 2 → VHS Привязки",
+      "id": 47939,
+      "is_leaf": true,
+      "title": "VHS Привязки",
+      "url": "/catalog/47939"
+    }
+  ],
+  "msb": {
+    "api_base": "http://127.0.0.1:17248",
+    "cookie_ttl": 900,
+    "headless": false,
+    "profile_id": null,
+    "profiles_dir": "C:\\Users\\Atreum\\AppData\\Roaming\\MSB\\profiles",
+    "token_set": false
+  },
+  "parser": {
+    "max_pages": 3,
+    "max_quantity": 100,
+    "use_msb": true
+  },
+  "pipeline": {
+    "candidates_output": "data/candidates.json",
+    "categories_cache": "C:\\Users\\Atreum\\Desktop\\MySoft\\GGselMSB\\categories_cache.json",
+    "enabled_category_ids": [
+      47488,
+      34063,
+      34066,
+      34072,
+      35526
+    ],
+    "fixed_costs_rub": 0.0,
+    "keyword_blacklist": [],
+    "max_offers_per_seller": 3,
+    "min_expected_profit_rub": 50.0,
+    "min_net_profit": 50.0,
+    "payment_fee": 0.027,
+    "payment_fee_compat": 0.027,
+    "risk_reserve": 0.05,
+    "seller_blacklist": [],
+    "seller_whitelist": [],
+    "target_margin": 0.2,
+    "target_net_margin": 0.2,
+    "tax_pct": 0.0,
+    "top100_output": "data/top100.json",
+    "top_n": 100,
+    "withdrawal_fee": 0.02
+  },
+  "pool": {
+    "max_hits": 80,
+    "profile_ids": [
+      "2084336484026486784",
+      "2084336479580524544",
+      "2084336475029704704",
+      "2084336471078670336"
+    ],
+    "rest_sec": 300,
+    "skip_running": true
+  },
+  "rate_limit": {
+    "base_delay": 4.0,
+    "max_delay": 60.0,
+    "min_delay": 2.0,
+    "mult_401": 3.0,
+    "mult_429": 2.0,
+    "mult_5xx": 1.5,
+    "ok_decay": 0.95,
+    "state_file": "data/rate_state.json"
+  },
+  "server": {
+    "local_port": 5000
+  },
+  "telemetry": {
+    "dir": "data/telemetry",
+    "enabled": true,
+    "max_file_mb": 50.0
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "manifest_version": 3,
+  "name": "MSB Profile Badge",
+  "version": "1.0.0",
+  "description": "Shows current MSB profile number and account in the browser toolbar and as an on-page overlay.",
+  "permissions": ["storage", "alarms", "scripting"],
+  "host_permissions": ["http://127.0.0.1:17248/*", "http://localhost:17248/*"],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "MSB Profile",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["msb-context.json", "content.css"],
+      "matches": ["<all_urls>"]
+    }
+  ],
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "css": ["content.css"],
+      "run_at": "document_start",
+      "all_frames": false
+    }
+  ]
+}

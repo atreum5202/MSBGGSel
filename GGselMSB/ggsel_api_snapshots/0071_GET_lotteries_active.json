@@ -1,0 +1,71 @@
+{
+  "captured_at": "2026-08-13T17:21:37",
+  "method": "GET",
+  "scheme": "https",
+  "host": "api.ggsel.com",
+  "port": 443,
+  "path": "/lotteries/active",
+  "url": "https://api.ggsel.com/lotteries/active",
+  "request": {
+    "headers": {
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:153.0) Gecko/20100101 Firefox/153.0",
+      "accept": "application/json, text/plain, */*",
+      "accept-language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
+      "accept-encoding": "gzip, deflate, br, zstd",
+      "referer": "https://ggsel.net/",
+      "authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnZ3NlbCIsInN1YiI6NzI1NDg4OCwiaWF0IjoxNzg1MTQ4NTg0LCJleHAiOjE3ODc4MjY5ODQsImp0aSI6ImU1ZWM0OGI1LWEzYzMtNGJmZC04YzRmLWFmZWM2NTRhMDI2YyIsInVzZXIiOnsiaWQiOjcyNTQ4ODgsImVtYWlsIjoiYXRyZXVtLjUyMDJAZ21haWwuY29tIn0sIm5hbWVzcGFjZSI6ImFwaV9jdXN0b21lciJ9.se62otYgvcZIfZ3_eHj_r22bVH0vo-36iCv7QwqEXRY",
+      "origin": "https://ggsel.net",
+      "sec-gpc": "1",
+      "sec-fetch-dest": "empty",
+      "sec-fetch-mode": "cors",
+      "sec-fetch-site": "cross-site",
+      "te": "trailers"
+    },
+    "cookies": {},
+    "query": {},
+    "body_text": "",
+    "body_json": null
+  },
+  "response": {
+    "status": 200,
+    "reason": "",
+    "headers": {
+      "server": "QRATOR",
+      "date": "Thu, 13 Aug 2026 13:21:37 GMT",
+      "content-type": "application/json",
+      "vary": "Accept-Encoding",
+      "cache-control": "no-cache, private, no-cache, no-store, must-revalidate",
+      "access-control-allow-origin": "*",
+      "access-control-allow-methods": "*",
+      "access-control-allow-headers": "*",
+      "access-control-allow-credentials": "true",
+      "strict-transport-security": "max-age=31536000; includeSubDomains",
+      "content-encoding": "br",
+      "referrer-policy": "origin",
+      "x-xss-protection": "1; mode=block",
+      "pragma": "no-cache",
+      "expires": "0",
+      "set-cookie": "qrator_msid2=v2.0.1786627297.701.d94c0ea5ch9CHmWp|0Y1z06fCBMDvEG72|h3otnKyuKafhpT+A/j8GzCW5u4r4ZN6N39oXjNiliCb2VZH01+qLC/b0QZtsSvb709ciT4l9+KO8NxSCIjOWEw==-6NCMzhYh7J9Q/V6cCBXmbcMd5FI=; Max-Age=1000; Path=/; HttpOnly;  Domain=.ggsel.com;"
+    },
+    "content_type": "application/json",
+    "body_text": "{\"data\":{\"id\":17,\"name\":\"\\u0420\\u043e\\u0437\\u044b\\u0433\\u0440\\u044b\\u0448 \\u0418\\u044e\\u043d\\u044c-\\u0418\\u044e\\u043b\\u044c 2025\",\"image\":\"https:\\/\\/img.ggsel.net\\/production\\/uploads\\/lotteries\\/big\\/9bd43c2c7e4859983d72cd00d3be9a1b.png\",\"event_start\":\"2025-06-26T07:00:00.000000Z\",\"event_date\":\"2025-07-20T20:59:00.000000Z\",\"event_stream\":\"2025-07-23T14:00:00.000000Z\",\"event_end\":\"2025-07-23T20:59:00.000000Z\",\"cashback\":10,\"status\":\"pending\",\"record_link\":\"https:\\/\\/www.youtube.com\\/watch?v=HxHRxMH_mNw&ab_channel=GGSEL\",\"poster\":\"b435bdc413b19ba015c1ca99502e5106.png\"},\"success\":true}",
+    "body_json": {
+      "data": {
+        "id": 17,
+        "name": "Розыгрыш Июнь-Июль 2025",
+        "image": "https://img.ggsel.net/production/uploads/lotteries/big/9bd43c2c7e4859983d72cd00d3be9a1b.png",
+        "event_start": "2025-06-26T07:00:00.000000Z",
+        "event_date": "2025-07-20T20:59:00.000000Z",
+        "event_stream": "2025-07-23T14:00:00.000000Z",
+        "event_end": "2025-07-23T20:59:00.000000Z",
+        "cashback": 10,
+        "status": "pending",
+        "record_link": "https://www.youtube.com/watch?v=HxHRxMH_mNw&ab_channel=GGSEL",
+        "poster": "b435bdc413b19ba015c1ca99502e5106.png"
+      },
+      "success": true
+    },
+    "size": 330
+  },
+  "n": 71
+}

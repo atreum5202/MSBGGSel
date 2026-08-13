@@ -1,0 +1,29 @@
+appId: com.mystealth.browser
+productName: MyStealthBrowser
+copyright: Copyright (c) 2026 MyStealthBrowser
+directories:
+  output: release
+  buildResources: build
+files:
+  - "src/**/*"
+  - "dist/**/*"
+  - "package.json"
+  - "!**/*.map"
+  - "!**/.DS_Store"
+asar: true
+asarUnpack:
+  - "node_modules/cloakbrowser/**/*"
+  - "node_modules/patchright/**/*"
+  - "node_modules/playwright-core/**/*"
+  - "node_modules/wayfern/**/*"
+win:
+  target: nsis
+  artifactName: "${productName}-${version}-setup.${ext}"
+mac:
+  target: dmg
+  category: public.app-category.developer-tools
+  artifactName: "${productName}-${version}-${arch}.${ext}"
+linux:
+  target: AppImage
+  category: Development
+  artifactName: "${productName}-${version}.${ext}"

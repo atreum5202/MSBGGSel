@@ -1,0 +1,99 @@
+/* MSB Profile Badge — popup styles */
+
+* { box-sizing: border-box; }
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 13px;
+  color: #1c1c1f;
+  background: #ffffff;
+  min-width: 280px;
+}
+
+.card { padding: 12px 14px; }
+
+.head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.badge {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #2F6FED 0%, #1f4fb8 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.3px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.08);
+  flex-shrink: 0;
+}
+
+.title {
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 1.2;
+  color: #111;
+  word-break: break-all;
+}
+
+.sub {
+  font-size: 12px;
+  color: #5a5a63;
+  margin-top: 2px;
+  word-break: break-all;
+}
+
+.kv {
+  margin: 0;
+  padding: 10px 0 0 0;
+  border-top: 1px solid #eee;
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  row-gap: 6px;
+  column-gap: 10px;
+}
+
+.kv dt {
+  color: #6a6a72;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  align-self: center;
+}
+
+.kv dd {
+  margin: 0;
+  font-size: 12.5px;
+  color: #1c1c1f;
+  word-break: break-all;
+  align-self: center;
+}
+
+.foot {
+  margin-top: 12px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+button {
+  appearance: none;
+  border: 1px solid #d8d8de;
+  background: #f7f7f9;
+  color: #1c1c1f;
+  padding: 5px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background 0.1s ease;
+}
+
+button:hover { background: #ececf1; }
+button:active { background: #e0e0e6; }

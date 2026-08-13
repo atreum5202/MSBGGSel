@@ -1,0 +1,32 @@
+{
+  "cookies": {
+    "abc": "original",
+    "branch": "MAIN",
+    "currency": "wmr",
+    "i18next": "ru",
+    "geo_ip": "185.148.24.128",
+    "geo_user": "RU",
+    "device": "mobile",
+    "tmr_lvidTS": "1786216756033",
+    "tmr_lvid": "ff026b3a2a6b412452d9834f3deeb1ed",
+    "domain_sid": "5FjIJWMDO0ef09IXRtDr-%3A1786216758906",
+    "_ga": "GA1.1.541561350.1786216766",
+    "st_uid": "5e26cc227d9727b0126ab85e2eb8e58e",
+    "_ym_uid": "1786216766298647265",
+    "_ym_d": "1786216766",
+    "_ym_isad": "2",
+    "cookie_consent": "1",
+    "popmechanic_sbjs_migrations": "popmechanic_1418474375998%3D1%7C%7C%7C1471519752600%3D1%7C%7C%7C1471519752605%3D1",
+    "ip": "185.148.24.128",
+    "activePWA": "false",
+    "is_first_visit": "false",
+    "_ga_6QVFBL8H0P": "GS2.1.s1786228105$o3$g1$t1786228105$j60$l0$h0",
+    "mindboxDeviceUUID": "65eb937e-ae38-4559-ba3a-04962ba696ea",
+    "directCrm-session": "%7B%22deviceGuid%22%3A%2265eb937e-ae38-4559-ba3a-04962ba696ea%22%7D",
+    "qrator_msid2": "v2.0.1786230253.216.b9941880weWMSEw4|6h0uw04CBalTGwoW|ruPcAUqqOPA2sZPqFW9QOUo3QYvJokDUqupkYd3+gIbaovgf71u+wDXQ18PJF9pjP9WbptHe7HyCHWLaEmGo2Q==-d3t8/WwZmIEKlZ5m6PsspncjiU4=",
+    "tmr_detect": "1%7C1786230254749"
+  },
+  "profile_id": "2084336484026486784",
+  "saved_at": 1786230255.7623048,
+  "domain": "ggsel.net"
+}

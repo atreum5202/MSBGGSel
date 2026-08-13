@@ -1,0 +1,4 @@
+{
+  "error": "string argument should contain only ASCII characters",
+  "raw": "\u0015M\u0000\u0000\u0004J=��\u0016*O�,�\u0001\r�:�\u0002�V��-��6��\u001e\u001d\"\u0004�F7��<�G�=�v�\u001eN"
+}

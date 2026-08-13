@@ -1,0 +1,553 @@
+{"ts":"2026-07-24T21:37:05.799700Z","epoch":1784929025.799701,"event":"parser.start","query":"games","category":"games","quantity":5,"profile_count":49}
+{"ts":"2026-07-24T21:37:05.800693Z","epoch":1784929025.8006933,"event":"parser.page_fetched","profile_id":"abc-123","status":200,"latency_ms":234,"rate_delay":4.0,"is_challenge":false}
+{"ts":"2026-07-24T21:37:05.800693Z","epoch":1784929025.8006933,"event":"parser.cookies_refreshed","profile_id":"abc-123","source":"snapshot","took_ms":15,"cookies_count":12}
+{"ts":"2026-07-24T21:37:05.801700Z","epoch":1784929025.8017,"event":"parser.product_saved","category":"games","ai_enriched":true,"took_ms":320}
+{"ts":"2026-07-24T21:37:05.808996Z","epoch":1784929025.8089964,"event":"parser.run_complete","total_products":5,"total_pages":1,"duration_sec":12.4,"status":"done"}
+{"ts":"2026-07-24T21:37:05.810111Z","epoch":1784929025.810112,"event":"parser.cookies_refreshed","profile_id":"secret-profile","cookies_count":2,"cookies_names":["__qrator_jsid","session"],"source":"msb"}
+{"ts":"2026-07-24T21:52:15.515579Z","epoch":1784929935.5155797,"event":"parser.start","query":"","category":"games","quantity":2,"profile_count":0}
+{"ts":"2026-07-24T21:52:15.563931Z","epoch":1784929935.563931,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"error","fetcher_used":"msb"}
+{"ts":"2026-07-24T21:59:48.314632Z","epoch":1784930388.314633,"event":"parser.start","query":"","category":"games","quantity":1,"profile_count":0}
+{"ts":"2026-07-24T22:00:13.639073Z","epoch":1784930413.6390734,"event":"parser.cookies_refreshed","profile_id":"76889d38-c5aa-49b5-9529-122062266c35","source":"msb","took_ms":9109,"cookies_count":27}
+{"ts":"2026-07-24T22:00:21.182894Z","epoch":1784930421.182894,"event":"parser.page_fetched","profile_id":"76889d38-c5aa-49b5-9529-122062266c35","status":200,"latency_ms":3515,"rate_delay":4.0,"is_challenge":false,"url":"https://ggsel.net/catalog/games"}
+{"ts":"2026-07-24T22:00:21.305162Z","epoch":1784930421.3051624,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"msb"}
+{"ts":"2026-07-24T22:04:15.005973Z","epoch":1784930655.0059733,"event":"parser.start","query":"","category":"games","quantity":2,"profile_count":0}
+{"ts":"2026-07-24T22:04:52.276838Z","epoch":1784930692.2768385,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-07-24T22:04:52.460457Z","epoch":1784930692.4604573,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"msb"}
+{"ts":"2026-07-24T22:08:10.153202Z","epoch":1784930890.1532018,"event":"parser.start","query":"","category":"games","quantity":2,"profile_count":0}
+{"ts":"2026-07-24T22:08:29.380376Z","epoch":1784930909.3803768,"event":"parser.page_fetched","profile_id":"2a9c546e-fdbd-492f-b9d5-a32b54ab5801","status":200,"latency_ms":2436,"rate_delay":4.0,"is_challenge":false,"url":"https://ggsel.net/catalog/games"}
+{"ts":"2026-07-24T22:08:29.817983Z","epoch":1784930909.8179832,"event":"parser.run_complete","total_products":2,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"msb"}
+{"ts":"2026-07-25T17:57:16.723308Z","epoch":1785002236.723308,"event":"parser.start","query":"Gemini","category":"","quantity":5,"profile_count":0}
+{"ts":"2026-07-25T17:57:40.405850Z","epoch":1785002260.4058502,"event":"parser.page_fetched","profile_id":"76889d38-c5aa-49b5-9529-122062266c35","status":404,"latency_ms":421,"rate_delay":3.8,"is_challenge":false,"url":"https://ggsel.net/search?q=Gemini"}
+{"ts":"2026-07-25T17:57:40.503171Z","epoch":1785002260.5031714,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"msb"}
+{"ts":"2026-07-25T18:06:59.028762Z","epoch":1785002819.028762,"event":"parser.start","query":"","category":"accounts","quantity":5,"profile_count":0}
+{"ts":"2026-07-25T18:07:15.568228Z","epoch":1785002835.5682287,"event":"parser.page_fetched","profile_id":"76889d38-c5aa-49b5-9529-122062266c35","status":401,"latency_ms":265,"rate_delay":3.8,"is_challenge":true,"url":"https://ggsel.net/catalog/accounts"}
+{"ts":"2026-07-25T18:07:15.572138Z","epoch":1785002835.5721385,"event":"parser.profile_rested","profile_id":"76889d38-c5aa-49b5-9529-122062266c35","reason":"401","duration_sec":300}
+{"ts":"2026-07-25T18:07:28.928300Z","epoch":1785002848.9283004,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-07-25T18:07:29.014773Z","epoch":1785002849.0147736,"event":"parser.run_complete","total_products":0,"total_pages":2,"duration_sec":0,"status":"done","fetcher_used":"msb"}
+{"ts":"2026-07-25T19:40:20.934340Z","epoch":1785008420.9343407,"event":"parser.start","query":"","category":"accounts","quantity":20,"profile_count":0}
+{"ts":"2026-07-25T19:40:39.967014Z","epoch":1785008439.9670143,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-07-25T19:40:40.012841Z","epoch":1785008440.0128415,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"msb"}
+{"ts":"2026-07-25T19:54:45.878724Z","epoch":1785009285.8787243,"event":"parser.start","query":"","category":"accounts","quantity":2,"profile_count":0}
+{"ts":"2026-07-25T19:55:04.106323Z","epoch":1785009304.1063237,"event":"parser.page_fetched","profile_id":"76889d38-c5aa-49b5-9529-122062266c35","status":401,"latency_ms":311,"rate_delay":4.0,"is_challenge":true,"url":"https://ggsel.net/catalog/accounts"}
+{"ts":"2026-07-25T19:55:04.108861Z","epoch":1785009304.108861,"event":"parser.profile_rested","profile_id":"76889d38-c5aa-49b5-9529-122062266c35","reason":"401","duration_sec":300}
+{"ts":"2026-07-25T19:55:04.225090Z","epoch":1785009304.2250907,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"msb"}
+{"ts":"2026-07-25T22:01:53.919753Z","epoch":1785016913.9197538,"event":"parser.start","query":"","category":"games","quantity":20,"profile_count":0}
+{"ts":"2026-07-25T22:02:22.294780Z","epoch":1785016942.2947807,"event":"parser.page_fetched","profile_id":"76889d38-c5aa-49b5-9529-122062266c35","status":401,"latency_ms":250,"rate_delay":12.0,"is_challenge":true,"url":"https://ggsel.net/catalog/games"}
+{"ts":"2026-07-25T22:02:22.297790Z","epoch":1785016942.2977903,"event":"parser.profile_rested","profile_id":"76889d38-c5aa-49b5-9529-122062266c35","reason":"401","duration_sec":300}
+{"ts":"2026-07-25T22:02:31.527225Z","epoch":1785016951.527225,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-07-25T22:02:31.731989Z","epoch":1785016951.7319891,"event":"parser.run_complete","total_products":0,"total_pages":2,"duration_sec":0,"status":"done","fetcher_used":"msb"}
+{"ts":"2026-07-26T04:51:12.275167Z","epoch":1785041472.2751672,"event":"parser.start","query":"","category":"games","quantity":5,"profile_count":0}
+{"ts":"2026-07-26T04:51:12.951764Z","epoch":1785041472.951765,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-07-26T04:51:13.015944Z","epoch":1785041473.015945,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"msb"}
+{"ts":"2026-07-26T08:48:59.339563Z","epoch":1785055739.3395638,"event":"parser.start","query":"","category":"games","quantity":20,"profile_count":0}
+{"ts":"2026-07-26T08:49:19.939466Z","epoch":1785055759.939466,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-07-26T08:49:19.989313Z","epoch":1785055759.9893131,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"msb"}
+{"ts":"2026-07-26T09:21:33.266960Z","epoch":1785057693.2669609,"event":"parser.start","query":"","category":"subscriptions","quantity":20,"profile_count":0}
+{"ts":"2026-07-26T09:21:53.807490Z","epoch":1785057713.80749,"event":"parser.page_fetched","profile_id":"2081299678611705856","status":404,"latency_ms":1030,"rate_delay":4.0,"is_challenge":false,"url":"https://ggsel.net/catalog/subscriptions"}
+{"ts":"2026-07-26T09:21:53.916819Z","epoch":1785057713.916819,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"msb"}
+{"ts":"2026-07-26T09:24:58.079671Z","epoch":1785057898.0796714,"event":"parser.start","query":"","category":"subscriptions","quantity":20,"profile_count":0}
+{"ts":"2026-07-26T09:25:18.160173Z","epoch":1785057918.160173,"event":"parser.page_fetched","profile_id":"2081299678502653952","status":404,"latency_ms":735,"rate_delay":4.0,"is_challenge":false,"url":"https://ggsel.net/catalog/subscriptions"}
+{"ts":"2026-07-26T09:25:18.198868Z","epoch":1785057918.1988683,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"msb"}
+{"ts":"2026-07-26T20:49:21.012915Z","epoch":1785098961.0129156,"event":"parser.start","query":"","category":"game-currency","quantity":20,"profile_count":0}
+{"ts":"2026-07-26T20:49:45.992565Z","epoch":1785098985.9925652,"event":"parser.page_fetched","profile_id":"2081299678611705856","status":401,"latency_ms":266,"rate_delay":4.0,"is_challenge":true,"url":"https://ggsel.net/catalog/game-currency"}
+{"ts":"2026-07-26T20:49:45.998223Z","epoch":1785098985.998223,"event":"parser.profile_rested","profile_id":"2081299678611705856","reason":"401","duration_sec":300}
+{"ts":"2026-07-26T20:50:04.117733Z","epoch":1785099004.1177335,"event":"parser.run_complete","total_products":0,"total_pages":2,"duration_sec":0,"status":"done","fetcher_used":"msb"}
+{"ts":"2026-07-26T21:05:51.219305Z","epoch":1785099951.2193053,"event":"parser.start","query":"","category":"game-currency","quantity":20,"profile_count":0}
+{"ts":"2026-07-26T21:07:03.191146Z","epoch":1785100023.1911466,"event":"parser.page_fetched","profile_id":"2081299678611705856","status":401,"latency_ms":422,"rate_delay":12.0,"is_challenge":true,"url":"https://ggsel.net/catalog/game-currency"}
+{"ts":"2026-07-26T21:07:03.196178Z","epoch":1785100023.1961784,"event":"parser.profile_rested","profile_id":"2081299678611705856","reason":"401","duration_sec":300}
+{"ts":"2026-07-26T21:08:07.011189Z","epoch":1785100087.011189,"event":"parser.run_complete","total_products":0,"total_pages":2,"duration_sec":0,"status":"done","fetcher_used":"msb"}
+{"ts":"2026-07-26T22:29:06.508459Z","epoch":1785104946.5084596,"event":"parser.start","query":"","category":"igry-po-nazvaniyu","quantity":5,"profile_count":0}
+{"ts":"2026-07-26T22:30:47.894121Z","epoch":1785105047.894122,"event":"parser.start","query":"","category":"igry-po-nazvaniyu","quantity":5,"profile_count":0}
+{"ts":"2026-07-26T22:30:48.002990Z","epoch":1785105048.00299,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"error","fetcher_used":"cascade"}
+{"ts":"2026-07-26T22:37:52.502298Z","epoch":1785105472.5022986,"event":"parser.start","query":"","category":"igry-po-nazvaniyu","quantity":5,"profile_count":0}
+{"ts":"2026-07-26T22:39:33.760338Z","epoch":1785105573.7603388,"event":"parser.page_fetched","profile_id":"2081299678611705856","status":401,"latency_ms":343,"rate_delay":36.0,"is_challenge":true,"url":"https://ggsel.net/catalog/igry-po-nazvaniyu"}
+{"ts":"2026-07-26T22:39:33.762840Z","epoch":1785105573.7628405,"event":"parser.profile_rested","profile_id":"2081299678611705856","reason":"401","duration_sec":300}
+{"ts":"2026-07-26T22:39:33.801116Z","epoch":1785105573.8011167,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cascade"}
+{"ts":"2026-07-26T23:25:27.844580Z","epoch":1785108327.844581,"event":"parser.start","query":"","category":"subscriptions-for-all-occasions","quantity":5,"profile_count":0}
+{"ts":"2026-07-26T23:26:32.906740Z","epoch":1785108392.9067407,"event":"parser.page_fetched","profile_id":"2081299678502653952","status":401,"latency_ms":407,"rate_delay":4.0,"is_challenge":true,"url":"https://ggsel.net/catalog/subscriptions-for-all-occasions"}
+{"ts":"2026-07-26T23:26:32.910268Z","epoch":1785108392.910269,"event":"parser.profile_rested","profile_id":"2081299678502653952","reason":"401","duration_sec":300}
+{"ts":"2026-07-26T23:26:32.978104Z","epoch":1785108392.9781044,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cascade"}
+{"ts":"2026-07-27T00:38:49.669371Z","epoch":1785112729.669371,"event":"parser.start","query":"steam","category":"","quantity":10,"profile_count":0}
+{"ts":"2026-07-27T00:40:15.891373Z","epoch":1785112815.8913739,"event":"parser.page_fetched","profile_id":"2081299678611705856","status":404,"latency_ms":936,"rate_delay":60.0,"is_challenge":false,"url":"https://ggsel.net/search?q=steam"}
+{"ts":"2026-07-27T00:40:17.977111Z","epoch":1785112817.9771113,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cascade"}
+{"ts":"2026-07-27T00:41:23.758604Z","epoch":1785112883.7586048,"event":"parser.start","query":"steam","category":"games-steam","quantity":3,"profile_count":0}
+{"ts":"2026-07-27T00:42:25.187262Z","epoch":1785112945.1872628,"event":"parser.page_fetched","profile_id":"2081299678611705856","status":200,"latency_ms":937,"rate_delay":60.0,"is_challenge":false,"url":"https://ggsel.net/catalog/games-steam"}
+{"ts":"2026-07-27T00:42:26.531678Z","epoch":1785112946.5316787,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cascade"}
+{"ts":"2026-07-27T00:42:39.617596Z","epoch":1785112959.617596,"event":"parser.start","query":"","category":"igry-po-nazvaniyu","quantity":5,"profile_count":0}
+{"ts":"2026-07-27T00:43:40.465587Z","epoch":1785113020.4655876,"event":"parser.page_fetched","profile_id":"2081299678611705856","status":200,"latency_ms":1828,"rate_delay":57.0,"is_challenge":false,"url":"https://ggsel.net/catalog/igry-po-nazvaniyu"}
+{"ts":"2026-07-27T00:43:41.803183Z","epoch":1785113021.803183,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cascade"}
+{"ts":"2026-07-27T00:45:22.857708Z","epoch":1785113122.8587072,"event":"parser.start","query":"","category":"grand-theft-auto-5-first","quantity":2,"profile_count":0}
+{"ts":"2026-07-27T00:46:18.146300Z","epoch":1785113178.1463006,"event":"parser.page_fetched","profile_id":"2081299678611705856","status":401,"latency_ms":781,"rate_delay":54.15,"is_challenge":true,"url":"https://ggsel.net/catalog/grand-theft-auto-5-first"}
+{"ts":"2026-07-27T00:46:18.148302Z","epoch":1785113178.1483026,"event":"parser.profile_rested","profile_id":"2081299678611705856","reason":"401","duration_sec":300}
+{"ts":"2026-07-27T00:46:50.350918Z","epoch":1785113210.3509183,"event":"parser.start","query":"steam","category":"games-steam","quantity":5,"profile_count":0}
+{"ts":"2026-07-27T00:48:21.205182Z","epoch":1785113301.2051823,"event":"parser.page_fetched","profile_id":"2081299678611705856","status":200,"latency_ms":1390,"rate_delay":60.0,"is_challenge":false,"url":"https://ggsel.net/catalog/games-steam"}
+{"ts":"2026-07-27T00:48:22.738552Z","epoch":1785113302.738552,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cascade"}
+{"ts":"2026-07-27T00:48:33.473863Z","epoch":1785113313.4738634,"event":"parser.start","query":"","category":"grand-theft-auto-5-first","quantity":5,"profile_count":0}
+{"ts":"2026-07-27T00:49:33.113691Z","epoch":1785113373.1136913,"event":"parser.page_fetched","profile_id":"2081299678611705856","status":200,"latency_ms":2265,"rate_delay":57.0,"is_challenge":false,"url":"https://ggsel.net/catalog/grand-theft-auto-5-first"}
+{"ts":"2026-07-27T00:49:33.619969Z","epoch":1785113373.6199694,"event":"parser.run_complete","total_products":5,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cascade"}
+{"ts":"2026-07-27T00:51:24.759643Z","epoch":1785113484.7596436,"event":"parser.start","query":"steam","category":"games-steam","quantity":5,"profile_count":0}
+{"ts":"2026-07-27T01:01:08.542941Z","epoch":1785114068.5429418,"event":"parser.start","query":"","category":"igry-po-nazvaniyu","quantity":5,"profile_count":0}
+{"ts":"2026-07-27T01:02:22.703743Z","epoch":1785114142.703743,"event":"parser.start","query":"","category":"games-steam","quantity":1,"profile_count":0}
+{"ts":"2026-07-27T01:02:27.304299Z","epoch":1785114147.3042996,"event":"parser.page_fetched","profile_id":"2081299678611705856","status":200,"latency_ms":1639,"rate_delay":54.15,"is_challenge":false,"url":"https://ggsel.net/catalog/igry-po-nazvaniyu"}
+{"ts":"2026-07-27T01:02:27.615819Z","epoch":1785114147.6158192,"event":"parser.run_complete","total_products":5,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cascade"}
+{"ts":"2026-07-27T01:04:17.187072Z","epoch":1785114257.187072,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-07-27T01:53:17.749697Z","epoch":1785117197.7496977,"event":"parser.start","query":"","category":"podpisochnye-servisy","quantity":5,"profile_count":0}
+{"ts":"2026-07-27T01:54:40.006089Z","epoch":1785117280.0060897,"event":"parser.page_fetched","profile_id":"2081299678611705856","status":401,"latency_ms":358,"rate_delay":51.442499999999995,"is_challenge":true,"url":"https://ggsel.net/catalog/podpisochnye-servisy"}
+{"ts":"2026-07-27T01:54:40.008091Z","epoch":1785117280.008092,"event":"parser.profile_rested","profile_id":"2081299678611705856","reason":"401","duration_sec":300}
+{"ts":"2026-07-27T01:55:14.599059Z","epoch":1785117314.599059,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cascade"}
+{"ts":"2026-07-27T02:04:31.082007Z","epoch":1785117871.082008,"event":"parser.start","query":"","category":"roblox","quantity":2,"profile_count":0}
+{"ts":"2026-07-27T02:04:47.542017Z","epoch":1785117887.5420177,"event":"parser.run_complete","total_products":2,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-27T02:05:48.036846Z","epoch":1785117948.0368469,"event":"parser.start","query":"","category":"games-steam","quantity":1,"profile_count":0}
+{"ts":"2026-07-27T02:05:57.921857Z","epoch":1785117957.9218574,"event":"parser.run_complete","total_products":1,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-27T02:14:42.187373Z","epoch":1785118482.1873732,"event":"parser.start","query":"","category":"roblox","quantity":5,"profile_count":0}
+{"ts":"2026-07-27T02:15:04.356120Z","epoch":1785118504.35612,"event":"parser.run_complete","total_products":5,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-27T04:41:17.953938Z","epoch":1785127277.9539385,"event":"parser.start","query":"steam","category":"","quantity":5,"profile_count":0}
+{"ts":"2026-07-27T04:41:19.764753Z","epoch":1785127279.7647538,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-27T04:47:27.716443Z","epoch":1785127647.716443,"event":"parser.start","query":"","category":"igry-po-nazvaniyu","quantity":4,"profile_count":0}
+{"ts":"2026-07-28T05:36:28.661193Z","epoch":1785216988.6611934,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-07-28T05:36:35.533396Z","epoch":1785216995.5333967,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-07-28T05:36:39.699121Z","epoch":1785216999.699121,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-07-28T05:36:46.851133Z","epoch":1785217006.8511333,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-07-28T05:36:53.725023Z","epoch":1785217013.7250237,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-07-28T05:37:20.742250Z","epoch":1785217040.7422504,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-07-28T05:37:28.436755Z","epoch":1785217048.4367557,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-07-28T05:37:35.477807Z","epoch":1785217055.477807,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-07-28T05:37:43.573075Z","epoch":1785217063.5730758,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-07-28T05:37:47.153072Z","epoch":1785217067.1530724,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-07-28T05:39:15.409902Z","epoch":1785217155.409902,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-07-28T05:41:26.934772Z","epoch":1785217286.9347725,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-07-28T05:42:27.462343Z","epoch":1785217347.4623437,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-07-28T05:42:35.470555Z","epoch":1785217355.470556,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-07-28T05:42:39.228071Z","epoch":1785217359.2280712,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-07-28T05:42:45.832453Z","epoch":1785217365.832453,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-07-28T05:42:53.480843Z","epoch":1785217373.4808433,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-07-28T05:44:49.566025Z","epoch":1785217489.5660253,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-07-28T05:44:56.403346Z","epoch":1785217496.403347,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-07-28T05:45:03.903561Z","epoch":1785217503.903561,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-07-28T05:45:10.219680Z","epoch":1785217510.219681,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-07-28T05:45:16.778203Z","epoch":1785217516.778204,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-07-28T05:45:54.232578Z","epoch":1785217554.2325788,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-07-28T05:46:01.147525Z","epoch":1785217561.147525,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-07-28T05:46:04.579860Z","epoch":1785217564.5798607,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-07-28T05:46:11.437825Z","epoch":1785217571.4378252,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-07-28T05:46:17.740885Z","epoch":1785217577.740885,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-07-28T05:48:03.336155Z","epoch":1785217683.3361557,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-07-28T05:48:12.075478Z","epoch":1785217692.0754786,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-07-28T05:48:18.184904Z","epoch":1785217698.1849039,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-07-28T05:48:25.585426Z","epoch":1785217705.5854266,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-07-28T05:48:32.317079Z","epoch":1785217712.3170795,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-07-28T05:51:33.022393Z","epoch":1785217893.0223932,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-07-28T05:51:41.104294Z","epoch":1785217901.104294,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-07-28T05:51:47.251001Z","epoch":1785217907.2510014,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-07-28T05:51:53.938443Z","epoch":1785217913.9384437,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-07-28T05:52:01.725688Z","epoch":1785217921.7256885,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-07-28T08:03:30.286840Z","epoch":1785225810.2868407,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-07-28T08:03:37.386100Z","epoch":1785225817.386101,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-07-28T08:03:41.915246Z","epoch":1785225821.9152462,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-07-28T08:03:45.525844Z","epoch":1785225825.5258448,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-07-28T08:03:50.812233Z","epoch":1785225830.812233,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-07-28T09:12:40.330859Z","epoch":1785229960.3308597,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-07-28T09:12:47.743628Z","epoch":1785229967.7436283,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-07-28T09:12:53.252006Z","epoch":1785229973.252007,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-07-28T09:13:00.046434Z","epoch":1785229980.0464349,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-07-28T09:13:05.310548Z","epoch":1785229985.3105483,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-07-28T10:24:49.759151Z","epoch":1785234289.759152,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-07-29T06:02:12.610874Z","epoch":1785304932.6108744,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-07-29T06:02:19.713565Z","epoch":1785304939.7135656,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-07-29T06:02:26.735986Z","epoch":1785304946.7359867,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-07-29T06:02:33.494803Z","epoch":1785304953.4948032,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-07-29T06:02:41.689584Z","epoch":1785304961.6895847,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-07-29T06:04:15.470032Z","epoch":1785305055.470033,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-07-29T06:04:19.889913Z","epoch":1785305059.8899138,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-07-29T06:04:26.672311Z","epoch":1785305066.6723113,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-07-29T06:04:33.057001Z","epoch":1785305073.0570009,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-07-29T06:04:37.797377Z","epoch":1785305077.7973773,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-07-29T08:52:46.961407Z","epoch":1785315166.961407,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-07-29T08:52:53.991557Z","epoch":1785315173.9915574,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-07-29T08:52:57.610652Z","epoch":1785315177.610652,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-07-29T08:53:00.768817Z","epoch":1785315180.7688174,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-07-29T08:53:06.730675Z","epoch":1785315186.7306755,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-07-30T04:54:23.544643Z","epoch":1785387263.5446436,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-07-30T04:54:57.924477Z","epoch":1785387297.924477,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-07-30T04:55:23.034681Z","epoch":1785387323.0346818,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-07-30T04:55:50.845114Z","epoch":1785387350.8451145,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-07-30T04:56:00.393052Z","epoch":1785387360.3930526,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-07-30T05:01:04.442181Z","epoch":1785387664.4421818,"event":"parser.start","query":"???? steam","category":"","quantity":3,"profile_count":0}
+{"ts":"2026-07-30T05:01:04.566851Z","epoch":1785387664.5668519,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-30T05:07:59.791959Z","epoch":1785388079.7919593,"event":"parser.start","query":"steam","category":"","quantity":3,"profile_count":0}
+{"ts":"2026-07-30T05:08:04.511218Z","epoch":1785388084.5112185,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-30T05:42:48.859082Z","epoch":1785390168.859082,"event":"parser.start","query":"","category":"spotify-premium","quantity":15,"profile_count":0}
+{"ts":"2026-07-30T05:42:49.403313Z","epoch":1785390169.403313,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-30T05:43:23.879217Z","epoch":1785390203.8792176,"event":"parser.start","query":"","category":"microsoft-office-365","quantity":15,"profile_count":0}
+{"ts":"2026-07-30T05:43:23.999434Z","epoch":1785390203.9994345,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-30T05:43:58.888486Z","epoch":1785390238.8884866,"event":"parser.start","query":"","category":"robux","quantity":15,"profile_count":0}
+{"ts":"2026-07-30T05:43:59.511861Z","epoch":1785390239.511862,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-30T05:44:33.901598Z","epoch":1785390273.901598,"event":"parser.start","query":"","category":"roblox","quantity":15,"profile_count":0}
+{"ts":"2026-07-30T05:44:33.987140Z","epoch":1785390273.987141,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-30T05:45:08.909254Z","epoch":1785390308.909254,"event":"parser.start","query":"","category":"valorant-9149","quantity":15,"profile_count":0}
+{"ts":"2026-07-30T05:45:09.431809Z","epoch":1785390309.4318092,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-30T05:45:43.936553Z","epoch":1785390343.936553,"event":"parser.start","query":"","category":"xbox-game-pass-1","quantity":15,"profile_count":0}
+{"ts":"2026-07-30T05:45:44.494339Z","epoch":1785390344.49434,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-30T05:46:18.949516Z","epoch":1785390378.9495168,"event":"parser.start","query":"","category":"pubg-mobile","quantity":15,"profile_count":0}
+{"ts":"2026-07-30T05:46:19.622360Z","epoch":1785390379.62236,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-30T05:46:53.952924Z","epoch":1785390413.952924,"event":"parser.start","query":"","category":"mobile-legends","quantity":15,"profile_count":0}
+{"ts":"2026-07-30T05:46:54.512265Z","epoch":1785390414.5122657,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-30T05:47:04.913934Z","epoch":1785390424.913934,"event":"parser.start","query":"spotify","category":"","quantity":3,"profile_count":0}
+{"ts":"2026-07-30T05:47:04.994528Z","epoch":1785390424.9945285,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-30T05:47:29.010721Z","epoch":1785390449.0107217,"event":"parser.start","query":"","category":"genshin-impact","quantity":15,"profile_count":0}
+{"ts":"2026-07-30T05:47:29.460874Z","epoch":1785390449.4608748,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-30T05:48:04.015913Z","epoch":1785390484.0159132,"event":"parser.start","query":"","category":"brawl-stars-9063","quantity":15,"profile_count":0}
+{"ts":"2026-07-30T05:48:04.123776Z","epoch":1785390484.1237762,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-30T05:48:39.025107Z","epoch":1785390519.0251074,"event":"parser.start","query":"","category":"apple-id","quantity":15,"profile_count":0}
+{"ts":"2026-07-30T05:48:39.080521Z","epoch":1785390519.0805218,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-30T05:49:14.042803Z","epoch":1785390554.0428038,"event":"parser.start","query":"","category":"subscriptions-for-all-occasions","quantity":15,"profile_count":0}
+{"ts":"2026-07-30T05:49:14.709950Z","epoch":1785390554.7099504,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-30T05:49:49.056486Z","epoch":1785390589.0564864,"event":"parser.start","query":"","category":"microsoft-office","quantity":15,"profile_count":0}
+{"ts":"2026-07-30T05:49:49.738086Z","epoch":1785390589.7380862,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-30T05:50:24.068098Z","epoch":1785390624.0680985,"event":"parser.start","query":"","category":"antivirus-eset","quantity":15,"profile_count":0}
+{"ts":"2026-07-30T05:50:24.560599Z","epoch":1785390624.5605996,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-30T05:50:59.087588Z","epoch":1785390659.087588,"event":"parser.start","query":"","category":"software","quantity":15,"profile_count":0}
+{"ts":"2026-07-30T05:50:59.657022Z","epoch":1785390659.6570225,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-30T05:51:34.099782Z","epoch":1785390694.0997827,"event":"parser.start","query":"","category":"spotify-premium","quantity":15,"profile_count":0}
+{"ts":"2026-07-30T05:51:34.166823Z","epoch":1785390694.1668234,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-30T05:52:09.113390Z","epoch":1785390729.113391,"event":"parser.start","query":"","category":"microsoft-office-365","quantity":15,"profile_count":0}
+{"ts":"2026-07-30T05:52:09.206671Z","epoch":1785390729.206671,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-30T05:52:40.269213Z","epoch":1785390760.2692132,"event":"parser.start","query":"spotify","category":"","quantity":3,"profile_count":0}
+{"ts":"2026-07-30T05:52:40.749272Z","epoch":1785390760.749272,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-30T05:52:44.124711Z","epoch":1785390764.1252806,"event":"parser.start","query":"","category":"robux","quantity":15,"profile_count":0}
+{"ts":"2026-07-30T05:52:44.680963Z","epoch":1785390764.680963,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-30T05:53:19.135613Z","epoch":1785390799.1356134,"event":"parser.start","query":"","category":"roblox","quantity":15,"profile_count":0}
+{"ts":"2026-07-30T05:53:19.680466Z","epoch":1785390799.6804667,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-30T05:53:54.149649Z","epoch":1785390834.1496499,"event":"parser.start","query":"","category":"valorant-9149","quantity":15,"profile_count":0}
+{"ts":"2026-07-30T05:53:54.713384Z","epoch":1785390834.7133844,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-30T05:54:29.159325Z","epoch":1785390869.160333,"event":"parser.start","query":"","category":"xbox-game-pass-1","quantity":15,"profile_count":0}
+{"ts":"2026-07-30T05:54:29.851678Z","epoch":1785390869.8516786,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-30T05:55:04.194389Z","epoch":1785390904.1943898,"event":"parser.start","query":"","category":"pubg-mobile","quantity":15,"profile_count":0}
+{"ts":"2026-07-30T05:55:04.742023Z","epoch":1785390904.7420237,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-30T05:55:39.207371Z","epoch":1785390939.207371,"event":"parser.start","query":"","category":"mobile-legends","quantity":15,"profile_count":0}
+{"ts":"2026-07-30T05:55:39.698841Z","epoch":1785390939.6988413,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-30T05:56:14.227150Z","epoch":1785390974.227151,"event":"parser.start","query":"","category":"genshin-impact","quantity":15,"profile_count":0}
+{"ts":"2026-07-30T05:56:14.728059Z","epoch":1785390974.72806,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-30T05:56:49.245974Z","epoch":1785391009.245974,"event":"parser.start","query":"","category":"brawl-stars-9063","quantity":15,"profile_count":0}
+{"ts":"2026-07-30T05:56:49.319405Z","epoch":1785391009.3194056,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-30T05:57:24.267163Z","epoch":1785391044.2671633,"event":"parser.start","query":"","category":"apple-id","quantity":15,"profile_count":0}
+{"ts":"2026-07-30T05:57:24.390024Z","epoch":1785391044.3900242,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-30T05:57:59.273222Z","epoch":1785391079.2732227,"event":"parser.start","query":"","category":"subscriptions-for-all-occasions","quantity":15,"profile_count":0}
+{"ts":"2026-07-30T05:57:59.351862Z","epoch":1785391079.3518624,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-30T05:58:34.313197Z","epoch":1785391114.3131979,"event":"parser.start","query":"","category":"microsoft-office","quantity":15,"profile_count":0}
+{"ts":"2026-07-30T05:58:34.387534Z","epoch":1785391114.3875344,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-30T05:59:09.344106Z","epoch":1785391149.344107,"event":"parser.start","query":"","category":"antivirus-eset","quantity":15,"profile_count":0}
+{"ts":"2026-07-30T05:59:09.979036Z","epoch":1785391149.979037,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-30T05:59:44.349752Z","epoch":1785391184.3497527,"event":"parser.start","query":"","category":"software","quantity":15,"profile_count":0}
+{"ts":"2026-07-30T05:59:44.402592Z","epoch":1785391184.4025924,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-30T06:00:19.376227Z","epoch":1785391219.3762274,"event":"parser.start","query":"","category":"spotify-premium","quantity":15,"profile_count":0}
+{"ts":"2026-07-30T06:00:23.474576Z","epoch":1785391223.474577,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-30T06:00:54.386557Z","epoch":1785391254.3865573,"event":"parser.start","query":"","category":"microsoft-office-365","quantity":15,"profile_count":0}
+{"ts":"2026-07-30T06:00:55.124659Z","epoch":1785391255.1246598,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-30T06:01:29.406107Z","epoch":1785391289.406108,"event":"parser.start","query":"","category":"robux","quantity":15,"profile_count":0}
+{"ts":"2026-07-30T06:01:39.246375Z","epoch":1785391299.246375,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-30T06:02:09.418623Z","epoch":1785391329.4186234,"event":"parser.start","query":"","category":"roblox","quantity":15,"profile_count":0}
+{"ts":"2026-07-30T06:02:14.185596Z","epoch":1785391334.1855965,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-30T06:02:44.442389Z","epoch":1785391364.4423897,"event":"parser.start","query":"","category":"valorant-9149","quantity":15,"profile_count":0}
+{"ts":"2026-07-30T06:02:46.116254Z","epoch":1785391366.116254,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-30T06:03:19.448412Z","epoch":1785391399.4484124,"event":"parser.start","query":"","category":"xbox-game-pass-1","quantity":15,"profile_count":0}
+{"ts":"2026-07-30T06:03:20.931555Z","epoch":1785391400.9315553,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-30T06:03:54.466595Z","epoch":1785391434.4665954,"event":"parser.start","query":"","category":"pubg-mobile","quantity":15,"profile_count":0}
+{"ts":"2026-07-30T06:03:55.808875Z","epoch":1785391435.8088758,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-30T06:04:29.487286Z","epoch":1785391469.4872866,"event":"parser.start","query":"","category":"mobile-legends","quantity":15,"profile_count":0}
+{"ts":"2026-07-30T06:04:32.959004Z","epoch":1785391472.9590044,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-30T06:05:04.498009Z","epoch":1785391504.4980097,"event":"parser.start","query":"","category":"genshin-impact","quantity":15,"profile_count":0}
+{"ts":"2026-07-30T06:05:21.899720Z","epoch":1785391521.8997204,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-30T06:05:54.513593Z","epoch":1785391554.5135932,"event":"parser.start","query":"","category":"brawl-stars-9063","quantity":15,"profile_count":0}
+{"ts":"2026-07-30T06:05:58.224283Z","epoch":1785391558.2242835,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-30T06:06:25.968844Z","epoch":1785391585.968845,"event":"parser.start","query":"","category":"apple-id","quantity":15,"profile_count":0}
+{"ts":"2026-07-30T06:06:26.069735Z","epoch":1785391586.0697358,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-30T06:07:00.978045Z","epoch":1785391620.9780457,"event":"parser.start","query":"","category":"subscriptions-for-all-occasions","quantity":15,"profile_count":0}
+{"ts":"2026-07-30T06:07:01.063819Z","epoch":1785391621.0638194,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-30T06:07:35.982139Z","epoch":1785391655.9821396,"event":"parser.start","query":"","category":"microsoft-office","quantity":15,"profile_count":0}
+{"ts":"2026-07-30T06:07:36.894622Z","epoch":1785391656.8946223,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-30T06:08:11.000711Z","epoch":1785391691.0007114,"event":"parser.start","query":"","category":"antivirus-eset","quantity":15,"profile_count":0}
+{"ts":"2026-07-30T06:08:11.074320Z","epoch":1785391691.0743203,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-30T06:08:46.015339Z","epoch":1785391726.0153394,"event":"parser.start","query":"","category":"software","quantity":15,"profile_count":0}
+{"ts":"2026-07-30T06:08:46.644921Z","epoch":1785391726.6449215,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-30T06:09:21.030942Z","epoch":1785391761.0309427,"event":"parser.start","query":"","category":"spotify-premium","quantity":15,"profile_count":0}
+{"ts":"2026-07-30T06:09:21.080730Z","epoch":1785391761.0807307,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-30T06:09:56.044893Z","epoch":1785391796.0448935,"event":"parser.start","query":"","category":"microsoft-office-365","quantity":15,"profile_count":0}
+{"ts":"2026-07-30T06:09:56.104268Z","epoch":1785391796.1042683,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-30T06:10:31.060032Z","epoch":1785391831.0600328,"event":"parser.start","query":"","category":"robux","quantity":15,"profile_count":0}
+{"ts":"2026-07-30T06:10:31.570238Z","epoch":1785391831.570239,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-30T06:11:06.078884Z","epoch":1785391866.0788848,"event":"parser.start","query":"","category":"roblox","quantity":15,"profile_count":0}
+{"ts":"2026-07-30T06:11:07.490654Z","epoch":1785391867.4906542,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-30T06:11:41.089918Z","epoch":1785391901.0899181,"event":"parser.start","query":"","category":"valorant-9149","quantity":15,"profile_count":0}
+{"ts":"2026-07-30T06:12:05.242035Z","epoch":1785391925.2420359,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-30T06:12:36.108347Z","epoch":1785391956.1083477,"event":"parser.start","query":"","category":"xbox-game-pass-1","quantity":15,"profile_count":0}
+{"ts":"2026-07-30T06:12:36.895853Z","epoch":1785391956.8958535,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-30T06:13:11.122547Z","epoch":1785391991.1225476,"event":"parser.start","query":"","category":"pubg-mobile","quantity":15,"profile_count":0}
+{"ts":"2026-07-30T06:13:11.716858Z","epoch":1785391991.7168586,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-30T06:13:46.165740Z","epoch":1785392026.1657405,"event":"parser.start","query":"","category":"mobile-legends","quantity":15,"profile_count":0}
+{"ts":"2026-07-30T06:13:46.692494Z","epoch":1785392026.6924946,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-30T06:14:21.199140Z","epoch":1785392061.1991403,"event":"parser.start","query":"","category":"genshin-impact","quantity":15,"profile_count":0}
+{"ts":"2026-07-30T06:14:21.821434Z","epoch":1785392061.821435,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-30T06:14:56.212720Z","epoch":1785392096.2127202,"event":"parser.start","query":"","category":"brawl-stars-9063","quantity":15,"profile_count":0}
+{"ts":"2026-07-30T06:14:56.268568Z","epoch":1785392096.2685685,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-30T06:15:31.242124Z","epoch":1785392131.242124,"event":"parser.start","query":"","category":"apple-id","quantity":15,"profile_count":0}
+{"ts":"2026-07-30T06:15:33.825058Z","epoch":1785392133.8250587,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-30T06:16:06.241134Z","epoch":1785392166.2411346,"event":"parser.start","query":"","category":"subscriptions-for-all-occasions","quantity":15,"profile_count":0}
+{"ts":"2026-07-30T06:16:06.322046Z","epoch":1785392166.3220468,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-30T06:16:41.255448Z","epoch":1785392201.2554483,"event":"parser.start","query":"","category":"microsoft-office","quantity":15,"profile_count":0}
+{"ts":"2026-07-30T06:16:41.343597Z","epoch":1785392201.3435977,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-30T06:17:16.266807Z","epoch":1785392236.2668078,"event":"parser.start","query":"","category":"antivirus-eset","quantity":15,"profile_count":0}
+{"ts":"2026-07-30T06:17:16.873673Z","epoch":1785392236.8736732,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-30T06:17:51.278442Z","epoch":1785392271.2799532,"event":"parser.start","query":"","category":"software","quantity":15,"profile_count":0}
+{"ts":"2026-07-30T06:17:52.075880Z","epoch":1785392272.0758808,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-30T06:18:26.298299Z","epoch":1785392306.2982996,"event":"parser.start","query":"","category":"spotify-premium","quantity":15,"profile_count":0}
+{"ts":"2026-07-30T06:18:26.405342Z","epoch":1785392306.4053428,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-30T06:19:01.318579Z","epoch":1785392341.3185794,"event":"parser.start","query":"","category":"microsoft-office-365","quantity":15,"profile_count":0}
+{"ts":"2026-07-30T06:19:02.051163Z","epoch":1785392342.0511637,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-30T06:21:15.452015Z","epoch":1785392475.4520159,"event":"parser.start","query":"spotify-premium","category":"","quantity":3,"profile_count":0}
+{"ts":"2026-07-30T06:21:16.004065Z","epoch":1785392476.004065,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-30T06:22:17.790917Z","epoch":1785392537.7909174,"event":"parser.start","query":"","category":"spotify-premium","quantity":15,"profile_count":0}
+{"ts":"2026-07-30T06:22:17.918968Z","epoch":1785392537.9189687,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-30T06:22:52.818503Z","epoch":1785392572.8185034,"event":"parser.start","query":"","category":"microsoft-office-365","quantity":15,"profile_count":0}
+{"ts":"2026-07-30T06:23:32.928406Z","epoch":1785392612.9284067,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-30T06:24:07.821900Z","epoch":1785392647.8219008,"event":"parser.start","query":"","category":"robux","quantity":15,"profile_count":0}
+{"ts":"2026-07-30T06:24:47.580724Z","epoch":1785392687.5807247,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-30T06:25:17.846882Z","epoch":1785392717.8468828,"event":"parser.start","query":"","category":"roblox","quantity":15,"profile_count":0}
+{"ts":"2026-07-30T06:25:17.928278Z","epoch":1785392717.928278,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-30T06:25:52.852722Z","epoch":1785392752.8527226,"event":"parser.start","query":"","category":"valorant-9149","quantity":15,"profile_count":0}
+{"ts":"2026-07-30T06:25:52.921774Z","epoch":1785392752.9217744,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-30T06:26:27.882679Z","epoch":1785392787.8826792,"event":"parser.start","query":"","category":"xbox-game-pass-1","quantity":15,"profile_count":0}
+{"ts":"2026-07-30T06:26:27.970001Z","epoch":1785392787.970002,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-30T06:29:00.802284Z","epoch":1785392940.8022842,"event":"parser.start","query":"","category":"spotify-premium","quantity":15,"profile_count":0}
+{"ts":"2026-07-30T06:29:00.910960Z","epoch":1785392940.9109604,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-30T06:29:35.808412Z","epoch":1785392975.8084123,"event":"parser.start","query":"","category":"microsoft-office-365","quantity":15,"profile_count":0}
+{"ts":"2026-07-30T06:29:35.914572Z","epoch":1785392975.9145722,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-30T06:30:10.814665Z","epoch":1785393010.8146653,"event":"parser.start","query":"","category":"robux","quantity":15,"profile_count":0}
+{"ts":"2026-07-30T06:30:10.858246Z","epoch":1785393010.8582463,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-30T06:30:45.832960Z","epoch":1785393045.83296,"event":"parser.start","query":"","category":"roblox","quantity":15,"profile_count":0}
+{"ts":"2026-07-30T06:30:45.915863Z","epoch":1785393045.9158638,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-30T06:31:20.852551Z","epoch":1785393080.8525517,"event":"parser.start","query":"","category":"valorant-9149","quantity":15,"profile_count":0}
+{"ts":"2026-07-30T06:31:20.913587Z","epoch":1785393080.9135876,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-30T06:31:55.871354Z","epoch":1785393115.871354,"event":"parser.start","query":"","category":"xbox-game-pass-1","quantity":15,"profile_count":0}
+{"ts":"2026-07-30T06:31:55.925473Z","epoch":1785393115.9254735,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-30T06:32:30.890725Z","epoch":1785393150.8907259,"event":"parser.start","query":"","category":"pubg-mobile","quantity":15,"profile_count":0}
+{"ts":"2026-07-30T06:32:30.946791Z","epoch":1785393150.9467916,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-30T06:33:05.903344Z","epoch":1785393185.9033446,"event":"parser.start","query":"","category":"mobile-legends","quantity":15,"profile_count":0}
+{"ts":"2026-07-30T06:33:05.965171Z","epoch":1785393185.9651713,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-30T06:33:40.917772Z","epoch":1785393220.9177728,"event":"parser.start","query":"","category":"genshin-impact","quantity":15,"profile_count":0}
+{"ts":"2026-07-30T06:33:40.973774Z","epoch":1785393220.9737747,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-30T06:55:38.071310Z","epoch":1785394538.0713103,"event":"parser.start","query":"","category":"108961","quantity":3,"profile_count":0}
+{"ts":"2026-07-30T06:55:38.155197Z","epoch":1785394538.1551976,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-30T07:02:09.103869Z","epoch":1785394929.10387,"event":"parser.start","query":"","category":"28145","quantity":15,"profile_count":0}
+{"ts":"2026-07-30T07:02:09.235129Z","epoch":1785394929.2351294,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-30T07:04:49.126124Z","epoch":1785395089.1261246,"event":"parser.start","query":"","category":"28145","quantity":15,"profile_count":0}
+{"ts":"2026-07-30T07:05:27.746381Z","epoch":1785395127.746381,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-30T07:05:59.118504Z","epoch":1785395159.1185043,"event":"parser.start","query":"","category":"120504","quantity":15,"profile_count":0}
+{"ts":"2026-07-30T07:06:30.342383Z","epoch":1785395190.3423831,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-30T07:07:04.154372Z","epoch":1785395224.154373,"event":"parser.start","query":"","category":"33986","quantity":15,"profile_count":0}
+{"ts":"2026-07-30T07:07:42.948995Z","epoch":1785395262.948995,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-30T07:08:14.173569Z","epoch":1785395294.1735697,"event":"parser.start","query":"","category":"139110","quantity":15,"profile_count":0}
+{"ts":"2026-07-30T07:08:54.116305Z","epoch":1785395334.1163049,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-30T07:09:24.176081Z","epoch":1785395364.1760817,"event":"parser.start","query":"","category":"132647","quantity":15,"profile_count":0}
+{"ts":"2026-07-30T07:09:55.521922Z","epoch":1785395395.521922,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-30T07:10:29.200871Z","epoch":1785395429.2008715,"event":"parser.start","query":"","category":"27467","quantity":15,"profile_count":0}
+{"ts":"2026-07-30T07:11:02.788214Z","epoch":1785395462.7882147,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-30T07:11:34.215042Z","epoch":1785395494.2150424,"event":"parser.start","query":"","category":"100314277","quantity":15,"profile_count":0}
+{"ts":"2026-07-30T07:12:05.692413Z","epoch":1785395525.692413,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-30T07:12:39.223717Z","epoch":1785395559.223718,"event":"parser.start","query":"","category":"108961","quantity":15,"profile_count":0}
+{"ts":"2026-07-30T07:13:19.101327Z","epoch":1785395599.1013274,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-30T07:13:49.244726Z","epoch":1785395629.2447264,"event":"parser.start","query":"","category":"108960","quantity":15,"profile_count":0}
+{"ts":"2026-07-30T07:14:24.858030Z","epoch":1785395664.8580308,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-30T07:14:59.278826Z","epoch":1785395699.2788265,"event":"parser.start","query":"","category":"32852","quantity":15,"profile_count":0}
+{"ts":"2026-07-30T07:15:32.224647Z","epoch":1785395732.2246478,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-30T07:16:04.297150Z","epoch":1785395764.2971504,"event":"parser.start","query":"","category":"138351","quantity":15,"profile_count":0}
+{"ts":"2026-07-30T07:16:38.231608Z","epoch":1785395798.2316084,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-30T07:17:09.303977Z","epoch":1785395829.3039775,"event":"parser.start","query":"","category":"109024","quantity":15,"profile_count":0}
+{"ts":"2026-07-30T07:17:43.382071Z","epoch":1785395863.3820717,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-30T07:18:14.357473Z","epoch":1785395894.3574736,"event":"parser.start","query":"","category":"24243","quantity":15,"profile_count":0}
+{"ts":"2026-07-30T07:18:50.907210Z","epoch":1785395930.9072108,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-30T07:19:24.439547Z","epoch":1785395964.4395475,"event":"parser.start","query":"","category":"100310073","quantity":15,"profile_count":0}
+{"ts":"2026-07-30T07:20:56.361297Z","epoch":1785396056.3612974,"event":"parser.start","query":"","category":"28145","quantity":5,"profile_count":0}
+{"ts":"2026-07-30T07:21:37.868894Z","epoch":1785396097.8688948,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-07-30T07:22:08.858554Z","epoch":1785396128.8585546,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cascade"}
+{"ts":"2026-07-30T08:32:27.118639Z","epoch":1785400347.11864,"event":"parser.start","query":"Steam","category":"","quantity":3,"profile_count":0}
+{"ts":"2026-07-30T08:34:02.954065Z","epoch":1785400442.9540653,"event":"parser.page_fetched","profile_id":"2081299678611705856","status":404,"latency_ms":687,"rate_delay":4.0,"is_challenge":false,"url":"https://ggsel.net/search?q=Steam"}
+{"ts":"2026-07-30T08:34:03.624123Z","epoch":1785400443.6241236,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cascade"}
+{"ts":"2026-07-30T08:36:51.137339Z","epoch":1785400611.1373398,"event":"parser.start","query":"Steam","category":"","quantity":3,"profile_count":0}
+{"ts":"2026-07-30T08:37:16.137582Z","epoch":1785400636.1375828,"event":"parser.page_fetched","profile_id":"2081299678611705856","status":404,"latency_ms":469,"rate_delay":4.0,"is_challenge":false,"url":"https://ggsel.net/search?q=Steam"}
+{"ts":"2026-07-30T08:37:17.446310Z","epoch":1785400637.4463103,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cascade"}
+{"ts":"2026-07-31T08:56:28.283275Z","epoch":1785488188.2832756,"event":"parser.start","query":"","category":"55706","quantity":10,"profile_count":0}
+{"ts":"2026-07-31T08:56:28.485647Z","epoch":1785488188.4856472,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-31T08:56:32.277042Z","epoch":1785488192.2770424,"event":"parser.start","query":"","category":"138325","quantity":10,"profile_count":0}
+{"ts":"2026-07-31T08:56:32.968183Z","epoch":1785488192.968183,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-31T08:56:36.273320Z","epoch":1785488196.273321,"event":"parser.start","query":"","category":"44070","quantity":10,"profile_count":0}
+{"ts":"2026-07-31T08:56:36.935869Z","epoch":1785488196.9358697,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-31T09:04:39.945061Z","epoch":1785488679.945062,"event":"parser.start","query":"","category":"exitlag","quantity":10,"profile_count":0}
+{"ts":"2026-07-31T09:05:17.853147Z","epoch":1785488717.8531477,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-31T09:05:20.976518Z","epoch":1785488720.9765186,"event":"parser.start","query":"","category":"arc-raiders","quantity":10,"profile_count":0}
+{"ts":"2026-07-31T09:05:21.038072Z","epoch":1785488721.0380728,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-31T09:05:24.989239Z","epoch":1785488724.9892392,"event":"parser.start","query":"","category":"clash-of-clans-9576","quantity":10,"profile_count":0}
+{"ts":"2026-07-31T09:06:01.178913Z","epoch":1785488761.178913,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-31T09:08:23.083059Z","epoch":1785488903.0830588,"event":"parser.start","query":"","category":"antivirus-eset","quantity":10,"profile_count":0}
+{"ts":"2026-07-31T09:08:23.143065Z","epoch":1785488903.1430655,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-31T09:08:27.104613Z","epoch":1785488907.104613,"event":"parser.start","query":"","category":"other-1","quantity":10,"profile_count":0}
+{"ts":"2026-07-31T09:09:07.027329Z","epoch":1785488947.027329,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-31T09:09:10.127200Z","epoch":1785488950.1272004,"event":"parser.start","query":"","category":"grand-theft-auto-vi","quantity":10,"profile_count":0}
+{"ts":"2026-07-31T09:09:42.572690Z","epoch":1785488982.5726902,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-31T09:16:06.713720Z","epoch":1785489366.71372,"event":"parser.start","query":"","category":"146751","quantity":10,"profile_count":0}
+{"ts":"2026-07-31T09:16:07.341375Z","epoch":1785489367.3413754,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-31T09:16:10.741313Z","epoch":1785489370.7413132,"event":"parser.start","query":"","category":"140318","quantity":10,"profile_count":0}
+{"ts":"2026-07-31T09:16:10.833472Z","epoch":1785489370.8334725,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-31T09:16:14.742844Z","epoch":1785489374.7428443,"event":"parser.start","query":"","category":"102640","quantity":10,"profile_count":0}
+{"ts":"2026-07-31T09:16:15.374867Z","epoch":1785489375.3748672,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-31T10:23:44.489576Z","epoch":1785493424.489577,"event":"parser.start","query":"","category":"grand-theft-auto-5-first","quantity":10,"profile_count":0}
+{"ts":"2026-07-31T10:24:23.049780Z","epoch":1785493463.0497801,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-31T10:24:26.524809Z","epoch":1785493466.5248091,"event":"parser.start","query":"","category":"unlocktool","quantity":10,"profile_count":0}
+{"ts":"2026-07-31T10:25:01.348787Z","epoch":1785493501.3487868,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-31T10:25:04.547091Z","epoch":1785493504.5470917,"event":"parser.start","query":"","category":"games-steam","quantity":10,"profile_count":0}
+{"ts":"2026-07-31T10:25:35.689581Z","epoch":1785493535.6895812,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-31T10:37:20.047908Z","epoch":1785494240.0479085,"event":"parser.start","query":"","category":"other-games-currency","quantity":10,"profile_count":0}
+{"ts":"2026-07-31T10:37:20.199848Z","epoch":1785494240.1998487,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-31T10:37:24.066400Z","epoch":1785494244.0664003,"event":"parser.start","query":"","category":"arena-breakout-infinite","quantity":10,"profile_count":0}
+{"ts":"2026-07-31T10:37:24.178953Z","epoch":1785494244.1789536,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-31T10:37:28.081584Z","epoch":1785494248.0815842,"event":"parser.start","query":"","category":"capcut","quantity":10,"profile_count":0}
+{"ts":"2026-07-31T10:37:58.197663Z","epoch":1785494278.1976638,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-31T10:46:45.637019Z","epoch":1785494805.6370199,"event":"parser.start","query":"","category":"grand-theft-auto-vi","quantity":10,"profile_count":0}
+{"ts":"2026-07-31T10:47:19.495622Z","epoch":1785494839.4956226,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-31T10:47:22.657423Z","epoch":1785494842.657423,"event":"parser.start","query":"","category":"albion-online","quantity":10,"profile_count":0}
+{"ts":"2026-07-31T10:48:00.700397Z","epoch":1785494880.7003977,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-07-31T10:48:04.700642Z","epoch":1785494884.700642,"event":"parser.start","query":"","category":"pubg-mobile","quantity":10,"profile_count":0}
+{"ts":"2026-07-31T10:48:41.653451Z","epoch":1785494921.6534512,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-08-07T19:21:20.185987Z","epoch":1786130480.185988,"event":"parser.start","query":"","category":"honkai-star-rail","quantity":10,"profile_count":0}
+{"ts":"2026-08-07T19:21:23.260524Z","epoch":1786130483.2605243,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-08-07T19:21:27.167328Z","epoch":1786130487.167328,"event":"parser.start","query":"","category":"standoff-2","quantity":10,"profile_count":0}
+{"ts":"2026-08-07T19:21:30.148830Z","epoch":1786130490.1488307,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-08-07T19:21:33.188977Z","epoch":1786130493.1889772,"event":"parser.start","query":"","category":"helldivers-2","quantity":10,"profile_count":0}
+{"ts":"2026-08-07T19:21:36.136266Z","epoch":1786130496.136266,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-08-08T18:36:56.272102Z","epoch":1786214216.2721024,"event":"parser.start","query":"games","category":"","quantity":5,"profile_count":0}
+{"ts":"2026-08-08T18:36:59.296584Z","epoch":1786214219.2965848,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-08-08T18:42:17.783909Z","epoch":1786214537.7839098,"event":"parser.start","query":"games","category":"","quantity":5,"profile_count":0}
+{"ts":"2026-08-08T18:42:21.884332Z","epoch":1786214541.884332,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-08-08T18:42:25.319238Z","epoch":1786214545.3192384,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cascade"}
+{"ts":"2026-08-08T18:51:15.944281Z","epoch":1786215075.9442813,"event":"parser.start","query":"games","category":"","quantity":5,"profile_count":0}
+{"ts":"2026-08-08T18:53:08.491971Z","epoch":1786215188.4919715,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cascade"}
+{"ts":"2026-08-08T19:07:21.012814Z","epoch":1786216041.0128145,"event":"parser.start","query":"games","category":"","quantity":5,"profile_count":0}
+{"ts":"2026-08-08T19:09:11.403544Z","epoch":1786216151.403545,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cascade"}
+{"ts":"2026-08-08T19:18:43.213825Z","epoch":1786216723.2138252,"event":"parser.start","query":"games","category":"","quantity":5,"profile_count":0}
+{"ts":"2026-08-08T19:19:36.239433Z","epoch":1786216776.2394333,"event":"parser.page_fetched","profile_id":"2084336484026486784","status":404,"latency_ms":906,"rate_delay":4.0,"is_challenge":false,"url":"https://ggsel.net/search?q=games"}
+{"ts":"2026-08-08T19:19:37.748668Z","epoch":1786216777.7486687,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cascade"}
+{"ts":"2026-08-08T20:00:37.461920Z","epoch":1786219237.4619207,"event":"parser.start","query":"","category":"47488","quantity":5,"profile_count":0}
+{"ts":"2026-08-08T20:00:40.845826Z","epoch":1786219240.8458264,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cascade"}
+{"ts":"2026-08-08T20:02:13.759733Z","epoch":1786219333.759733,"event":"parser.start","query":"","category":"47488","quantity":5,"profile_count":0}
+{"ts":"2026-08-08T20:02:17.364552Z","epoch":1786219337.3645525,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cascade"}
+{"ts":"2026-08-08T20:03:58.202865Z","epoch":1786219438.2028656,"event":"parser.start","query":"","category":"47488","quantity":5,"profile_count":0}
+{"ts":"2026-08-08T20:04:59.558109Z","epoch":1786219499.5581093,"event":"parser.page_fetched","profile_id":"2084336484026486784","status":404,"latency_ms":1000,"rate_delay":4.0,"is_challenge":false,"url":"https://ggsel.net/catalog/47488"}
+{"ts":"2026-08-08T20:05:01.796722Z","epoch":1786219501.7967222,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cascade"}
+{"ts":"2026-08-08T20:05:47.206395Z","epoch":1786219547.2071564,"event":"parser.start","query":"","category":"47488","quantity":5,"profile_count":0}
+{"ts":"2026-08-08T20:06:58.602034Z","epoch":1786219618.6020348,"event":"parser.page_fetched","profile_id":"2084336484026486784","status":404,"latency_ms":1187,"rate_delay":4.0,"is_challenge":false,"url":"https://ggsel.net/catalog/47488"}
+{"ts":"2026-08-08T20:07:00.249828Z","epoch":1786219620.2498286,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cascade"}
+{"ts":"2026-08-08T20:22:26.893398Z","epoch":1786220546.893398,"event":"parser.start","query":"","category":"47488","quantity":5,"profile_count":0}
+{"ts":"2026-08-08T20:22:42.521880Z","epoch":1786220562.5218809,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"error","fetcher_used":""}
+{"ts":"2026-08-08T20:23:55.187184Z","epoch":1786220635.187184,"event":"parser.start","query":"","category":"47488","quantity":5,"profile_count":0}
+{"ts":"2026-08-08T20:23:58.335712Z","epoch":1786220638.3357124,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":""}
+{"ts":"2026-08-08T22:29:22.079633Z","epoch":1786228162.079633,"event":"parser.start","query":"games","category":"","quantity":5,"profile_count":0}
+{"ts":"2026-08-08T22:29:24.065085Z","epoch":1786228164.0650856,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":""}
+{"ts":"2026-08-08T22:31:09.001315Z","epoch":1786228269.001315,"event":"parser.start","query":"","category":"47488","quantity":5,"profile_count":0}
+{"ts":"2026-08-08T22:31:10.331313Z","epoch":1786228270.3313138,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":""}
+{"ts":"2026-08-08T23:36:16.997208Z","epoch":1786232176.997208,"event":"parser.start","query":"spotify-premium","category":"","quantity":5}
+{"ts":"2026-08-08T23:36:52.872075Z","epoch":1786232212.8720753,"event":"parser.page_fetched","profile_id":"2084336484026486784","status":200,"latency_ms":3078,"rate_delay":4.0,"is_challenge":false,"url":"https://ggsel.net/catalog/spotify-premium"}
+{"ts":"2026-08-08T23:36:53.124871Z","epoch":1786232213.1248715,"event":"parser.run_complete","total_products":5,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cascade"}
+{"ts":"2026-08-09T00:03:11.188156Z","epoch":1786233791.1881564,"event":"parser.start","query":"spotify-premium","category":"","quantity":1}
+{"ts":"2026-08-09T00:03:45.173109Z","epoch":1786233825.1731098,"event":"parser.page_fetched","profile_id":"2084336484026486784","status":200,"latency_ms":3280,"rate_delay":3.8,"is_challenge":false,"url":"https://ggsel.net/catalog/spotify-premium"}
+{"ts":"2026-08-09T00:03:45.388080Z","epoch":1786233825.3880806,"event":"parser.run_complete","total_products":1,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cascade"}
+{"ts":"2026-08-09T00:04:33.160001Z","epoch":1786233873.160001,"event":"parser.start","query":"spotify-premium","category":"","quantity":1}
+{"ts":"2026-08-09T00:05:07.794872Z","epoch":1786233907.7948723,"event":"parser.page_fetched","profile_id":"2084336484026486784","status":200,"latency_ms":3093,"rate_delay":3.61,"is_challenge":false,"url":"https://ggsel.net/catalog/spotify-premium"}
+{"ts":"2026-08-09T00:05:07.982920Z","epoch":1786233907.9829206,"event":"parser.run_complete","total_products":1,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cascade"}
+{"ts":"2026-08-09T00:06:38.871921Z","epoch":1786233998.8719213,"event":"parser.start","query":"spotify-premium","category":"","quantity":1}
+{"ts":"2026-08-09T00:07:18.762335Z","epoch":1786234038.7623358,"event":"parser.page_fetched","profile_id":"2084336484026486784","status":200,"latency_ms":2891,"rate_delay":3.4294999999999995,"is_challenge":false,"url":"https://ggsel.net/catalog/spotify-premium"}
+{"ts":"2026-08-09T00:07:19.019368Z","epoch":1786234039.0193684,"event":"parser.run_complete","total_products":1,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cascade"}
+{"ts":"2026-08-09T00:45:36.792852Z","epoch":1786236336.7928522,"event":"parser.start","query":"spotify-premium","category":"","quantity":1}
+{"ts":"2026-08-09T00:46:11.704207Z","epoch":1786236371.7042074,"event":"parser.page_fetched","profile_id":"2084336484026486784","status":200,"latency_ms":3344,"rate_delay":3.2580249999999995,"is_challenge":false,"url":"https://ggsel.net/catalog/spotify-premium"}
+{"ts":"2026-08-09T00:46:11.923528Z","epoch":1786236371.9235287,"event":"parser.run_complete","total_products":1,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cascade"}
+{"ts":"2026-08-09T00:50:11.613656Z","epoch":1786236611.613656,"event":"parser.start","query":"spotify-premium","category":"","quantity":1}
+{"ts":"2026-08-09T00:50:46.050844Z","epoch":1786236646.0508447,"event":"parser.page_fetched","profile_id":"2084336484026486784","status":200,"latency_ms":3625,"rate_delay":3.0951237499999995,"is_challenge":false,"url":"https://ggsel.net/catalog/spotify-premium"}
+{"ts":"2026-08-09T00:50:46.248778Z","epoch":1786236646.248779,"event":"parser.run_complete","total_products":1,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cascade"}
+{"ts":"2026-08-10T14:18:44.150352Z","epoch":1786371524.1503525,"event":"parser.start","query":"","category":"valorant-9149","quantity":20}
+{"ts":"2026-08-10T14:18:54.180537Z","epoch":1786371534.180538,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-08-10T14:19:38.357702Z","epoch":1786371578.357703,"event":"parser.run_complete","total_products":20,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cascade"}
+{"ts":"2026-08-10T16:31:53.222177Z","epoch":1786379513.2221777,"event":"parser.start","query":"spotify","category":"","quantity":5}
+{"ts":"2026-08-10T16:31:55.787429Z","epoch":1786379515.787429,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-08-10T16:33:30.472273Z","epoch":1786379610.4722736,"event":"parser.start","query":"","category":"podpisochnye-servisy","quantity":5}
+{"ts":"2026-08-10T16:33:38.190671Z","epoch":1786379618.1906717,"event":"parser.run_complete","total_products":5,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cffi"}
+{"ts":"2026-08-10T16:50:45.924675Z","epoch":1786380645.9246757,"event":"parser.start","query":"","category":"subscriptions-for-all-occasions","quantity":10}
+{"ts":"2026-08-10T16:52:44.209678Z","epoch":1786380764.2096786,"event":"parser.page_fetched","profile_id":"2086579080215990272","status":200,"latency_ms":1952,"rate_delay":4.0,"is_challenge":false,"url":"https://ggsel.net/catalog/subscriptions-for-all-occasions"}
+{"ts":"2026-08-10T16:53:08.045289Z","epoch":1786380788.0452893,"event":"parser.run_complete","total_products":10,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cascade"}
+{"ts":"2026-08-11T00:18:57.846312Z","epoch":1786407537.8463125,"event":"parser.start","query":"","category":"hacker","quantity":20}
+{"ts":"2026-08-11T01:35:17.980857Z","epoch":1786412117.9808571,"event":"parser.start","query":"","category":"hacker","quantity":20}
+{"ts":"2026-08-13T12:30:36.545970Z","epoch":1786624236.5459707,"event":"parser.start","query":"","category":"grand-theft-auto-vi","quantity":10}
+{"ts":"2026-08-13T12:31:31.110784Z","epoch":1786624291.110784,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-08-13T12:32:24.092877Z","epoch":1786624344.0938995,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-08-13T12:33:18.666759Z","epoch":1786624398.6667593,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-08-13T12:33:44.492091Z","epoch":1786624424.4920914,"event":"parser.run_complete","total_products":10,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cascade"}
+{"ts":"2026-08-13T12:41:09.216243Z","epoch":1786624869.2162435,"event":"parser.start","query":"","category":"roblox","quantity":10}
+{"ts":"2026-08-13T12:42:02.642954Z","epoch":1786624922.6429543,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-08-13T12:42:16.801288Z","epoch":1786624936.8012881,"event":"parser.run_complete","total_products":10,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cascade"}
+{"ts":"2026-08-13T12:42:34.517908Z","epoch":1786624954.5179079,"event":"parser.start","query":"","category":"jetbrains","quantity":10}
+{"ts":"2026-08-13T12:43:06.276930Z","epoch":1786624986.2769303,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-08-13T12:43:25.002369Z","epoch":1786625005.0033665,"event":"parser.run_complete","total_products":10,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cascade"}
+{"ts":"2026-08-13T12:49:29.322194Z","epoch":1786625369.322194,"event":"parser.start","query":"","category":"roblox","quantity":10}
+{"ts":"2026-08-13T12:50:10.614748Z","epoch":1786625410.6147482,"event":"parser.page_fetched","profile_id":"0a0b0ca0-daea-48ce-995d-20ac5771e97d","status":200,"latency_ms":1032,"rate_delay":4.0,"is_challenge":false,"url":"https://ggsel.net/catalog/roblox"}
+{"ts":"2026-08-13T12:50:15.792510Z","epoch":1786625415.7925107,"event":"parser.page_fetched","profile_id":"0a0b0ca0-daea-48ce-995d-20ac5771e97d","status":200,"latency_ms":1125,"rate_delay":3.8,"is_challenge":false,"url":"https://ggsel.net/catalog/product/robloks-roblox-kod-aktivacii-100-24000-robuksov-vse-strany-102260624"}
+{"ts":"2026-08-13T12:50:24.240024Z","epoch":1786625424.240024,"event":"parser.page_fetched","profile_id":"0a0b0ca0-daea-48ce-995d-20ac5771e97d","status":200,"latency_ms":858,"rate_delay":3.61,"is_challenge":false,"url":"https://ggsel.net/catalog/product/avto-robuksy-bez-pending-80-22500-102618529"}
+{"ts":"2026-08-13T12:50:30.706608Z","epoch":1786625430.706608,"event":"parser.page_fetched","profile_id":"0a0b0ca0-daea-48ce-995d-20ac5771e97d","status":200,"latency_ms":905,"rate_delay":3.4294999999999995,"is_challenge":false,"url":"https://ggsel.net/catalog/product/roblox-50-2000-robux-globalnyi-102267766"}
+{"ts":"2026-08-13T12:50:39.171837Z","epoch":1786625439.1718369,"event":"parser.page_fetched","profile_id":"0a0b0ca0-daea-48ce-995d-20ac5771e97d","status":200,"latency_ms":1389,"rate_delay":3.2580249999999995,"is_challenge":false,"url":"https://ggsel.net/catalog/product/avto-24-7-robuksy-po-vxodu-bez-geimpassa-80-10000-robuksov-102636987"}
+{"ts":"2026-08-13T12:50:48.066002Z","epoch":1786625448.0660026,"event":"parser.page_fetched","profile_id":"0a0b0ca0-daea-48ce-995d-20ac5771e97d","status":200,"latency_ms":844,"rate_delay":3.0951237499999995,"is_challenge":false,"url":"https://ggsel.net/catalog/product/robux-robuksy-roblox-80-22500-r-popolnenie-akkaunta-102555083"}
+{"ts":"2026-08-13T12:50:55.802644Z","epoch":1786625455.8026447,"event":"parser.page_fetched","profile_id":"0a0b0ca0-daea-48ce-995d-20ac5771e97d","status":200,"latency_ms":1625,"rate_delay":2.940367562499999,"is_challenge":false,"url":"https://ggsel.net/catalog/product/avto-24-7-robuksy-po-vxodu-bez-geimpassa-80-22500-102537456"}
+{"ts":"2026-08-13T12:51:03.299121Z","epoch":1786625463.299121,"event":"parser.page_fetched","profile_id":"0a0b0ca0-daea-48ce-995d-20ac5771e97d","status":200,"latency_ms":1172,"rate_delay":2.793349184374999,"is_challenge":false,"url":"https://ggsel.net/catalog/product/avto-roblox-kod-popolneniia-global-kod-102128452"}
+{"ts":"2026-08-13T12:51:09.060116Z","epoch":1786625469.0601163,"event":"parser.page_fetched","profile_id":"0a0b0ca0-daea-48ce-995d-20ac5771e97d","status":200,"latency_ms":796,"rate_delay":2.653681725156249,"is_challenge":false,"url":"https://ggsel.net/catalog/product/roblox-gift-card-200-14000-robux-globalnyi-5201996"}
+{"ts":"2026-08-13T12:51:14.115837Z","epoch":1786625474.1158378,"event":"parser.page_fetched","profile_id":"0a0b0ca0-daea-48ce-995d-20ac5771e97d","status":200,"latency_ms":797,"rate_delay":2.5209976388984363,"is_challenge":false,"url":"https://ggsel.net/catalog/product/roblox-gift-card-225-10-000robux-liuboi-region-4751588"}
+{"ts":"2026-08-13T12:51:19.792788Z","epoch":1786625479.7937887,"event":"parser.page_fetched","profile_id":"0a0b0ca0-daea-48ce-995d-20ac5771e97d","status":200,"latency_ms":968,"rate_delay":2.3949477569535143,"is_challenge":false,"url":"https://ggsel.net/catalog/product/avtovydaca-liuboe-kolicestvo-robuksy-po-game-pass-102112944"}
+{"ts":"2026-08-13T12:52:13.122570Z","epoch":1786625533.1225703,"event":"parser.run_complete","total_products":10,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cascade"}
+{"ts":"2026-08-13T12:52:16.260959Z","epoch":1786625536.260959,"event":"parser.start","query":"","category":"valorant-9149","quantity":10}
+{"ts":"2026-08-13T12:52:21.928950Z","epoch":1786625541.9289505,"event":"parser.page_fetched","profile_id":"0a0b0ca0-daea-48ce-995d-20ac5771e97d","status":200,"latency_ms":1484,"rate_delay":2.2752003691058382,"is_challenge":false,"url":"https://ggsel.net/catalog/valorant-9149"}
+{"ts":"2026-08-13T12:52:27.016179Z","epoch":1786625547.0161796,"event":"parser.page_fetched","profile_id":"0a0b0ca0-daea-48ce-995d-20ac5771e97d","status":200,"latency_ms":1702,"rate_delay":2.161440350650546,"is_challenge":false,"url":"https://ggsel.net/catalog/product/podarocnaia-karta-valorant-points-375-8900-tr-turciia-102369357"}
+{"ts":"2026-08-13T12:52:32.468742Z","epoch":1786625552.4687424,"event":"parser.page_fetched","profile_id":"0a0b0ca0-daea-48ce-995d-20ac5771e97d","status":200,"latency_ms":1093,"rate_delay":2.053368333118019,"is_challenge":false,"url":"https://ggsel.net/catalog/product/avto-valorant-points-1000-vp-rossiia-kod-popolneniia-4826294"}
+{"ts":"2026-08-13T12:52:45.964454Z","epoch":1786625565.964455,"event":"parser.run_complete","total_products":10,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cascade"}
+{"ts":"2026-08-13T13:33:53.807476Z","epoch":1786628033.807477,"event":"parser.start","query":"","category":"genshin-impact","quantity":10}
+{"ts":"2026-08-13T13:34:19.777437Z","epoch":1786628059.7774372,"event":"parser.page_fetched","profile_id":"0a0b0ca0-daea-48ce-995d-20ac5771e97d","status":200,"latency_ms":1093,"rate_delay":2.0,"is_challenge":false,"url":"https://ggsel.net/catalog/genshin-impact"}
+{"ts":"2026-08-13T13:34:23.828175Z","epoch":1786628063.8281758,"event":"parser.page_fetched","profile_id":"0a0b0ca0-daea-48ce-995d-20ac5771e97d","status":200,"latency_ms":1405,"rate_delay":2.0,"is_challenge":false,"url":"https://ggsel.net/catalog/product/zemcuznii-xor-genshin-impact-popolnenie-5403398"}
+{"ts":"2026-08-13T13:34:30.976802Z","epoch":1786628070.9768023,"event":"parser.page_fetched","profile_id":"0a0b0ca0-daea-48ce-995d-20ac5771e97d","status":200,"latency_ms":1360,"rate_delay":2.0,"is_challenge":false,"url":"https://ggsel.net/catalog/product/980-110-kristallov-avto-genshin-impact-po-id-102185095"}
+{"ts":"2026-08-13T13:34:36.898592Z","epoch":1786628076.8995917,"event":"parser.page_fetched","profile_id":"0a0b0ca0-daea-48ce-995d-20ac5771e97d","status":200,"latency_ms":1110,"rate_delay":2.0,"is_challenge":false,"url":"https://ggsel.net/catalog/product/1980-260-kristallov-avto-genshin-impact-po-id-102185103"}
+{"ts":"2026-08-13T13:34:42.039187Z","epoch":1786628082.0391874,"event":"parser.page_fetched","profile_id":"0a0b0ca0-daea-48ce-995d-20ac5771e97d","status":200,"latency_ms":1250,"rate_delay":2.0,"is_challenge":false,"url":"https://ggsel.net/catalog/product/zemcuznyi-gimn-boevoi-propusk-100571957"}
+{"ts":"2026-08-13T13:34:47.232033Z","epoch":1786628087.2320335,"event":"parser.page_fetched","profile_id":"0a0b0ca0-daea-48ce-995d-20ac5771e97d","status":200,"latency_ms":812,"rate_delay":2.0,"is_challenge":false,"url":"https://ggsel.net/catalog/product/genshin-impact-boevoi-propusk-zemcuznyi-gimn-102154541"}
+{"ts":"2026-08-13T13:34:53.258701Z","epoch":1786628093.2587013,"event":"parser.page_fetched","profile_id":"0a0b0ca0-daea-48ce-995d-20ac5771e97d","status":200,"latency_ms":1327,"rate_delay":2.0,"is_challenge":false,"url":"https://ggsel.net/catalog/product/3280-600-kristallov-genshin-impact-po-id-102185111"}
+{"ts":"2026-08-13T13:34:59.253391Z","epoch":1786628099.2533915,"event":"parser.page_fetched","profile_id":"0a0b0ca0-daea-48ce-995d-20ac5771e97d","status":200,"latency_ms":1358,"rate_delay":2.0,"is_challenge":false,"url":"https://ggsel.net/catalog/product/6480-1600-kristallov-genshin-impact-po-id-102185124"}
+{"ts":"2026-08-13T13:35:05.498844Z","epoch":1786628105.498844,"event":"parser.page_fetched","profile_id":"0a0b0ca0-daea-48ce-995d-20ac5771e97d","status":200,"latency_ms":1453,"rate_delay":2.0,"is_challenge":false,"url":"https://ggsel.net/catalog/product/zemcuznii-gimn-genshin-impact-popolnenie-5403390"}
+{"ts":"2026-08-13T13:35:12.966982Z","epoch":1786628112.9669824,"event":"parser.page_fetched","profile_id":"0a0b0ca0-daea-48ce-995d-20ac5771e97d","status":200,"latency_ms":1202,"rate_delay":2.0,"is_challenge":false,"url":"https://ggsel.net/catalog/product/247-avto-genshin-impact-300-30-kristallov-4683861"}
+{"ts":"2026-08-13T13:35:19.331068Z","epoch":1786628119.3310678,"event":"parser.page_fetched","profile_id":"0a0b0ca0-daea-48ce-995d-20ac5771e97d","status":200,"latency_ms":1014,"rate_delay":2.0,"is_challenge":false,"url":"https://ggsel.net/catalog/product/blagoslovenie-poloi-luny-30-dnei-102087945"}
+{"ts":"2026-08-13T13:36:13.984419Z","epoch":1786628173.984419,"event":"parser.run_complete","total_products":10,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cascade"}
+{"ts":"2026-08-13T13:36:17.433693Z","epoch":1786628177.4336934,"event":"parser.start","query":"","category":"standoff-2","quantity":10}
+{"ts":"2026-08-13T13:36:21.505820Z","epoch":1786628181.5058203,"event":"parser.page_fetched","profile_id":"0a0b0ca0-daea-48ce-995d-20ac5771e97d","status":200,"latency_ms":1078,"rate_delay":2.0,"is_challenge":false,"url":"https://ggsel.net/catalog/standoff-2"}
+{"ts":"2026-08-13T13:36:26.212676Z","epoch":1786628186.2126765,"event":"parser.page_fetched","profile_id":"0a0b0ca0-daea-48ce-995d-20ac5771e97d","status":200,"latency_ms":828,"rate_delay":2.0,"is_challenge":false,"url":"https://ggsel.net/catalog/product/rynok-24-7-1g-0-72-komissiia-na-mne-102350774"}
+{"ts":"2026-08-13T13:36:35.471218Z","epoch":1786628195.4712183,"event":"parser.page_fetched","profile_id":"0a0b0ca0-daea-48ce-995d-20ac5771e97d","status":200,"latency_ms":906,"rate_delay":2.0,"is_challenge":false,"url":"https://ggsel.net/catalog/product/kupit-goldu-standoff-2-102231078"}
+{"ts":"2026-08-13T13:36:41.727984Z","epoch":1786628201.7279842,"event":"parser.page_fetched","profile_id":"0a0b0ca0-daea-48ce-995d-20ac5771e97d","status":200,"latency_ms":1359,"rate_delay":2.0,"is_challenge":false,"url":"https://ggsel.net/catalog/product/po-id-100-4000-goldy-zolota-standoff-2-102616387"}
+{"ts":"2026-08-13T13:36:49.801003Z","epoch":1786628209.8010032,"event":"parser.page_fetched","profile_id":"0a0b0ca0-daea-48ce-995d-20ac5771e97d","status":200,"latency_ms":875,"rate_delay":2.0,"is_challenge":false,"url":"https://ggsel.net/catalog/product/za-minutu-bonusy-komissiia-na-mne-golda-zoloto-standoff-2-cerez-rynok-102610783"}
+{"ts":"2026-08-13T13:36:56.926797Z","epoch":1786628216.9267972,"event":"parser.page_fetched","profile_id":"0a0b0ca0-daea-48ce-995d-20ac5771e97d","status":200,"latency_ms":1234,"rate_delay":2.0,"is_challenge":false,"url":"https://ggsel.net/catalog/product/bez-vxoda-po-id-3000-zolota-goldy-po-id-102360228"}
+{"ts":"2026-08-13T13:37:02.841527Z","epoch":1786628222.8415275,"event":"parser.page_fetched","profile_id":"0a0b0ca0-daea-48ce-995d-20ac5771e97d","status":200,"latency_ms":718,"rate_delay":2.0,"is_challenge":false,"url":"https://ggsel.net/catalog/product/za-minutu-bonusy-komissiia-pokupatelia-golda-zoloto-standoff-2-cerez-rynok-102610911"}
+{"ts":"2026-08-13T13:37:09.796424Z","epoch":1786628229.7964246,"event":"parser.page_fetched","profile_id":"0a0b0ca0-daea-48ce-995d-20ac5771e97d","status":200,"latency_ms":1609,"rate_delay":2.0,"is_challenge":false,"url":"https://ggsel.net/catalog/product/golda-standoff-2-komissiia-na-mne-102314918"}
+{"ts":"2026-08-13T13:37:15.128340Z","epoch":1786628235.128341,"event":"parser.page_fetched","profile_id":"0a0b0ca0-daea-48ce-995d-20ac5771e97d","status":200,"latency_ms":1264,"rate_delay":2.0,"is_challenge":false,"url":"https://ggsel.net/catalog/product/standoff-2-1000-zolota-goldy-po-id-102360214"}
+{"ts":"2026-08-13T13:37:22.229940Z","epoch":1786628242.2299407,"event":"parser.page_fetched","profile_id":"0a0b0ca0-daea-48ce-995d-20ac5771e97d","status":200,"latency_ms":812,"rate_delay":2.0,"is_challenge":false,"url":"https://ggsel.net/catalog/product/golda-standoff-2-rynok-50-100000-5151232"}
+{"ts":"2026-08-13T13:37:29.774670Z","epoch":1786628249.7746706,"event":"parser.page_fetched","profile_id":"0a0b0ca0-daea-48ce-995d-20ac5771e97d","status":200,"latency_ms":1281,"rate_delay":2.0,"is_challenge":false,"url":"https://ggsel.net/catalog/product/komissiia-pokupatelia-rynok-24-7-102443646"}
+{"ts":"2026-08-13T13:38:17.757785Z","epoch":1786628297.7577853,"event":"parser.run_complete","total_products":10,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cascade"}
+{"ts":"2026-08-13T13:38:21.542002Z","epoch":1786628301.542003,"event":"parser.start","query":"","category":"antivirus-eset","quantity":10}
+{"ts":"2026-08-13T13:38:49.983983Z","epoch":1786628329.9839833,"event":"parser.page_fetched","profile_id":"0a0b0ca0-daea-48ce-995d-20ac5771e97d","status":200,"latency_ms":1281,"rate_delay":2.0,"is_challenge":false,"url":"https://ggsel.net/catalog/product/eset-internet-security-1-3-goda-102106072"}
+{"ts":"2026-08-13T13:38:56.408152Z","epoch":1786628336.408152,"event":"parser.page_fetched","profile_id":"0a0b0ca0-daea-48ce-995d-20ac5771e97d","status":200,"latency_ms":1328,"rate_delay":2.0,"is_challenge":false,"url":"https://ggsel.net/catalog/product/eset-nod32-internet-security-kliuc-1-pk-1-2-3-goda-3793003"}
+{"ts":"2026-08-13T13:39:01.101107Z","epoch":1786628341.1011074,"event":"parser.page_fetched","profile_id":"0a0b0ca0-daea-48ce-995d-20ac5771e97d","status":200,"latency_ms":828,"rate_delay":2.0,"is_challenge":false,"url":"https://ggsel.net/catalog/product/eset-nod32-internet-security-3-mesiaca-2-ustroistva-global-key-3373216"}
+{"ts":"2026-08-13T13:39:07.277607Z","epoch":1786628347.2776072,"event":"parser.page_fetched","profile_id":"0a0b0ca0-daea-48ce-995d-20ac5771e97d","status":200,"latency_ms":983,"rate_delay":2.0,"is_challenge":false,"url":"https://ggsel.net/catalog/product/eset-nod32-internet-security-2026-global-key-1-2-goda-3162470"}
+{"ts":"2026-08-13T13:39:12.602388Z","epoch":1786628352.6023881,"event":"parser.page_fetched","profile_id":"0a0b0ca0-daea-48ce-995d-20ac5771e97d","status":200,"latency_ms":921,"rate_delay":2.0,"is_challenge":false,"url":"https://ggsel.net/catalog/product/eset-nod32-premium-internet-security-2026-1-2-goda-3033090"}
+{"ts":"2026-08-13T13:39:18.731789Z","epoch":1786628358.7317898,"event":"parser.page_fetched","profile_id":"0a0b0ca0-daea-48ce-995d-20ac5771e97d","status":200,"latency_ms":1641,"rate_delay":2.0,"is_challenge":false,"url":"https://ggsel.net/catalog/product/eset-smart-security-premium-licenziia-kliuc-1-god-102141383"}
+{"ts":"2026-08-13T13:39:23.962052Z","epoch":1786628363.9620526,"event":"parser.page_fetched","profile_id":"0a0b0ca0-daea-48ce-995d-20ac5771e97d","status":200,"latency_ms":671,"rate_delay":2.0,"is_challenge":false,"url":"https://ggsel.net/catalog/product/eset-smart-security-premium-1-god-ves-mir-3367106"}
+{"ts":"2026-08-13T13:39:31.055150Z","epoch":1786628371.0551505,"event":"parser.page_fetched","profile_id":"0a0b0ca0-daea-48ce-995d-20ac5771e97d","status":200,"latency_ms":1172,"rate_delay":2.0,"is_challenge":false,"url":"https://ggsel.net/catalog/product/eset-ultimate-security-2026-ves-mir-4937636"}
+{"ts":"2026-08-13T13:39:39.179514Z","epoch":1786628379.1795146,"event":"parser.page_fetched","profile_id":"0a0b0ca0-daea-48ce-995d-20ac5771e97d","status":200,"latency_ms":1311,"rate_delay":2.0,"is_challenge":false,"url":"https://ggsel.net/catalog/product/eset-nod32-internet-security-global-kliuc-3-mesiaca-2-ustroistva-102655565"}
+{"ts":"2026-08-13T13:39:45.541396Z","epoch":1786628385.5413964,"event":"parser.page_fetched","profile_id":"0a0b0ca0-daea-48ce-995d-20ac5771e97d","status":200,"latency_ms":625,"rate_delay":2.0,"is_challenge":false,"url":"https://ggsel.net/catalog/product/eset-nod32-internet-security-2-goda-5032273"}
+{"ts":"2026-08-13T13:40:06.547505Z","epoch":1786628406.5475056,"event":"parser.run_complete","total_products":10,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cascade"}

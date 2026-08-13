@@ -1,0 +1,15 @@
+{
+  "name": "scratch",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "playwright-core": "^1.40.0",
+    "socks": "^2.8.9"
+  },
+  "scripts": {
+    "register": "node run_all_profiles.js",
+    "register:test": "node run_all_profiles.js --group ggsel_test --delay 5",
+    "register:dry": "node run_all_profiles.js --group GGSeller --delay 0",
+    "results": "node -e \"import('./lib/results_store.js').then(m => m.loadResults()).then(r => { console.table(r); })\""
+  }
+}

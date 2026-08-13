@@ -1,0 +1,1567 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GGsel — Кабинет продавца</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}?v={{ build_version }}">
+</head>
+<body>
+
+<div class="app">
+
+  <!-- ═══ SIDEBAR ═══ -->
+  <aside class="sidebar">
+    <div class="sidebar-head">
+      <div class="logo-mark">GG</div>
+      <div>
+        <div class="logo-text">ggsel</div>
+        <div class="logo-sub">Кабинет</div>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <!-- Главное -->
+      <div class="nav-item active" data-view="dashboard">
+        <span class="nav-ico">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="3" width="8" height="8" rx="1.5"/><rect x="13" y="3" width="8" height="8" rx="1.5"/><rect x="3" y="13" width="8" height="8" rx="1.5"/><rect x="13" y="13" width="8" height="8" rx="1.5"/></svg>
+        </span>
+        <span class="nav-label">Дашборд</span>
+      </div>
+      <div class="nav-item" data-view="offers">
+        <span class="nav-ico">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        </span>
+        <span class="nav-label">Товары</span>
+        <span class="nav-badge" id="badge-offers" style="display:none;">0</span>
+      </div>
+      <div class="nav-item" data-view="messages">
+        <span class="nav-ico">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2v10z"/></svg>
+        </span>
+        <span class="nav-label">Чаты</span>
+      </div>
+      <div class="nav-item" data-view="finance">
+        <span class="nav-ico">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 14.93V18a1 1 0 01-2 0v-1.07A7 7 0 015.07 13H5a1 1 0 010-2h.07A7 7 0 0111 5.07V5a1 1 0 012 0v.07A7 7 0 0118.93 11H19a1 1 0 010 2h-.07A7 7 0 0113 16.93zM12 8a4 4 0 100 8 4 4 0 000-8z"/></svg>
+        </span>
+        <span class="nav-label">Финансы</span>
+      </div>
+
+      <div class="nav-item" data-view="profile">
+        <span class="nav-ico">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+        </span>
+        <span class="nav-label">Профиль</span>
+      </div>
+      
+      <div class="nav-item" data-view="promo-codes">
+        <span class="nav-ico">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+        </span>
+        <span class="nav-label">Промокоды</span>
+      </div>
+
+      <div class="nav-item" data-view="wholesale">
+        <span class="nav-ico">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+        </span>
+        <span class="nav-label">Оптовые закупки</span>
+      </div>
+
+      <div class="nav-item" data-view="feedback">
+        <span class="nav-ico">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+        </span>
+        <span class="nav-label">Поделиться мнением</span>
+      </div>
+    </nav>
+
+    <div class="sidebar-bottom">
+      <div class="nav-section-label">Система</div>
+      
+      <div class="nav-item" data-view="drafts">
+        <span class="nav-ico">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        </span>
+        <span class="nav-label">Черновики</span>
+        <span class="nav-badge" id="badge-drafts" style="display:none;">0</span>
+      </div>
+      <div class="nav-item" data-view="deals">
+        <span class="nav-ico">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+        </span>
+        <span class="nav-label">Сделки</span>
+        <span class="nav-badge" id="badge-deals" style="display:none;">0</span>
+      </div>
+      <!-- Парсер -->
+      <div class="nav-item" data-view="parser">
+        <span class="nav-ico">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </span>
+        <span class="nav-label">Парсер</span>
+        <span class="nav-badge" id="badge-parser" style="display:none;">0</span>
+      </div>
+      <!-- Модерация -->
+      <div class="nav-item" data-view="moderation">
+        <span class="nav-ico">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+        </span>
+        <span class="nav-label">Модерация</span>
+        <span class="nav-badge" id="badge-moderation" style="display:none;">0</span>
+      </div>
+      <!-- Журнал -->
+      <div class="nav-item" data-view="logs">
+        <span class="nav-ico">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        </span>
+        <span class="nav-label">Журнал</span>
+      </div>
+      <!-- Настройки API -->
+      <div class="nav-item" data-view="settings">
+        <span class="nav-ico">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 010 14.14M4.93 4.93a10 10 0 000 14.14M15.54 8.46a5 5 0 010 7.07M8.46 8.46a5 5 0 000 7.07"/></svg>
+        </span>
+        <span class="nav-label">Настройки API</span>
+      </div>
+      <!-- Состояние -->
+      <div class="nav-item" data-view="system-status">
+        <span class="nav-ico">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        </span>
+        <span class="nav-label">Состояние</span>
+      </div>
+
+      <button class="sidebar-toggle-btn" id="btn-sidebar-toggle" title="Свернуть / Развернуть сайдбар">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+      </button>
+    </div>
+  </aside>
+
+  <!-- ═══ MAIN ═══ -->
+  <div class="main-wrap">
+    <header class="topbar">
+      <a class="tb-balance" id="tb-balance" data-view="finance" title="Баланс ($)">
+        <span id="tb-balance-text">—</span>
+        <span style="color: var(--text-faint); font-size: 11px;">$</span>
+      </a>
+
+      <div class="tb-spacer"></div>
+
+      <div class="tb-services-group">
+        <div class="tb-svc" id="svc-backend-wrap" style="cursor:pointer" title="Backend Flask — нажми для диагностики эндпоинтов">
+          <span class="tb-svc-dot online" id="svc-backend-dot"></span>
+          Backend
+        </div>
+        <div class="tb-svc tb-svc-api" id="svc-api-wrap" style="cursor:pointer" title="GGsel API — нажми для теста эндпоинтов">
+          <span class="tb-svc-dot" id="svc-ggsel-dot"></span>
+          API
+        </div>
+        <div class="tb-svc tb-svc-cookie" id="svc-cookie-wrap" style="cursor:pointer" title="Cookie сессии (нажмите для просмотра)">
+          <span class="tb-svc-dot checking" id="svc-cookie-dot"></span>
+          <span id="svc-cookie-label">Cookie</span>
+        </div>
+        <button id="svc-cookie-open-btn" class="tb-cookie-open-btn" title="Открыть браузер MSB → зайти в магазин → обновить куки">
+          <svg id="svc-cookie-open-icon" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="23 4 23 10 17 10"></polyline>
+            <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+          </svg>
+        </button>
+        <div class="tb-svc tb-svc-msb" id="svc-msb-wrap" style="cursor:pointer" title="MSB Anti-detect — нажми для диагностики API">
+          <span class="tb-svc-dot checking" id="svc-msb-dot"></span>
+          <span id="svc-msb-label">MSB</span>
+        </div>
+      </div>
+
+      <button id="btn-ai-workspace" class="tb-ai-workspace-btn" title="Открыть панель в браузере MSB (профиль AI Workspace)">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="5 3 19 12 5 21 5 3"></polygon>
+        </svg>
+        ИИ Воркспейс
+      </button>
+
+      <span class="tb-status" id="global-status">Готов</span>
+
+      <div class="tb-dropdown-wrap">
+        <div class="tb-btn" id="btn-lang-dropdown">RU 🇷🇺 ▼</div>
+        <div class="tb-dropdown-menu" id="menu-lang" style="display:none;">
+          <div class="tb-dropdown-item">RU 🇷🇺</div>
+          <div class="tb-dropdown-item">EN 🇺🇸</div>
+        </div>
+      </div>
+
+      <div class="tb-dropdown-wrap">
+        <div class="tb-notification" id="tb-notification" title="Уведомления">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+            <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+          </svg>
+          <span class="badge-dot" id="tb-notification-dot"></span>
+        </div>
+        <div class="tb-dropdown-menu right" id="menu-notifications" style="display:none; width:280px; padding:12px;">
+          <div style="font-weight:600; margin-bottom:8px;">Последние события</div>
+          <div id="notifications-list" class="muted" style="font-size:12px;">Нет новых событий</div>
+        </div>
+      </div>
+
+      <div class="tb-dropdown-wrap">
+        <div class="tb-btn" id="btn-user-dropdown" style="border:none; background:transparent;">Atreum ▼</div>
+        <div class="tb-dropdown-menu right" id="menu-user" style="display:none; width:180px;">
+          <div class="tb-dropdown-item muted" id="user-email-text" style="cursor:default; font-size:11px; padding:8px 12px; border-bottom:1px solid var(--border-soft);">atreum.5202@gmail.com</div>
+          <div class="tb-dropdown-item" style="padding:8px 12px;">Сменить аккаунт</div>
+          <div class="tb-dropdown-item" style="padding:8px 12px; color:var(--red);">Выйти</div>
+        </div>
+      </div>
+
+    </header>
+
+    <main class="content">
+
+      <!-- ════════════════════════════════════════════════════
+           VIEW: DASHBOARD
+           ════════════════════════════════════════════════════ -->
+      <section class="view active" id="view-dashboard">
+        <div class="page-head">
+          <div>
+            <div class="page-title">Дашборд</div>
+            <div class="page-sub">Общая сводка по магазину #{{ seller_id }}</div>
+          </div>
+        </div>
+
+        {% if config_warnings %}
+        <div class="config-warning-banner" id="config-warning-banner">
+          {% for msg in config_warnings %}
+          <div>⚠ {{ msg }}</div>
+          {% endfor %}
+        </div>
+        {% endif %}
+
+        <div class="stat-grid" id="dashboard-kpis">
+          <div class="stat-card">
+            <div class="stat-label">Выручка за сегодня</div>
+            <div class="stat-value" id="stat-revenue-today">—</div>
+            <div class="stat-sub">USD</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Баланс (свободно)</div>
+            <div class="stat-value" id="stat-balance">—</div>
+            <div class="stat-sub">USD</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">В работе</div>
+            <div class="stat-value" id="stat-orders-progress">—</div>
+            <div class="stat-sub">заказов</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Непрочитано</div>
+            <div class="stat-value" id="stat-chats-unread">—</div>
+            <div class="stat-sub">чатов</div>
+          </div>
+          <div class="stat-card" style="cursor:pointer;" onclick="showView('moderation')">
+            <div class="stat-label">Модерация</div>
+            <div class="stat-value" id="stat-pending-moderation">—</div>
+            <div class="stat-sub">ждут одобрения</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Опубликовано сегодня</div>
+            <div class="stat-value" id="stat-published-today">—</div>
+            <div class="stat-sub">товаров</div>
+          </div>
+        </div>
+
+        <div class="attention-block" id="dashboard-attention" style="display: none;">
+          <div class="attention-title"><i class="fas fa-exclamation-circle"></i> Требует решения</div>
+          <div class="attention-content" id="attention-content">
+            <div class="loader"><div class="spinner"></div>Загрузка...</div>
+          </div>
+        </div>
+
+        <div class="section-title">События</div>
+        <div class="timeline-container" id="dashboard-timeline">
+           <div class="loader"><div class="spinner"></div>Загрузка событий...</div>
+        </div>
+      </section>
+
+      <!-- ════════════════════════════════════════════════════
+           VIEW: OFFERS
+           ════════════════════════════════════════════════════ -->
+      <section class="view" id="view-offers">
+        <div class="page-head">
+          <div>
+            <div class="page-title">Товары</div>
+            <div class="page-sub">Все ваши офферы с превью, фильтрами и пакетными действиями</div>
+          </div>
+          <button class="btn btn-primary" id="btn-create-offer">+ Создать оффер</button>
+        </div>
+
+        <div class="toolbar">
+          <input type="text" id="offers-search" class="inp grow" placeholder="Поиск по названию...">
+          <select id="offers-status" class="select">
+            <option value="">Все статусы</option>
+            <option value="active">Активные</option>
+            <option value="paused">На паузе</option>
+            <option value="draft">Черновики</option>
+          </select>
+        </div>
+
+        <div class="action-bar" id="offers-action-bar">
+          <span class="ab-count" id="offers-selected-count">0</span>
+          <button class="btn btn-sm" id="btn-bulk-activate">Активировать</button>
+          <button class="btn btn-sm btn-warn" id="btn-bulk-pause">Пауза</button>
+          <button class="btn btn-sm btn-danger" id="btn-bulk-delete">Удалить</button>
+          <button class="btn btn-sm" id="btn-bulk-clear">Снять выбор</button>
+        </div>
+
+        <div class="card pad-0" id="offers-table"><div class="loader"><div class="spinner"></div>Загрузка...</div></div>
+        <div class="action-status" id="offers-action-status"></div>
+      </section>
+
+      <!-- ════════════════════════════════════════════════════
+           VIEW: QUEUE (stub)
+           ════════════════════════════════════════════════════ -->
+      <section class="view" id="view-queue">
+        <div class="page-head">
+          <div>
+            <div class="page-title">Очередь</div>
+            <div class="page-sub">Задачи в обработке (фоновые операции)</div>
+          </div>
+        </div>
+        <div class="stub-card" id="queue-content">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z"/></svg>
+          <div class="stub-title">Очередь задач</div>
+          <div class="stub-sub">Эта страница появится после подключения фоновых обработчиков. Сейчас данные берутся напрямую через API.</div>
+        </div>
+      </section>
+
+      <!-- ════════════════════════════════════════════════════
+           VIEW: ORDERS (uses /api/sales)
+           ════════════════════════════════════════════════════ -->
+      <section class="view" id="view-orders">
+  <div class="page-head">
+    <div>
+      <div class="page-title">Заказы</div>
+      <div class="page-sub">Управление заказами и продажами</div>
+    </div>
+  </div>
+  
+  <div class="filters-bar" style="display:flex; gap:10px; margin-bottom: 20px; flex-wrap:wrap; align-items:center;">
+    <div class="time-chips" id="orders-time-chips" style="display:flex; gap:5px; background:var(--bg-elevated); padding:4px; border-radius:var(--radius); border:1px solid var(--border);">
+      <button class="chip active" data-days="1" style="padding:4px 12px; border:none; background:var(--primary-soft); color:var(--primary); border-radius:4px; cursor:pointer; font-size:12px;">За день</button>
+      <button class="chip" data-days="7" style="padding:4px 12px; border:none; background:transparent; color:var(--text); border-radius:4px; cursor:pointer; font-size:12px;">За неделю</button>
+      <button class="chip" data-days="30" style="padding:4px 12px; border:none; background:transparent; color:var(--text); border-radius:4px; cursor:pointer; font-size:12px;">За месяц</button>
+    </div>
+    
+    <select class="select" id="orders-status-filter" style="width:150px;">
+      <option value="">Все статусы</option>
+      <option value="success">Оплачен</option>
+      <option value="refund">Возврат</option>
+      <option value="wait_payment">Ожидает</option>
+    </select>
+    
+    <input type="text" class="inp" id="orders-search-inp" placeholder="Счет, Email, ID товара..." style="width:250px;">
+    <button class="btn" id="orders-search-btn">Найти</button>
+  </div>
+
+  <div class="card pad-0">
+    <table class="table" style="margin-bottom:0;">
+      <thead>
+        <tr>
+          <th>Счет</th>
+          <th>Товар</th>
+          <th>Покупатель</th>
+          <th>Дата</th>
+          <th>Сумма</th>
+          <th>Статус</th>
+        </tr>
+      </thead>
+      <tbody id="orders-tbody">
+        <tr><td colspan="6" class="text-center" style="padding:20px;">Загрузка...</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+      <!-- ════════════════════════════════════════════════════
+           VIEW: PROMO CODES (stub)
+           ════════════════════════════════════════════════════ -->
+      <section class="view" id="view-promo-codes">
+  <div class="page-head">
+    <div>
+      <div class="page-title">Промокоды</div>
+      <div class="page-sub">Управление промокодами для ваших товаров</div>
+    </div>
+    <div class="page-actions">
+      <button class="btn btn-primary">+ Добавить</button>
+    </div>
+  </div>
+
+  <div class="filters-bar" style="display:flex; gap:10px; margin-bottom: 20px;">
+    <select class="select" id="promo-status-filter" style="width:150px;">
+      <option value="">Все статусы</option>
+    </select>
+    <select class="select" id="promo-offer-filter" style="width:200px;">
+      <option value="">Все товары</option>
+    </select>
+    <input type="text" class="inp" id="promo-search-inp" placeholder="Поиск по коду..." style="width:250px;">
+    <div style="flex:1;"></div>
+    <button class="btn" id="promo-search-btn">Найти</button>
+  </div>
+
+  <div class="card" style="padding: 0;">
+    <table class="table" style="margin-bottom:0;">
+      <thead>
+        <tr>
+          <th>Код</th>
+          <th>Скидка</th>
+          <th>Период</th>
+          <th>Активаций</th>
+          <th>Статус</th>
+          <th style="width:50px;"></th>
+        </tr>
+      </thead>
+      <tbody id="promo-tbody">
+        <!-- JS fill -->
+      </tbody>
+    </table>
+  </div>
+  
+  <div class="pagination" id="promo-pagination" style="display:flex; justify-content:center; gap:5px; margin-top:20px;">
+    <!-- JS fill -->
+  </div>
+</section>
+
+      <!-- ════════════════════════════════════════════════════
+           VIEW: MESSAGES / CHATS
+           ════════════════════════════════════════════════════ -->
+      <section class="view" id="view-messages" style="height:100%; flex-direction:column;">
+  <div class="page-head" style="flex-shrink:0;">
+    <div>
+      <div class="page-title">Чаты</div>
+      <div class="page-sub">Диалоги с покупателями</div>
+    </div>
+  </div>
+
+  <div class="chats-split-view" style="flex:1; display:flex; gap:20px; overflow:hidden;">
+    <!-- Левая панель: список диалогов -->
+    <div class="chats-list-panel card" style="width:300px; flex-shrink:0; display:flex; flex-direction:column; padding:0; overflow:hidden;">
+      <div class="toolbar" style="padding:10px; border-bottom:1px solid var(--border);">
+        <input type="text" class="inp" id="chats-search" placeholder="Поиск..." style="width:100%;">
+      </div>
+      <div id="chats-list-container" style="flex:1; overflow-y:auto;">
+        <div class="loader"><div class="spinner"></div></div>
+      </div>
+    </div>
+
+    <!-- Правая панель: сообщения -->
+    <div class="chat-messages-panel card" style="flex:1; display:flex; flex-direction:column; padding:0; overflow:hidden;">
+      <div id="chat-header" style="padding:15px; border-bottom:1px solid var(--border); font-weight:600; display:flex; justify-content:space-between; align-items:center;">
+        <span id="chat-title">Выберите диалог</span>
+        <span id="chat-order-link" style="font-size:12px; color:var(--primary); cursor:pointer;"></span>
+      </div>
+      <div id="chat-messages-container" style="flex:1; overflow-y:auto; padding:15px; display:flex; flex-direction:column; gap:10px; background:var(--bg);">
+        <!-- Messages here -->
+        <div class="text-center text-muted" style="margin-top:20px;">Нет выбранного диалога</div>
+      </div>
+      <div id="chat-input-area" style="padding:15px; border-top:1px solid var(--border); display:flex; gap:10px; background:var(--bg-card); align-items:flex-end;">
+        <textarea class="inp" id="chat-msg-inp" placeholder="Введите сообщение..." style="flex:1; resize:none; min-height:40px; max-height:120px;" rows="1" disabled></textarea>
+        <button class="btn btn-primary" id="chat-send-btn" disabled>Отправить</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+      <!-- ════════════════════════════════════════════════════
+           VIEW: REVIEWS
+           ════════════════════════════════════════════════════ -->
+      <section class="view" id="view-reviews">
+        <div class="page-head">
+          <div>
+            <div class="page-title">Отзывы</div>
+            <div class="page-sub">Отзывы покупателей и ваши ответы</div>
+          </div>
+        </div>
+        <div class="card pad-0" id="reviews-table"><div class="loader"><div class="spinner"></div>Загрузка...</div></div>
+      </section>
+
+      <!-- ════════════════════════════════════════════════════
+           VIEW: FINANCE
+           ════════════════════════════════════════════════════ -->
+      <section class="view" id="view-finance">
+  <div class="page-head">
+    <div>
+      <div class="page-title">Финансы</div>
+      <div class="page-sub">Баланс, ожидаемые зачисления, история транзакций</div>
+    </div>
+  </div>
+  
+  <div class="stat-grid">
+    <div class="stat-card">
+      <div class="stat-label">Баланс</div>
+      <div class="stat-value" id="fin-free">—</div>
+      <div class="stat-sub">$ (Свободные)</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Заморожено</div>
+      <div class="stat-value" id="fin-lock">—</div>
+      <div class="stat-sub">$ (Ожидают начисления)</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Заработано</div>
+      <div class="stat-value" id="fin-plus">—</div>
+      <div class="stat-sub">$ (Доход)</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Операции</div>
+      <div class="stat-value" id="fin-count">—</div>
+      <div class="stat-sub">Количество за период</div>
+    </div>
+  </div>
+  
+  <div class="filters-bar" style="display:flex; justify-content:space-between; align-items:center; margin-top:20px; margin-bottom:15px;">
+    <div class="section-title" style="margin:0;">История транзакций</div>
+    <div class="time-chips" id="finance-time-chips" style="display:flex; gap:5px; background:var(--bg-elevated); padding:4px; border-radius:var(--radius); border:1px solid var(--border);">
+      <button class="chip" data-days="1" style="padding:4px 12px; border:none; background:transparent; color:var(--text); border-radius:4px; cursor:pointer; font-size:12px;">За день</button>
+      <button class="chip" data-days="7" style="padding:4px 12px; border:none; background:transparent; color:var(--text); border-radius:4px; cursor:pointer; font-size:12px;">За неделю</button>
+      <button class="chip active" data-days="30" style="padding:4px 12px; border:none; background:var(--primary-soft); color:var(--primary); border-radius:4px; cursor:pointer; font-size:12px;">За месяц</button>
+    </div>
+  </div>
+  
+  <div class="card pad-0">
+    <table class="table" style="margin-bottom:0;">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Тип</th>
+          <th>Сумма</th>
+          <th>Описание</th>
+          <th>Дата</th>
+        </tr>
+      </thead>
+      <tbody id="receipts-tbody">
+        <tr><td colspan="5" class="text-center" style="padding:20px;">Загрузка...</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+      <!-- ════════════════════════════════════════════════════
+           VIEW: ADS > CAMPAIGNS (stub)
+           ════════════════════════════════════════════════════ -->
+      <section class="view" id="view-ads-campaigns">
+        <div class="page-head">
+          <div>
+            <div class="page-title">Кампании</div>
+            <div class="page-sub">Рекламные кампании для продвижения товаров</div>
+          </div>
+        </div>
+        <div class="stub-card">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
+          <div class="stub-title">Управление рекламными кампаниями</div>
+          <div class="stub-sub">API GGSEL не предоставляет прямого доступа к рекламным кампаниям. Раздел заработает после подключения.</div>
+        </div>
+      </section>
+
+      <!-- ════════════════════════════════════════════════════
+           VIEW: ADS > STATS (stub)
+           ════════════════════════════════════════════════════ -->
+      <section class="view" id="view-ads-stats">
+        <div class="page-head">
+          <div>
+            <div class="page-title">Статистика рекламы</div>
+            <div class="page-sub">CTR, показы, расходы по кампаниям</div>
+          </div>
+        </div>
+        <div class="stub-card">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z"/></svg>
+          <div class="stub-title">Статистика рекламы появится позже</div>
+          <div class="stub-sub">После подключения API рекламного кабинета GGsel здесь появится детальная аналитика.</div>
+        </div>
+      </section>
+
+      <!-- ════════════════════════════════════════════════════
+           VIEW: SETTINGS
+           ════════════════════════════════════════════════════ -->
+      <section class="view" id="view-settings">
+  <div class="page-head">
+    <div>
+      <div class="page-title">API и Доступ</div>
+      <div class="page-sub">Управление API-ключами и белыми списками IP</div>
+    </div>
+  </div>
+
+  <div class="wizard-tabs" style="display:flex; gap:10px; margin-bottom:20px; border-bottom:1px solid var(--border); padding-bottom:10px;">
+    <div class="wizard-tab active" data-stab="1" style="cursor:pointer; padding:5px 10px; border-radius:4px; font-weight:bold; color:var(--text);" onclick="switchSettingsTab(1)">API Ключи</div>
+    <div class="wizard-tab" data-stab="2" style="cursor:pointer; padding:5px 10px; border-radius:4px; font-weight:bold; color:var(--text-muted);" onclick="switchSettingsTab(2)">IP Адреса</div>
+  </div>
+
+  <div class="card stab-content" id="stab-1">
+    <h3>Управление ключами V1 / V2</h3>
+    <p class="muted" style="margin-top:0;">Используются для работы с API GGSEL.</p>
+    
+    <table class="table" style="margin-bottom:20px;">
+      <thead>
+        <tr>
+          <th>Название</th>
+          <th>Токен</th>
+          <th>Статус</th>
+          <th>Создан</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Основной токен</td>
+          <td style="font-family:monospace; color:var(--primary);">{{ api_key_full[:8] }}...{{ api_key_full[-4:] if api_key_full else '' }}</td>
+          <td><span style="color:var(--green);">Активен</span></td>
+          <td>Сегодня</td>
+        </tr>
+      </tbody>
+    </table>
+    <button class="btn btn-primary" onclick="showToast('Создание ключа временно недоступно', 'info')">+ Создать ключ</button>
+  </div>
+
+  <div class="card stab-content" id="stab-2" style="display:none;">
+    <h3>Белый список IP</h3>
+    <p class="muted" style="margin-top:0;">API запросы будут приниматься только с этих адресов.</p>
+    <div style="margin-bottom:15px;">
+      <textarea class="inp" id="settings-ips" rows="5" style="width:400px; resize:vertical; font-family:monospace;" placeholder="Введите IP адреса, каждый с новой строки..."></textarea>
+    </div>
+    <button class="btn btn-primary" onclick="showToast('IP сохранены', 'success')">Сохранить список</button>
+  </div>
+</section>
+
+      <!-- ════════════════════════════════════════════════════
+           VIEW: LOGS (stub)
+           ════════════════════════════════════════════════════ -->
+      <section class="view" id="view-logs">
+        <div class="page-head">
+          <div>
+            <div class="page-title">Системные логи</div>
+            <div class="page-sub">Журнал работы сервиса (watchdog.log)</div>
+          </div>
+        </div>
+        <div class="logs-block">
+          <div class="logs-head">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+            <span>watchdog.log</span>
+          </div>
+          <div class="logs-body" id="logs-body">
+            <div class="loader"><div class="spinner"></div>Загрузка логов...</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ════════════════════════════════════════════════════
+           VIEW: STATUS (uses /api/test_all)
+           ════════════════════════════════════════════════════ -->
+      <section class="view" id="view-status">
+        <div class="page-head">
+          <div>
+            <div class="page-title">Статус системы</div>
+            <div class="page-sub">Мониторинг подключений и состояние сервисов</div>
+          </div>
+        </div>
+        <div class="diag-grid">
+          <div class="diag-card">
+            <div class="diag-card-head">
+              <div class="diag-card-title">
+                <div class="diag-card-icon">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
+                </div>
+                <span>Официальное API (Ключ)</span>
+              </div>
+              <span class="diag-card-tag">V1 / V2</span>
+            </div>
+            <div id="status-api-list"><div class="loader"><div class="spinner"></div>Проверка...</div></div>
+          </div>
+          <div class="diag-card">
+            <div class="diag-card-head">
+              <div class="diag-card-title">
+                <div class="diag-card-icon green">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="9 12 12 15 22 6"/></svg>
+                </div>
+                <span>Backend v7</span>
+              </div>
+              <span class="diag-card-tag">Локально</span>
+            </div>
+            <div class="diag-row">
+              <div class="diag-row-head">
+                <div class="diag-row-title">
+                  <span class="svc-dot online"></span>
+                  Flask сервер
+                </div>
+                <span class="diag-row-ms">аптайм</span>
+              </div>
+              <div class="diag-data">// v7 backend работает напрямую с GGSEL API.
+Все запросы проходят через:
+  /api/dashboard
+  /api/offers
+  /api/sales
+  /api/balance
+  /api/test_all
+  ...
+Никаких прокси, никаких кук.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ════════════════════════════════════════════════════
+           VIEW: PARSER (ручной запуск парсера ggsel.net)
+           ════════════════════════════════════════════════════ -->
+      <section class="view" id="view-parser">
+        <div class="page-head">
+          <div>
+            <div class="page-title">Парсер</div>
+            <div class="page-sub">Сбор товаров с ggsel.net · AI-обогащение карточек</div>
+          </div>
+          <div style="display:flex; gap:6px; flex-wrap:wrap; align-items:center;">
+            <button class="btn btn-sm" id="btn-parser-stats">Статистика</button>
+            <button class="btn btn-sm" id="btn-parser-refresh">↻</button>
+            <button class="btn btn-primary btn-sm" id="btn-autopilot-start">▶ Авто-пилот</button>
+            <button class="btn btn-sm" id="btn-autopilot-stop" style="display:none; color:var(--red); border-color:var(--red);">■ Стоп</button>
+          </div>
+        </div>
+
+        <!-- Status card -->
+        <div class="stat-grid" id="parser-status-card" style="margin-bottom:14px;">
+          <div class="stat-card">
+            <div class="stat-label">Статус</div>
+            <div class="stat-value" id="parser-status-text" style="font-size:20px;">—</div>
+            <div class="stat-sub" id="parser-autopilot-status"></div>
+            <div class="stat-sub" id="parser-last-run" style="margin-top:2px;"></div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Сохранено</div>
+            <div class="stat-value" id="parser-stat-saved">0</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">AI-обогащено</div>
+            <div class="stat-value" id="parser-stat-ai">0</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Страниц</div>
+            <div class="stat-value" id="parser-stat-pages">0</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Ошибок</div>
+            <div class="stat-value" id="parser-stat-errors" style="color:var(--red);">0</div>
+          </div>
+        </div>
+
+        <!-- Form -->
+        <div class="card">
+          <div class="card-title" style="margin-bottom:16px;">Параметры запуска</div>
+          <div class="form-grid">
+            <div class="form-row">
+              <label>Поисковый запрос</label>
+              <input type="text" id="parser-input-query" class="inp"
+                     placeholder="например: steam, rust, gta 5, подписка spotify...">
+              <div class="muted" style="font-size:11px; margin-top:4px;">
+                Если указано — ищем по всему сайту через /search
+              </div>
+            </div>
+            <div class="form-row">
+              <label>ИЛИ категория ggsel.net</label>
+              <select id="parser-input-category" class="select">
+                <option value="">— без категории (поиск по запросу) —</option>
+
+                <optgroup label="━━ ГЛАВНЫЕ РАЗДЕЛЫ ━━">
+                  <option value="igry-po-nazvaniyu">🎮 Все игры</option>
+                  <option value="game-currency">💰 Внутриигровые товары и валюта</option>
+                  <option value="mobile-games">📱 Мобильные игры</option>
+                  <option value="podpisochnye-servisy">📺 Сервисы и соцсети</option>
+                  <option value="programs-new">💻 Программное обеспечение</option>
+                </optgroup>
+
+                <optgroup label="━━ ПОПУЛЯРНЫЕ ИГРЫ ━━">
+                  <option value="grand-theft-auto-5-first">GTA 5</option>
+                  <option value="grand-theft-auto-vi">GTA 6 (новинка)</option>
+                  <option value="playstation-games">PlayStation</option>
+                  <option value="xbox-game-pass-1">Xbox Game Pass</option>
+                  <option value="minecraft-10054">Minecraft</option>
+                  <option value="valorant-9149">Valorant</option>
+                  <option value="roblox">Roblox</option>
+                  <option value="robux">Robux</option>
+                  <option value="fortnite">Fortnite</option>
+                  <option value="dead-by-daylight-9610">Dead by Daylight</option>
+                  <option value="brawl-stars-9063">Brawl Stars</option>
+                  <option value="genshin-impact">Genshin Impact</option>
+                  <option value="apex-legends-1">Apex Legends</option>
+                  <option value="arc-raiders">ARC Raiders</option>
+                  <option value="helldivers-2">Helldivers 2</option>
+                  <option value="cyberpunk-2077">Cyberpunk 2077</option>
+                  <option value="red-dead-redemption-2-10191">Red Dead Redemption 2</option>
+                  <option value="clash-royale-9584">Clash Royale</option>
+                  <option value="battlefield-6-160525">Battlefield 6</option>
+                  <option value="ea-sports-fc-26-fifa-26">EA Sports FC 26 (FIFA 26)</option>
+                  <option value="arena-breakout-infinite">Arena Breakout: Infinite</option>
+                  <option value="europa-universalis-v">Europa Universalis V</option>
+                  <option value="dispatch">Dispatch</option>
+                  <option value="games-anno-117-pax-romana">Anno 117: Pax Romana</option>
+                  <option value="games-steam">Все игры Steam</option>
+                  <option value="other-1">Прочие товары</option>
+                </optgroup>
+
+                <optgroup label="━━ МОБИЛЬНЫЕ ИГРЫ ━━">
+                  <option value="mobile-legends">Mobile Legends: Bang Bang</option>
+                  <option value="pubg-mobile">PUBG Mobile</option>
+                  <option value="call-of-duty-mobile">Call of Duty: Mobile</option>
+                  <option value="clash-of-clans-9576">Clash of Clans</option>
+                  <option value="standoff-2">Standoff 2</option>
+                  <option value="zenless-zone-zero">Zenless Zone Zero</option>
+                  <option value="honkai-star-rail">Honkai: Star Rail</option>
+                  <option value="world-of-tanks-blitz">World of Tanks Blitz</option>
+                  <option value="albion-online">Albion Online</option>
+                </optgroup>
+
+                <optgroup label="━━ ПРОГРАММНОЕ ОБЕСПЕЧЕНИЕ ━━">
+                  <option value="microsoft-office">Microsoft Office</option>
+                  <option value="microsoft-office-365">Office 365</option>
+                  <option value="adobe-creative-cloud">Adobe Creative Cloud</option>
+                  <option value="os">Windows / OS</option>
+                  <option value="autodesk">Autodesk (AutoCAD, Revit)</option>
+                  <option value="jetbrains">JetBrains</option>
+                  <option value="capcut">CapCut</option>
+                  <option value="voicemod-pro">VoiceMod Pro</option>
+                  <option value="exitlag">ExitLag</option>
+                  <option value="antivirus-eset">Антивирус ESET</option>
+                  <option value="malwarebytes-premium">Malwarebytes</option>
+                  <option value="unlocktool">UnlockTool</option>
+                  <option value="software-for-gamers-and-streaming">Для геймеров и стриминга</option>
+                  <option value="programming-software">Для программистов</option>
+                  <option value="seo-software">SEO инструменты</option>
+                  <option value="software">Весь софт</option>
+                </optgroup>
+
+                <optgroup label="━━ СЕРВИСЫ ━━">
+                  <option value="spotify-premium">Spotify Premium</option>
+                  <option value="apple-id">Apple ID аккаунты</option>
+                  <option value="subscriptions-for-all-occasions">Подписки на всё</option>
+                  <option value="other-games-currency">Прочая игровая валюта</option>
+                </optgroup>
+              </select>
+              <div class="muted" style="font-size:11px; margin-top:4px;">
+                Категория приоритетнее запроса
+              </div>
+            </div>
+            <div class="form-row">
+              <label>Сколько товаров спарсить</label>
+              <input type="number" id="parser-input-quantity" class="inp" value="20" min="1" max="100">
+              <div class="muted" style="font-size:11px; margin-top:4px;">
+                Безопасный лимит: <span id="parser-hard-cap">100</span>
+              </div>
+            </div>
+            <div class="form-row">
+              <label>Страниц пагинации</label>
+              <input type="number" id="parser-input-pages" class="inp" value="3" min="1" max="10">
+              <div class="muted" style="font-size:11px; margin-top:4px;">
+                Hard cap: 10. Больше страниц = медленнее и рискованнее.
+              </div>
+            </div>
+            <div class="form-row">
+              <label>AI-обогащение</label>
+              <select id="parser-input-ai" class="select">
+                <option value="true" selected>Включено (Groq / Gemini)</option>
+                <option value="false">Выключено — только оригинал</option>
+              </select>
+              <div class="muted" style="font-size:11px; margin-top:4px;">
+                Генерирует заголовок, описание и теги через AI
+              </div>
+            </div>
+          </div>
+
+          <div style="display:flex; gap:8px; margin-top:20px; flex-wrap:wrap;">
+            <button class="btn btn-primary" id="btn-parser-start" style="min-width:140px;">▶ Старт</button>
+            <button class="btn btn-danger" id="btn-parser-stop" disabled>■ Стоп</button>
+            <button class="btn btn-ghost" id="btn-parser-clear-form">Сброс</button>
+          </div>
+
+          <div id="parser-action-status" class="action-status" style="margin-top:10px;"></div>
+        </div>
+
+        <!-- Дерево категорий -->
+        <div class="card" id="categories-tree-card" style="margin-top: 0;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 10px;">
+            <div class="card-title" style="margin-bottom: 0;">Категории парсинга</div>
+            <div style="display: flex; gap: 8px;">
+              <button class="btn btn-sm" id="btn-sync-fees">Синхронизировать комиссии</button>
+              <button class="btn btn-sm btn-primary" id="btn-refresh-categories">Обновить категории</button>
+            </div>
+          </div>
+          <div style="margin-bottom: 10px; font-size: 12px; color: var(--text-muted);" id="categories-sync-info">
+            Загрузка дерева категорий...
+          </div>
+          <div id="categories-accordion-container" style="max-height: 400px; overflow-y: auto; border: 1px solid var(--border); border-radius: 6px; padding: 10px; background: var(--bg-card);">
+            <!-- Сюда JS загрузит дерево -->
+          </div>
+        </div>
+
+        <!-- Last run log -->
+        <div class="card" id="parser-log-card" style="display:none;">
+          <div class="card-title" style="margin-bottom:10px;">
+            Лог запуска
+            <span class="muted" id="parser-log-runid" style="font-weight:normal; font-size:12px;"></span>
+          </div>
+          <div id="parser-log-entries"
+               style="max-height:300px; overflow-y:auto; font-family:Consolas,monospace; font-size:12px; line-height:1.5;">
+          </div>
+        </div>
+
+        <!-- Products table -->
+        <div class="card pad-0">
+          <div class="parser-filters">
+            <input type="text" id="parser-products-search" class="inp grow"
+                   placeholder="Поиск по названию...">
+            <select id="parser-products-status" class="select">
+              <option value="pending">Ожидают</option>
+              <option value="">Все статусы</option>
+              <option value="approved">Одобрены</option>
+              <option value="rejected">Отклонены</option>
+            </select>
+            <div class="slider-wrap">
+              <label>Profit ≥</label>
+              <input type="range" id="parser-profit-slider" min="0" max="10000" step="100" value="0">
+              <span class="slider-val" id="parser-profit-val">0</span>
+            </div>
+            <div class="parser-autorefresh" id="parser-autorefresh-pill">
+              <span class="pulse-dot"></span>
+              <span id="parser-autorefresh-label">авто</span>
+            </div>
+            <span class="muted" id="parser-products-count" style="font-size:12px;"></span>
+          </div>
+          <div id="parser-products-table">
+            <div class="loader"><div class="spinner"></div>Загрузка...</div>
+          </div>
+        </div>
+
+        <!-- Pipeline Top-100 table -->
+        <div class="card pad-0">
+          <div style="padding:14px 18px; display:flex; align-items:center; justify-content:space-between;">
+            <div class="card-title" style="margin:0;">Pipeline Top-100</div>
+            <button class="btn btn-sm" id="btn-pipeline-run">▶ Запустить</button>
+          </div>
+          <div id="pipeline-status-card" style="display:none; padding:8px 18px; border-top:1px solid var(--border-soft);">
+            <div id="pipeline-status-text" class="muted" style="font-size:13px;">—</div>
+          </div>
+          <div style="overflow-x:auto;">
+            <table>
+              <thead>
+                <tr>
+                  <th>Название</th>
+                  <th style="text-align:right;">Закупка</th>
+                  <th style="text-align:right;">Продажа</th>
+                  <th style="text-align:right;">Прибыль</th>
+                  <th style="text-align:right;">Маржа</th>
+                  <th style="text-align:center;">Статус</th>
+                  <th style="text-align:center;">Действия</th>
+                </tr>
+              </thead>
+              <tbody id="parsed-products-table">
+                <tr><td colspan="7" style="padding:24px; text-align:center;"><div class="loader"><div class="spinner"></div>Загрузка...</div></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Runs history -->
+        <div class="card">
+          <div class="card-title" style="margin-bottom:10px;">История запусков</div>
+          <div id="parser-runs-table" style="overflow-x:auto;">
+            <div class="loader"><div class="spinner"></div>Загрузка...</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ════════════════════════════════════════════════════
+           VIEW: MODERATION (Товары на одобрение)
+           ════════════════════════════════════════════════════ -->
+      <section class="view" id="view-moderation">
+        <div class="page-head">
+          <div>
+            <div class="page-title">Модерация</div>
+            <div class="page-sub">Проверка и публикация спарсенных товаров</div>
+          </div>
+          <div style="display:flex; gap:6px; align-items:center;">
+            <button class="btn btn-sm" id="btn-mod-refresh">↻ Обновить</button>
+          </div>
+        </div>
+
+        <!-- Фильтры -->
+        <div class="card" style="padding:12px 16px; margin-bottom:16px;">
+          <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
+            <input type="text" id="mod-search" class="inp" placeholder="Поиск по названию..." style="flex:1; min-width:180px; max-width:340px;">
+            <select id="mod-status-filter" class="select">
+              <option value="pending" selected>Ожидают</option>
+              <option value="approved">Одобренные</option>
+              <option value="rejected">Отклонённые</option>
+              <option value="published">Опубликованные</option>
+              <option value="">Все</option>
+            </select>
+            <span class="badge neutral" id="mod-pending-count">0</span>
+          </div>
+        </div>
+
+        <!-- Карточки товаров (split view: конкурент ← → мой магазин) -->
+        <div id="moderation-feed" class="moderation-feed">
+          <div class="loader"><div class="spinner"></div>Загрузка...</div>
+        </div>
+
+        <!-- Подгрузка -->
+        <div id="mod-load-more-wrap" style="display:none; text-align:center; padding:16px;">
+          <button class="btn" id="btn-mod-load-more">Загрузить ещё</button>
+        </div>
+      </section>
+
+      <!-- ════════════════════════════════════════════════════
+           VIEW: WARMER (прогрев MSB профилей для Qrator)
+           ════════════════════════════════════════════════════ -->
+
+      <section class="view" id="view-warmer">
+        <div class="page-head">
+          <div>
+            <div class="page-title">🍪 Прогрев MSB профилей</div>
+            <div class="page-sub">Открывает профили через MultiLogin / MSB, переходит на ggsel.net и получает Qrator-куки для парсера</div>
+          </div>
+          <div style="display:flex; gap:8px;">
+            <button class="btn" id="btn-warmer-check-cookies">🔍 Проверить куки</button>
+            <button class="btn" id="btn-warmer-refresh">↻ Статус</button>
+          </div>
+        </div>
+
+        <!-- Статус и прогресс -->
+        <div class="card" id="warmer-status-card">
+          <div style="display:flex; align-items:center; gap:14px; flex-wrap:wrap;">
+            <div style="flex:1; min-width:160px;">
+              <div class="muted" style="font-size:11px; text-transform:uppercase; letter-spacing:0.5px;">Статус</div>
+              <div id="warmer-status-text" style="font-size:18px; font-weight:600; margin-top:2px;">Готов</div>
+            </div>
+            <div>
+              <div class="muted" style="font-size:11px; text-transform:uppercase; letter-spacing:0.5px;">✅ OK (Qrator)</div>
+              <div id="warmer-stat-ok" style="font-size:18px; font-weight:600; margin-top:2px; color:var(--green);">0</div>
+            </div>
+            <div>
+              <div class="muted" style="font-size:11px; text-transform:uppercase; letter-spacing:0.5px;">⚠ Частично</div>
+              <div id="warmer-stat-partial" style="font-size:18px; font-weight:600; margin-top:2px; color:var(--yellow);">0</div>
+            </div>
+            <div>
+              <div class="muted" style="font-size:11px; text-transform:uppercase; letter-spacing:0.5px;">❌ Без куков</div>
+              <div id="warmer-stat-fail" style="font-size:18px; font-weight:600; margin-top:2px; color:var(--red);">0</div>
+            </div>
+            <div>
+              <div class="muted" style="font-size:11px; text-transform:uppercase; letter-spacing:0.5px;">Всего</div>
+              <div id="warmer-stat-total" style="font-size:18px; font-weight:600; margin-top:2px;">0</div>
+            </div>
+          </div>
+          <!-- Progress bar -->
+          <div style="margin-top:14px;">
+            <div style="height:6px; background:var(--border); border-radius:3px; overflow:hidden;">
+              <div id="warmer-progress-bar" style="height:100%; width:0%; background:var(--green); border-radius:3px; transition:width 0.4s;"></div>
+            </div>
+            <div class="muted" id="warmer-progress-text" style="font-size:11px; margin-top:4px;">0%</div>
+          </div>
+        </div>
+
+        <!-- Параметры запуска -->
+        <div class="card">
+          <div class="card-title" style="margin-bottom:12px;">⚙️ Параметры прогрева</div>
+          <div class="form-grid">
+            <div class="form-row">
+              <label>Адрес MSB API</label>
+              <input type="text" id="warmer-msb-url" class="inp" value="http://127.0.0.1:17248">
+              <div class="muted" style="font-size:11px; margin-top:4px;">URL MultiLogin-совместимого менеджера (MSB)</div>
+            </div>
+            <div class="form-row">
+              <label>Кол-во профилей за запуск</label>
+              <input type="number" id="warmer-batch" class="inp" value="0" min="0">
+              <div class="muted" style="font-size:11px; margin-top:4px;">0 = все профили</div>
+            </div>
+            <div class="form-row">
+              <label>Пауза между профилями (сек)</label>
+              <input type="number" id="warmer-delay" class="inp" value="5" min="1" max="60">
+            </div>
+          </div>
+          <div style="display:flex; gap:10px; margin-top:18px;">
+            <button class="btn btn-primary" id="btn-warmer-start" style="min-width:160px;">▶ Старт прогрева</button>
+            <button class="btn" id="btn-warmer-stop" style="min-width:130px;background:rgba(220,38,38,0.15);color:#f87171;border-color:#7f1d1d;display:none">⏹ Остановить</button>
+          </div>
+          <div id="warmer-action-status" class="action-status" style="margin-top:10px;"></div>
+        </div>
+
+        <!-- Лог прогрева -->
+        <div class="card" id="warmer-log-card" style="display:none;">
+          <div class="card-title" style="margin-bottom:10px;">📋 Лог прогрева</div>
+          <div id="warmer-log-body"
+               style="max-height:340px; overflow-y:auto; font-family:Consolas,monospace; font-size:11px; line-height:1.55; white-space:pre-wrap; word-break:break-all;">
+          </div>
+        </div>
+
+        <!-- Таблица куков -->
+        <div class="card pad-0" id="warmer-cookies-card" style="display:none;">
+          <div style="padding:14px 18px; display:flex; align-items:center; gap:10px;">
+            <div class="card-title" style="margin:0; flex:1;">🍪 Состояние куков по профилям</div>
+            <span class="muted" id="warmer-cookies-count" style="font-size:12px;"></span>
+          </div>
+          <div id="warmer-cookies-table"></div>
+        </div>
+      </section>
+
+
+
+      <!-- ════════════════════════════════════════════════════
+           VIEW: MSB
+           ════════════════════════════════════════════════════ -->
+      <section class="view" id="view-msb">
+        <div class="page-head">
+          <div>
+            <div class="page-title">MSB — Профили браузера</div>
+            <div class="page-sub">Управление антидетект-профилями для парсера. Профили нужны чтобы обходить защиту ggsel.net.</div>
+          </div>
+          <button class="btn" id="btn-ml-refresh">↻ Обновить</button>
+        </div>
+
+        <!-- Status card -->
+        <div class="card" id="ml-status-card">
+          <div style="display:flex; align-items:center; gap:16px; flex-wrap:wrap;">
+            <div style="flex:1; min-width:180px;">
+              <div class="muted" style="font-size:11px; text-transform:uppercase; letter-spacing:0.5px;">MSB</div>
+              <div id="ml-running-text" style="font-size:18px; font-weight:600; margin-top:2px;">Проверка...</div>
+            </div>
+            <div>
+              <div class="muted" style="font-size:11px; text-transform:uppercase; letter-spacing:0.5px;">Наших профилей</div>
+              <div id="ml-our-count" style="font-size:18px; font-weight:600; margin-top:2px;">—</div>
+            </div>
+            <div>
+              <div class="muted" style="font-size:11px; text-transform:uppercase; letter-spacing:0.5px;">Нужно</div>
+              <div id="ml-desired-count" style="font-size:18px; font-weight:600; margin-top:2px;">4</div>
+            </div>
+            <div>
+              <div class="muted" style="font-size:11px; text-transform:uppercase; letter-spacing:0.5px;">Всего в ML</div>
+              <div id="ml-total-count" style="font-size:18px; font-weight:600; margin-top:2px;">—</div>
+            </div>
+            <div>
+              <div class="muted" style="font-size:11px; text-transform:uppercase; letter-spacing:0.5px;">Прокси</div>
+              <div id="ml-proxies-text" style="font-size:18px; font-weight:600; margin-top:2px;">—</div>
+            </div>
+          </div>
+          <div id="ml-status-msg" class="muted" style="margin-top:10px; font-size:12px;"></div>
+        </div>
+
+        <!-- Action card -->
+        <div class="card">
+          <div class="card-title" style="margin-bottom:12px;">Действия</div>
+          <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
+            <button class="btn btn-primary" id="btn-ml-provision" style="min-width:220px;">
+              🔧 Проверить и создать профили
+            </button>
+            <span class="muted" style="font-size:12px;">
+              Проверит сколько профилей уже есть, создаст недостающие и назначит прокси
+            </span>
+          </div>
+          <div id="ml-action-status" class="action-status" style="margin-top:12px;"></div>
+        </div>
+
+        <!-- Gemini browser group settings -->
+        <div class="card" id="ml-gemini-group-card">
+          <div class="card-title" style="margin-bottom:12px;">🤖 Группа MoreLogin для генерации фото через Gemini</div>
+          <div class="muted" style="font-size:12px; margin-bottom:14px;">
+            Укажи название группы в MoreLogin, профили которой уже вошли в Google-аккаунт и Gemini.
+            При клике "Сгенерировать" система возьмёт случайный профиль из этой группы.
+          </div>
+          <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
+            <input type="text" id="ml-gemini-group-input" class="inp" placeholder="Название группы, например: Gemini" style="flex:1; min-width:200px; max-width:320px;">
+            <button class="btn btn-primary" id="btn-ml-gemini-group-save" style="min-width:120px;">✓ Сохранить</button>
+            <button class="btn" id="btn-ml-gemini-group-test">🔍 Проверить</button>
+          </div>
+          <div id="ml-gemini-group-status" style="margin-top:10px; font-size:12px;"></div>
+        </div>
+
+        <!-- Profiles table -->
+        <div class="card pad-0" id="ml-profiles-card" style="display:none;">
+          <div style="padding:14px 18px; display:flex; align-items:center; gap:10px;">
+            <div class="card-title" style="margin:0; flex:1;">Список профилей</div>
+            <span class="muted" id="ml-profiles-count" style="font-size:12px;"></span>
+          </div>
+          <div id="ml-profiles-table"></div>
+        </div>
+      </section>
+
+      <!-- ════════════════════════════════════════════════════
+           VIEW: DEALS (Активные заказы / Сделки)
+           ════════════════════════════════════════════════════ -->
+      <section class="view" id="view-deals">
+        <div class="page-head">
+          <div>
+            <div class="page-title">🤝 Активные заказы (Сделки)</div>
+            <div class="page-sub">Связка заказов покупателей с оригинальными товарами у конкурентов</div>
+          </div>
+          <div>
+            <button class="btn" id="btn-deals-refresh">↺ Обновить</button>
+          </div>
+        </div>
+
+        <div class="card pad-0" style="margin-bottom: 20px;">
+          <div id="deals-table-container">
+            <table style="width:100%; border-collapse:collapse; font-size:13px;" id="table-deals-orders">
+              <thead>
+                <tr style="background:var(--bg-card, #2b303b);">
+                  <th style="padding:10px; text-align:left;">Заказ</th>
+                  <th style="padding:10px; text-align:left;">Товар (Оригинал)</th>
+                  <th style="padding:10px; text-align:right;">Моя цена</th>
+                  <th style="padding:10px; text-align:right;">Закупка</th>
+                  <th style="padding:10px; text-align:right;">Прибыль</th>
+                  <th style="padding:10px; text-align:center;">Статус</th>
+                  <th style="padding:10px; text-align:center;">Действия</th>
+                </tr>
+              </thead>
+              <tbody id="deals-orders-tbody">
+                <tr><td colspan="7" style="padding:20px; text-align:center;"><div class="loader"><div class="spinner"></div>Загрузка...</div></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Двойная панель чатов (отображается при клике на заказ) -->
+        <div class="card" id="deal-chats-panel" style="display: none; padding: 20px; background: var(--bg-card);">
+          <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); padding-bottom: 10px; margin-bottom: 15px;">
+            <h3 id="deal-chats-title" style="margin: 0; font-size: 16px;">Чат по заказу #—</h3>
+            <button class="btn btn-sm" onclick="document.getElementById('deal-chats-panel').style.display='none'">✕ Закрыть чат</button>
+          </div>
+          <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+            <!-- Левая колонка: Чат с покупателем -->
+            <div style="flex: 1; min-width: 300px; border-right: 1px solid var(--border); padding-right: 20px; display: flex; flex-direction: column;">
+              <h4 style="margin-top: 0; margin-bottom: 10px;">💬 Чат с покупателем</h4>
+              <div id="buyer-chat-messages" style="height: 250px; overflow-y: auto; border: 1px solid var(--border); border-radius: 6px; padding: 10px; margin-bottom: 10px; background: var(--bg-body);">
+                <!-- Сообщения -->
+              </div>
+              <div style="display: flex; gap: 8px;">
+                <input type="text" id="buyer-message-input" class="inp" placeholder="Введите сообщение..." style="flex: 1;">
+                <button class="btn btn-primary" id="btn-send-buyer-message">Отправить</button>
+              </div>
+            </div>
+
+            <!-- Правая колонка: Чат с оригинальным продавцом -->
+            <div style="flex: 1; min-width: 300px; display: flex; flex-direction: column; justify-content: space-between;">
+              <div>
+                <h4 style="margin-top: 0; margin-bottom: 10px;">👤 Связь с оригинальным продавцом</h4>
+                <div style="margin-bottom: 15px; font-size: 13px; line-height: 1.6;">
+                  <p>🔹 <strong>Оригинальный товар:</strong> <a id="original-product-link" href="#" target="_blank" style="font-weight: bold; color: var(--accent);">Перейти к товару</a></p>
+                  <p>🔹 <strong>Магазин продавца:</strong> <a id="original-seller-link" href="#" target="_blank" style="font-weight: bold; color: var(--accent);">Перейти в магазин</a></p>
+                </div>
+              </div>
+              <div>
+                <button class="btn btn-primary" id="btn-copy-seller-msg" style="width: 100%; margin-bottom: 10px; display: flex; align-items: center; justify-content: center; gap: 6px; background: #3b82f6; border-color: #3b82f6;">
+                  📋 Скопировать сообщение продавцу
+                </button>
+                <div class="muted" style="font-size: 11px; text-align: center;">
+                  Сгенерирует текст для отправки оригинальному продавцу в чат
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    
+<!-- STAGE 3: WHOLESALE -->
+<section class="view" id="view-wholesale">
+  <div class="page-head">
+    <div>
+      <div class="page-title">Оптовые закупки</div>
+      <div class="page-sub">Управление скидками для оптовиков</div>
+    </div>
+    <div class="page-actions">
+      <button class="btn btn-primary">+ Добавить</button>
+    </div>
+  </div>
+  <div class="card" style="padding: 0;">
+    <table class="table" style="margin-bottom:0;">
+      <thead>
+        <tr>
+          <th>Пользователь</th>
+          <th>Товар</th>
+          <th>Скидка</th>
+          <th style="width:50px;"></th>
+        </tr>
+      </thead>
+      <tbody id="wholesale-tbody">
+      </tbody>
+    </table>
+  </div>
+</section>
+
+    
+<!-- STAGE 4: OFFER EDIT WIZARD -->
+<section class="view" id="view-offer-edit">
+  <div class="page-head">
+    <div>
+      <div class="page-title">Редактирование товара <span id="wizard-offer-id" style="color:var(--text-faint);font-size:14px;"></span></div>
+      <div class="page-sub">Мастер настройки из 3-х шагов</div>
+    </div>
+    <div class="page-actions">
+      <button class="btn" onclick="showView('offers')">Отмена</button>
+      <button class="btn btn-primary" id="wizard-save-btn">Сохранить</button>
+    </div>
+  </div>
+
+  <div class="wizard-tabs" style="display:flex; gap:10px; margin-bottom:20px; border-bottom:1px solid var(--border); padding-bottom:10px;">
+    <div class="wizard-tab active" data-step="1" style="cursor:pointer; padding:5px 10px; border-radius:4px; font-weight:bold;">1. Основные данные</div>
+    <div class="wizard-tab" data-step="2" style="cursor:pointer; padding:5px 10px; border-radius:4px; font-weight:bold; color:var(--text-muted);">2. Цены</div>
+    <div class="wizard-tab" data-step="3" style="cursor:pointer; padding:5px 10px; border-radius:4px; font-weight:bold; color:var(--text-muted);">3. Выдача</div>
+  </div>
+
+  <div class="card wizard-step" id="wizard-step-1">
+    <h3>Основные данные</h3>
+    <div style="margin-bottom:15px;">
+      <label style="display:block; margin-bottom:5px; color:var(--text-muted);">Название (RU)</label>
+      <input type="text" class="inp" id="wizard-title-ru" style="width:100%;">
+    </div>
+    <div style="margin-bottom:15px;">
+      <label style="display:block; margin-bottom:5px; color:var(--text-muted);">Название (EN)</label>
+      <input type="text" class="inp" id="wizard-title-en" style="width:100%;">
+    </div>
+    <button class="btn btn-primary" onclick="wizardGo(2)">Далее</button>
+  </div>
+
+  <div class="card wizard-step" id="wizard-step-2" style="display:none;">
+    <h3>Цены и скидки</h3>
+    <div style="margin-bottom:15px;">
+      <label style="display:block; margin-bottom:5px; color:var(--text-muted);">Цена (USD)</label>
+      <input type="number" class="inp" id="wizard-price" style="width:200px;">
+    </div>
+    <button class="btn" onclick="wizardGo(1)">Назад</button>
+    <button class="btn btn-primary" onclick="wizardGo(3)">Далее</button>
+  </div>
+
+  <div class="card wizard-step" id="wizard-step-3" style="display:none;">
+    <h3>Тип выдачи</h3>
+    <div style="margin-bottom:15px;">
+      <label style="display:block; margin-bottom:5px; color:var(--text-muted);">Тип товара</label>
+      <select class="select" id="wizard-type" style="width:200px;">
+        <option value="text">Текст</option>
+        <option value="file">Файл</option>
+        <option value="link">Ссылка</option>
+      </select>
+    </div>
+    <button class="btn" onclick="wizardGo(2)">Назад</button>
+    <button class="btn btn-primary" onclick="document.getElementById('wizard-save-btn').click()">Завершить</button>
+  </div>
+</section>
+
+    
+<!-- STAGE 7: PROFILE -->
+<section class="view" id="view-profile">
+  <div class="page-head">
+    <div>
+      <div class="page-title">Профиль и Настройки</div>
+      <div class="page-sub">Управление аккаунтом и уведомлениями</div>
+    </div>
+  </div>
+
+  <div class="wizard-tabs" style="display:flex; gap:10px; margin-bottom:20px; border-bottom:1px solid var(--border); padding-bottom:10px;">
+    <div class="wizard-tab active" data-ptab="1" style="cursor:pointer; padding:5px 10px; border-radius:4px; font-weight:bold; color:var(--text);" onclick="switchProfileTab(1)">Личные данные</div>
+    <div class="wizard-tab" data-ptab="2" style="cursor:pointer; padding:5px 10px; border-radius:4px; font-weight:bold; color:var(--text-muted);" onclick="switchProfileTab(2)">Уведомления</div>
+  </div>
+
+  <div class="card ptab-content" id="ptab-1">
+    <h3>Данные продавца</h3>
+    <div style="margin-bottom:15px;">
+      <label style="display:block; margin-bottom:5px; color:var(--text-muted);">Email</label>
+      <input type="text" class="inp" id="profile-email" style="width:300px;" disabled>
+    </div>
+    <div style="margin-bottom:15px;">
+      <label style="display:block; margin-bottom:5px; color:var(--text-muted);">Никнейм</label>
+      <input type="text" class="inp" id="profile-nickname" style="width:300px;">
+    </div>
+    <div style="margin-bottom:15px;">
+      <label style="display:block; margin-bottom:5px; color:var(--text-muted);">WebMoney (WMZ)</label>
+      <input type="text" class="inp" id="profile-wmz" style="width:300px;">
+    </div>
+    <button class="btn btn-primary" onclick="showToast('Сохранено', 'success')">Сохранить</button>
+  </div>
+
+  <div class="card ptab-content" id="ptab-2" style="display:none;">
+    <h3>Настройки уведомлений (Telegram)</h3>
+    <div style="display:flex; align-items:center; justify-content:space-between; max-width:400px; padding:10px 0; border-bottom:1px solid var(--border);">
+      <span>Новые заказы</span>
+      <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
+    </div>
+    <div style="display:flex; align-items:center; justify-content:space-between; max-width:400px; padding:10px 0; border-bottom:1px solid var(--border);">
+      <span>Новые сообщения</span>
+      <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
+    </div>
+    <div style="display:flex; align-items:center; justify-content:space-between; max-width:400px; padding:10px 0;">
+      <span>Новые отзывы</span>
+      <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
+    </div>
+  </div>
+</section>
+
+    
+<!-- STAGE 9: HELP & DOCS -->
+<section class="view" id="view-docs">
+  <div class="page-head">
+    <div class="page-title">Справка</div>
+    <div class="page-sub">Документация по API GGSEL</div>
+  </div>
+  <div class="card">
+    <div class="docs-list">
+      <a class="docs-link" href="https://seller.ggsel.com/docs" target="_blank">Введение ↗</a>
+      <a class="docs-link" href="https://seller.ggsel.com/docs/seller-api-v-1" target="_blank">API v1 ↗</a>
+      <a class="docs-link" href="https://seller.ggsel.com/docs/v2/seller-api-v-2" target="_blank">API v2 ↗</a>
+      <a class="docs-link" href="https://seller.ggsel.com/docs/v2/list-of-categories" target="_blank">Список категорий v2 ↗</a>
+      <a class="docs-link" href="https://seller.ggsel.com/docs/v2/search-categories" target="_blank">Поиск категорий v2 ↗</a>
+      <a class="docs-link" href="https://seller.ggsel.com/docs/v2/view-option" target="_blank">Просмотр опции v2 ↗</a>
+      <a class="docs-link" href="https://seller.ggsel.com/docs/v2/list-offer-options-visible-to-seller" target="_blank">Список опций продавца v2 ↗</a>
+      <a class="docs-link" href="https://seller.ggsel.com/docs/v2/create-many" target="_blank">Создание многих v2 ↗</a>
+      <a class="docs-link" href="https://seller.ggsel.com/docs/v2/get-async-job-result" target="_blank">Результат задачи v2 ↗</a>
+      <a class="docs-link" href="https://seller.ggsel.com/docs/return-seller-balance-info" target="_blank">Баланс продавца ↗</a>
+      <a class="docs-link" href="https://seller.ggsel.com/docs/return-seller-receipts" target="_blank">Чеки продавца ↗</a>
+      <a class="docs-link" href="https://seller.ggsel.com/docs/return-seller-token" target="_blank">Токен продавца ↗</a>
+      <a class="docs-link" href="https://seller.ggsel.com/docs/return-all-categories" target="_blank">Все категории ↗</a>
+      <a class="docs-link" href="https://seller.ggsel.com/docs/create-message-without-file" target="_blank">Сообщение без файла ↗</a>
+      <a class="docs-link" href="https://seller.ggsel.com/docs/list-of-chats" target="_blank">Список чатов ↗</a>
+      <a class="docs-link" href="https://seller.ggsel.com/docs/list-of-messages" target="_blank">Список сообщений ↗</a>
+    </div>
+  </div>
+</section>
+
+    </main>
+  </div>
+</div>
+
+<!-- ═══ MODAL ═══ -->
+<div class="modal-bg" id="modal-bg">
+  <div class="modal" id="modal-content"></div>
+</div>
+
+<!-- ═══ API TEST OVERLAY ═══ -->
+<div class="modal-bg" id="api-test-bg">
+  <div class="modal modal-wide" id="api-test-content">
+    <div class="modal-head">
+      <div>
+        <h2 style="margin:0;">🧪 Полный тест эндпоинтов V1 + V2</h2>
+        <div class="muted" id="api-test-summary">Готов к запуску</div>
+      </div>
+      <button class="modal-close" onclick="closeApiTest()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="api-test-controls">
+        <button class="btn btn-primary" id="api-test-run" onclick="runApiTest()">▶ Запустить тест</button>
+        <span class="muted" style="font-size:12px;">При открытии загружаются кэшированные результаты. Нажмите кнопку чтобы перепрогнать.</span>
+      </div>
+      <div id="api-test-results" class="api-test-results"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ BACKEND TEST OVERLAY ═══ -->
+<div class="modal-bg" id="backend-test-bg">
+  <div class="modal modal-wide" id="backend-test-content">
+    <div class="modal-head">
+      <div>
+        <h2 style="margin:0;">⚙️ Backend — Flask эндпоинты</h2>
+        <div class="muted" id="backend-test-summary">Готов к запуску</div>
+      </div>
+      <button class="modal-close" onclick="closeBackendTest()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="api-test-controls">
+        <button class="btn btn-primary" id="backend-test-run" onclick="runBackendTest()">▶ Запустить тест</button>
+        <span class="muted" style="font-size:12px;">При открытии загружаются кэшированные результаты. Нажмите кнопку чтобы перепрогнать.</span>
+      </div>
+      <div id="backend-test-results" class="api-test-results"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ MSB API TEST OVERLAY ═══ -->
+<div class="modal-bg" id="msb-test-bg">
+  <div class="modal modal-wide" id="msb-test-content">
+    <div class="modal-head">
+      <div>
+        <h2 style="margin:0;">🛡 MSB API — MyStealthBrowser</h2>
+        <div class="muted" id="msb-test-summary">Готов к запуску</div>
+      </div>
+      <button class="modal-close" onclick="closeMsbTest()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="api-test-controls">
+        <button class="btn btn-primary" id="msb-test-run" onclick="runMsbTest()">▶ Запустить тест</button>
+        <span class="muted" style="font-size:12px;">Кэш: при открытии показываются прошлые результаты.</span>
+        <div style="display:flex; gap:10px; align-items:center; padding:4px 10px; background:rgba(0,0,0,0.2); border-radius:6px; border:1px solid var(--border-soft);">
+          <span style="font-size:11px; color:var(--text-faint); font-weight:500;">РЕЖИМ:</span>
+          <label style="display:flex;align-items:center;gap:5px;cursor:pointer;font-size:12px;">
+            <input type="radio" name="msb-mode" value="background" id="msb-opt-background">
+            <span>🔲 Фон</span>
+          </label>
+          <label style="display:flex;align-items:center;gap:5px;cursor:pointer;font-size:12px;">
+            <input type="radio" name="msb-mode" value="visible" id="msb-opt-visible">
+            <span>👁 Видимый</span>
+          </label>
+        </div>
+        <span class="muted" style="font-size:12px; margin-left:auto;">http://127.0.0.1:17248</span>
+      </div>
+      <div id="msb-test-results" class="api-test-results"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ COOKIE STATUS OVERLAY ═══ -->
+<div class="modal-bg" id="cookie-modal-bg">
+  <div class="modal modal-wide" id="cookie-modal-content">
+    <div class="modal-head">
+      <div>
+        <h2 style="margin:0;">🍪 Cookie — Seller сессия</h2>
+        <div id="cookie-modal-summary" style="margin-top:6px;">Загрузка статуса...</div>
+      </div>
+      <button class="modal-close" onclick="closeCookieModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <!-- Кнопки ручного управления -->
+      <div class="api-test-controls" style="flex-wrap:wrap; gap:8px;">
+        <button class="btn btn-sm" id="cookie-modal-check-btn" onclick="runCookieCheck()">↻ Проверить</button>
+        <button class="btn btn-primary btn-sm" id="cookie-modal-open-btn" onclick="cookieModalOpenBrowser()">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px;margin-right:4px;"><polyline points="23 4 23 10 17 10"></polyline><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path></svg>
+          Открыть MSB Seller
+        </button>
+        <button class="btn btn-sm" id="cookie-modal-copy-btn" onclick="cookieCopyToClipboard()" title="Скопировать куки в формате Cookie-заголовка">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px;margin-right:4px;"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+          Скопировать куки
+        </button>
+        <span class="muted" style="font-size:12px;">Группа <b>SellerGGsel</b> → ggsel.net → seller.ggsel.com → CDP</span>
+      </div>
+
+      <!-- Панель автообновления -->
+      <div id="cookie-auto-panel" style="margin:10px 0 4px; padding:12px 16px; background:rgba(255,255,255,0.03); border:1px solid var(--border-soft); border-radius:10px;">
+        <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+          <span style="font-size:13px; font-weight:600;">🤖 Авто-обновление</span>
+          <span id="cookie-auto-status-badge" class="badge neutral" style="font-size:11px;">загрузка...</span>
+          <span id="cookie-auto-msg" class="muted" style="font-size:11px; flex:1;"></span>
+          <button class="btn btn-sm" id="cookie-auto-trigger-btn" onclick="cookieAutoTrigger()" title="Обновить куки прямо сейчас (фон MSB)">
+            ⚡ Обновить фоново
+          </button>
+          <button class="btn btn-sm" id="cookie-auto-toggle-btn" onclick="cookieAutoToggle()">вкл/выкл</button>
+        </div>
+        <div style="margin-top:8px; display:flex; gap:20px; font-size:11px; color:var(--text-faint);">
+          <span>⏱ Последнее: <b id="cookie-auto-last">—</b></span>
+          <span>⏳ Следующая проверка: <b id="cookie-auto-next">—</b></span>
+          <span>🔄 TTL: <b id="cookie-auto-ttl">—</b></span>
+        </div>
+      </div>
+
+      <div id="cookie-modal-body">
+        <div class="loader"><div class="spinner"></div>Проверка cookie...</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="toast-container"></div>
+<script src="{{ url_for('static', filename='app.js') }}?v={{ build_version }}"></script>
+</body>
+</html>
+
+
+

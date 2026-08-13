@@ -1,0 +1,32 @@
+{
+  "file_scan_exclusions": [
+    "**/.git",
+    "**/node_modules",
+    "**/__pycache__",
+    "**/__pycache_old*",
+    "**/*.pyc",
+    "**/scratch/**",
+    "**/ggsel_api_snapshots/**",
+    "**/ggseller_data/**",
+    "**/_archive_root/**",
+    "**/logs/**",
+    "**/data/images/**",
+    "**/data/telemetry/**",
+    "**/static/products/**",
+    "**/static/generated/**",
+    "**/tests/probe_result.json",
+    "**/data/probe_result.json",
+    "probe_result.json",
+    "seller_categories.json",
+    "candidates.json",
+    "categories_cache.json",
+    "cat_fees.json",
+    "**/*.db",
+    "**/*.log",
+    "**/*.jsonl",
+    "**/*.webp",
+    "**/*.jpg",
+    "**/*.png",
+    "index_backup.html"
+  ]
+}

@@ -1,0 +1,1814 @@
+{
+  "conversations": [
+    {
+      "id": 18568274,
+      "system": true,
+      "user": {
+        "username": "Поддержка",
+        "avatar_url": "https://static.ggsel.net/back-office/assets/icons/techsupport-de0f79e64901de5fa67c8c5d35c02be9a7e0ad0b53b0a1e7c156a3847b6e2193.svg"
+      },
+      "last_message": {
+        "created_at": "2026-06-25T20:35:03.188+03:00",
+        "is_current_user": false,
+        "image_url": null,
+        "text": "Здравствуйте!\n\nМы не сотрудничаем с Digiseller.\nАктуальную документацию по API вы можете найти здесь: https://seller.ggsel.com/docs",
+        "read": true
+      },
+      "offer": {
+        "id": null,
+        "title": null,
+        "ggsel_product_url": null
+      },
+      "order_id": null,
+      "cover_image_url": null
+    },
+    {
+      "id": 18568275,
+      "system": true,
+      "user": {
+        "username": "Уведомления",
+        "avatar_url": "https://static.ggsel.net/back-office/assets/icons/for_notifications-4c41fa283406952994414509d3c819f1347dd184929d229713fdf2924a75b4b3.svg"
+      },
+      "last_message": {
+        "created_at": "2026-08-07T17:09:18.005+03:00",
+        "is_current_user": false,
+        "image_url": null,
+        "text": "Уважаемые продавцы!\r\n\r\nУведомляем вас, что с 08.08.2026, в общих правилах площадки вступает в силу новый пункт 6.12:\r\nПри продаже товаров с типом «Гифт» продавец обязан указывать информацию об аккаунте, с которого будет отправлен подарок (никнейм, ссылка на профиль). Данная информация должна быть размещена на странице выдачи заказа либо направлена покупателю в чате заказа до момента отправки подарка.\r\n\r\nДанное изменение направлено на повышение прозрачности процесса покупки, а также улучшение пользовательского опыта.\r\nПравила площадки: https://clck.ru/3TevWr",
+        "read": false
+      },
+      "offer": {
+        "id": null,
+        "title": null,
+        "ggsel_product_url": null
+      },
+      "order_id": null,
+      "cover_image_url": null
+    },
+    {
+      "id": 22495988,
+      "system": false,
+      "user": {
+        "username": "judasu4488@gmail.com",
+        "avatar_url": null
+      },
+      "last_message": {
+        "created_at": "2026-06-30T22:14:48.336+03:00",
+        "is_current_user": false,
+        "image_url": null,
+        "text": "Давай тогда уж возврат.",
+        "read": true
+      },
+      "offer": {
+        "id": 2388488,
+        "title": "Gemini Pro 18 Месяцев 🔥 БЕЗ ВХОДА В АККАУНТ 💎 atreuM",
+        "ggsel_product_url": "https://ggsel.net/catalog/product/102388489"
+      },
+      "order_id": 34360908,
+      "cover_image_url": "https://storage.yandexcloud.net/gsellers-imgs-prod/offer/cover_image/2388488-2175939-a023dba83ba41c9e2b0014446890f249.png"
+    },
+    {
+      "id": 22603364,
+      "system": false,
+      "user": {
+        "username": "mark.arkaev@gmail.com",
+        "avatar_url": null
+      },
+      "last_message": {
+        "created_at": "2026-06-25T18:49:27.961+03:00",
+        "is_current_user": true,
+        "image_url": null,
+        "text": "Надеюсь на хороший отзыв, вам спасибо )",
+        "read": true
+      },
+      "offer": {
+        "id": 2388488,
+        "title": "Gemini Pro 18 Месяцев 🔥 БЕЗ ВХОДА В АККАУНТ 💎 atreuM",
+        "ggsel_product_url": "https://ggsel.net/catalog/product/102388489"
+      },
+      "order_id": 34544911,
+      "cover_image_url": "https://storage.yandexcloud.net/gsellers-imgs-prod/offer/cover_image/2388488-2175939-a023dba83ba41c9e2b0014446890f249.png"
+    },
+    {
+      "id": 22273763,
+      "system": false,
+      "user": {
+        "username": "ushakov_9900@mail.ru",
+        "avatar_url": null
+      },
+      "last_message": {
+        "created_at": "2026-06-22T19:03:56.766+03:00",
+        "is_current_user": true,
+        "image_url": null,
+        "text": "Если всё хорошо, буду рад отзыву )",
+        "read": true
+      },
+      "offer": {
+        "id": 2388488,
+        "title": "Gemini Pro 18 Месяцев 🔥 БЕЗ ВХОДА В АККАУНТ 💎 atreuM",
+        "ggsel_product_url": "https://ggsel.net/catalog/product/102388489"
+      },
+      "order_id": 33982616,
+      "cover_image_url": "https://storage.yandexcloud.net/gsellers-imgs-prod/offer/cover_image/2388488-2175939-a023dba83ba41c9e2b0014446890f249.png"
+    }
+  ],
+  "messages": [
+    {
+      "conversation_id": 18568274,
+      "messages": [
+        {
+          "id": 25959339,
+          "text": "Мы ценим Ваше время, поэтому, к каждому пользователю прикрепляется персональный менеджер.\nОбращайтесь по любым вопросам.\nЕсли вы еще не прошли верификацию и не получили полный доступ к кабинету продавца, пожалуйста, кратко опишите что вы собираетесь продавать и мы отправим вам инструкцию для верификации.",
+          "created_at": "2026-05-03T18:48:13.991+03:00",
+          "read": true,
+          "author": {
+            "username": "Поддержка",
+            "email": "suppportselllers@outlook.com"
+          },
+          "image_url": null,
+          "preview_image_url": null,
+          "order_id": null,
+          "is_current_user": false,
+          "conversation_id": 18568274,
+          "system": true,
+          "offer": null,
+          "input_id": null,
+          "cover_image_url": null
+        },
+        {
+          "id": 25959419,
+          "text": "Здравствуйте, хочу стать продавцом ",
+          "created_at": "2026-05-03T18:48:49.633+03:00",
+          "read": true,
+          "author": {
+            "username": "Atreum",
+            "email": "atreum.5202@gmail.com"
+          },
+          "image_url": null,
+          "preview_image_url": null,
+          "order_id": null,
+          "is_current_user": true,
+          "conversation_id": 18568274,
+          "system": true,
+          "offer": null,
+          "input_id": "acd5067e-eb64-4d81-a25c-933a403ee2dd",
+          "cover_image_url": null
+        },
+        {
+          "id": 25959528,
+          "text": "Для начала хочу начать с продажи аккаунтов Google AI Pro",
+          "created_at": "2026-05-03T18:49:26.062+03:00",
+          "read": true,
+          "author": {
+            "username": "Atreum",
+            "email": "atreum.5202@gmail.com"
+          },
+          "image_url": null,
+          "preview_image_url": null,
+          "order_id": null,
+          "is_current_user": true,
+          "conversation_id": 18568274,
+          "system": true,
+          "offer": null,
+          "input_id": "b1e35d71-e139-49de-ba30-744494ebe92a",
+          "cover_image_url": null
+        },
+        {
+          "id": 25963349,
+          "text": "Здравствуйте!\n\nБлагодарим вас за ответ, будем рады продолжить сотрудничество!\nПрохождение верификации доступно с 16-ти лет.\n\nПожалуйста, пройдите следующий этап верификации личности, чтобы вы могли получить полный доступ к функциям личного кабинета. \nДанная процедура является обязательной в соответствии с правилами продажи товаров на платформе.\n\nОбратите внимание, для успешного прохождения верификации необходимо указать адрес электронной почты, который был использован при регистрации личного кабинета: atreum.5202@gmail.com\n\nПерейдите по указанной ссылке в созданную для вас сессию, потребуется только завершить процесс. \nСсылка действительна в течение 7 дней: https://verify.didit.me/session/ftBVyvTtyTVQ\n\nПожалуйста, напишите нам, как верификация будет пройдена.\n",
+          "created_at": "2026-05-03T19:10:23.091+03:00",
+          "read": true,
+          "author": {
+            "username": "Поддержка",
+            "email": "suppportselllers@outlook.com"
+          },
+          "image_url": null,
+          "preview_image_url": null,
+          "order_id": null,
+          "is_current_user": false,
+          "conversation_id": 18568274,
+          "system": true,
+          "offer": null,
+          "input_id": "5dac5025-a8ce-4b0c-8a2d-f1dd94188a39",
+          "cover_image_url": null
+        },
+        {
+          "id": 25964096,
+          "text": "Проверка пройдена",
+          "created_at": "2026-05-03T19:14:46.868+03:00",
+          "read": true,
+          "author": {
+            "username": "Atreum",
+            "email": "atreum.5202@gmail.com"
+          },
+          "image_url": null,
+          "preview_image_url": null,
+          "order_id": null,
+          "is_current_user": true,
+          "conversation_id": 18568274,
+          "system": true,
+          "offer": null,
+          "input_id": "f26630c3-c66f-4222-92ef-31f7ded94baf",
+          "cover_image_url": null
+        },
+        {
+          "id": 25969806,
+          "text": "Благодарим за ожидание.\nРады сообщить, что вы успешно прошли верификацию. Теперь в личном кабинете вам доступны все функции для старта продаж на площадке.\n\nТакже рекомендуем ознакомиться с полными правилами платформы: \nhttps://clck.ru/3SnUx3\nИ с Wiki для продавцов: https://clck.ru/3TFz9B\nЕсли у вас возникнут дополнительные вопросы, мы всегда готовы помочь!\n",
+          "created_at": "2026-05-03T19:47:19.365+03:00",
+          "read": true,
+          "author": {
+            "username": "Поддержка",
+            "email": "suppportselllers@outlook.com"
+          },
+          "image_url": null,
+          "preview_image_url": null,
+          "order_id": null,
+          "is_current_user": false,
+          "conversation_id": 18568274,
+          "system": true,
+          "offer": null,
+          "input_id": "5728785b-95e5-4fe0-805e-3d2210362c86",
+          "cover_image_url": null
+        },
+        {
+          "id": 33431564,
+          "text": "Здравствуйте!\n\nМы были вынуждены скрыть ваш товар, так как продажа подписки Google AI сроком более 1 месяца запрещена.\nhttps://ggsel.net/catalog/product/102388481\n\nПросим вас не размещать аналогичные товары на продажу в дальнейшем.",
+          "created_at": "2026-06-18T08:45:25.350+03:00",
+          "read": true,
+          "author": {
+            "username": "Поддержка",
+            "email": "suppportselllers@outlook.com"
+          },
+          "image_url": null,
+          "preview_image_url": null,
+          "order_id": null,
+          "is_current_user": false,
+          "conversation_id": 18568274,
+          "system": true,
+          "offer": null,
+          "input_id": "e21af56f-1b83-4b72-af0b-82b0b21a4dfc",
+          "cover_image_url": null
+        },
+        {
+          "id": 33509566,
+          "text": "Хорошо, благодарю что оповестили, подскажите а текущая сделка остаётся актуальной? Сделка уже завершена с моей стороны или это квалифицируется как другой товар?",
+          "created_at": "2026-06-18T16:45:44.112+03:00",
+          "read": true,
+          "author": {
+            "username": "Atreum",
+            "email": "atreum.5202@gmail.com"
+          },
+          "image_url": null,
+          "preview_image_url": null,
+          "order_id": null,
+          "is_current_user": true,
+          "conversation_id": 18568274,
+          "system": true,
+          "offer": null,
+          "input_id": "f1e8a491-a5c3-4633-a376-d6cab970b67d",
+          "cover_image_url": null
+        },
+        {
+          "id": 33533361,
+          "text": "Да, вы можете продолжать работу и размещение новых товаров, если они полностью соответствуют правилам площадки.\nПри этом просим учитывать, что ранее скрытый товар восстановлению не подлежит, а при дальнейшей публикации важно строго соблюдать требования категории, чтобы избежать повторных нарушений.",
+          "created_at": "2026-06-18T17:23:02.966+03:00",
+          "read": true,
+          "author": {
+            "username": "Поддержка",
+            "email": "suppportselllers@outlook.com"
+          },
+          "image_url": null,
+          "preview_image_url": null,
+          "order_id": null,
+          "is_current_user": false,
+          "conversation_id": 18568274,
+          "system": true,
+          "offer": null,
+          "input_id": "b85d922d-5370-40a4-b7c1-2e49a811a807",
+          "cover_image_url": null
+        },
+        {
+          "id": 33553770,
+          "text": "А можно id товара, который нужно изменить, у меня они все в \"Товары\" еще в продаже",
+          "created_at": "2026-06-18T19:11:01.901+03:00",
+          "read": true,
+          "author": {
+            "username": "Atreum",
+            "email": "atreum.5202@gmail.com"
+          },
+          "image_url": null,
+          "preview_image_url": null,
+          "order_id": null,
+          "is_current_user": true,
+          "conversation_id": 18568274,
+          "system": true,
+          "offer": null,
+          "input_id": "c5a6c660-911b-4083-88ff-386e612fb2b1",
+          "cover_image_url": null
+        },
+        {
+          "id": 33556816,
+          "text": "Подскажите, о каком товаре идёт речь? \n",
+          "created_at": "2026-06-18T19:25:53.421+03:00",
+          "read": true,
+          "author": {
+            "username": "Поддержка",
+            "email": "suppportselllers@outlook.com"
+          },
+          "image_url": null,
+          "preview_image_url": null,
+          "order_id": null,
+          "is_current_user": false,
+          "conversation_id": 18568274,
+          "system": true,
+          "offer": null,
+          "input_id": "c8b24cf9-9bda-443c-b96e-90cbd0f04daf",
+          "cover_image_url": null
+        },
+        {
+          "id": 33587596,
+          "text": "Хорошо, прошу прощения, мне стоит ознакомиться с правилами сервиса.",
+          "created_at": "2026-06-18T22:02:12.258+03:00",
+          "read": true,
+          "author": {
+            "username": "Atreum",
+            "email": "atreum.5202@gmail.com"
+          },
+          "image_url": null,
+          "preview_image_url": null,
+          "order_id": null,
+          "is_current_user": true,
+          "conversation_id": 18568274,
+          "system": true,
+          "offer": null,
+          "input_id": "2c39d5d7-85d5-4d37-896e-c87719a2c61e",
+          "cover_image_url": null
+        },
+        {
+          "id": 33590936,
+          "text": "Обращайтесь, если возникнут еще какие-либо вопросы! 🙌",
+          "created_at": "2026-06-18T22:21:03.381+03:00",
+          "read": true,
+          "author": {
+            "username": "Поддержка",
+            "email": "suppportselllers@outlook.com"
+          },
+          "image_url": null,
+          "preview_image_url": null,
+          "order_id": null,
+          "is_current_user": false,
+          "conversation_id": 18568274,
+          "system": true,
+          "offer": null,
+          "input_id": "970eca2b-851a-4723-92a5-809a2117b703",
+          "cover_image_url": null
+        },
+        {
+          "id": 34386780,
+          "text": "Здравствуйте!\n\nМы были вынуждены скрыть ваш товар, так как продажа подписки Google AI сроком более 1 месяца запрещена.\nhttps://ggsel.net/catalog/product/102388489\n\nПросим вас не размещать аналогичные товары на продажу в дальнейшем.",
+          "created_at": "2026-06-23T15:35:41.341+03:00",
+          "read": true,
+          "author": {
+            "username": "Поддержка",
+            "email": "suppportselllers@outlook.com"
+          },
+          "image_url": null,
+          "preview_image_url": null,
+          "order_id": null,
+          "is_current_user": false,
+          "conversation_id": 18568274,
+          "system": true,
+          "offer": null,
+          "input_id": "e15db630-6967-4d37-9efd-bd661607a27f",
+          "cover_image_url": null
+        },
+        {
+          "id": 34798918,
+          "text": "Здравствуйте, а хочу уточнить, API соеденения и тех информация всё с сайта брать? Или мне открыли кабинет в Digiseller? ",
+          "created_at": "2026-06-25T18:53:24.130+03:00",
+          "read": false,
+          "author": {
+            "username": "Atreum",
+            "email": "atreum.5202@gmail.com"
+          },
+          "image_url": null,
+          "preview_image_url": null,
+          "order_id": null,
+          "is_current_user": true,
+          "conversation_id": 18568274,
+          "system": true,
+          "offer": null,
+          "input_id": "222954b8-b189-4278-ba6e-758c892b9082",
+          "cover_image_url": null
+        },
+        {
+          "id": 34820230,
+          "text": "Здравствуйте!\n\nМы не сотрудничаем с Digiseller.\nАктуальную документацию по API вы можете найти здесь: https://seller.ggsel.com/docs",
+          "created_at": "2026-06-25T20:35:03.188+03:00",
+          "read": true,
+          "author": {
+            "username": "Поддержка",
+            "email": "suppportselllers@outlook.com"
+          },
+          "image_url": null,
+          "preview_image_url": null,
+          "order_id": null,
+          "is_current_user": false,
+          "conversation_id": 18568274,
+          "system": true,
+          "offer": null,
+          "input_id": null,
+          "cover_image_url": null
+        }
+      ]
+    },
+    {
+      "conversation_id": 18568275,
+      "messages": [
+        {
+          "id": 25959340,
+          "text": "Приветствуем вас на площадке ggsel.net!\n\nМы собрали для вас полезную информацию для старта:\nПравила площадки — https://clck.ru/33nX2X\nМинимальные цены — https://clck.ru/3PXExS\n\nВ чате «Поддержка» вы можете связаться с нами, будем рады помочь!\n",
+          "created_at": "2026-05-03T18:48:14.055+03:00",
+          "read": true,
+          "author": {
+            "username": "Уведомления",
+            "email": "7b1df2cf6ff93b5644ad30a8665773144a9ad39a@back-office.ggsel.net"
+          },
+          "image_url": null,
+          "preview_image_url": null,
+          "order_id": null,
+          "is_current_user": false,
+          "conversation_id": 18568275,
+          "system": true,
+          "offer": null,
+          "input_id": null,
+          "cover_image_url": null
+        },
+        {
+          "id": 26232972,
+          "text": "Для нас важно, чтобы работа на площадке приносила вам комфорт и результат! \r\n \r\nПросим пройти короткий опрос, оценить взаимодействие с поддержкой и поделиться идеями, что можно улучшить.\r\nhttps://clck.ru/3TS3Ns",
+          "created_at": "2026-05-05T14:39:05.011+03:00",
+          "read": true,
+          "author": {
+            "username": "Уведомления",
+            "email": "7b1df2cf6ff93b5644ad30a8665773144a9ad39a@back-office.ggsel.net"
+          },
+          "image_url": null,
+          "preview_image_url": null,
+          "order_id": null,
+          "is_current_user": false,
+          "conversation_id": 18568275,
+          "system": true,
+          "offer": null,
+          "input_id": null,
+          "cover_image_url": null
+        },
+        {
+          "id": 27459882,
+          "text": "Обратите внимание!\r\n\r\nИнформируем вас, что с сегодняшнего дня, с ~14:00 по МСК будет введена новая и постоянная мера безопасности при которой будут приостанавливаться продажы для продавцов с балансом ниже нуля. Просим пополнить баланс до положительного значения.\r\n\r\nВ случае если пополнение произойдёт после блокировки, то продажи возобновятся автоматически.\r\nКроме этого, API-методы при блокировке из-за отрицательного баланса остаются рабочими.\r\n\r\nЕсли у вас нет возможности пополнить баланс, пожалуйста, обратитесь в поддержку.",
+          "created_at": "2026-05-13T12:25:18.495+03:00",
+          "read": true,
+          "author": {
+            "username": "Уведомления",
+            "email": "7b1df2cf6ff93b5644ad30a8665773144a9ad39a@back-office.ggsel.net"
+          },
+          "image_url": null,
+          "preview_image_url": null,
+          "order_id": null,
+          "is_current_user": false,
+          "conversation_id": 18568275,
+          "system": true,
+          "offer": null,
+          "input_id": null,
+          "cover_image_url": null
+        },
+        {
+          "id": 29459913,
+          "text": "Уважаемые продавцы!\r\n\r\nУведомляем вас, что с 27.05.26 на площадке будет действовать дополнительное требование к правилу 1.22:\r\nТовары в категории \"Оффлайн аккаунты\" должны содержать: логин и пароль от аккаунта, а также код двухфакторной аутентификации (2FA) при наличии. Доступ к игре с такого аккаунта не должен осуществляться через семейную группу Steam. \r\n\r\nВ случае возникновения проблем с доступом к игре продавец должен предоставить замену аккаунта в течение 1 часа, если:\r\n- запуск игры завершается сбоем;\r\n- предоставленный аккаунт не работает; \r\n- действует ограничение защиты Denuvo Anti-Tamper.\r\n\r\nИзменения направлены на повышение качества пользовательского опыта.\r\nПравила площадки: https://clck.ru/3TevWr",
+          "created_at": "2026-05-25T15:01:40.174+03:00",
+          "read": true,
+          "author": {
+            "username": "Уведомления",
+            "email": "7b1df2cf6ff93b5644ad30a8665773144a9ad39a@back-office.ggsel.net"
+          },
+          "image_url": null,
+          "preview_image_url": null,
+          "order_id": null,
+          "is_current_user": false,
+          "conversation_id": 18568275,
+          "system": true,
+          "offer": null,
+          "input_id": null,
+          "cover_image_url": null
+        },
+        {
+          "id": 29799664,
+          "text": "Мы постоянно работаем над тем, чтобы личный кабинет стал более удобным, и ваше мнение здесь очень важно. Расскажите, пожалуйста, что вам больше всего нравится в последних обновлениях. Каждый ответ поможет нам сделать лучший сервис для вас!\r\nhttps://clck.ru/3S5eWS",
+          "created_at": "2026-05-27T14:54:36.778+03:00",
+          "read": true,
+          "author": {
+            "username": "Уведомления",
+            "email": "7b1df2cf6ff93b5644ad30a8665773144a9ad39a@back-office.ggsel.net"
+          },
+          "image_url": null,
+          "preview_image_url": null,
+          "order_id": null,
+          "is_current_user": false,
+          "conversation_id": 18568275,
+          "system": true,
+          "offer": null,
+          "input_id": null,
+          "cover_image_url": null
+        },
+        {
+          "id": 29991477,
+          "text": "Уважаемые продавцы, обращаем ваше внимание!\r\n \r\nРекомендуем использовать вывод средств с баланса в рублях напрямую через личный кабинет продавца, а не через обменники или переводы от физических лиц. Множественные входящие P2P переводы могут вызывать подозрения у банков и приводить к ограничениям. Рублёвый вывод с площадки выглядит прозрачнее: средства поступают как выплата, а не как переводы от разных людей.\r\n \r\nДля регулярной деятельности также рекомендуем оформить самозанятость или ИП и декларировать доходы.",
+          "created_at": "2026-05-28T16:18:19.808+03:00",
+          "read": true,
+          "author": {
+            "username": "Уведомления",
+            "email": "7b1df2cf6ff93b5644ad30a8665773144a9ad39a@back-office.ggsel.net"
+          },
+          "image_url": null,
+          "preview_image_url": null,
+          "order_id": null,
+          "is_current_user": false,
+          "conversation_id": 18568275,
+          "system": true,
+          "offer": null,
+          "input_id": null,
+          "cover_image_url": null
+        },
+        {
+          "id": 30163123,
+          "text": "Уважаемые продавцы!\r\nВ связи с повышенным количеством обращений, время ожидания ответа от поддержки временно увеличено.\r\n \r\nПриносим извинения за возможные неудобства и благодарим за ваше понимание. \r\nНаша команда делает всё возможное, чтобы обработать все обращения в кратчайшие сроки.",
+          "created_at": "2026-05-29T18:00:29.037+03:00",
+          "read": true,
+          "author": {
+            "username": "Уведомления",
+            "email": "7b1df2cf6ff93b5644ad30a8665773144a9ad39a@back-office.ggsel.net"
+          },
+          "image_url": null,
+          "preview_image_url": null,
+          "order_id": null,
+          "is_current_user": false,
+          "conversation_id": 18568275,
+          "system": true,
+          "offer": null,
+          "input_id": null,
+          "cover_image_url": null
+        },
+        {
+          "id": 31818930,
+          "text": "Уважаемые продавцы!\r\n\r\nМы провели технические работы на сервисе авторизации, из-за этого у части продавцов мог сброситься токен доступа к API. \r\n\r\nЕсли вы получаете ошибку 401, то вам необходимо перевыпустить токен авторизации в api_sellers/api. \r\n\r\nПродавцы, у которых токен был \"зашит\" в коде, вам необходимо настроить логику так, чтобы ваша система при получении ошибки 401 автоматически запрашивала новый токен. \r\n\r\nЕсли остались вопросы - обратитесь, пожалуйста, в нашу поддержку.",
+          "created_at": "2026-06-09T00:28:45.438+03:00",
+          "read": true,
+          "author": {
+            "username": "Уведомления",
+            "email": "7b1df2cf6ff93b5644ad30a8665773144a9ad39a@back-office.ggsel.net"
+          },
+          "image_url": null,
+          "preview_image_url": null,
+          "order_id": null,
+          "is_current_user": false,
+          "conversation_id": 18568275,
+          "system": true,
+          "offer": null,
+          "input_id": null,
+          "cover_image_url": null
+        },
+        {
+          "id": 32015563,
+          "text": "Уважаемые продавцы!\r\n\r\nС 15 июня изменится комиссия для следующих категорий платформы Steam:\r\n\r\n• Ключи / гифты\r\n• DLC\r\n• Покупка на ваш аккаунт\r\n\r\nНовая комиссия составит 4%.",
+          "created_at": "2026-06-10T10:36:17.187+03:00",
+          "read": true,
+          "author": {
+            "username": "Уведомления",
+            "email": "7b1df2cf6ff93b5644ad30a8665773144a9ad39a@back-office.ggsel.net"
+          },
+          "image_url": null,
+          "preview_image_url": null,
+          "order_id": null,
+          "is_current_user": false,
+          "conversation_id": 18568275,
+          "system": true,
+          "offer": null,
+          "input_id": null,
+          "cover_image_url": null
+        },
+        {
+          "id": 32080734,
+          "text": "Уважаемые продавцы, напоминаем вам про эффективный метод стимулирования повторных покупок - Промокоды для вашего магазина.\r\n\r\nКак создать промокод\r\n1. Перейдите в раздел «Промокоды»\r\n2. Нажмите «Создать промокод» (или «Добавить», если уже есть)\r\n3. Заполните все поля и нажмите на «Сохранить и опубликовать». Готово!\r\n\r\nПодробная инструкция по промокодам: https://xsgbt9x62vmu.sg.larksuite.com/wiki/SDsvwPBaJiJeOykcGbMl8Icageb\r\n\r\nЕсли у вас есть вопросы или предложения по разделу \"Промокоды\" - напишите нашему менеджеру по развитию Валерию в Telegram (https://t.me/ggselmanage)",
+          "created_at": "2026-06-10T15:19:06.521+03:00",
+          "read": true,
+          "author": {
+            "username": "Уведомления",
+            "email": "7b1df2cf6ff93b5644ad30a8665773144a9ad39a@back-office.ggsel.net"
+          },
+          "image_url": null,
+          "preview_image_url": null,
+          "order_id": null,
+          "is_current_user": false,
+          "conversation_id": 18568275,
+          "system": true,
+          "offer": null,
+          "input_id": null,
+          "cover_image_url": null
+        },
+        {
+          "id": 33530640,
+          "text": "Уважаемые продавцы, 19 июня мы обновим IP-адреса для исходящих запросов. Если вы используете whitelist — заранее добавьте новые адреса: 111.88.151.151, 81.26.176.96.\r\nОбязательно проверьте настройки платежных систем!",
+          "created_at": "2026-06-18T17:18:12.028+03:00",
+          "read": true,
+          "author": {
+            "username": "Уведомления",
+            "email": "7b1df2cf6ff93b5644ad30a8665773144a9ad39a@back-office.ggsel.net"
+          },
+          "image_url": null,
+          "preview_image_url": null,
+          "order_id": null,
+          "is_current_user": false,
+          "conversation_id": 18568275,
+          "system": true,
+          "offer": null,
+          "input_id": null,
+          "cover_image_url": null
+        },
+        {
+          "id": 34589609,
+          "text": "Дорогие продавцы!\r\n\r\nНе упустите возможность занять место в баннере на главной странице ggsel.net, конкурс уже стартовал в канале для продавцов.\r\n\r\nПодробности по ссылке: https://t.me/ggselcom/348\r\n\r\nПо всем возникающим вопросам вы можете обратиться к менеджеру: http://t.me/GGSelManager\r\n",
+          "created_at": "2026-06-24T16:39:46.450+03:00",
+          "read": true,
+          "author": {
+            "username": "Уведомления",
+            "email": "7b1df2cf6ff93b5644ad30a8665773144a9ad39a@back-office.ggsel.net"
+          },
+          "image_url": null,
+          "preview_image_url": null,
+          "order_id": null,
+          "is_current_user": false,
+          "conversation_id": 18568275,
+          "system": true,
+          "offer": null,
+          "input_id": null,
+          "cover_image_url": null
+        },
+        {
+          "id": 35628657,
+          "text": "Уважаемые продавцы!\r\n\r\nМы продолжаем улучшать личный кабинет продавца и хотим сделать его ещё удобнее для вас. \r\nПоделитесь, пожалуйста, своим мнением о последних обновлениях: https://clck.ru/3S5eWS",
+          "created_at": "2026-06-29T10:23:24.708+03:00",
+          "read": true,
+          "author": {
+            "username": "Уведомления",
+            "email": "7b1df2cf6ff93b5644ad30a8665773144a9ad39a@back-office.ggsel.net"
+          },
+          "image_url": null,
+          "preview_image_url": null,
+          "order_id": null,
+          "is_current_user": false,
+          "conversation_id": 18568275,
+          "system": true,
+          "offer": null,
+          "input_id": null,
+          "cover_image_url": null
+        },
+        {
+          "id": 35661756,
+          "text": "Уважаемые продавцы!\r\n \r\nРады сообщить, что с 27.06.2026 были изменены условия нативного платежного метода ggsel.\r\nКомиссия для СБП метода была снижена:\r\n2.9% → 2.7%",
+          "created_at": "2026-06-29T11:49:27.638+03:00",
+          "read": true,
+          "author": {
+            "username": "Уведомления",
+            "email": "7b1df2cf6ff93b5644ad30a8665773144a9ad39a@back-office.ggsel.net"
+          },
+          "image_url": null,
+          "preview_image_url": null,
+          "order_id": null,
+          "is_current_user": false,
+          "conversation_id": 18568275,
+          "system": true,
+          "offer": null,
+          "input_id": null,
+          "cover_image_url": null
+        },
+        {
+          "id": 36372609,
+          "text": "Уважаемые продавцы!\r\n\r\nУведомляем вас, что с 03.07.2026 в общих правилах площадки вступает в силу новый раздел - «Политика удаления отзывов», направленный на обеспечение более прозрачного и понятного взаимодействия между администрацией и продавцами.\r\n\r\nОзнакомиться с полной версией политики вы можете по ссылке: https://clck.ru/3TevWr (пункт 9).",
+          "created_at": "2026-07-02T14:12:43.936+03:00",
+          "read": true,
+          "author": {
+            "username": "Уведомления",
+            "email": "7b1df2cf6ff93b5644ad30a8665773144a9ad39a@back-office.ggsel.net"
+          },
+          "image_url": null,
+          "preview_image_url": null,
+          "order_id": null,
+          "is_current_user": false,
+          "conversation_id": 18568275,
+          "system": true,
+          "offer": null,
+          "input_id": null,
+          "cover_image_url": null
+        },
+        {
+          "id": 36656867,
+          "text": "Уважаемые продавцы!\r\n\r\nУведомляем вас о следующих изменениях, которые вступают в силу 06.07.2026.\r\n\r\n1. Новый пункт правил в «Политика возврата средств», направленный на повышение качества обслуживания покупателей:\r\nАдминистрация вправе самостоятельно оформить полный или частичный возврат денежных средств по заказу, если в течение 12 часов с момента покупки:\r\n- товар не был выдан;\r\n- проблема покупателя не была решена продавцом самостоятельно.\r\n\r\nПри принятии решения администрацией также будут учитываться индивидуальный график работы продавца, указанный в описании товара, особенности конкретной категории и иные объективные обстоятельства, которые могли повлиять на сроки выполнения заказа или решение проблемы.\r\n\r\n2. Изменения в пункте 6.9 общих правил площадки:\r\n- если запрос на устранение нарушения от администрации не был рассмотрен в течение 12 часов (ранее - 24 часа), администрация вправе применить санкции вплоть до временной блокировки;\r\n- если запрос на решение проблемы клиента от администрации не был рассмотрен в течение 3 часов (ранее - 6 часов), администрация вправе применить санкции в виде временной блокировки.",
+          "created_at": "2026-07-03T17:44:05.280+03:00",
+          "read": true,
+          "author": {
+            "username": "Уведомления",
+            "email": "7b1df2cf6ff93b5644ad30a8665773144a9ad39a@back-office.ggsel.net"
+          },
+          "image_url": null,
+          "preview_image_url": null,
+          "order_id": null,
+          "is_current_user": false,
+          "conversation_id": 18568275,
+          "system": true,
+          "offer": null,
+          "input_id": null,
+          "cover_image_url": null
+        },
+        {
+          "id": 39423415,
+          "text": "Уважаемые продавцы!\r\n\r\nМы продолжаем улучшать личный кабинет продавца и хотим сделать его ещё удобнее для вас. \r\nПоделитесь, пожалуйста, своим мнением о последних обновлениях: https://clck.ru/3S5eWS",
+          "created_at": "2026-07-17T12:42:24.821+03:00",
+          "read": true,
+          "author": {
+            "username": "Уведомления",
+            "email": "7b1df2cf6ff93b5644ad30a8665773144a9ad39a@back-office.ggsel.net"
+          },
+          "image_url": null,
+          "preview_image_url": null,
+          "order_id": null,
+          "is_current_user": false,
+          "conversation_id": 18568275,
+          "system": true,
+          "offer": null,
+          "input_id": null,
+          "cover_image_url": null
+        },
+        {
+          "id": 39468320,
+          "text": "Уважаемые продавцы!\r\n \r\nВ целях обеспечения безопасности будут деактивированы все API-ключи к 16:00 по МСК.\r\nЕсли вы пользуетесь нашими API-методами, то необходимо будет пересоздать ключ в разделе \"Настройка API\".",
+          "created_at": "2026-07-17T15:00:06.990+03:00",
+          "read": true,
+          "author": {
+            "username": "Уведомления",
+            "email": "7b1df2cf6ff93b5644ad30a8665773144a9ad39a@back-office.ggsel.net"
+          },
+          "image_url": null,
+          "preview_image_url": null,
+          "order_id": null,
+          "is_current_user": false,
+          "conversation_id": 18568275,
+          "system": true,
+          "offer": null,
+          "input_id": null,
+          "cover_image_url": null
+        },
+        {
+          "id": 39502964,
+          "text": "Также в целях обеспечения безопасности будут сброшены пароли от Личного кабинета в 16:10 по МСК.\r\n\r\nВосстановить пароль можно будет стандартным путем через почту и сброс пароля при входе в личный кабинет.",
+          "created_at": "2026-07-17T16:22:12.827+03:00",
+          "read": true,
+          "author": {
+            "username": "Уведомления",
+            "email": "7b1df2cf6ff93b5644ad30a8665773144a9ad39a@back-office.ggsel.net"
+          },
+          "image_url": null,
+          "preview_image_url": null,
+          "order_id": null,
+          "is_current_user": false,
+          "conversation_id": 18568275,
+          "system": true,
+          "offer": null,
+          "input_id": null,
+          "cover_image_url": null
+        },
+        {
+          "id": 43486737,
+          "text": "Уважаемые продавцы!\r\n\r\nУведомляем вас, что с 08.08.2026, в общих правилах площадки вступает в силу новый пункт 6.12:\r\nПри продаже товаров с типом «Гифт» продавец обязан указывать информацию об аккаунте, с которого будет отправлен подарок (никнейм, ссылка на профиль). Данная информация должна быть размещена на странице выдачи заказа либо направлена покупателю в чате заказа до момента отправки подарка.\r\n\r\nДанное изменение направлено на повышение прозрачности процесса покупки, а также улучшение пользовательского опыта.\r\nПравила площадки: https://clck.ru/3TevWr",
+          "created_at": "2026-08-07T17:09:18.005+03:00",
+          "read": false,
+          "author": {
+            "username": "Уведомления",
+            "email": "7b1df2cf6ff93b5644ad30a8665773144a9ad39a@back-office.ggsel.net"
+          },
+          "image_url": null,
+          "preview_image_url": null,
+          "order_id": null,
+          "is_current_user": false,
+          "conversation_id": 18568275,
+          "system": true,
+          "offer": null,
+          "input_id": null,
+          "cover_image_url": null
+        }
+      ]
+    },
+    {
+      "conversation_id": 22495988,
+      "messages": [
+        {
+          "id": 33935225,
+          "text": "Привет, подскажите почту на которую нужна подписка? )",
+          "created_at": "2026-06-20T21:25:55.624+03:00",
+          "read": false,
+          "author": {
+            "username": "Atreum",
+            "email": "atreum.5202@gmail.com"
+          },
+          "image_url": null,
+          "preview_image_url": null,
+          "order_id": 34360908,
+          "is_current_user": true,
+          "conversation_id": 22495988,
+          "system": false,
+          "offer": {
+            "id": 2388488,
+            "title": "Gemini Pro 18 Месяцев 🔥 БЕЗ ВХОДА В АККАУНТ 💎 atreuM",
+            "ggsel_product_url": "https://ggsel.net/catalog/product/102388489"
+          },
+          "input_id": "03651bb2-766c-428d-9e74-8333735c89f1",
+          "cover_image_url": "https://storage.yandexcloud.net/gsellers-imgs-prod/offer/cover_image/2388488-2175939-a023dba83ba41c9e2b0014446890f249.png"
+        },
+        {
+          "id": 33935554,
+          "text": "Привет, judasu4488@gmail.com",
+          "created_at": "2026-06-20T21:27:47.893+03:00",
+          "read": true,
+          "author": {
+            "username": "judasu4488@gmail.com",
+            "email": "judasu4488@gmail.com"
+          },
+          "image_url": null,
+          "preview_image_url": null,
+          "order_id": 34360908,
+          "is_current_user": false,
+          "conversation_id": 22495988,
+          "system": false,
+          "offer": {
+            "id": 2388488,
+            "title": "Gemini Pro 18 Месяцев 🔥 БЕЗ ВХОДА В АККАУНТ 💎 atreuM",
+            "ggsel_product_url": "https://ggsel.net/catalog/product/102388489"
+          },
+          "input_id": null,
+          "cover_image_url": "https://storage.yandexcloud.net/gsellers-imgs-prod/offer/cover_image/2388488-2175939-a023dba83ba41c9e2b0014446890f249.png"
+        },
+        {
+          "id": 33935744,
+          "text": "Отправил, на почте))) Буду рад отзыву ",
+          "created_at": "2026-06-20T21:28:53.802+03:00",
+          "read": false,
+          "author": {
+            "username": "Atreum",
+            "email": "atreum.5202@gmail.com"
+          },
+          "image_url": null,
+          "preview_image_url": null,
+          "order_id": 34360908,
+          "is_current_user": true,
+          "conversation_id": 22495988,
+          "system": false,
+          "offer": {
+            "id": 2388488,
+            "title": "Gemini Pro 18 Месяцев 🔥 БЕЗ ВХОДА В АККАУНТ 💎 atreuM",
+            "ggsel_product_url": "https://ggsel.net/catalog/product/102388489"
+          },
+          "input_id": "5b65efc8-34c8-4724-bb48-4bc3ad23b849",
+          "cover_image_url": "https://storage.yandexcloud.net/gsellers-imgs-prod/offer/cover_image/2388488-2175939-a023dba83ba41c9e2b0014446890f249.png"
+        },
+        {
+          "id": 33936407,
+          "text": "Получили?",
+          "created_at": "2026-06-20T21:32:41.420+03:00",
+          "read": false,
+          "author": {
+            "username": "Atreum",
+            "email": "atreum.5202@gmail.com"
+          },
+          "image_url": null,
+          "preview_image_url": null,
+          "order_id": 34360908,
+          "is_current_user": true,
+          "conversation_id": 22495988,
+          "system": false,
+          "offer": {
+            "id": 2388488,
+            "title": "Gemini Pro 18 Месяцев 🔥 БЕЗ ВХОДА В АККАУНТ 💎 atreuM",
+            "ggsel_product_url": "https://ggsel.net/catalog/product/102388489"
+          },
+          "input_id": "9b5b8a8e-588a-491d-8170-712e57880082",
+          "cover_image_url": "https://storage.yandexcloud.net/gsellers-imgs-prod/offer/cover_image/2388488-2175939-a023dba83ba41c9e2b0014446890f249.png"
+        },
+        {
+          "id": 33936642,
+          "text": "Не удалось вступить в семейную группу\nПохоже, вы и пользователь, отправивший вам приглашение, находитесь в разных странах. Подскажи что делат?",
+          "created_at": "2026-06-20T21:33:59.717+03:00",
+          "read": true,
+          "author": {
+            "username": "judasu4488@gmail.com",
+            "email": "judasu4488@gmail.com"
+          },
+          "image_url": null,
+          "preview_image_url": null,
+          "order_id": 34360908,
+          "is_current_user": false,
+          "conversation_id": 22495988,
+          "system": false,
+          "offer": {
+            "id": 2388488,
+            "title": "Gemini Pro 18 Месяцев 🔥 БЕЗ ВХОДА В АККАУНТ 💎 atreuM",
+            "ggsel_product_url": "https://ggsel.net/catalog/product/102388489"
+          },
+          "input_id": null,
+          "cover_image_url": "https://storage.yandexcloud.net/gsellers-imgs-prod/offer/cover_image/2388488-2175939-a023dba83ba41c9e2b0014446890f249.png"
+        },
+        {
+          "id": 33936806,
+          "text": "Да конечно, https://policies.google.com/country-association-form?hl=ru&source=policies-site\nПосмотрите пожалуйста какой регион вашего аккаунта",
+          "created_at": "2026-06-20T21:34:57.967+03:00",
+          "read": false,
+          "author": {
+            "username": "Atreum",
+            "email": "atreum.5202@gmail.com"
+          },
+          "image_url": null,
+          "preview_image_url": null,
+          "order_id": 34360908,
+          "is_current_user": true,
+          "conversation_id": 22495988,
+          "system": false,
+          "offer": {
+            "id": 2388488,
+            "title": "Gemini Pro 18 Месяцев 🔥 БЕЗ ВХОДА В АККАУНТ 💎 atreuM",
+            "ggsel_product_url": "https://ggsel.net/catalog/product/102388489"
+          },
+          "input_id": "de375f5b-c965-48d9-91ab-4216a794f5b3",
+          "cover_image_url": "https://storage.yandexcloud.net/gsellers-imgs-prod/offer/cover_image/2388488-2175939-a023dba83ba41c9e2b0014446890f249.png"
+        },
+        {
+          "id": 33936922,
+          "text": "Россия пишет",
+          "created_at": "2026-06-20T21:35:39.337+03:00",
+          "read": true,
+          "author": {
+            "username": "judasu4488@gmail.com",
+            "email": "judasu4488@gmail.com"
+          },
+          "image_url": null,
+          "preview_image_url": null,
+          "order_id": 34360908,
+          "is_current_user": false,
+          "conversation_id": 22495988,
+          "system": false,
+          "offer": {
+            "id": 2388488,
+            "title": "Gemini Pro 18 Месяцев 🔥 БЕЗ ВХОДА В АККАУНТ 💎 atreuM",
+            "ggsel_product_url": "https://ggsel.net/catalog/product/102388489"
+          },
+          "input_id": null,
+          "cover_image_url": "https://storage.yandexcloud.net/gsellers-imgs-prod/offer/cover_image/2388488-2175939-a023dba83ba41c9e2b0014446890f249.png"
+        },
+        {
+          "id": 33936978,
+          "text": "Учту на будущее, что стоит уточнять регион у покупателя и подстраиваться под него, прошу прощения. Сейчас чтобы всё заработало вам необходимо просто сменить регион, это вам допом будет без санкций всё теперь работать ))). Выберите США",
+          "created_at": "2026-06-20T21:35:59.701+03:00",
+          "read": false,
+          "author": {
+            "username": "Atreum",
+            "email": "atreum.5202@gmail.com"
+          },
+          "image_url": null,
+          "preview_image_url": null,
+          "order_id": 34360908,
+          "is_current_user": true,
+          "conversation_id": 22495988,
+          "system": false,
+          "offer": {
+            "id": 2388488,
+            "title": "Gemini Pro 18 Месяцев 🔥 БЕЗ ВХОДА В АККАУНТ 💎 atreuM",
+            "ggsel_product_url": "https://ggsel.net/catalog/product/102388489"
+          },
+          "input_id": "f001313b-1f93-43d5-9644-50bc455d99a2",
+          "cover_image_url": "https://storage.yandexcloud.net/gsellers-imgs-prod/offer/cover_image/2388488-2175939-a023dba83ba41c9e2b0014446890f249.png"
+        },
+        {
+          "id": 33937043,
+          "text": "Если требуется распишу подробнее или видеоинструкцию скину. ",
+          "created_at": "2026-06-20T21:36:27.406+03:00",
+          "read": false,
+          "author": {
+            "username": "Atreum",
+            "email": "atreum.5202@gmail.com"
+          },
+          "image_url": null,
+          "preview_image_url": null,
+          "order_id": 34360908,
+          "is_current_user": true,
+          "conversation_id": 22495988,
+          "system": false,
+          "offer": {
+            "id": 2388488,
+            "title": "Gemini Pro 18 Месяцев 🔥 БЕЗ ВХОДА В АККАУНТ 💎 atreuM",
+            "ggsel_product_url": "https://ggsel.net/catalog/product/102388489"
+          },
+          "input_id": "a712747e-459c-4a8a-8726-1d20675a51ac",
+          "cover_image_url": "https://storage.yandexcloud.net/gsellers-imgs-prod/offer/cover_image/2388488-2175939-a023dba83ba41c9e2b0014446890f249.png"
+        },
+        {
+          "id": 33937173,
+          "text": "Лучше всего выбрать штат Орегон, цены для вас будут ниже так как у них налог 0%. ",
+          "created_at": "2026-06-20T21:37:16.827+03:00",
+          "read": false,
+          "author": {
+            "username": "Atreum",
+            "email": "atreum.5202@gmail.com"
+          },
+          "image_url": null,
+          "preview_image_url": null,
+          "order_id": 34360908,
+          "is_current_user": true,
+          "conversation_id": 22495988,
+          "system": false,
+          "offer": {
+            "id": 2388488,
+            "title": "Gemini Pro 18 Месяцев 🔥 БЕЗ ВХОДА В АККАУНТ 💎 atreuM",
+            "ggsel_product_url": "https://ggsel.net/catalog/product/102388489"
+          },
+          "input_id": "aade6758-9ce3-4da9-8625-1b8d0179853a",
+          "cover_image_url": "https://storage.yandexcloud.net/gsellers-imgs-prod/offer/cover_image/2388488-2175939-a023dba83ba41c9e2b0014446890f249.png"
+        },
+        {
+          "id": 33937350,
+          "text": "К утру ваш регион сменится, моя ссылка действительна 7 дней, как только сменится регион, перейдите и всё заработает))). Если что можете всегда обратиться.",
+          "created_at": "2026-06-20T21:38:21.321+03:00",
+          "read": false,
+          "author": {
+            "username": "Atreum",
+            "email": "atreum.5202@gmail.com"
+          },
+          "image_url": null,
+          "preview_image_url": null,
+          "order_id": 34360908,
+          "is_current_user": true,
+          "conversation_id": 22495988,
+          "system": false,
+          "offer": {
+            "id": 2388488,
+            "title": "Gemini Pro 18 Месяцев 🔥 БЕЗ ВХОДА В АККАУНТ 💎 atreuM",
+            "ggsel_product_url": "https://ggsel.net/catalog/product/102388489"
+          },
+          "input_id": "9f0e3e3b-27cf-45bc-bad0-c4f73e64291c",
+          "cover_image_url": "https://storage.yandexcloud.net/gsellers-imgs-prod/offer/cover_image/2388488-2175939-a023dba83ba41c9e2b0014446890f249.png"
+        },
+        {
+          "id": 33937435,
+          "text": "Хорошо, спасибо",
+          "created_at": "2026-06-20T21:38:44.410+03:00",
+          "read": true,
+          "author": {
+            "username": "judasu4488@gmail.com",
+            "email": "judasu4488@gmail.com"
+          },
+          "image_url": null,
+          "preview_image_url": null,
+          "order_id": 34360908,
+          "is_current_user": false,
+          "conversation_id": 22495988,
+          "system": false,
+          "offer": {
+            "id": 2388488,
+            "title": "Gemini Pro 18 Месяцев 🔥 БЕЗ ВХОДА В АККАУНТ 💎 atreuM",
+            "ggsel_product_url": "https://ggsel.net/catalog/product/102388489"
+          },
+          "input_id": null,
+          "cover_image_url": "https://storage.yandexcloud.net/gsellers-imgs-prod/offer/cover_image/2388488-2175939-a023dba83ba41c9e2b0014446890f249.png"
+        },
+        {
+          "id": 33937490,
+          "text": "Вам спасибо))), на связи буду благодарен за отзыв",
+          "created_at": "2026-06-20T21:39:02.454+03:00",
+          "read": false,
+          "author": {
+            "username": "Atreum",
+            "email": "atreum.5202@gmail.com"
+          },
+          "image_url": null,
+          "preview_image_url": null,
+          "order_id": 34360908,
+          "is_current_user": true,
+          "conversation_id": 22495988,
+          "system": false,
+          "offer": {
+            "id": 2388488,
+            "title": "Gemini Pro 18 Месяцев 🔥 БЕЗ ВХОДА В АККАУНТ 💎 atreuM",
+            "ggsel_product_url": "https://ggsel.net/catalog/product/102388489"
+          },
+          "input_id": "2fd4d71f-34f2-4272-b32c-fd7fddf38ce6",
+          "cover_image_url": "https://storage.yandexcloud.net/gsellers-imgs-prod/offer/cover_image/2388488-2175939-a023dba83ba41c9e2b0014446890f249.png"
+        },
+        {
+          "id": 34014741,
+          "text": "Несколько раз пробовал поменять, не получается .",
+          "created_at": "2026-06-21T13:41:10.516+03:00",
+          "read": true,
+          "author": {
+            "username": "judasu4488@gmail.com",
+            "email": "judasu4488@gmail.com"
+          },
+          "image_url": null,
+          "preview_image_url": null,
+          "order_id": 34360908,
+          "is_current_user": false,
+          "conversation_id": 22495988,
+          "system": false,
+          "offer": {
+            "id": 2388488,
+            "title": "Gemini Pro 18 Месяцев 🔥 БЕЗ ВХОДА В АККАУНТ 💎 atreuM",
+            "ggsel_product_url": "https://ggsel.net/catalog/product/102388489"
+          },
+          "input_id": null,
+          "cover_image_url": "https://storage.yandexcloud.net/gsellers-imgs-prod/offer/cover_image/2388488-2175939-a023dba83ba41c9e2b0014446890f249.png"
+        },
+        {
+          "id": 34015062,
+          "text": "С впн не получается , аккаунт слишком старый что бы их обмануть.",
+          "created_at": "2026-06-21T13:43:05.516+03:00",
+          "read": true,
+          "author": {
+            "username": "judasu4488@gmail.com",
+            "email": "judasu4488@gmail.com"
+          },
+          "image_url": null,
+          "preview_image_url": null,
+          "order_id": 34360908,
+          "is_current_user": false,
+          "conversation_id": 22495988,
+          "system": false,
+          "offer": {
+            "id": 2388488,
+            "title": "Gemini Pro 18 Месяцев 🔥 БЕЗ ВХОДА В АККАУНТ 💎 atreuM",
+            "ggsel_product_url": "https://ggsel.net/catalog/product/102388489"
+          },
+          "input_id": null,
+          "cover_image_url": "https://storage.yandexcloud.net/gsellers-imgs-prod/offer/cover_image/2388488-2175939-a023dba83ba41c9e2b0014446890f249.png"
+        },
+        {
+          "id": 34181204,
+          "text": "Привет, а впн не нужен, просто запрос, они одобряют",
+          "created_at": "2026-06-22T13:11:02.487+03:00",
+          "read": false,
+          "author": {
+            "username": "Atreum",
+            "email": "atreum.5202@gmail.com"
+          },
+          "image_url": null,
+          "preview_image_url": null,
+          "order_id": 34360908,
+          "is_current_user": true,
+          "conversation_id": 22495988,
+          "system": false,
+          "offer": {
+            "id": 2388488,
+            "title": "Gemini Pro 18 Месяцев 🔥 БЕЗ ВХОДА В АККАУНТ 💎 atreuM",
+            "ggsel_product_url": "https://ggsel.net/catalog/product/102388489"
+          },
+          "input_id": "ccec4329-a259-4344-bafd-9383dc71e2a2",
+          "cover_image_url": "https://storage.yandexcloud.net/gsellers-imgs-prod/offer/cover_image/2388488-2175939-a023dba83ba41c9e2b0014446890f249.png"
+        },
+        {
+          "id": 34181392,
+          "text": "https://policies.google.com/country-association-form?hl=ru&source=policies-site\nПросто смена района на США штат любой и всё. Без впн. Если что то будет не так могу дать готовый аккаунт с подпиской. ",
+          "created_at": "2026-06-22T13:11:54.931+03:00",
+          "read": false,
+          "author": {
+            "username": "Atreum",
+            "email": "atreum.5202@gmail.com"
+          },
+          "image_url": null,
+          "preview_image_url": null,
+          "order_id": 34360908,
+          "is_current_user": true,
+          "conversation_id": 22495988,
+          "system": false,
+          "offer": {
+            "id": 2388488,
+            "title": "Gemini Pro 18 Месяцев 🔥 БЕЗ ВХОДА В АККАУНТ 💎 atreuM",
+            "ggsel_product_url": "https://ggsel.net/catalog/product/102388489"
+          },
+          "input_id": "c63c31f2-dd5e-4c27-a66e-0ed0f1fe0991",
+          "cover_image_url": "https://storage.yandexcloud.net/gsellers-imgs-prod/offer/cover_image/2388488-2175939-a023dba83ba41c9e2b0014446890f249.png"
+        },
+        {
+          "id": 34252958,
+          "text": "Да ",
+          "created_at": "2026-06-22T19:02:58.060+03:00",
+          "read": false,
+          "author": {
+            "username": "Atreum",
+            "email": "atreum.5202@gmail.com"
+          },
+          "image_url": null,
+          "preview_image_url": null,
+          "order_id": 34360908,
+          "is_current_user": true,
+          "conversation_id": 22495988,
+          "system": false,
+          "offer": {
+            "id": 2388488,
+            "title": "Gemini Pro 18 Месяцев 🔥 БЕЗ ВХОДА В АККАУНТ 💎 atreuM",
+            "ggsel_product_url": "https://ggsel.net/catalog/product/102388489"
+          },
+          "input_id": "f333ddc8-bd23-424a-a997-83f1c3bc4647",
+          "cover_image_url": "https://storage.yandexcloud.net/gsellers-imgs-prod/offer/cover_image/2388488-2175939-a023dba83ba41c9e2b0014446890f249.png"
+        },
+        {
+          "id": 34638350,
+          "text": "ну сколько я не пробовал, не получается поменять отказывают.",
+          "created_at": "2026-06-24T21:24:19.632+03:00",
+          "read": true,
+          "author": {
+            "username": "judasu4488@gmail.com",
+            "email": "judasu4488@gmail.com"
+          },
+          "image_url": null,
+          "preview_image_url": null,
+          "order_id": 34360908,
+          "is_current_user": false,
+          "conversation_id": 22495988,
+          "system": false,
+          "offer": {
+            "id": 2388488,
+            "title": "Gemini Pro 18 Месяцев 🔥 БЕЗ ВХОДА В АККАУНТ 💎 atreuM",
+            "ggsel_product_url": "https://ggsel.net/catalog/product/102388489"
+          },
+          "input_id": null,
+          "cover_image_url": "https://storage.yandexcloud.net/gsellers-imgs-prod/offer/cover_image/2388488-2175939-a023dba83ba41c9e2b0014446890f249.png"
+        },
+        {
+          "id": 34751505,
+          "text": "Получилось? С впн всё таки на США",
+          "created_at": "2026-06-25T15:20:12.448+03:00",
+          "read": false,
+          "author": {
+            "username": "Atreum",
+            "email": "atreum.5202@gmail.com"
+          },
+          "image_url": null,
+          "preview_image_url": null,
+          "order_id": 34360908,
+          "is_current_user": true,
+          "conversation_id": 22495988,
+          "system": false,
+          "offer": {
+            "id": 2388488,
+            "title": "Gemini Pro 18 Месяцев 🔥 БЕЗ ВХОДА В АККАУНТ 💎 atreuM",
+            "ggsel_product_url": "https://ggsel.net/catalog/product/102388489"
+          },
+          "input_id": "0b8d469f-a4db-411e-86c5-420883091416",
+          "cover_image_url": "https://storage.yandexcloud.net/gsellers-imgs-prod/offer/cover_image/2388488-2175939-a023dba83ba41c9e2b0014446890f249.png"
+        }
+      ]
+    },
+    {
+      "conversation_id": 22603364,
+      "messages": [
+        {
+          "id": 34121108,
+          "text": "здравствуйте",
+          "created_at": "2026-06-21T23:08:12.511+03:00",
+          "read": true,
+          "author": {
+            "username": "mark.arkaev@gmail.com",
+            "email": "mark.arkaev@gmail.com"
+          },
+          "image_url": null,
+          "preview_image_url": null,
+          "order_id": 34544911,
+          "is_current_user": false,
+          "conversation_id": 22603364,
+          "system": false,
+          "offer": {
+            "id": 2388488,
+            "title": "Gemini Pro 18 Месяцев 🔥 БЕЗ ВХОДА В АККАУНТ 💎 atreuM",
+            "ggsel_product_url": "https://ggsel.net/catalog/product/102388489"
+          },
+          "input_id": null,
+          "cover_image_url": "https://storage.yandexcloud.net/gsellers-imgs-prod/offer/cover_image/2388488-2175939-a023dba83ba41c9e2b0014446890f249.png"
+        },
+        {
+          "id": 34122803,
+          "text": "извините если я что-то делаю не так ,но где код/ссылка ?",
+          "created_at": "2026-06-21T23:21:24.703+03:00",
+          "read": true,
+          "author": {
+            "username": "mark.arkaev@gmail.com",
+            "email": "mark.arkaev@gmail.com"
+          },
+          "image_url": null,
+          "preview_image_url": null,
+          "order_id": 34544911,
+          "is_current_user": false,
+          "conversation_id": 22603364,
+          "system": false,
+          "offer": {
+            "id": 2388488,
+            "title": "Gemini Pro 18 Месяцев 🔥 БЕЗ ВХОДА В АККАУНТ 💎 atreuM",
+            "ggsel_product_url": "https://ggsel.net/catalog/product/102388489"
+          },
+          "input_id": null,
+          "cover_image_url": "https://storage.yandexcloud.net/gsellers-imgs-prod/offer/cover_image/2388488-2175939-a023dba83ba41c9e2b0014446890f249.png"
+        },
+        {
+          "id": 34176759,
+          "text": "Привет, прости что так поздно, только проснулся)). Скажи просто почту на которую подписка нужна",
+          "created_at": "2026-06-22T12:47:16.349+03:00",
+          "read": false,
+          "author": {
+            "username": "Atreum",
+            "email": "atreum.5202@gmail.com"
+          },
+          "image_url": null,
+          "preview_image_url": null,
+          "order_id": 34544911,
+          "is_current_user": true,
+          "conversation_id": 22603364,
+          "system": false,
+          "offer": {
+            "id": 2388488,
+            "title": "Gemini Pro 18 Месяцев 🔥 БЕЗ ВХОДА В АККАУНТ 💎 atreuM",
+            "ggsel_product_url": "https://ggsel.net/catalog/product/102388489"
+          },
+          "input_id": "2fe6d6e8-1f7b-459f-ad2a-9f8d47a314a6",
+          "cover_image_url": "https://storage.yandexcloud.net/gsellers-imgs-prod/offer/cover_image/2388488-2175939-a023dba83ba41c9e2b0014446890f249.png"
+        },
+        {
+          "id": 34177812,
+          "text": "Пришли мне просто почту на которую нужна подписка и в течении 5 минут подписка будет у тебя))).  \nhttps://policies.google.com/country-association-form?hl=ru&source=policies-site\nЕсли напишет что ваш регион не подходит для подписки, то по ссылке выше смени регион на США штат Орегон (0% налоги) тогда и товары для тебя и прочее всегда будет дешевле, это бонусом ). Смена произойдёт в течении 12 ч, а ссылка которую тебе пришлю будет работать 7 дней до активации, как сменится регион открываешь ссылку и получаешь подписку на 18 мес)",
+          "created_at": "2026-06-22T12:52:58.740+03:00",
+          "read": false,
+          "author": {
+            "username": "Atreum",
+            "email": "atreum.5202@gmail.com"
+          },
+          "image_url": null,
+          "preview_image_url": null,
+          "order_id": 34544911,
+          "is_current_user": true,
+          "conversation_id": 22603364,
+          "system": false,
+          "offer": {
+            "id": 2388488,
+            "title": "Gemini Pro 18 Месяцев 🔥 БЕЗ ВХОДА В АККАУНТ 💎 atreuM",
+            "ggsel_product_url": "https://ggsel.net/catalog/product/102388489"
+          },
+          "input_id": "9a8b97f4-1488-44a8-9f24-0c3959bea76a",
+          "cover_image_url": "https://storage.yandexcloud.net/gsellers-imgs-prod/offer/cover_image/2388488-2175939-a023dba83ba41c9e2b0014446890f249.png"
+        },
+        {
+          "id": 34221344,
+          "text": "derpy.bridger@gmail.com",
+          "created_at": "2026-06-22T16:25:30.432+03:00",
+          "read": true,
+          "author": {
+            "username": "mark.arkaev@gmail.com",
+            "email": "mark.arkaev@gmail.com"
+          },
+          "image_url": null,
+          "preview_image_url": null,
+          "order_id": 34544911,
+          "is_current_user": false,
+          "conversation_id": 22603364,
+          "system": false,
+          "offer": {
+            "id": 2388488,
+            "title": "Gemini Pro 18 Месяцев 🔥 БЕЗ ВХОДА В АККАУНТ 💎 atreuM",
+            "ggsel_product_url": "https://ggsel.net/catalog/product/102388489"
+          },
+          "input_id": null,
+          "cover_image_url": "https://storage.yandexcloud.net/gsellers-imgs-prod/offer/cover_image/2388488-2175939-a023dba83ba41c9e2b0014446890f249.png"
+        },
+        {
+          "id": 34252840,
+          "text": "Отправил письмо на почту), спасибо, буду рад отзыву",
+          "created_at": "2026-06-22T19:02:25.270+03:00",
+          "read": false,
+          "author": {
+            "username": "Atreum",
+            "email": "atreum.5202@gmail.com"
+          },
+          "image_url": null,
+          "preview_image_url": null,
+          "order_id": 34544911,
+          "is_current_user": true,
+          "conversation_id": 22603364,
+          "system": false,
+          "offer": {
+            "id": 2388488,
+            "title": "Gemini Pro 18 Месяцев 🔥 БЕЗ ВХОДА В АККАУНТ 💎 atreuM",
+            "ggsel_product_url": "https://ggsel.net/catalog/product/102388489"
+          },
+          "input_id": "328950a9-216e-469f-a94d-7f0bebb3c278",
+          "cover_image_url": "https://storage.yandexcloud.net/gsellers-imgs-prod/offer/cover_image/2388488-2175939-a023dba83ba41c9e2b0014446890f249.png"
+        },
+        {
+          "id": 34466200,
+          "text": "Здравствуйте, не дает присоединиться, не смотря на то что сменил регион, на орегон просто не дает сменить, что делать?",
+          "created_at": "2026-06-23T22:19:48.282+03:00",
+          "read": true,
+          "author": {
+            "username": "mark.arkaev@gmail.com",
+            "email": "mark.arkaev@gmail.com"
+          },
+          "image_url": null,
+          "preview_image_url": null,
+          "order_id": 34544911,
+          "is_current_user": false,
+          "conversation_id": 22603364,
+          "system": false,
+          "offer": {
+            "id": 2388488,
+            "title": "Gemini Pro 18 Месяцев 🔥 БЕЗ ВХОДА В АККАУНТ 💎 atreuM",
+            "ggsel_product_url": "https://ggsel.net/catalog/product/102388489"
+          },
+          "input_id": null,
+          "cover_image_url": "https://storage.yandexcloud.net/gsellers-imgs-prod/offer/cover_image/2388488-2175939-a023dba83ba41c9e2b0014446890f249.png"
+        },
+        {
+          "id": 34523826,
+          "text": "Здравствуйте, отправил вам новое приглашение, попробуйте, если регион сменился и не выйдет, могу вам дать аккаунт готовый с подпиской или вернуть средства. Подскажите пожалуйста, что за ошибка выходит, можно если скрин. ",
+          "created_at": "2026-06-24T12:10:53.387+03:00",
+          "read": false,
+          "author": {
+            "username": "Atreum",
+            "email": "atreum.5202@gmail.com"
+          },
+          "image_url": null,
+          "preview_image_url": null,
+          "order_id": 34544911,
+          "is_current_user": true,
+          "conversation_id": 22603364,
+          "system": false,
+          "offer": {
+            "id": 2388488,
+            "title": "Gemini Pro 18 Месяцев 🔥 БЕЗ ВХОДА В АККАУНТ 💎 atreuM",
+            "ggsel_product_url": "https://ggsel.net/catalog/product/102388489"
+          },
+          "input_id": "c603ce21-1635-475c-8b79-2c078b7d1fbe",
+          "cover_image_url": "https://storage.yandexcloud.net/gsellers-imgs-prod/offer/cover_image/2388488-2175939-a023dba83ba41c9e2b0014446890f249.png"
+        },
+        {
+          "id": 34535472,
+          "text": "мне гугл не дал сменить регион на орегон, просто не принял заявку, я попробовал с другого и мне просто деактивировали аккаунт в гугле из-за «подозрительной активности»(( а так он пишет что-то по типу: человек который отправил вам приглашение находится в другом регионе и вы не можете присоединиться",
+          "created_at": "2026-06-24T13:15:38.566+03:00",
+          "read": true,
+          "author": {
+            "username": "mark.arkaev@gmail.com",
+            "email": "mark.arkaev@gmail.com"
+          },
+          "image_url": null,
+          "preview_image_url": null,
+          "order_id": 34544911,
+          "is_current_user": false,
+          "conversation_id": 22603364,
+          "system": false,
+          "offer": {
+            "id": 2388488,
+            "title": "Gemini Pro 18 Месяцев 🔥 БЕЗ ВХОДА В АККАУНТ 💎 atreuM",
+            "ggsel_product_url": "https://ggsel.net/catalog/product/102388489"
+          },
+          "input_id": null,
+          "cover_image_url": "https://storage.yandexcloud.net/gsellers-imgs-prod/offer/cover_image/2388488-2175939-a023dba83ba41c9e2b0014446890f249.png"
+        },
+        {
+          "id": 34535491,
+          "text": "скрин прикреплю чуть позже",
+          "created_at": "2026-06-24T13:15:45.197+03:00",
+          "read": true,
+          "author": {
+            "username": "mark.arkaev@gmail.com",
+            "email": "mark.arkaev@gmail.com"
+          },
+          "image_url": null,
+          "preview_image_url": null,
+          "order_id": 34544911,
+          "is_current_user": false,
+          "conversation_id": 22603364,
+          "system": false,
+          "offer": {
+            "id": 2388488,
+            "title": "Gemini Pro 18 Месяцев 🔥 БЕЗ ВХОДА В АККАУНТ 💎 atreuM",
+            "ggsel_product_url": "https://ggsel.net/catalog/product/102388489"
+          },
+          "input_id": null,
+          "cover_image_url": "https://storage.yandexcloud.net/gsellers-imgs-prod/offer/cover_image/2388488-2175939-a023dba83ba41c9e2b0014446890f249.png"
+        },
+        {
+          "id": 34605727,
+          "text": "вот такую ошибку выдает даже с новым приглашением",
+          "created_at": "2026-06-24T18:00:52.576+03:00",
+          "read": true,
+          "author": {
+            "username": "mark.arkaev@gmail.com",
+            "email": "mark.arkaev@gmail.com"
+          },
+          "image_url": "https://storage.yandexcloud.net/gsellers-imgs-prod/conversation/message/message_image/34605727-2362198-1d8c7084bf7f308aa00dfd3fb0806ae6.png",
+          "preview_image_url": "https://storage.yandexcloud.net/gsellers-imgs-prod/conversation/message/message_image/34605727-2362198-1d8c7084bf7f308aa00dfd3fb0806ae6.png",
+          "order_id": 34544911,
+          "is_current_user": false,
+          "conversation_id": 22603364,
+          "system": false,
+          "offer": {
+            "id": 2388488,
+            "title": "Gemini Pro 18 Месяцев 🔥 БЕЗ ВХОДА В АККАУНТ 💎 atreuM",
+            "ggsel_product_url": "https://ggsel.net/catalog/product/102388489"
+          },
+          "input_id": null,
+          "cover_image_url": "https://storage.yandexcloud.net/gsellers-imgs-prod/offer/cover_image/2388488-2175939-a023dba83ba41c9e2b0014446890f249.png"
+        },
+        {
+          "id": 34607564,
+          "text": "Могу дать готовый аккаунт с подписской, да там штат не важно главное страна США",
+          "created_at": "2026-06-24T18:20:38.626+03:00",
+          "read": false,
+          "author": {
+            "username": "Atreum",
+            "email": "atreum.5202@gmail.com"
+          },
+          "image_url": null,
+          "preview_image_url": null,
+          "order_id": 34544911,
+          "is_current_user": true,
+          "conversation_id": 22603364,
+          "system": false,
+          "offer": {
+            "id": 2388488,
+            "title": "Gemini Pro 18 Месяцев 🔥 БЕЗ ВХОДА В АККАУНТ 💎 atreuM",
+            "ggsel_product_url": "https://ggsel.net/catalog/product/102388489"
+          },
+          "input_id": "6edf0167-1beb-4e1c-8edc-b69c3073628f",
+          "cover_image_url": "https://storage.yandexcloud.net/gsellers-imgs-prod/offer/cover_image/2388488-2175939-a023dba83ba41c9e2b0014446890f249.png"
+        },
+        {
+          "id": 34629967,
+          "text": "тогда давайте акк сразу, спасибо",
+          "created_at": "2026-06-24T20:41:27.457+03:00",
+          "read": true,
+          "author": {
+            "username": "mark.arkaev@gmail.com",
+            "email": "mark.arkaev@gmail.com"
+          },
+          "image_url": null,
+          "preview_image_url": null,
+          "order_id": 34544911,
+          "is_current_user": false,
+          "conversation_id": 22603364,
+          "system": false,
+          "offer": {
+            "id": 2388488,
+            "title": "Gemini Pro 18 Месяцев 🔥 БЕЗ ВХОДА В АККАУНТ 💎 atreuM",
+            "ggsel_product_url": "https://ggsel.net/catalog/product/102388489"
+          },
+          "input_id": null,
+          "cover_image_url": "https://storage.yandexcloud.net/gsellers-imgs-prod/offer/cover_image/2388488-2175939-a023dba83ba41c9e2b0014446890f249.png"
+        },
+        {
+          "id": 34750693,
+          "text": "Логин: lacivella@gmail.com\nПароль: Professor.2000\n2Fa: DUYI6BX7KRNCFN3Z7HP3ZZK7GPFUBMX7",
+          "created_at": "2026-06-25T15:16:22.320+03:00",
+          "read": false,
+          "author": {
+            "username": "Atreum",
+            "email": "atreum.5202@gmail.com"
+          },
+          "image_url": null,
+          "preview_image_url": null,
+          "order_id": 34544911,
+          "is_current_user": true,
+          "conversation_id": 22603364,
+          "system": false,
+          "offer": {
+            "id": 2388488,
+            "title": "Gemini Pro 18 Месяцев 🔥 БЕЗ ВХОДА В АККАУНТ 💎 atreuM",
+            "ggsel_product_url": "https://ggsel.net/catalog/product/102388489"
+          },
+          "input_id": "bfdc541f-47c6-4f88-ac7d-d70240ea84a3",
+          "cover_image_url": "https://storage.yandexcloud.net/gsellers-imgs-prod/offer/cover_image/2388488-2175939-a023dba83ba41c9e2b0014446890f249.png"
+        },
+        {
+          "id": 34751376,
+          "text": "Уже активирован, да проблема была просто в VPN )))",
+          "created_at": "2026-06-25T15:19:34.712+03:00",
+          "read": false,
+          "author": {
+            "username": "Atreum",
+            "email": "atreum.5202@gmail.com"
+          },
+          "image_url": null,
+          "preview_image_url": null,
+          "order_id": 34544911,
+          "is_current_user": true,
+          "conversation_id": 22603364,
+          "system": false,
+          "offer": {
+            "id": 2388488,
+            "title": "Gemini Pro 18 Месяцев 🔥 БЕЗ ВХОДА В АККАУНТ 💎 atreuM",
+            "ggsel_product_url": "https://ggsel.net/catalog/product/102388489"
+          },
+          "input_id": "2938d211-832e-4d4b-be14-c513ef4b9c43",
+          "cover_image_url": "https://storage.yandexcloud.net/gsellers-imgs-prod/offer/cover_image/2388488-2175939-a023dba83ba41c9e2b0014446890f249.png"
+        },
+        {
+          "id": 34760985,
+          "text": "спасибо",
+          "created_at": "2026-06-25T16:03:09.544+03:00",
+          "read": true,
+          "author": {
+            "username": "mark.arkaev@gmail.com",
+            "email": "mark.arkaev@gmail.com"
+          },
+          "image_url": null,
+          "preview_image_url": null,
+          "order_id": 34544911,
+          "is_current_user": false,
+          "conversation_id": 22603364,
+          "system": false,
+          "offer": {
+            "id": 2388488,
+            "title": "Gemini Pro 18 Месяцев 🔥 БЕЗ ВХОДА В АККАУНТ 💎 atreuM",
+            "ggsel_product_url": "https://ggsel.net/catalog/product/102388489"
+          },
+          "input_id": null,
+          "cover_image_url": "https://storage.yandexcloud.net/gsellers-imgs-prod/offer/cover_image/2388488-2175939-a023dba83ba41c9e2b0014446890f249.png"
+        },
+        {
+          "id": 34798051,
+          "text": "Надеюсь на хороший отзыв, вам спасибо )",
+          "created_at": "2026-06-25T18:49:27.961+03:00",
+          "read": false,
+          "author": {
+            "username": "Atreum",
+            "email": "atreum.5202@gmail.com"
+          },
+          "image_url": null,
+          "preview_image_url": null,
+          "order_id": 34544911,
+          "is_current_user": true,
+          "conversation_id": 22603364,
+          "system": false,
+          "offer": {
+            "id": 2388488,
+            "title": "Gemini Pro 18 Месяцев 🔥 БЕЗ ВХОДА В АККАУНТ 💎 atreuM",
+            "ggsel_product_url": "https://ggsel.net/catalog/product/102388489"
+          },
+          "input_id": "cb61797c-fced-4e61-abf0-e4893a792172",
+          "cover_image_url": "https://storage.yandexcloud.net/gsellers-imgs-prod/offer/cover_image/2388488-2175939-a023dba83ba41c9e2b0014446890f249.png"
+        }
+      ]
+    },
+    {
+      "conversation_id": 22273763,
+      "messages": [
+        {
+          "id": 33507632,
+          "text": "Здравствуйте, не могу найти инструкцию",
+          "created_at": "2026-06-18T16:36:05.149+03:00",
+          "read": true,
+          "author": {
+            "username": "ushakov_9900@mail.ru",
+            "email": "ushakov_9900@mail.ru"
+          },
+          "image_url": null,
+          "preview_image_url": null,
+          "order_id": 33982616,
+          "is_current_user": false,
+          "conversation_id": 22273763,
+          "system": false,
+          "offer": {
+            "id": 2388488,
+            "title": "Gemini Pro 18 Месяцев 🔥 БЕЗ ВХОДА В АККАУНТ 💎 atreuM",
+            "ggsel_product_url": "https://ggsel.net/catalog/product/102388489"
+          },
+          "input_id": null,
+          "cover_image_url": "https://storage.yandexcloud.net/gsellers-imgs-prod/offer/cover_image/2388488-2175939-a023dba83ba41c9e2b0014446890f249.png"
+        },
+        {
+          "id": 33508520,
+          "text": "Здравствуйте, просто пришлите адрес аккаунта на который хотите получить подписку )))",
+          "created_at": "2026-06-18T16:40:31.138+03:00",
+          "read": false,
+          "author": {
+            "username": "Atreum",
+            "email": "atreum.5202@gmail.com"
+          },
+          "image_url": null,
+          "preview_image_url": null,
+          "order_id": 33982616,
+          "is_current_user": true,
+          "conversation_id": 22273763,
+          "system": false,
+          "offer": {
+            "id": 2388488,
+            "title": "Gemini Pro 18 Месяцев 🔥 БЕЗ ВХОДА В АККАУНТ 💎 atreuM",
+            "ggsel_product_url": "https://ggsel.net/catalog/product/102388489"
+          },
+          "input_id": "2a62efee-854b-4555-bbe9-9c851ccd9424",
+          "cover_image_url": "https://storage.yandexcloud.net/gsellers-imgs-prod/offer/cover_image/2388488-2175939-a023dba83ba41c9e2b0014446890f249.png"
+        },
+        {
+          "id": 33508647,
+          "text": "Ожидаю )))",
+          "created_at": "2026-06-18T16:41:09.832+03:00",
+          "read": false,
+          "author": {
+            "username": "Atreum",
+            "email": "atreum.5202@gmail.com"
+          },
+          "image_url": null,
+          "preview_image_url": null,
+          "order_id": 33982616,
+          "is_current_user": true,
+          "conversation_id": 22273763,
+          "system": false,
+          "offer": {
+            "id": 2388488,
+            "title": "Gemini Pro 18 Месяцев 🔥 БЕЗ ВХОДА В АККАУНТ 💎 atreuM",
+            "ggsel_product_url": "https://ggsel.net/catalog/product/102388489"
+          },
+          "input_id": "d1b8c60f-27d9-4d6e-a2c1-ff366148f7fd",
+          "cover_image_url": "https://storage.yandexcloud.net/gsellers-imgs-prod/offer/cover_image/2388488-2175939-a023dba83ba41c9e2b0014446890f249.png"
+        },
+        {
+          "id": 33508883,
+          "text": "Ramenskaa.d@gmail.com",
+          "created_at": "2026-06-18T16:42:26.772+03:00",
+          "read": true,
+          "author": {
+            "username": "ushakov_9900@mail.ru",
+            "email": "ushakov_9900@mail.ru"
+          },
+          "image_url": null,
+          "preview_image_url": null,
+          "order_id": 33982616,
+          "is_current_user": false,
+          "conversation_id": 22273763,
+          "system": false,
+          "offer": {
+            "id": 2388488,
+            "title": "Gemini Pro 18 Месяцев 🔥 БЕЗ ВХОДА В АККАУНТ 💎 atreuM",
+            "ggsel_product_url": "https://ggsel.net/catalog/product/102388489"
+          },
+          "input_id": null,
+          "cover_image_url": "https://storage.yandexcloud.net/gsellers-imgs-prod/offer/cover_image/2388488-2175939-a023dba83ba41c9e2b0014446890f249.png"
+        },
+        {
+          "id": 33509015,
+          "text": "Проверьте почту )",
+          "created_at": "2026-06-18T16:43:10.678+03:00",
+          "read": false,
+          "author": {
+            "username": "Atreum",
+            "email": "atreum.5202@gmail.com"
+          },
+          "image_url": null,
+          "preview_image_url": null,
+          "order_id": 33982616,
+          "is_current_user": true,
+          "conversation_id": 22273763,
+          "system": false,
+          "offer": {
+            "id": 2388488,
+            "title": "Gemini Pro 18 Месяцев 🔥 БЕЗ ВХОДА В АККАУНТ 💎 atreuM",
+            "ggsel_product_url": "https://ggsel.net/catalog/product/102388489"
+          },
+          "input_id": "0ef0619c-152d-411f-a28a-427fc70456a1",
+          "cover_image_url": "https://storage.yandexcloud.net/gsellers-imgs-prod/offer/cover_image/2388488-2175939-a023dba83ba41c9e2b0014446890f249.png"
+        },
+        {
+          "id": 34253171,
+          "text": "Если всё хорошо, буду рад отзыву )",
+          "created_at": "2026-06-22T19:03:56.766+03:00",
+          "read": false,
+          "author": {
+            "username": "Atreum",
+            "email": "atreum.5202@gmail.com"
+          },
+          "image_url": null,
+          "preview_image_url": null,
+          "order_id": 33982616,
+          "is_current_user": true,
+          "conversation_id": 22273763,
+          "system": false,
+          "offer": {
+            "id": 2388488,
+            "title": "Gemini Pro 18 Месяцев 🔥 БЕЗ ВХОДА В АККАУНТ 💎 atreuM",
+            "ggsel_product_url": "https://ggsel.net/catalog/product/102388489"
+          },
+          "input_id": "3fba8831-d0f4-4684-add9-b70bd489907f",
+          "cover_image_url": "https://storage.yandexcloud.net/gsellers-imgs-prod/offer/cover_image/2388488-2175939-a023dba83ba41c9e2b0014446890f249.png"
+        }
+      ]
+    }
+  ]
+}

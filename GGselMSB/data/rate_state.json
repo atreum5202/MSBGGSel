@@ -1,0 +1,11 @@
+{
+  "0a0b0ca0-daea-48ce-995d-20ac5771e97d": {
+    "delay": 2.0,
+    "consecutive_ok": 46,
+    "consecutive_errors": 0,
+    "is_problematic": false,
+    "last_status": 200,
+    "last_updated": 1786628385.4885962,
+    "total_requests": 46
+  }
+}

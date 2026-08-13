@@ -1,0 +1,57 @@
+# ─── Dependencies ──────────────────────────────────────────────────────────
+node_modules/
+captures/
+.pnp.*
+.yarn/
+
+# ─── Build artefacts ───────────────────────────────────────────────────────
+# Vite renderer output
+dist/
+# electron-builder output
+build/
+release/
+
+# ─── Runtime logs & state ───────────────────────────────────────────────────────
+logs/*.log
+logs/*.pid
+logs/*.lock
+# Keep logs/.gitkeep so the directory exists in fresh clones.
+
+# ─── GGselMSB project runtime data (secrets, logs, DB, cache) ────────────────
+project/GGselMSB/data/
+project/GGselMSB/logs/
+project/GGselMSB/__pycache__/
+project/GGselMSB/__pycache_old_*/
+project/GGselMSB/bot/__pycache__/
+project/GGselMSB/parser/__pycache__/
+project/GGselMSB/categories_cache.json
+project/GGselMSB/cat_fees.json
+project/GGselMSB/.env
+network/
+
+# ─── Environment & secrets ─────────────────────────────────────────────────
+.env
+.env.local
+.env.*.local
+# .env.example stays — it's the documented contract.
+
+# ─── Windows reserved device names ────────────────────────────────────────
+nul
+
+# ─── Editor / OS noise ─────────────────────────────────────────────────────
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ─── Chromium build experiment (WIP, lives in WSL — keep out of repo) ─────
+#   See AGENT.md "Architecture" for current state.
+chromium-src/
+helium-patches/
+*.chromium.patch
+*.msb-toolbar.patch

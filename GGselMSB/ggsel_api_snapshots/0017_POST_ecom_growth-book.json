@@ -1,0 +1,63 @@
+{
+  "captured_at": "2026-08-13T05:58:18",
+  "method": "POST",
+  "scheme": "https",
+  "host": "api.ggsel.com",
+  "port": 443,
+  "path": "/ecom/growth-book",
+  "url": "https://api.ggsel.com/ecom/growth-book",
+  "request": {
+    "headers": {
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:153.0) Gecko/20100101 Firefox/153.0",
+      "accept": "application/json, text/plain, */*",
+      "accept-language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
+      "accept-encoding": "gzip, deflate, br, zstd",
+      "referer": "https://ggsel.net/",
+      "content-type": "application/json",
+      "authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnZ3NlbCIsInN1YiI6NzI1NDg4OCwiaWF0IjoxNzg1MTQ4NTg0LCJleHAiOjE3ODc4MjY5ODQsImp0aSI6ImU1ZWM0OGI1LWEzYzMtNGJmZC04YzRmLWFmZWM2NTRhMDI2YyIsInVzZXIiOnsiaWQiOjcyNTQ4ODgsImVtYWlsIjoiYXRyZXVtLjUyMDJAZ21haWwuY29tIn0sIm5hbWVzcGFjZSI6ImFwaV9jdXN0b21lciJ9.se62otYgvcZIfZ3_eHj_r22bVH0vo-36iCv7QwqEXRY",
+      "content-length": "254",
+      "origin": "https://ggsel.net",
+      "sec-gpc": "1",
+      "sec-fetch-dest": "empty",
+      "sec-fetch-mode": "cors",
+      "sec-fetch-site": "cross-site",
+      "te": "trailers"
+    },
+    "cookies": {},
+    "query": {},
+    "body_text": "{\"payload\":\"eyJleHBlcmltZW50X2lkIjoiZ2gtbmluZGVuZG8tYmFubmVyLTEiLCJ2YXJpYXRpb25faWQiOiIxIiwidXNlcl9pZCI6IjE3ODQ5MjU2NjM3MjE0NzAyMyIsImV4cF9mZWF0dXJlIjoiY29yZS1ob21lLXNsaWRlci1zZWNvbmRhcnktdXJsIiwiZXhwX2RldiI6Imdnc2VsLm5ldCIsInBsYXRmb3JtIjoiZGVza3RvcCJ9\"}",
+    "body_json": {
+      "payload": "eyJleHBlcmltZW50X2lkIjoiZ2gtbmluZGVuZG8tYmFubmVyLTEiLCJ2YXJpYXRpb25faWQiOiIxIiwidXNlcl9pZCI6IjE3ODQ5MjU2NjM3MjE0NzAyMyIsImV4cF9mZWF0dXJlIjoiY29yZS1ob21lLXNsaWRlci1zZWNvbmRhcnktdXJsIiwiZXhwX2RldiI6Imdnc2VsLm5ldCIsInBsYXRmb3JtIjoiZGVza3RvcCJ9"
+    }
+  },
+  "response": {
+    "status": 200,
+    "reason": "",
+    "headers": {
+      "server": "QRATOR",
+      "date": "Thu, 13 Aug 2026 01:58:19 GMT",
+      "content-type": "application/json",
+      "vary": "Accept-Encoding",
+      "cache-control": "no-cache, private, no-cache, no-store, must-revalidate",
+      "access-control-allow-origin": "*",
+      "access-control-allow-methods": "*",
+      "access-control-allow-headers": "*",
+      "access-control-allow-credentials": "true",
+      "strict-transport-security": "max-age=31536000; includeSubDomains",
+      "content-encoding": "br",
+      "x-xss-protection": "1; mode=block",
+      "referrer-policy": "origin",
+      "pragma": "no-cache",
+      "expires": "0",
+      "set-cookie": "qrator_msid2=v2.0.1786586298.955.d94c0d6fh9hQoNjJ|pW1xo4Fz8uRxvB6j|aCJWbTBHHbc/PXN4cL3TE0KWgev4mj37sUuFVjbWOcK7gBh3Nkd6pevQi8J+CIIy5ffcOxMv964qPNgeXMm7Pg==-fQbDSmxDJX4LhwRkNukDHGvhmgg=; Max-Age=1000; Path=/; HttpOnly;  Domain=.ggsel.com;"
+    },
+    "content_type": "application/json",
+    "body_text": "{\"success\":true,\"massage\":\"\\u0421\\u043e\\u0431\\u044b\\u0442\\u0438\\u044f \\u043a\\u043b\\u0438\\u0435\\u043d\\u0442\\u0430 \\u0441\\u043e\\u0445\\u0440\\u0430\\u043d\\u0435\\u043d\\u044b\"}",
+    "body_json": {
+      "success": true,
+      "massage": "События клиента сохранены"
+    },
+    "size": 89
+  },
+  "n": 17
+}

@@ -1,0 +1,560 @@
+{
+  "all": {
+    "items": [
+      {
+        "id": 34544911,
+        "created_at": "2026-06-21T23:04:58.681+03:00",
+        "payment_date": "2026-06-21T23:06:24.572+03:00",
+        "status": "successful",
+        "processed_review": false,
+        "offer_title": "Gemini Pro 18 Месяцев 🔥 БЕЗ ВХОДА В АККАУНТ 💎 atreuM",
+        "offer_id": 2388488,
+        "offer_ggsel_id": 102388489,
+        "quantity": 1,
+        "amount": 949,
+        "full_amount": 949,
+        "seller_reward_amount": 902.499,
+        "seller_reward_amount_usdt": 11.62,
+        "is_seller_reward_converted": true,
+        "seller_reward_complete_at": null,
+        "review_score": null,
+        "ggsel_id": 102388489,
+        "delivery_status": "shipped",
+        "currency": "RUB",
+        "seller_reward_amount_usdt_currency": "USDT",
+        "number": 34544911,
+        "buyer_email": "mark.arkaev@gmail.com"
+      },
+      {
+        "id": 34360908,
+        "created_at": "2026-06-20T21:05:22.943+03:00",
+        "payment_date": "2026-06-20T21:09:46.126+03:00",
+        "status": "successful",
+        "processed_review": false,
+        "offer_title": "Gemini Pro 18 Месяцев 🔥 БЕЗ ВХОДА В АККАУНТ 💎 atreuM",
+        "offer_id": 2388488,
+        "offer_ggsel_id": 102388489,
+        "quantity": 1,
+        "amount": 949,
+        "full_amount": 949,
+        "seller_reward_amount": 902.499,
+        "seller_reward_amount_usdt": 11.62,
+        "is_seller_reward_converted": true,
+        "seller_reward_complete_at": null,
+        "review_score": null,
+        "ggsel_id": 102388489,
+        "delivery_status": "shipped",
+        "currency": "RUB",
+        "seller_reward_amount_usdt_currency": "USDT",
+        "number": 34360908,
+        "buyer_email": "judasu4488@gmail.com"
+      },
+      {
+        "id": 33982616,
+        "created_at": "2026-06-18T16:31:13.098+03:00",
+        "payment_date": "2026-06-18T16:32:15.351+03:00",
+        "status": "successful",
+        "processed_review": true,
+        "offer_title": "Gemini Pro 18 Месяцев 🔥 БЕЗ ВХОДА В АККАУНТ 💎 atreuM",
+        "offer_id": 2388488,
+        "offer_ggsel_id": 102388489,
+        "quantity": 1,
+        "amount": 999,
+        "full_amount": 999,
+        "seller_reward_amount": 950.049,
+        "seller_reward_amount_usdt": 12.26,
+        "is_seller_reward_converted": true,
+        "seller_reward_complete_at": null,
+        "review_score": 5,
+        "ggsel_id": 102388489,
+        "delivery_status": "shipped",
+        "currency": "RUB",
+        "seller_reward_amount_usdt_currency": "USDT",
+        "number": 33982616,
+        "buyer_email": "ushakov_9900@mail.ru"
+      }
+    ],
+    "pages": [
+      {
+        "page": 1,
+        "count": 3,
+        "pagination": {
+          "total_pages": 999,
+          "page": 1,
+          "limit": 50,
+          "total_count": 999
+        }
+      }
+    ]
+  },
+  "new": {
+    "items": [
+      {
+        "id": 34544911,
+        "created_at": "2026-06-21T23:04:58.681+03:00",
+        "payment_date": "2026-06-21T23:06:24.572+03:00",
+        "status": "successful",
+        "processed_review": false,
+        "offer_title": "Gemini Pro 18 Месяцев 🔥 БЕЗ ВХОДА В АККАУНТ 💎 atreuM",
+        "offer_id": 2388488,
+        "offer_ggsel_id": 102388489,
+        "quantity": 1,
+        "amount": 949,
+        "full_amount": 949,
+        "seller_reward_amount": 902.499,
+        "seller_reward_amount_usdt": 11.62,
+        "is_seller_reward_converted": true,
+        "seller_reward_complete_at": null,
+        "review_score": null,
+        "ggsel_id": 102388489,
+        "delivery_status": "shipped",
+        "currency": "RUB",
+        "seller_reward_amount_usdt_currency": "USDT",
+        "number": 34544911,
+        "buyer_email": "mark.arkaev@gmail.com"
+      },
+      {
+        "id": 34360908,
+        "created_at": "2026-06-20T21:05:22.943+03:00",
+        "payment_date": "2026-06-20T21:09:46.126+03:00",
+        "status": "successful",
+        "processed_review": false,
+        "offer_title": "Gemini Pro 18 Месяцев 🔥 БЕЗ ВХОДА В АККАУНТ 💎 atreuM",
+        "offer_id": 2388488,
+        "offer_ggsel_id": 102388489,
+        "quantity": 1,
+        "amount": 949,
+        "full_amount": 949,
+        "seller_reward_amount": 902.499,
+        "seller_reward_amount_usdt": 11.62,
+        "is_seller_reward_converted": true,
+        "seller_reward_complete_at": null,
+        "review_score": null,
+        "ggsel_id": 102388489,
+        "delivery_status": "shipped",
+        "currency": "RUB",
+        "seller_reward_amount_usdt_currency": "USDT",
+        "number": 34360908,
+        "buyer_email": "judasu4488@gmail.com"
+      },
+      {
+        "id": 33982616,
+        "created_at": "2026-06-18T16:31:13.098+03:00",
+        "payment_date": "2026-06-18T16:32:15.351+03:00",
+        "status": "successful",
+        "processed_review": true,
+        "offer_title": "Gemini Pro 18 Месяцев 🔥 БЕЗ ВХОДА В АККАУНТ 💎 atreuM",
+        "offer_id": 2388488,
+        "offer_ggsel_id": 102388489,
+        "quantity": 1,
+        "amount": 999,
+        "full_amount": 999,
+        "seller_reward_amount": 950.049,
+        "seller_reward_amount_usdt": 12.26,
+        "is_seller_reward_converted": true,
+        "seller_reward_complete_at": null,
+        "review_score": 5,
+        "ggsel_id": 102388489,
+        "delivery_status": "shipped",
+        "currency": "RUB",
+        "seller_reward_amount_usdt_currency": "USDT",
+        "number": 33982616,
+        "buyer_email": "ushakov_9900@mail.ru"
+      }
+    ],
+    "pages": [
+      {
+        "page": 1,
+        "count": 3,
+        "pagination": {
+          "total_pages": 999,
+          "page": 1,
+          "limit": 50,
+          "total_count": 999
+        }
+      }
+    ]
+  },
+  "in_progress": {
+    "items": [
+      {
+        "id": 34544911,
+        "created_at": "2026-06-21T23:04:58.681+03:00",
+        "payment_date": "2026-06-21T23:06:24.572+03:00",
+        "status": "successful",
+        "processed_review": false,
+        "offer_title": "Gemini Pro 18 Месяцев 🔥 БЕЗ ВХОДА В АККАУНТ 💎 atreuM",
+        "offer_id": 2388488,
+        "offer_ggsel_id": 102388489,
+        "quantity": 1,
+        "amount": 949,
+        "full_amount": 949,
+        "seller_reward_amount": 902.499,
+        "seller_reward_amount_usdt": 11.62,
+        "is_seller_reward_converted": true,
+        "seller_reward_complete_at": null,
+        "review_score": null,
+        "ggsel_id": 102388489,
+        "delivery_status": "shipped",
+        "currency": "RUB",
+        "seller_reward_amount_usdt_currency": "USDT",
+        "number": 34544911,
+        "buyer_email": "mark.arkaev@gmail.com"
+      },
+      {
+        "id": 34360908,
+        "created_at": "2026-06-20T21:05:22.943+03:00",
+        "payment_date": "2026-06-20T21:09:46.126+03:00",
+        "status": "successful",
+        "processed_review": false,
+        "offer_title": "Gemini Pro 18 Месяцев 🔥 БЕЗ ВХОДА В АККАУНТ 💎 atreuM",
+        "offer_id": 2388488,
+        "offer_ggsel_id": 102388489,
+        "quantity": 1,
+        "amount": 949,
+        "full_amount": 949,
+        "seller_reward_amount": 902.499,
+        "seller_reward_amount_usdt": 11.62,
+        "is_seller_reward_converted": true,
+        "seller_reward_complete_at": null,
+        "review_score": null,
+        "ggsel_id": 102388489,
+        "delivery_status": "shipped",
+        "currency": "RUB",
+        "seller_reward_amount_usdt_currency": "USDT",
+        "number": 34360908,
+        "buyer_email": "judasu4488@gmail.com"
+      },
+      {
+        "id": 33982616,
+        "created_at": "2026-06-18T16:31:13.098+03:00",
+        "payment_date": "2026-06-18T16:32:15.351+03:00",
+        "status": "successful",
+        "processed_review": true,
+        "offer_title": "Gemini Pro 18 Месяцев 🔥 БЕЗ ВХОДА В АККАУНТ 💎 atreuM",
+        "offer_id": 2388488,
+        "offer_ggsel_id": 102388489,
+        "quantity": 1,
+        "amount": 999,
+        "full_amount": 999,
+        "seller_reward_amount": 950.049,
+        "seller_reward_amount_usdt": 12.26,
+        "is_seller_reward_converted": true,
+        "seller_reward_complete_at": null,
+        "review_score": 5,
+        "ggsel_id": 102388489,
+        "delivery_status": "shipped",
+        "currency": "RUB",
+        "seller_reward_amount_usdt_currency": "USDT",
+        "number": 33982616,
+        "buyer_email": "ushakov_9900@mail.ru"
+      }
+    ],
+    "pages": [
+      {
+        "page": 1,
+        "count": 3,
+        "pagination": {
+          "total_pages": 999,
+          "page": 1,
+          "limit": 50,
+          "total_count": 999
+        }
+      }
+    ]
+  },
+  "completed": {
+    "items": [
+      {
+        "id": 34544911,
+        "created_at": "2026-06-21T23:04:58.681+03:00",
+        "payment_date": "2026-06-21T23:06:24.572+03:00",
+        "status": "successful",
+        "processed_review": false,
+        "offer_title": "Gemini Pro 18 Месяцев 🔥 БЕЗ ВХОДА В АККАУНТ 💎 atreuM",
+        "offer_id": 2388488,
+        "offer_ggsel_id": 102388489,
+        "quantity": 1,
+        "amount": 949,
+        "full_amount": 949,
+        "seller_reward_amount": 902.499,
+        "seller_reward_amount_usdt": 11.62,
+        "is_seller_reward_converted": true,
+        "seller_reward_complete_at": null,
+        "review_score": null,
+        "ggsel_id": 102388489,
+        "delivery_status": "shipped",
+        "currency": "RUB",
+        "seller_reward_amount_usdt_currency": "USDT",
+        "number": 34544911,
+        "buyer_email": "mark.arkaev@gmail.com"
+      },
+      {
+        "id": 34360908,
+        "created_at": "2026-06-20T21:05:22.943+03:00",
+        "payment_date": "2026-06-20T21:09:46.126+03:00",
+        "status": "successful",
+        "processed_review": false,
+        "offer_title": "Gemini Pro 18 Месяцев 🔥 БЕЗ ВХОДА В АККАУНТ 💎 atreuM",
+        "offer_id": 2388488,
+        "offer_ggsel_id": 102388489,
+        "quantity": 1,
+        "amount": 949,
+        "full_amount": 949,
+        "seller_reward_amount": 902.499,
+        "seller_reward_amount_usdt": 11.62,
+        "is_seller_reward_converted": true,
+        "seller_reward_complete_at": null,
+        "review_score": null,
+        "ggsel_id": 102388489,
+        "delivery_status": "shipped",
+        "currency": "RUB",
+        "seller_reward_amount_usdt_currency": "USDT",
+        "number": 34360908,
+        "buyer_email": "judasu4488@gmail.com"
+      },
+      {
+        "id": 33982616,
+        "created_at": "2026-06-18T16:31:13.098+03:00",
+        "payment_date": "2026-06-18T16:32:15.351+03:00",
+        "status": "successful",
+        "processed_review": true,
+        "offer_title": "Gemini Pro 18 Месяцев 🔥 БЕЗ ВХОДА В АККАУНТ 💎 atreuM",
+        "offer_id": 2388488,
+        "offer_ggsel_id": 102388489,
+        "quantity": 1,
+        "amount": 999,
+        "full_amount": 999,
+        "seller_reward_amount": 950.049,
+        "seller_reward_amount_usdt": 12.26,
+        "is_seller_reward_converted": true,
+        "seller_reward_complete_at": null,
+        "review_score": 5,
+        "ggsel_id": 102388489,
+        "delivery_status": "shipped",
+        "currency": "RUB",
+        "seller_reward_amount_usdt_currency": "USDT",
+        "number": 33982616,
+        "buyer_email": "ushakov_9900@mail.ru"
+      }
+    ],
+    "pages": [
+      {
+        "page": 1,
+        "count": 3,
+        "pagination": {
+          "total_pages": 999,
+          "page": 1,
+          "limit": 50,
+          "total_count": 999
+        }
+      }
+    ]
+  },
+  "cancelled": {
+    "items": [
+      {
+        "id": 34544911,
+        "created_at": "2026-06-21T23:04:58.681+03:00",
+        "payment_date": "2026-06-21T23:06:24.572+03:00",
+        "status": "successful",
+        "processed_review": false,
+        "offer_title": "Gemini Pro 18 Месяцев 🔥 БЕЗ ВХОДА В АККАУНТ 💎 atreuM",
+        "offer_id": 2388488,
+        "offer_ggsel_id": 102388489,
+        "quantity": 1,
+        "amount": 949,
+        "full_amount": 949,
+        "seller_reward_amount": 902.499,
+        "seller_reward_amount_usdt": 11.62,
+        "is_seller_reward_converted": true,
+        "seller_reward_complete_at": null,
+        "review_score": null,
+        "ggsel_id": 102388489,
+        "delivery_status": "shipped",
+        "currency": "RUB",
+        "seller_reward_amount_usdt_currency": "USDT",
+        "number": 34544911,
+        "buyer_email": "mark.arkaev@gmail.com"
+      },
+      {
+        "id": 34360908,
+        "created_at": "2026-06-20T21:05:22.943+03:00",
+        "payment_date": "2026-06-20T21:09:46.126+03:00",
+        "status": "successful",
+        "processed_review": false,
+        "offer_title": "Gemini Pro 18 Месяцев 🔥 БЕЗ ВХОДА В АККАУНТ 💎 atreuM",
+        "offer_id": 2388488,
+        "offer_ggsel_id": 102388489,
+        "quantity": 1,
+        "amount": 949,
+        "full_amount": 949,
+        "seller_reward_amount": 902.499,
+        "seller_reward_amount_usdt": 11.62,
+        "is_seller_reward_converted": true,
+        "seller_reward_complete_at": null,
+        "review_score": null,
+        "ggsel_id": 102388489,
+        "delivery_status": "shipped",
+        "currency": "RUB",
+        "seller_reward_amount_usdt_currency": "USDT",
+        "number": 34360908,
+        "buyer_email": "judasu4488@gmail.com"
+      },
+      {
+        "id": 33982616,
+        "created_at": "2026-06-18T16:31:13.098+03:00",
+        "payment_date": "2026-06-18T16:32:15.351+03:00",
+        "status": "successful",
+        "processed_review": true,
+        "offer_title": "Gemini Pro 18 Месяцев 🔥 БЕЗ ВХОДА В АККАУНТ 💎 atreuM",
+        "offer_id": 2388488,
+        "offer_ggsel_id": 102388489,
+        "quantity": 1,
+        "amount": 999,
+        "full_amount": 999,
+        "seller_reward_amount": 950.049,
+        "seller_reward_amount_usdt": 12.26,
+        "is_seller_reward_converted": true,
+        "seller_reward_complete_at": null,
+        "review_score": 5,
+        "ggsel_id": 102388489,
+        "delivery_status": "shipped",
+        "currency": "RUB",
+        "seller_reward_amount_usdt_currency": "USDT",
+        "number": 33982616,
+        "buyer_email": "ushakov_9900@mail.ru"
+      }
+    ],
+    "pages": [
+      {
+        "page": 1,
+        "count": 3,
+        "pagination": {
+          "total_pages": 999,
+          "page": 1,
+          "limit": 50,
+          "total_count": 999
+        }
+      }
+    ]
+  },
+  "dispute": {
+    "items": [
+      {
+        "id": 34544911,
+        "created_at": "2026-06-21T23:04:58.681+03:00",
+        "payment_date": "2026-06-21T23:06:24.572+03:00",
+        "status": "successful",
+        "processed_review": false,
+        "offer_title": "Gemini Pro 18 Месяцев 🔥 БЕЗ ВХОДА В АККАУНТ 💎 atreuM",
+        "offer_id": 2388488,
+        "offer_ggsel_id": 102388489,
+        "quantity": 1,
+        "amount": 949,
+        "full_amount": 949,
+        "seller_reward_amount": 902.499,
+        "seller_reward_amount_usdt": 11.62,
+        "is_seller_reward_converted": true,
+        "seller_reward_complete_at": null,
+        "review_score": null,
+        "ggsel_id": 102388489,
+        "delivery_status": "shipped",
+        "currency": "RUB",
+        "seller_reward_amount_usdt_currency": "USDT",
+        "number": 34544911,
+        "buyer_email": "mark.arkaev@gmail.com"
+      },
+      {
+        "id": 34360908,
+        "created_at": "2026-06-20T21:05:22.943+03:00",
+        "payment_date": "2026-06-20T21:09:46.126+03:00",
+        "status": "successful",
+        "processed_review": false,
+        "offer_title": "Gemini Pro 18 Месяцев 🔥 БЕЗ ВХОДА В АККАУНТ 💎 atreuM",
+        "offer_id": 2388488,
+        "offer_ggsel_id": 102388489,
+        "quantity": 1,
+        "amount": 949,
+        "full_amount": 949,
+        "seller_reward_amount": 902.499,
+        "seller_reward_amount_usdt": 11.62,
+        "is_seller_reward_converted": true,
+        "seller_reward_complete_at": null,
+        "review_score": null,
+        "ggsel_id": 102388489,
+        "delivery_status": "shipped",
+        "currency": "RUB",
+        "seller_reward_amount_usdt_currency": "USDT",
+        "number": 34360908,
+        "buyer_email": "judasu4488@gmail.com"
+      },
+      {
+        "id": 33982616,
+        "created_at": "2026-06-18T16:31:13.098+03:00",
+        "payment_date": "2026-06-18T16:32:15.351+03:00",
+        "status": "successful",
+        "processed_review": true,
+        "offer_title": "Gemini Pro 18 Месяцев 🔥 БЕЗ ВХОДА В АККАУНТ 💎 atreuM",
+        "offer_id": 2388488,
+        "offer_ggsel_id": 102388489,
+        "quantity": 1,
+        "amount": 999,
+        "full_amount": 999,
+        "seller_reward_amount": 950.049,
+        "seller_reward_amount_usdt": 12.26,
+        "is_seller_reward_converted": true,
+        "seller_reward_complete_at": null,
+        "review_score": 5,
+        "ggsel_id": 102388489,
+        "delivery_status": "shipped",
+        "currency": "RUB",
+        "seller_reward_amount_usdt_currency": "USDT",
+        "number": 33982616,
+        "buyer_email": "ushakov_9900@mail.ru"
+      }
+    ],
+    "pages": [
+      {
+        "page": 1,
+        "count": 3,
+        "pagination": {
+          "total_pages": 999,
+          "page": 1,
+          "limit": 50,
+          "total_count": 999
+        }
+      }
+    ]
+  },
+  "delivery_statuses": {
+    "data": {
+      "statuses": [
+        {
+          "name": "Ожидает",
+          "status": "pending",
+          "color": "orange"
+        },
+        {
+          "name": "Авто",
+          "status": "auto",
+          "color": "blue"
+        },
+        {
+          "name": "Доставлен",
+          "status": "shipped",
+          "color": "green"
+        }
+      ]
+    }
+  },
+  "promo_codes_ref": {
+    "data": [],
+    "pagination": {
+      "page": 1,
+      "limit": 50,
+      "total_pages": 1,
+      "total_count": 0
+    }
+  }
+}

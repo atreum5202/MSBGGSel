@@ -1,0 +1,326 @@
+{
+  "_comment": "Группы профилей MSB для GGSeller scratch. Gmail не поддерживается — только Outlook.",
+  "groups": {
+    "ggsel_outlook": {
+      "description": "Все Outlook профили для регистрации на ggsel.net",
+      "mail_type": "outlook",
+      "profiles": [
+        {
+          "id": "20f77a2f-c56a-46b3-b318-ee701793f459",
+          "email": "ristarel1@outlook.com",
+          "proxy": {
+            "host": "152.232.74.90",
+            "port": 9080,
+            "protocol": "socks5"
+          }
+        },
+        {
+          "id": "e957185b-d17e-4848-8fc7-58f8fcceab07",
+          "email": "rominero21@outlook.com",
+          "proxy": {
+            "host": "185.183.163.219",
+            "port": 8000,
+            "protocol": "socks5"
+          }
+        },
+        {
+          "id": "b2eeef63-b18b-4a22-b51f-9179d629c189",
+          "email": "Dalichanki2@outlook.com",
+          "proxy": null
+        },
+        {
+          "id": "fb4a130f-503c-4db7-9e75-57e306e6dd01",
+          "email": "atreum.5201@outlook.com",
+          "proxy": null
+        },
+        {
+          "id": "e7566f40-4a1d-45b2-af0e-37fa03894377",
+          "email": "mercholiver355@outlook.com",
+          "proxy": null
+        },
+        {
+          "id": "49bbeb0a-1d7b-4aac-b040-6da0f46e530d",
+          "email": "mercholiver356@outlook.com",
+          "proxy": null
+        },
+        {
+          "id": "0d10b74e-bb82-4a3c-b3c6-04120645a1ec",
+          "email": "milachi8741@outlook.com",
+          "proxy": null
+        },
+        {
+          "id": "7ee9fc5d-4b6b-4835-82ad-dbeb49ba8902",
+          "email": "milachi8742@outlook.com",
+          "proxy": null
+        },
+        {
+          "id": "3f01881e-0d25-42da-87bd-63fd1f21ee02",
+          "email": "milachi8743@outlook.com",
+          "proxy": null
+        },
+        {
+          "id": "54904bbe-d657-4f78-b122-a620e8d450ad",
+          "email": "forevernexttime@outlook.com",
+          "proxy": null
+        },
+        {
+          "id": "1a3b76fc-1d9b-494c-a931-c090ae6c1fbc",
+          "email": "forevernexttime2@outlook.com",
+          "proxy": null
+        },
+        {
+          "id": "0c5c0aab-4e20-4808-ac65-a6c1d754ae3f",
+          "email": "speekinscore@outlook.com",
+          "proxy": null
+        },
+        {
+          "id": "59bc0f65-e9bf-431a-a4cd-8f12c1ea7769",
+          "email": "speekinscore2@outlook.com",
+          "proxy": null
+        },
+        {
+          "id": "4920ccfd-e728-446c-b30c-d6fe25fd35eb",
+          "email": "baransd1@outlook.com",
+          "proxy": null
+        },
+        {
+          "id": "ac48b3ea-1884-4a76-a127-43f5aeadd1ab",
+          "email": "alexiy2027@outlook.com",
+          "proxy": null
+        },
+        {
+          "id": "bce650fa-e5e2-451a-8107-27dfee9459bd",
+          "email": "arteurta@outlook.com",
+          "proxy": null
+        },
+        {
+          "id": "af873f34-37dc-4bbc-aeba-95fff0399e1a",
+          "email": "atreurta2@outlook.com",
+          "proxy": null
+        },
+        {
+          "id": "8df3e72d-9c98-48fa-82dd-9efa93ebb8bd",
+          "email": "meraling1@outlook.com",
+          "proxy": null
+        },
+        {
+          "id": "8170bb89-e38b-4f71-9c50-b032d45821d0",
+          "email": "varingas1@outlook.com",
+          "proxy": null
+        },
+        {
+          "id": "83b04cb9-dd44-4f6e-87fb-9e48c4398f80",
+          "email": "varingas2@outlook.com",
+          "proxy": null
+        },
+        {
+          "id": "2f54d2e3-8302-4e10-a54d-9f8e9041d93f",
+          "email": "berajno@outlook.com",
+          "proxy": null
+        },
+        {
+          "id": "73575b14-96e7-40d6-9cb4-154d5ffb9a27",
+          "email": "berajno2@outlook.com",
+          "proxy": null
+        },
+        {
+          "id": "d2f21eed-0d12-4581-a398-36c49bc83995",
+          "email": "darkalan1@outlook.com",
+          "proxy": null
+        },
+        {
+          "id": "62dac0de-7d30-4dc9-b8d8-ad9c396d65d8",
+          "email": "darkalan2@outlook.com",
+          "proxy": null
+        },
+        {
+          "id": "52622ee2-f855-4eb1-8eea-a3bf4816206a",
+          "email": "sarakaldin@outlook.com",
+          "proxy": null
+        },
+        {
+          "id": "75e32dbd-76c8-451a-ac11-7365339fc0d9",
+          "email": "sarakaldin2@outlook.com",
+          "proxy": null
+        },
+        {
+          "id": "5b1737c7-1f54-4234-ba8b-b15d88d71f13",
+          "email": "brokladonish@outlook.com",
+          "proxy": null
+        },
+        {
+          "id": "c0d425d6-2170-41b2-9c06-32311ad9709d",
+          "email": "ertangila@outlook.com",
+          "proxy": null
+        },
+        {
+          "id": "69bec2cf-3e47-47e3-a03f-cdfed571ec64",
+          "email": "ertangila2@outlook.com",
+          "proxy": null
+        },
+        {
+          "id": "c2f92b03-3c3d-46ec-ab33-c60549d95f41",
+          "email": "bvreing@outlook.com",
+          "proxy": null
+        },
+        {
+          "id": "92b50d37-7aaa-4ef2-ba3a-f631c362f3c9",
+          "email": "Bvreing2@outlook.com",
+          "proxy": null
+        },
+        {
+          "id": "6f1459ff-a0a1-458f-a790-852186b374bc",
+          "email": "biranol@outlook.com",
+          "proxy": null
+        },
+        {
+          "id": "0363edcc-605c-48a4-8c0c-2cab78361e05",
+          "email": "vernadilo1@outlook.com",
+          "proxy": null
+        },
+        {
+          "id": "642c4d38-f8d8-4bcf-af0d-59e9408b2c98",
+          "email": "vernadilo2@outlook.com",
+          "proxy": null
+        }
+      ]
+    },
+    "ggsel_test": {
+      "description": "Тестовая группа — 5 Outlook профилей с прокси",
+      "mail_type": "outlook",
+      "profiles": [
+        {
+          "id": "20f77a2f-c56a-46b3-b318-ee701793f459",
+          "email": "ristarel1@outlook.com",
+          "proxy": {
+            "host": "152.232.74.90",
+            "port": 9080,
+            "protocol": "socks5"
+          }
+        },
+        {
+          "id": "49bbeb0a-1d7b-4aac-b040-6da0f46e530d",
+          "email": "mercholiver356@outlook.com",
+          "proxy": null
+        },
+        {
+          "id": "6f1459ff-a0a1-458f-a790-852186b374bc",
+          "email": "biranol@outlook.com",
+          "proxy": null
+        },
+        {
+          "id": "0363edcc-605c-48a4-8c0c-2cab78361e05",
+          "email": "vernadilo1@outlook.com",
+          "proxy": null
+        },
+        {
+          "id": "642c4d38-f8d8-4bcf-af0d-59e9408b2c98",
+          "email": "vernadilo2@outlook.com",
+          "proxy": null
+        }
+      ]
+    },
+    "GGSeller": {
+      "description": "Тестовая группа — 5 Outlook профилей с прокси",
+      "mail_type": "outlook",
+      "profiles": [
+        {
+          "id": "20f77a2f-c56a-46b3-b318-ee701793f459",
+          "email": "ristarel1@outlook.com",
+          "proxy": {
+            "host": "152.232.74.90",
+            "port": 9080,
+            "protocol": "socks5"
+          }
+        },
+        {
+          "id": "49bbeb0a-1d7b-4aac-b040-6da0f46e530d",
+          "email": "mercholiver356@outlook.com",
+          "proxy": null
+        },
+        {
+          "id": "6f1459ff-a0a1-458f-a790-852186b374bc",
+          "email": "biranol@outlook.com",
+          "proxy": null
+        },
+        {
+          "id": "0363edcc-605c-48a4-8c0c-2cab78361e05",
+          "email": "vernadilo1@outlook.com",
+          "proxy": null
+        },
+        {
+          "id": "642c4d38-f8d8-4bcf-af0d-59e9408b2c98",
+          "email": "vernadilo2@outlook.com",
+          "proxy": null
+        }
+      ]
+    },
+    "Cursor": {
+      "description": "Группа Cursor",
+      "mail_type": "outlook",
+      "profiles": [
+        {
+          "id": "20f77a2f-c56a-46b3-b318-ee701793f459",
+          "email": "ristarel1@outlook.com",
+          "proxy": {
+            "host": "152.232.74.90",
+            "port": 9080,
+            "protocol": "socks5"
+          }
+        },
+        {
+          "id": "44b27bff-9267-4167-a1f9-b7ffd195c675",
+          "email": "milachi874@gmail.com",
+          "proxy": null
+        }
+      ]
+    },
+    "Claude": {
+      "description": "Группа Claude",
+      "mail_type": "outlook",
+      "profiles": [
+        {
+          "id": "20f77a2f-c56a-46b3-b318-ee701793f459",
+          "email": "ristarel1@outlook.com",
+          "proxy": {
+            "host": "152.232.74.90",
+            "port": 9080,
+            "protocol": "socks5"
+          }
+        },
+        {
+          "id": "fe2235f8-7e2e-4ef6-b7c8-51c7796f1079",
+          "email": "beganhulio@gmail.com",
+          "proxy": null
+        },
+        {
+          "id": "44b27bff-9267-4167-a1f9-b7ffd195c675",
+          "email": "milachi874@gmail.com",
+          "proxy": null
+        }
+      ]
+    },
+    "Minimax": {
+      "description": "Группа Minimax",
+      "mail_type": "outlook",
+      "profiles": [
+        {
+          "id": "44b27bff-9267-4167-a1f9-b7ffd195c675",
+          "email": "milachi874@gmail.com",
+          "proxy": null
+        }
+      ]
+    },
+    "Цифровые товары": {
+      "description": "Группа Цифровые товары",
+      "mail_type": "outlook",
+      "profiles": [
+        {
+          "id": "d06d95aa-f6ee-428f-9249-7fc351203df4",
+          "email": "geminigrokdeepseek@gmail.com",
+          "proxy": null
+        }
+      ]
+    }
+  }
+}
