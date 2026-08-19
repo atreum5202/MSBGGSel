@@ -154,7 +154,7 @@ def start_bot():
     if chat_id:
         async def on_startup():
             try:
-                await bot.send_message(chat_id=chat_id, text="🚀 Бот запущен! GGSellerV7 онлайн.")
+                await bot.send_message(chat_id=chat_id, text="🚀 Бот запущен! GGselMSB онлайн.")
             except Exception as e:
                 log.error(f"Failed to send startup message: {e}")
         dp.startup.register(on_startup)

@@ -203,6 +203,40 @@ def _apply_migrations(conn: sqlite3.Connection) -> None:
         ("parsed_products", "approval_status",       "TEXT DEFAULT 'pending'"),
         # Локально скачанное фото товара (обход хотлинк-защиты CDN при показе в админке)
         ("parsed_products", "local_image_path",      "TEXT"),
+        # Полный путь категорий (крошки) с детальной страницы ggsel
+        ("parsed_products", "breadcrumb",            "TEXT DEFAULT ''"),
+        # ── Привязка к аккаунту-источнику (профиль MSB через который спарсен товар)
+        ("parsed_products", "source_profile_name",   "TEXT DEFAULT ''"),
+        ("parsed_products", "source_account_email",  "TEXT DEFAULT ''"),
+        ("parsed_products", "source_ggsel_user_id",  "TEXT DEFAULT ''"),
+        # ── Дополнительные данные товара из детальной страницы
+        ("parsed_products", "reviews_good_count",    "INTEGER DEFAULT 0"),   # положительные отзывы
+        ("parsed_products", "reviews_bad_count",     "INTEGER DEFAULT 0"),   # отрицательные
+        ("parsed_products", "first_review_at",       "TEXT"),                # дата 1-го отзыва
+        ("parsed_products", "last_review_at",        "TEXT"),                # дата последнего отзыва
+        ("parsed_products", "payment_methods",       "TEXT"),                # JSON список способов оплаты
+        ("parsed_products", "agency_fee",            "REAL"),                # комиссия агентства
+        ("parsed_products", "options_count",         "INTEGER DEFAULT 0"),   # кол-во вариантов
+        ("parsed_products", "price_old",             "REAL"),                # старая цена (скидка)
+        ("parsed_products", "price_usd",             "REAL"),                # цена в USD (wmz)
+        ("parsed_products", "price_eur",             "REAL"),                # цена в EUR (wme)
+        ("parsed_products", "from_gsellers",         "INTEGER DEFAULT 0"),   # товар от g-продавца
+        ("parsed_products", "is_noindex",            "INTEGER DEFAULT 0"),   # исключён из поиска
+        ("parsed_products", "seller_registered_at",  "TEXT"),                # дата регистрации продавца
+        ("parsed_products", "seller_attestat",       "TEXT"),                # тип верификации продавца
+        ("parsed_products", "options_json",          "TEXT"),                # JSON опций товара (номиналы, регионы)
+        ("parsed_products", "detail_enriched_at",    "TEXT"),                # когда собраны детали
+        # Позиция в каталоге
+        ("parsed_products", "catalog_position",        "INTEGER"),             # (page-1)*limit + idx + 1
+        ("parsed_products", "catalog_page",            "INTEGER"),             # номер страницы API
+        # ── API-поля категоризации из elastic API листинга (миграция 2026-08-19) ──
+        ("parsed_products", "id_section",           "INTEGER"),   # ID подкатегории из API (= category_id для выкладки)
+        ("parsed_products", "content_type_id",      "INTEGER"),   # числовой ID типа (2=Keys, 9=Currency, 48=Gifts…)
+        ("parsed_products", "content_type_name",    "TEXT"),      # название типа ("Currency", "Keys"…)
+        ("parsed_products", "search_title",         "TEXT"),      # название подкатегории из API
+        ("parsed_products", "category_url",         "TEXT"),      # slug категории из API
+        ("parsed_products", "category_title",       "TEXT"),      # полное название категории
+        ("parsed_products", "id_seller",            "INTEGER"),   # числовой ID продавца из API
     ]
     
     # Промт 5: Создать таблицу order_links в БД
@@ -296,4 +330,76 @@ def _apply_migrations(conn: sqlite3.Connection) -> None:
             except sqlite3.OperationalError:
                 pass
     conn.commit()
+
+    # Индексы на новые API-поля — создаём после ALTER TABLE (2026-08-19)
+    for _idx_sql in [
+        "CREATE INDEX IF NOT EXISTS idx_parsed_products_content_type ON parsed_products(content_type_id)",
+        "CREATE INDEX IF NOT EXISTS idx_parsed_products_id_section ON parsed_products(id_section)",
+        "CREATE INDEX IF NOT EXISTS idx_parsed_products_category_url ON parsed_products(category_url)",
+        "CREATE INDEX IF NOT EXISTS idx_parsed_products_id_seller ON parsed_products(id_seller)",
+    ]:
+        try:
+            conn.execute(_idx_sql)
+        except Exception:
+            pass
+    conn.commit()
+
+    # category_stats — статистика количества товаров по категориям
+    try:
+        conn.execute("""
+            CREATE TABLE IF NOT EXISTS category_stats (
+                slug        TEXT PRIMARY KEY,
+                title       TEXT,
+                url         TEXT,
+                total       INTEGER,
+                http_status INTEGER,
+                parent_slug TEXT,
+                scanned_at  TEXT DEFAULT (datetime('now')),
+                updated_at  TEXT DEFAULT (datetime('now'))
+            )
+        """)
+        conn.execute("CREATE INDEX IF NOT EXISTS idx_category_stats_total ON category_stats(total DESC)")
+        conn.execute("CREATE INDEX IF NOT EXISTS idx_category_stats_parent ON category_stats(parent_slug)")
+        conn.commit()
+    except Exception as e:
+        log.warning("Migration category_stats failed: %s", e)
+
+    # Миграция 2026-08-19-b: ретроспективно заполнить ggsel_fee_pct для уже сохранённых товаров
+    # seller_categories.id == category_id в parsed_products (подтверждено диагностикой)
+    try:
+        conn.execute("""
+            UPDATE parsed_products
+            SET
+                ggsel_fee_pct    = (SELECT sc.fee  FROM seller_categories sc WHERE sc.id = parsed_products.category_id LIMIT 1),
+                ggsel_fee_source = (
+                    SELECT 'seller_categories:' || sc.id || ' (' || COALESCE(sc.tree, sc.title, CAST(sc.id AS TEXT)) || ')'
+                    FROM seller_categories sc WHERE sc.id = parsed_products.category_id LIMIT 1
+                )
+            WHERE category_id IS NOT NULL
+              AND (ggsel_fee_pct IS NULL OR ggsel_fee_pct = 0)
+              AND EXISTS (SELECT 1 FROM seller_categories sc WHERE sc.id = parsed_products.category_id AND sc.fee IS NOT NULL)
+        """)
+        updated = conn.execute("SELECT changes()").fetchone()[0]
+        conn.commit()
+        if updated:
+            log.info("Migration 2026-08-19-b: backfilled ggsel_fee_pct for %d products", updated)
+    except Exception as e:
+        log.warning("Migration 2026-08-19-b (ggsel_fee_pct backfill) failed: %s", e)
+
+    # Миграция 2026-08-19-c: исправить поле category для товаров где category_url уже заполнен
+    # (реальный leaf-slug из API-цепочки имеет приоритет над slug запроса)
+    try:
+        conn.execute("""
+            UPDATE parsed_products
+            SET category = category_url
+            WHERE category_url IS NOT NULL
+              AND category_url != ''
+              AND category_url != category
+        """)
+        updated2 = conn.execute("SELECT changes()").fetchone()[0]
+        conn.commit()
+        if updated2:
+            log.info("Migration 2026-08-19-c: fixed category slug for %d products", updated2)
+    except Exception as e:
+        log.warning("Migration 2026-08-19-c (category slug fix) failed: %s", e)
 

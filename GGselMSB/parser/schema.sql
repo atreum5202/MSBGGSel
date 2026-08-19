@@ -26,6 +26,43 @@ CREATE TABLE IF NOT EXISTS parsed_products (
     in_stock            INTEGER DEFAULT 1,
     delivery_type       TEXT DEFAULT 'unknown',
 
+    -- API-поля категоризации (из elastic API листинга)
+    id_section          INTEGER,               -- ID подкатегории из API (= category_id для выкладки)
+    content_type_id     INTEGER,               -- числовой ID типа (2=Keys, 9=Currency, 48=Gifts...)
+    content_type_name   TEXT,                  -- название типа ("Currency", "Keys"...)
+    search_title        TEXT,                  -- название подкатегории из API ("Steam Wallet Россия")
+    category_url        TEXT,                  -- slug категории ("roblox", "steam-wallet")
+    category_title      TEXT,                  -- полное название категории
+    id_seller           INTEGER,               -- числовой ID продавца из API
+
+    -- Расширенные данные товара (из GET /goods/{id})
+    price_usd           REAL,                  -- цена в USD (wmz)
+    price_eur           REAL,                  -- цена в EUR (wme)
+    product_description TEXT,                  -- полное HTML-описание
+    options_count       INTEGER,               -- количество вариантов
+    price_old           REAL,                  -- старая цена (скидка)
+    payment_methods     TEXT,                  -- JSON: ["СБП", "Карта"...]
+    agency_fee          REAL,                  -- комиссия агентства
+    from_gsellers       INTEGER DEFAULT 0,     -- товар от GSellers
+    is_noindex          INTEGER DEFAULT 0,     -- закрыт от поисковиков
+
+    -- Отзывы (детальные)
+    reviews_good_count  INTEGER,               -- положительные (cnt_goodresponses)
+    reviews_bad_count   INTEGER,               -- отрицательные (cnt_badresponses)
+    first_review_at     TEXT,                  -- дата первого отзыва
+    last_review_at      TEXT,                  -- дата последнего отзыва
+
+    -- Продавец (детальные)
+    seller_registered_at  TEXT,               -- дата регистрации продавца
+    seller_attestat       TEXT,               -- уровень верификации
+
+    -- Обогащение
+    detail_enriched_at    TEXT,               -- когда обогащали детальной карточкой
+
+    -- Позиция в каталоге (из API-листинга)
+    catalog_position        INTEGER,  -- абсолютный номер в выдаче: (page-1)*limit + idx + 1
+    catalog_page            INTEGER,  -- номер страницы API (1-based)
+
     -- Данные магазина продавца
     shop_name               TEXT,
     shop_rating             REAL,
@@ -41,6 +78,8 @@ CREATE TABLE IF NOT EXISTS parsed_products (
     quantity_available     INTEGER,
     seller_url             TEXT,
     published_at           TEXT,
+    breadcrumb             TEXT DEFAULT '',
+    reviews_count          INTEGER DEFAULT 0,
 
     -- AI-обогащённая карточка (через Gemini)
     generated_title     TEXT,
@@ -217,3 +256,9 @@ CREATE INDEX IF NOT EXISTS idx_event_log_entity ON event_log(entity, entity_id);
 CREATE INDEX IF NOT EXISTS idx_event_log_time ON event_log(time DESC);
 CREATE INDEX IF NOT EXISTS idx_event_log_stage ON event_log(stage);
 CREATE INDEX IF NOT EXISTS idx_event_log_level ON event_log(level);
+
+-- Дополнительные индексы parsed_products
+-- NOTE: idx_parsed_products_content_type и idx_parsed_products_id_section
+-- создаются в _apply_migrations (после ALTER TABLE ADD COLUMN)
+CREATE INDEX IF NOT EXISTS idx_parsed_products_sales
+    ON parsed_products(sales_count DESC);

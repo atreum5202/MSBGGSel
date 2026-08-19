@@ -402,6 +402,8 @@ class MsbClient:
             if "launchMode" not in body:
                 if body.get("headless") or body.get("isHeadless"):
                     body["launchMode"] = "headless"
+                else:
+                    body["launchMode"] = "visible"
             if "headless" in body and "isHeadless" not in body:
                 body["isHeadless"] = body["headless"]
             data = await self._post(f"/profiles/{profile_id}/start", body=body)

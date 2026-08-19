@@ -13,10 +13,9 @@ try:
 except Exception:
     pass
 
-# Добавить оба проекта в sys.path
-BASE_DIR = Path(__file__).resolve().parents[2]
-sys.path.insert(0, str(BASE_DIR / "Worker" / "+APIendpoiner" / "GGSellerV5"))
-sys.path.insert(0, str(BASE_DIR / "Worker"    / "+APIendpoiner" / "ggsel_full"))
+# Корень проекта GGselMSB
+BASE_DIR = Path(__file__).resolve().parents[1]  # MSBWorkshop/GGselMSB/
+sys.path.insert(0, str(BASE_DIR))
 
 import requests
 from config import GGSEL_API_KEY, GGSEL_SELLER_ID, BASE_URL

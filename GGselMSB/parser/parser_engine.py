@@ -232,6 +232,8 @@ class Product:
     image_url: str = ""
     in_stock: bool = True
     profit_score: float = 0.0
+    catalog_position: Optional[int] = None  # абсолютный порядковый номер в выдаче API
+    catalog_page: Optional[int] = None      # страница API (1-based)
     extra: Dict[str, Any] = field(default_factory=dict)
 
 
@@ -599,6 +601,154 @@ class CffiFetcher:
 
 
 # ═══════════════════════════════════════════════════════════════════════════
+#  Category chain helpers
+# ═══════════════════════════════════════════════════════════════════════════
+
+def _extract_category_chain(cat_obj: dict) -> List[Tuple[str, str]]:
+    """
+    Рекурсивно проходим поле category.parent из GET /goods/{id}.
+
+    Вход:
+        {"url": "robuksy", "title": "...", "parent": {"url": "roblox", "title": "...",
+             "parent": {"url": "igry-po-nazvaniyu", "title": "...", "parent": null}}}
+
+    Выход: [(slug, clean_title), ...] от корня к листу:
+        [("igry-po-nazvaniyu", "Игры"), ("roblox", "Roblox"),
+         ("robuksy", "Подарочные карты с робуксами")]
+    """
+    import re as _re
+
+    def _clean_title(raw: str) -> str:
+        """убираем HTML-теги (типа <span class="emoji">🔥</span>) и префикс 'Купить '."""
+        s = _re.sub(r'<[^>]+>', '', raw or '').strip()
+        # breadcrumbs_title чище чем title — берём breadcrumbs_title если есть
+        return s
+
+    # Строим цепочку от листа к корню
+    chain_leaf_to_root: List[Tuple[str, str]] = []
+    node = cat_obj
+    while node and isinstance(node, dict):
+        slug = node.get("url") or ""
+        # breadcrumbs_title — предпочтительнее, title может быть 'Купить Roblox: Всё...'
+        raw_title = node.get("breadcrumbs_title") or node.get("title") or ""
+        title = _clean_title(raw_title)
+        if slug and title:
+            chain_leaf_to_root.append((slug, title))
+        node = node.get("parent")
+
+    # Разворачиваем: порядок от корня к листу
+    return list(reversed(chain_leaf_to_root))
+
+
+# Кэш маппинга slug → category_id (загружаем один раз)
+_CAT_MAP_CACHE: Optional[Dict[str, int]] = None
+
+def _load_cat_map() -> Dict[str, int]:
+    global _CAT_MAP_CACHE
+    if _CAT_MAP_CACHE is not None:
+        return _CAT_MAP_CACHE
+    try:
+        import json as _json
+        p = Path(__file__).parent.parent / "data" / "category_map.json"
+        if p.exists():
+            _CAT_MAP_CACHE = _json.loads(p.read_text(encoding="utf-8"))
+        else:
+            _CAT_MAP_CACHE = {}
+    except Exception:
+        _CAT_MAP_CACHE = {}
+    return _CAT_MAP_CACHE
+
+
+def _resolve_category_id(
+    leaf_slug: str,
+    breadcrumb: str,
+    content_type_id: Optional[int] = None,
+    id_section: Optional[int] = None,
+) -> Optional[int]:
+    """
+    Находим seller-cabinet category_id для товара.
+
+    Порядок поиска (по точности):
+      1. id_section   — прямое совпадение с id в categories (идеально!)
+      2. category_map — по leaf_slug
+      3. category_slugs в БД — по slug
+      4. categories в БД — по title листа (без эмодзи)
+    """
+    import re as _re
+
+    def _strip_emoji_html(s: str) -> str:
+        """убираем HTML-теги и эмодзи для чистого сравнения."""
+        s = _re.sub(r'<[^>]+>', '', s).strip()
+        # убираем unicode emoji (U+1F000..U+1FFFF и др.)
+        s = _re.sub(r'[\U0001F000-\U0001FFFF\U00002700-\U000027BF]+', '', s).strip()
+        return s
+
+    # 1. id_section — прямой ID подкатегории из листинга API
+    if id_section and id_section > 0:
+        try:
+            from .db_init import get_db_path
+            conn = sqlite3.connect(get_db_path(), timeout=5.0)
+            row = conn.execute(
+                "SELECT id FROM categories WHERE id = ? LIMIT 1", (id_section,)
+            ).fetchone()
+            conn.close()
+            if row:
+                return row[0]
+        except Exception:
+            pass
+        # Если нет в БД, но id_section существует — возвращаем как есть
+        return id_section
+
+    cat_map = _load_cat_map()
+
+    # 2. Статический мап
+    if leaf_slug and leaf_slug in cat_map:
+        return cat_map[leaf_slug]
+
+    # 3–4. Через БД
+    try:
+        from .db_init import get_db_path
+        conn = sqlite3.connect(get_db_path(), timeout=5.0)
+        try:
+            # 3. category_slugs по slug
+            if leaf_slug:
+                row = conn.execute(
+                    "SELECT id FROM category_slugs WHERE slug = ? AND id > 0 LIMIT 1",
+                    (leaf_slug,)
+                ).fetchone()
+                if row:
+                    return row[0]
+
+            # 4. categories по title листа (без эмодзи)
+            if breadcrumb:
+                parts = [p.strip() for p in breadcrumb.split("›")]
+                leaf_title_raw = parts[-1] if parts else ""
+                leaf_title = _strip_emoji_html(leaf_title_raw)
+                if leaf_title:
+                    # Точное совпадение по title
+                    row = conn.execute(
+                        "SELECT id FROM categories WHERE title = ? AND id > 0 LIMIT 1",
+                        (leaf_title,)
+                    ).fetchone()
+                    if row:
+                        return row[0]
+                    # LIKE по full_path (последний сегмент)
+                    row = conn.execute(
+                        "SELECT id FROM categories "
+                        "WHERE full_path LIKE ? AND id > 0 LIMIT 1",
+                        (f"% → {leaf_title}",)
+                    ).fetchone()
+                    if row:
+                        return row[0]
+        finally:
+            conn.close()
+    except Exception as e:
+        log.debug("_resolve_category_id error: %s", e)
+
+    return None
+
+
+# ═══════════════════════════════════════════════════════════════════════════
 #  HTML parsing
 # ═══════════════════════════════════════════════════════════════════════════
 def _make_soup(html: str):
@@ -614,18 +764,45 @@ def _make_soup(html: str):
 
 
 def _extract_id_from_url(url: str) -> str:
-    """Извлекает ID товара из URL вида /catalog/games/123456 или /product/123456."""
+    """Извлекает ID товара из URL.
+
+    Поддерживаемые форматы:
+      /catalog/product/<slug>-<id>          (ggsel.net — slug заканчивается на -<id>)
+      /catalog/<slug>-<id>                 (ggsel.net list)
+      /en/catalog/product/<slug>-<id>      (англ. версия ggsel.net)
+      /product/<id>                        (старый формат)
+      /goods/<id>                          (API redirect)
+      /item/<id>                           (универсально)
+
+    FIX 2026-08-16: регекс `/product/(\d+)` не работал на ggsel.net, потому что ID
+    встроен в конец slug'а: "...-4654060". Теперь:
+      1) Ищем классический формат /<segment>/<digits>
+      2) Иначе берём последний сегмент и вытаскиваем trailing -<digits>
+      3) Иначе берём последнее вхождение \d+ (длиной >= 4) во всём URL
+    """
     if not url:
         return ""
-    m = re.search(r"/(?:product|goods|item|lot|catalog/[^/]+)/(\d+)", url)
+
+    # 1. Классический формат /<segment>/<digits> или /catalog/<slug>/<digits>
+    m = re.search(r"/(?:product|goods|item|lot)(?:/[^/]*)?/(\d+)(?:/|$|\?|#)", url)
     if m:
         return m.group(1)
-    # fallback — последний числовой сегмент
-    parts = [p for p in url.rstrip("/").split("/") if p]
-    for p in reversed(parts):
-        if p.isdigit():
-            return p
-    return url
+    m = re.search(r"/catalog/[^/]+/(\d+)(?:/|$|\?|#)", url)
+    if m:
+        return m.group(1)
+
+    # 2. ggsel-стиль: последний сегмент = "slug-4654060" → вытащить trailing -<id>
+    last_seg = url.rstrip("/").split("/")[-1].split("?")[0].split("#")[0]
+    m = re.search(r"-(\d+)$", last_seg)
+    if m:
+        return m.group(1)
+
+    # 3. Любой последний числовой блок длиной >= 4 (id_goods на ggsel >= 4 цифр)
+    all_nums = re.findall(r"\d{4,}", url)
+    if all_nums:
+        return all_nums[-1]
+
+    return ""
 
 
 def _parse_price(text: str) -> Tuple[float, str]:
@@ -650,21 +827,48 @@ def _parse_price(text: str) -> Tuple[float, str]:
 
 
 def _parse_sales(text: str) -> Optional[int]:
-    """Парсит '1.2k продано' или '1234 продаж' → 1234."""
+    """Парсит '1.2k продано' / '1 460 продаж' / '1234 sales' → 1234.
+
+    FIX 2026-08-16: регекс `[\d.,]+` НЕ ловит пробелы/неразрывные пробелы
+    между цифрами, поэтому "1 460 продаж" парсился как 1. Теперь:
+      1) Нормализуем все whitespace-символы (NBSP, narrow NBSP, &nbsp;) в обычный пробел
+      2) Извлекаем число с возможным суффиксом k/к
+      3) Если есть k/к — парсим как float ("1.2k" → 1.2 × 1000 = 1200)
+      4) Иначе — парсим как int, выкидывая все разделители ("1 460" → 1460, "1,460" → 1460)
+    """
     if not text:
         return None
-    text = text.replace("\u00a0", " ").replace(" ", " ")
-    m = re.search(r"([\d.,]+)\s*([kкKК]?)\s*(?:продано|продаж|продажи|sold|sales)?", text, re.IGNORECASE)
+    # 1. Нормализуем все виды пробелов в обычный ASCII space
+    text = (text.replace("\u00a0", " ")    # NBSP
+                 .replace("\u202f", " ")    # narrow NBSP
+                 .replace("\u2009", " ")    # thin space
+                 .replace("&nbsp;", " ")     # HTML entity в сыром HTML
+                 .replace("\xa0", " "))     # literal NBSP
+    # 2. Ищем "1.2k" / "1 460" / "1,460" / "1.460" / "1234" / "3k" с optional k/к суффиксом
+    m = re.search(r"([\d](?:[\d\s.,]*\d)?)\s*([kкKК]?)", text)
     if not m:
         return None
-    raw = m.group(1).replace(",", ".")
-    try:
-        n = float(raw)
-    except ValueError:
-        return None
-    if m.group(2).lower() in ("k", "к"):
-        n *= 1000
-    return int(n)
+    raw = m.group(1)
+    k_suffix = m.group(2).lower() in ("k", "к")
+
+    if k_suffix:
+        # "1.2k" — парсим как float (decimal point имеет смысл)
+        # Нормализуем запятую → точка, удаляем пробелы
+        cleaned = raw.replace(",", ".").replace(" ", "")
+        try:
+            n = float(cleaned) * 1000
+        except ValueError:
+            return None
+        return int(n)
+    else:
+        # Без k — парсим как int, выкидывая ВСЕ не-цифры (пробелы, точки, запятые)
+        digits = re.sub(r"[^\d]", "", raw)
+        if not digits:
+            return None
+        try:
+            return int(digits)
+        except ValueError:
+            return None
 
 
 def _canonical_url(soup) -> str:
@@ -740,13 +944,47 @@ _DETAIL_IMG_SELECTORS = [
     ".carousel img[src]",
 ]
 _DETAIL_DESC_SELECTORS = [
+    # FIX 2026-08-16: data-testid="seo-text" ПЕРЕИСПОЛЬЗУЕТСЯ в breadcrumbs,
+    # поэтому не подходит. Используем:
+    #   1) class с "ProductInfo" AND "description" (description имеет оба,
+    #      breadcrumbs — нет). CSS-хеш может меняться, но комбинация стабильна.
+    #   2) class*='description' — fallback (matches the real desc AND tooltip-with-Description-module,
+    #      но сортируем по длине текста — реальное описание самое длинное)
+    "div[class*='ProductInfo'][class*='description']",
+    "div[class*='ProductInfo'][class*='ProductDescription']",
+    "div[data-testid='product-description']",
+    "div[itemprop='description']",
     "div[class*='description']",
     "div[class*='about']",
     "div[class*='detail']",
-    "[itemprop='description']",
     ".product-desc",
     ".offer-description",
     "section.description",
+]
+# Breadcrumb (полный путь категорий, как на ggsel: Home > Catalog > ... > Apple ID)
+_DETAIL_BREADCRUMB_SELECTORS = [
+    # FIX 2026-08-16: ggsel Next.js стабильные data-testid на крошках.
+    # Используем data-name (точное имя категории) вместо текста ссылки.
+    "a[data-testid^='breadcrumb-'][data-name]",
+    "span[data-testid='breadcrumb_last'] [data-name]",
+    "nav[data-testid='custom_breadcrumbs'] a[data-name]",
+    "nav[aria-label*='breadcrumb'] a",
+    "nav[class*='breadcrumb'] a",
+    "[class*='Breadcrumb'] a",
+    "[class*='breadcrumb'] a",
+    "ol[class*='breadcrumb'] li",
+    "ul[class*='breadcrumb'] li",
+    ".crumbs a",
+    ".breadcrumbs a",
+    ".path a",
+]
+# Количество отзывов (Reviews N)
+_DETAIL_REVIEWS_SELECTORS = [
+    "[class*='reviews'] [class*='count']",
+    "[class*='review'] [class*='total']",
+    "a[href*='#reviews']",
+    "a[href*='#tab-reviews']",
+    "[class*='Reviews'] [class*='num']",
 ]
 _DETAIL_PROP_SELECTORS = [
     "table[class*='prop'] tr",
@@ -842,14 +1080,37 @@ def _parse_product_detail(html: str, base_url: str) -> dict:
         out["images_json"] = json.dumps(imgs[:20], ensure_ascii=False)
 
     # ── 2. Полное описание
+    # FIX 2026-08-16: сортируем кандидатов по длине текста (реальное описание
+    # всегда длиннее tooltip'ов / ценовых блоков, которые тоже могут матчить class*='description')
+    desc_candidates: List[str] = []
     for sel in _DETAIL_DESC_SELECTORS:
         for el in soup.select(sel):
             text = el.get_text("\n", strip=True)
             if text and len(text) >= 30:
-                out["original_desc"] = text[:5000]
-                break
-        if out.get("original_desc"):
+                desc_candidates.append(text[:5000])
+        if desc_candidates:
+            # Берём самый длинный текст среди матчей этого селектора
+            out["original_desc"] = max(desc_candidates, key=len)
             break
+    if not out.get("original_desc") and desc_candidates:
+        out["original_desc"] = max(desc_candidates, key=len)
+
+    # ── 2b. FIX 2026-08-16: FALLBACK на API если HTML не дал описания.
+    # Многие товары (preorder / "кастомные карточки") не имеют data-testid="seo-text",
+    # но ВСЕГДА имеют поле `info` в API GET /goods/{id} — 100% надёжный источник.
+    pid = _extract_id_from_url(base_url)
+    if pid and (not out.get("original_desc") or len(out.get("original_desc", "")) < 100):
+        try:
+            from .ggsel_api_client import GgselApiClient
+            api = GgselApiClient.get()
+            api_resp = api._get(f"/goods/{pid}", params={"lang": "ru"}) if hasattr(api, "_get") else None
+            if isinstance(api_resp, dict) and api_resp.get("success") and api_resp.get("data"):
+                info = api_resp["data"].get("info") or ""
+                if info and len(info) > 30:
+                    out["original_desc"] = info[:5000]
+                    log.info("[Parser] description fallback from API for id=%s (%d chars)", pid, len(info))
+        except Exception as e:
+            log.debug("[Parser] API description fallback failed for id=%s: %s", pid, e)
 
     # ── 3. Характеристики (таблица / список)
     props: List[Dict[str, str]] = []
@@ -928,6 +1189,56 @@ def _parse_product_detail(html: str, base_url: str) -> dict:
         if dt and len(dt) >= 4:
             out["published_at"] = dt[:50]
             break
+
+    # ── 7. Хлебные крошки (полный путь: Home > Catalog > ... > Apple ID)
+    # FIX 2026-08-16: приоритет — data-name (точное имя категории без мусора),
+    # fallback — текст ссылки.
+    crumb_parts: List[str] = []
+    for sel in _DETAIL_BREADCRUMB_SELECTORS:
+        try:
+            els = soup.select(sel)
+        except Exception:
+            els = []
+        for el in els:
+            # data-name приоритетнее текста (без лишних пробелов/эмодзи)
+            name = el.get("data-name")
+            if not name:
+                txt = (el.get_text(" ", strip=True) or "").strip()
+                if not txt or len(txt) > 60:
+                    continue
+                # Пропускаем служебные крошки
+                if txt.lower() in ("home", "главная", "каталог", "catalog", "/"):
+                    continue
+                name = txt
+            else:
+                # Даже с data-name фильтруем служебные
+                if name.lower() in ("home", "главная", "каталог", "catalog", "/"):
+                    continue
+            if name and name not in crumb_parts:
+                crumb_parts.append(name)
+        if len(crumb_parts) >= 2:
+            break
+    if crumb_parts:
+        out["breadcrumb"] = " › ".join(crumb_parts)
+
+    # ── 8. Количество отзывов (Reviews N)
+    for sel in _DETAIL_REVIEWS_SELECTORS:
+        try:
+            el = soup.select_one(sel)
+        except Exception:
+            el = None
+        if not el:
+            continue
+        text = el.get_text(" ", strip=True) or ""
+        m = re.search(r"(\d[\d\s]*)\s*(отзыв|review|Reviews|reviews)", text, re.IGNORECASE)
+        if not m:
+            m = re.search(r"(\d+)", text)
+        if m:
+            try:
+                out["reviews_count"] = int(re.sub(r"[^\d]", "", m.group(1)) or 0)
+                break
+            except (TypeError, ValueError):
+                pass
 
     return out
 
@@ -1165,19 +1476,34 @@ class GGselHTMLParser:
                     data = json.loads(txt)
                     offers = data.get("offers", {})
                     agg = data.get("aggregateRating", {})
+                    # FIX 2026-08-16: добавил reviewCount + availability + seller
                     jld = {
                         "name": data.get("name", ""),
                         "image": data.get("image"),
                         "price": offers.get("price") if isinstance(offers, dict) else None,
                         "currency": offers.get("priceCurrency", "RUB") if isinstance(offers, dict) else "RUB",
                         "rating": agg.get("ratingValue") if isinstance(agg, dict) else None,
+                        "review_count": int(agg.get("reviewCount") or 0) if isinstance(agg, dict) else 0,
+                        "availability": offers.get("availability", "") if isinstance(offers, dict) else "",
+                        "seller_name": data.get("brand", {}).get("name", "") if isinstance(data.get("brand"), dict) else "",
                     }
                 except Exception:
                     pass
                 break
-        h1 = soup.find("h1")
-        name = (h1.get_text(strip=True) if h1 else jld.get("name", ""))
-        name = re.sub(r"^Купить\s*(\$\s*)?", "", name).strip()
+        # FIX 2026-08-16: приоритет JSON-LD name (чистый, без цены и кнопок)
+        name = jld.get("name", "").strip()
+        if not name:
+            h1 = soup.find("h1")
+            if h1:
+                # Ищем span[data-testid] или первый span — там только название
+                title_el = h1.find(attrs={"data-testid": True}) or h1.find("span")
+                if title_el:
+                    name = title_el.get_text(strip=True)
+                else:
+                    # Крайний случай: весь h1, обрезаем хвост с ценой
+                    raw = h1.get_text(" ", strip=True)
+                    name = re.sub(r"\s+\d[\d\s,.]*\s*[\u20bd$].*$", "", raw, flags=re.DOTALL).strip()
+        name = re.sub(r"^\u041a\u0443\u043f\u0438\u0442\u044c\s*(\$\s*)?", "", name).strip()
         amount_el = soup.find(class_=re.compile(r"ProductBuyBlock-module.*?amount"))
         price, currency = _parse_price(amount_el.get_text(" ", strip=True)) if amount_el else (0.0, "")
         if not price and jld.get("price"):
@@ -1191,12 +1517,23 @@ class GGselHTMLParser:
                 rating = float(jld["rating"])
             except (TypeError, ValueError):
                 pass
+        # FIX 2026-08-16: in_stock теперь из JSON-LD availability, а не хардкод True
+        in_stock = "InStock" in str(jld.get("availability") or "")
+        # FIX 2026-08-16: подтянуть reviews_count из JSON-LD aggregateRating.reviewCount
+        reviews_count = jld.get("review_count") or 0
+        # Также подтянуть sales count из data-testid (если есть на детальной странице)
+        sales_count = None
+        sell_el = soup.find(attrs={"data-testid": "product-stats-sell-count"})
+        if sell_el:
+            sales_count = _parse_sales(sell_el.get_text())
         pid = _extract_id_from_url(url)
         if pid and name:
             p = Product(
                 external_id=pid, name=name, price=price,
                 currency=currency or jld.get("currency", "RUB"),
-                url=url, rating=rating, in_stock=True,
+                url=url, rating=rating, in_stock=in_stock,
+                sales_count=sales_count,
+                reviews_count=reviews_count,
             )
             result.products = [p]
 
@@ -1369,13 +1706,33 @@ class ParserEngine:
     def _run_safe(self, query, category, quantity, max_pages, run_ai_enrichment):
         """Entry point фонового потока. Любое исключение ловится.
 
-        Запускает async _run_async() через asyncio.run() — это даёт нам event loop
-        для MsbFetcher (async) без переделки всего на asyncio. Каждый запуск
-        парсера = свой loop, чистое состояние.
+        Порядок приоритетов:
+          1. GgselApiClient (api.ggsel.com — JSON, без Qrator, без браузера)
+          2. CascadeFetcher (MSB куки → curl-cffi — HTML скрапинг)
         """
         import asyncio as _aio
         try:
-            _aio.run(self._run_async(query, category, quantity, max_pages, run_ai_enrichment))
+            # ── Шаг 1: Попробовать API клиент (быстро, надёжно) ──────────────
+            api_ok = False
+            try:
+                from .ggsel_api_client import get_client, check_token
+                client = get_client()
+                if check_token():
+                    self._log_event("info", "Используем API клиент (api.ggsel.com)")
+                    self._stats["fetcher_used"] = "api_client"
+                    _aio.run(self._run_async_api(
+                        client, query, category, quantity, max_pages, run_ai_enrichment
+                    ))
+                    api_ok = True
+                else:
+                    self._log_event("warn", "API токен недействителен — fallback на HTML")
+            except Exception as e:
+                self._log_event("warn", f"API клиент недоступен ({e}) — fallback на HTML")
+
+            # ── Шаг 2: HTML fallback (если API не сработал) ──────────────────
+            if not api_ok:
+                self._log_event("info", "Fallback: HTML скрапинг через CascadeFetcher")
+                _aio.run(self._run_async(query, category, quantity, max_pages, run_ai_enrichment))
             self._stats["status"] = "done"
             self._finish_run("done", self._stats["products_saved"],
                              self._stats["products_ai_enriched"])
@@ -1446,9 +1803,264 @@ class ParserEngine:
         # fallback — самая крупная категория
         return f"{BASE_URL}/catalog/igry-po-nazvaniyu"
 
+    async def _run_async_api(self, client, query, category, quantity, max_pages, run_ai_enrichment):
+        """
+        Быстрый путь через api.ggsel.com.
+        Не требует браузера, Qrator, прокси.
+
+        Важно: api.ggsel.com /elastic/goods/categories поддерживает фильтр
+        только по category_url (slug). Поле query_string API игнорирует.
+        Если передан query как slug-like строка — он попадёт в category_slug.
+        Свободный текстовый поиск через этот путь недоступен — используется HTML fallback.
+        """
+        from .dedup import is_fresh, is_rejected, is_duplicate_name, invalidate_name_cache
+        import re as _re
+
+        # Определяем category_slug: приоритет explicit category, потом query если slug-like
+        cat_slug = category or ""
+        if not cat_slug and query and _re.match(r'^[a-z0-9][a-z0-9\-]*$', query):
+            cat_slug = query  # query выглядит как slug
+
+        if not cat_slug and query:
+            # Свободный текст — API не поддерживает поиск, fallback на HTML
+            self._log_event("warn", f"API: свободный текст '{query}' не поддерживается — нужен HTML fallback")
+            raise ValueError(f"API не поддерживает текстовый поиск: {query!r}")
+
+        # Запоминаем профиль / аккаунт который делает запросы
+        _source_profile = getattr(client, "profile_name", "") or ""
+        _source_email   = getattr(client, "account_email", "") or ""
+        _source_uid     = getattr(client, "ggsel_user_id", "") or ""
+        self._log_event("info",
+            f"API старт: cat_slug={cat_slug!r} qty={quantity} "
+            f"profile={_source_profile!r} email={_source_email!r}"
+        )
+        saved_total = 0
+        ai_enriched_total = 0
+        seen_ids: set = set()
+
+        for page in range(1, max_pages + 1):
+            if self._stop_event.is_set():
+                self._log_event("info", "API: остановка по сигналу")
+                break
+            if saved_total >= quantity:
+                break
+
+            need = min(50, quantity - saved_total)
+            self._log_event("info", f"API стр.{page}: POST /elastic/goods/categories cat={cat_slug!r} limit={need}")
+            self._stats["pages_scanned"] = page
+
+            # Запрос в thread pool (клиент синхронный)
+            api_products = await asyncio.to_thread(
+                client.get_products,
+                category_slug=cat_slug,
+                search="",
+                page=page,
+                limit=need,
+                currency="wmz",
+            )
+
+            if not api_products:
+                self._log_event("info", f"API стр.{page}: пусто — стоп")
+                break
+
+            self._stats["products_found"] += len(api_products)
+            self._log_event("info", f"API стр.{page}: получено {len(api_products)} товаров")
+
+            batch = []
+            for item_idx, ap in enumerate(api_products):
+                if saved_total + len(batch) >= quantity:
+                    break
+                eid = str(ap.id_goods)
+                if not eid or eid in seen_ids: continue
+                if is_fresh(eid): continue
+                if is_rejected(eid): continue
+                if is_duplicate_name(ap.name): continue
+
+                p = client.to_engine_product(ap, category=category)
+                if not p: continue
+
+                p.profit_score = _calc_raw_score(
+                    sales_count=ap.cnt_sell,
+                    seller_rating=0.0,
+                    reviews_count=0,
+                    in_stock=ap.is_active,
+                )
+                p.catalog_page     = page
+                p.catalog_position = (page - 1) * need + item_idx + 1
+                seen_ids.add(eid)
+                batch.append(p)
+
+            if not batch:
+                self._log_event("info", f"API стр.{page}: все дубли/skip")
+                continue
+
+            # Параллельное обогащение деталей через GET /goods/{id}
+            # Semaphore ограничивает одновременные запросы чтобы не спамить API
+            _detail_sem = asyncio.Semaphore(8)
+
+            async def _enrich_one(p_obj):
+                async with _detail_sem:
+                    try:
+                        detail_raw = await asyncio.to_thread(
+                            client._get, f"/goods/{p_obj.external_id}", {"lang": "ru"}
+                        )
+                        if detail_raw and detail_raw.get("data"):
+                            gd = detail_raw["data"]
+
+                            # ── Описание ────────────────────────────────────
+                            desc = gd.get("info") or gd.get("add_info") or gd.get("description") or ""
+                            if desc:
+                                p_obj.extra["original_desc"] = desc[:5000]
+
+                            # ── Отзывы: положительные + отрицательные ───────
+                            good_r = int(gd.get("cnt_goodresponses") or 0)
+                            bad_r  = int(gd.get("cnt_badresponses")  or 0)
+                            if good_r or bad_r:
+                                p_obj.reviews_count = good_r + bad_r
+                                p_obj.extra["reviews_count"]      = good_r + bad_r
+                                p_obj.extra["reviews_good_count"] = good_r
+                                p_obj.extra["reviews_bad_count"]  = bad_r
+
+                            # ── Даты первого/последнего отзыва ──────────────
+                            resp_list = gd.get("responses") or gd.get("reviews") or []
+                            if resp_list and isinstance(resp_list, list):
+                                dates = []
+                                for rv in resp_list:
+                                    if isinstance(rv, dict):
+                                        d_str = rv.get("created_at") or rv.get("date") or rv.get("published_at")
+                                        if d_str:
+                                            dates.append(str(d_str))
+                                if dates:
+                                    p_obj.extra["first_review_at"] = min(dates)
+                                    p_obj.extra["last_review_at"]  = max(dates)
+
+                            # ── Опции товара (номиналы, регионы) ────────────
+                            options = gd.get("options") or []
+                            if options:
+                                p_obj.extra["options_count"] = len(options)
+                                p_obj.extra["options_json"]  = json.dumps(options[:50], ensure_ascii=False)
+
+                            # ── Способы оплаты ───────────────────────────────
+                            pm = gd.get("payment_methods") or []
+                            if pm:
+                                p_obj.extra["payment_methods"] = json.dumps(pm, ensure_ascii=False)
+
+                            # ── Старая цена / скидка ─────────────────────────
+                            old_price = gd.get("old_price")
+                            if old_price:
+                                try: p_obj.extra["price_old"] = float(old_price)
+                                except: pass
+                            p_obj.extra["price_usd"] = float(gd.get("price_wmz") or 0)
+                            p_obj.extra["price_eur"] = float(gd.get("price_wme") or 0)
+
+                            # ── Флаги ────────────────────────────────────────
+                            if gd.get("from_gsellers") is not None:
+                                p_obj.extra["from_gsellers"] = 1 if gd["from_gsellers"] else 0
+                            if gd.get("is_noindex") is not None:
+                                p_obj.extra["is_noindex"] = 1 if gd["is_noindex"] else 0
+
+                            # ── Продавец ─────────────────────────────────────
+                            seller_obj = gd.get("seller") or {}
+                            if isinstance(seller_obj, dict):
+                                sname = (seller_obj.get("name_seller")
+                                         or seller_obj.get("name")
+                                         or p_obj.seller)
+                                if sname:
+                                    p_obj.seller = sname
+                                srating = (seller_obj.get("rating")
+                                           or (seller_obj.get("statistics") or {}).get("rating"))
+                                if srating:
+                                    p_obj.seller_rating = float(srating)
+                                sid = seller_obj.get("id_seller") or seller_obj.get("id")
+                                if sid:
+                                    p_obj.seller_id = str(sid)
+                                reg = seller_obj.get("created_at") or seller_obj.get("registered_at")
+                                if reg:
+                                    p_obj.extra["seller_registered_at"] = str(reg)
+                                att = seller_obj.get("attestat") or seller_obj.get("verification")
+                                if att:
+                                    p_obj.extra["seller_attestat"] = str(att)
+                                stats = seller_obj.get("statistics") or {}
+                                seller_cnt_sell = stats.get("cnt_sell")
+                                if seller_cnt_sell:
+                                    p_obj.extra["seller_cnt_sell"] = int(seller_cnt_sell)
+
+                            # ── Изображение ──────────────────────────────────
+                            imgs = gd.get("images")
+                            if imgs:
+                                if isinstance(imgs, list) and imgs:
+                                    p_obj.image_url = imgs[0]
+                                elif isinstance(imgs, str) and imgs:
+                                    p_obj.image_url = imgs
+
+                            # ── Полная ветка категории ───────────────────────
+                            cat_obj = gd.get("category")
+                            if isinstance(cat_obj, dict):
+                                chain = _extract_category_chain(cat_obj)
+                                if chain:
+                                    crumb = " › ".join(t for _, t in chain)
+                                    p_obj.extra["breadcrumb"] = crumb
+                                    leaf_slug, leaf_title = chain[-1]
+                                    # Всегда ставим реальный leaf_slug из цепочки API
+                                    # (не slug запроса, который был в p_obj.category)
+                                    p_obj.category = leaf_slug
+                                    p_obj.extra["category_slug"] = leaf_slug
+                                    ct_id = cat_obj.get("content_type_id")
+                                    if ct_id:
+                                        p_obj.extra["content_type_id"] = ct_id
+                                    id_sec = int(p_obj.extra.get("id_section") or 0)
+                                    cab_id = _resolve_category_id(
+                                        leaf_slug, crumb, ct_id, id_section=id_sec
+                                    )
+                                    if cab_id:
+                                        p_obj.extra["category_id"] = cab_id
+                                    p_obj.extra["category_chain"] = [
+                                        {"slug": s, "title": t} for s, t in chain
+                                    ]
+                            # Fallback breadcrumb из search_title + id_section
+                            # если API не вернул category object
+                            elif not p_obj.extra.get("breadcrumb"):
+                                search_title = p_obj.extra.get("search_title") or ""
+                                if search_title:
+                                    p_obj.extra["breadcrumb"] = search_title
+
+                    except Exception as e:
+                        log.debug("detail enrich %s: %s", p_obj.external_id, e)
+
+            t_enrich_start = asyncio.get_event_loop().time()
+            await asyncio.gather(*[_enrich_one(p) for p in batch])
+            t_enrich = asyncio.get_event_loop().time() - t_enrich_start
+            self._log_event("info",
+                f"API стр.{page}: детали обогащены за {t_enrich:.1f}с "
+                f"({len(batch)} товаров, ~{t_enrich/len(batch):.2f}с/шт)"
+            )
+
+            batch.sort(key=lambda x: x.profit_score, reverse=True)
+            saved = self._save_batch(
+                batch, category,
+                source_profile=_source_profile,
+                source_email=_source_email,
+                source_uid=_source_uid,
+            )
+            saved_total += len(saved)
+            self._stats["products_saved"] = saved_total
+            self._log_event("info", f"API стр.{page}: сохранено {len(saved)} (итого {saved_total})")
+            invalidate_name_cache()
+
+            if run_ai_enrichment and saved:
+                ai_ok = self._ai_enrich_batch(saved)
+                ai_enriched_total += ai_ok
+                self._stats["products_ai_enriched"] = ai_enriched_total
+
+            # Пауза между страницами
+            await asyncio.sleep(random.uniform(1.5, 3.0))
+
+        self._log_event("info", f"API готово: сохранено {saved_total}, AI {ai_enriched_total}")
+
     async def _run_async(self, query, category, quantity, max_pages, run_ai_enrichment):
         """
-        Async главный цикл парсинга. Скрапит публичный ggsel.net через CascadeFetcher
+        Async главный цикл парсинга (HTML fallback).
+        Скрапит публичный ggsel.net через CascadeFetcher
         (MoreLogin CDP → curl-cffi fallback), парсит HTML карточек конкурентов.
         """
         # Telemetry: emit start
@@ -1639,10 +2251,21 @@ class ParserEngine:
             self._log_event("debug", f"_parse_product_detail exception: {e}")
             return {}
 
-    def _save_batch(self, products: List[Product], category: str) -> List[dict]:
+    def _save_batch(
+        self,
+        products: List[Product],
+        category: str,
+        source_profile: str = "",
+        source_email: str = "",
+        source_uid: str = "",
+    ) -> List[dict]:
         """
         Сохраняет батч в БД. Возвращает список сохранённых dict-ов
         (нужен для последующего AI-enrichment).
+
+        source_profile — имя MSB-профиля (P-15, ggsel_parser_1, ...)
+        source_email   — email аккаунта ggsel через который спарсено
+        source_uid     — id пользователя ggsel (из JWT sub)
         """
         from .db_init import get_db_path
         from .pricing import calculate_my_price
@@ -1660,6 +2283,29 @@ class ParserEngine:
             except Exception:
                 return None
 
+        # Подтягиваем fee из seller_categories по числовому category_id.
+        # seller_categories.id == id_section из публичного API == category_id для Seller API.
+        def _get_fee_for_category(conn, cat_id) -> tuple[Optional[float], Optional[str]]:
+            """Возвращает (fee, fee_source) по seller_categories.id."""
+            if not cat_id:
+                return None, None
+            try:
+                cid = int(cat_id)
+            except (TypeError, ValueError):
+                return None, None
+            try:
+                row = conn.execute(
+                    "SELECT fee, title, tree FROM seller_categories WHERE id = ? LIMIT 1",
+                    (cid,)
+                ).fetchone()
+                if row and row[0] is not None:
+                    fee = float(row[0])
+                    tree = row[2] or row[1] or str(cid)
+                    return fee, f"seller_categories:{cid} ({tree})"
+            except Exception:
+                pass
+            return None, None
+
         if not products:
             return []
 
@@ -1670,7 +2316,7 @@ class ParserEngine:
             conn.execute("PRAGMA synchronous=NORMAL")
             now = datetime.utcnow().isoformat()
             for p in products:
-                my_price = calculate_my_price(p.price, category or p.category or "default")
+                my_price = 0.0  # пересчитается после резолва cat_id
                 # Если есть images_json и original_desc из детальной страницы — обновляем
                 # image_url на первый URL из галереи (если раньше был пустой или дубликат)
                 extra = p.extra or {}
@@ -1684,24 +2330,122 @@ class ParserEngine:
                         pass
                 # итоговое фото: детальное имеет приоритет
                 final_image = detail_image or p.image_url or ""
-                cat_id = _get_category_id(conn, category or p.category)
+
+                # category_id: приоритет — extra (заполнено при обогащении через /goods/{id}),
+                # далее id_section из API-листинга (всегда есть в extra),
+                # fallback — поиск по slug в category_slugs
+                cat_id = (
+                    extra.get("category_id")
+                    or (int(extra["id_section"]) if extra.get("id_section") else None)
+                    or _get_category_id(conn, extra.get("category_slug") or category or p.category)
+                )
+
+                # breadcrumb из extra (построен из category.parent цепочки)
+                breadcrumb_val = extra.get("breadcrumb") or ""
+
+                # category slug для поля category:
+                # приоритет — реальный leaf_slug из цепочки API (/goods/{id}),
+                # fallback — slug запроса (category аргумент)
+                cat_slug_val = extra.get("category_slug") or p.category or category or ""
+
+                # seller_rating и seller_id
+                seller_rating_val = p.seller_rating or extra.get("seller_rating")
+                seller_id_val = p.seller_id or extra.get("seller_id") or ""
+
+                # shop_* — данные магазина конкурента из блока seller в /goods/{id}
+                shop_name_val            = p.seller or extra.get("seller_name") or ""
+                shop_rating_val          = seller_rating_val
+                shop_registered_at_val   = extra.get("seller_registered_at")
+                shop_positive_reviews_val = int(extra.get("reviews_good_count") or 0) or None
+                shop_negative_reviews_val = int(extra.get("reviews_bad_count") or 0) or None
+                shop_url_val             = (
+                    f"https://ggsel.net/en/seller/{seller_id_val}"
+                    if seller_id_val else None
+                )
+                seller_cnt_sell          = extra.get("seller_cnt_sell")
+                shop_products_count_val  = int(seller_cnt_sell) if seller_cnt_sell else None
+
+                # новые API-поля категоризации — из extra (заполняется to_engine_product + _enrich_one)
+                id_section_val       = int(extra.get("id_section") or 0) or None
+                content_type_id_val  = int(extra.get("content_type_id") or extra.get("content_type") or 0) or None
+                content_type_name_val = str(extra.get("content_type_name") or "") or None
+                search_title_val     = str(extra.get("search_title") or "") or None
+                # category_url — slug из API (/goods/{id} category.url), фоллбэк на cat_slug_val
+                category_url_val     = str(extra.get("category_slug") or extra.get("category_url") or cat_slug_val or "") or None
+                # category_title — полное название: лист цепочки API или search_title
+                category_title_val   = None
+                if extra.get("category_chain"):
+                    try:
+                        chain = extra["category_chain"]
+                        if chain:
+                            category_title_val = chain[-1].get("title") or None
+                    except Exception:
+                        pass
+                if not category_title_val:
+                    category_title_val = search_title_val
+                id_seller_val = int(extra.get("id_seller") or 0) or None
+
+                # пересчитываем cat_id: id_section имеет приоритет (=прямой ID подкатегории API)
+                if not cat_id and id_section_val:
+                    cat_id = id_section_val
+
+                # Получаем fee из seller_categories по финальному cat_id
+                ggsel_fee_pct_val, ggsel_fee_source_val = _get_fee_for_category(conn, cat_id)
+
+                # Пересчитываем my_price с реальным cat_id (числовым)
+                my_price = calculate_my_price(p.price, cat_id)
+
                 try:
                     conn.execute("""
                         INSERT INTO parsed_products
                             (product_id, title, original_title, original_desc, price, my_price,
-                             category, url, seller_name, rating, sales_count, image_url,
+                             category, url, seller_name, seller_id, seller_rating,
+                             rating, sales_count, image_url,
                              in_stock, source_price, profit_score, status,
                              images_json, properties_json, quantity_available,
-                             seller_url, published_at, last_parsed_at, created_at, updated_at,
-                             approval_status, category_id)
-                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1, ?, ?, 'pending',
-                                ?, ?, ?, ?, ?, ?, ?, ?, 'pending', ?)
+                             seller_url, published_at, breadcrumb, reviews_count,
+                             last_parsed_at, created_at, updated_at,
+                             approval_status, category_id,
+                             source_profile_name, source_account_email, source_ggsel_user_id,
+                             reviews_good_count, reviews_bad_count,
+                             first_review_at, last_review_at,
+                             payment_methods, agency_fee, options_count, options_json,
+                             price_old, price_usd, price_eur,
+                             from_gsellers, is_noindex,
+                             seller_registered_at, seller_attestat,
+                             detail_enriched_at,
+                             shop_name, shop_rating, shop_registered_at,
+                             shop_positive_reviews, shop_negative_reviews,
+                             shop_url, shop_products_count,
+                             catalog_position, catalog_page,
+                             id_section, content_type_id, content_type_name,
+                             search_title, category_url, category_title, id_seller,
+                             ggsel_fee_pct, ggsel_fee_source)
+                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1, ?, ?, 'pending',
+                                ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'pending', ?,
+                                ?, ?, ?,
+                                ?, ?,
+                                ?, ?,
+                                ?, ?, ?, ?,
+                                ?, ?, ?,
+                                ?, ?,
+                                ?, ?,
+                                ?,
+                                ?, ?, ?,
+                                ?, ?,
+                                ?, ?,
+                                ?, ?,
+                                ?, ?, ?,
+                                ?, ?, ?, ?,
+                                ?, ?)
                         ON CONFLICT(product_id) DO UPDATE SET
                             price              = excluded.price,
                             my_price           = excluded.my_price,
                             source_price       = excluded.source_price,
                             profit_score       = excluded.profit_score,
                             seller_name        = excluded.seller_name,
+                            seller_id          = COALESCE(NULLIF(excluded.seller_id,''), parsed_products.seller_id),
+                            seller_rating      = COALESCE(excluded.seller_rating, parsed_products.seller_rating),
                             rating             = excluded.rating,
                             sales_count        = excluded.sales_count,
                             image_url          = CASE WHEN excluded.image_url != '' THEN excluded.image_url ELSE parsed_products.image_url END,
@@ -1711,14 +2455,54 @@ class ParserEngine:
                             quantity_available = COALESCE(excluded.quantity_available, parsed_products.quantity_available),
                             seller_url         = COALESCE(excluded.seller_url, parsed_products.seller_url),
                             published_at       = COALESCE(excluded.published_at, parsed_products.published_at),
+                            breadcrumb         = COALESCE(NULLIF(excluded.breadcrumb, ''), parsed_products.breadcrumb),
+                            reviews_count      = COALESCE(excluded.reviews_count, parsed_products.reviews_count),
+                            reviews_good_count = COALESCE(excluded.reviews_good_count, parsed_products.reviews_good_count),
+                            reviews_bad_count  = COALESCE(excluded.reviews_bad_count, parsed_products.reviews_bad_count),
+                            first_review_at    = COALESCE(excluded.first_review_at, parsed_products.first_review_at),
+                            last_review_at     = COALESCE(excluded.last_review_at, parsed_products.last_review_at),
+                            payment_methods    = COALESCE(excluded.payment_methods, parsed_products.payment_methods),
+                            agency_fee         = COALESCE(excluded.agency_fee, parsed_products.agency_fee),
+                            options_count      = COALESCE(excluded.options_count, parsed_products.options_count),
+                            options_json       = COALESCE(excluded.options_json, parsed_products.options_json),
+                            price_old          = COALESCE(excluded.price_old, parsed_products.price_old),
+                            price_usd          = COALESCE(excluded.price_usd, parsed_products.price_usd),
+                            price_eur          = COALESCE(excluded.price_eur, parsed_products.price_eur),
+                            from_gsellers      = COALESCE(excluded.from_gsellers, parsed_products.from_gsellers),
+                            is_noindex         = COALESCE(excluded.is_noindex, parsed_products.is_noindex),
+                            seller_registered_at = COALESCE(excluded.seller_registered_at, parsed_products.seller_registered_at),
+                            seller_attestat    = COALESCE(excluded.seller_attestat, parsed_products.seller_attestat),
                             status             = CASE WHEN parsed_products.status = 'new' THEN 'pending' ELSE parsed_products.status END,
                             approval_status    = COALESCE(parsed_products.approval_status, 'pending'),
                             last_parsed_at     = excluded.last_parsed_at,
                             updated_at         = excluded.updated_at,
-                            category_id        = excluded.category_id
+                            detail_enriched_at = excluded.detail_enriched_at,
+                            category_id        = COALESCE(excluded.category_id, parsed_products.category_id),
+                            source_profile_name  = COALESCE(NULLIF(excluded.source_profile_name,''), parsed_products.source_profile_name),
+                            source_account_email = COALESCE(NULLIF(excluded.source_account_email,''), parsed_products.source_account_email),
+                            source_ggsel_user_id = COALESCE(NULLIF(excluded.source_ggsel_user_id,''), parsed_products.source_ggsel_user_id),
+                            shop_name            = COALESCE(NULLIF(excluded.shop_name,''), parsed_products.shop_name),
+                            shop_rating          = COALESCE(excluded.shop_rating, parsed_products.shop_rating),
+                            shop_registered_at   = COALESCE(excluded.shop_registered_at, parsed_products.shop_registered_at),
+                            shop_positive_reviews = COALESCE(excluded.shop_positive_reviews, parsed_products.shop_positive_reviews),
+                            shop_negative_reviews = COALESCE(excluded.shop_negative_reviews, parsed_products.shop_negative_reviews),
+                            shop_url             = COALESCE(excluded.shop_url, parsed_products.shop_url),
+                            shop_products_count  = COALESCE(excluded.shop_products_count, parsed_products.shop_products_count),
+                            catalog_position     = COALESCE(excluded.catalog_position, parsed_products.catalog_position),
+                            catalog_page         = COALESCE(excluded.catalog_page, parsed_products.catalog_page),
+                            id_section           = COALESCE(excluded.id_section, parsed_products.id_section),
+                            content_type_id      = COALESCE(excluded.content_type_id, parsed_products.content_type_id),
+                            content_type_name    = COALESCE(excluded.content_type_name, parsed_products.content_type_name),
+                            search_title         = COALESCE(excluded.search_title, parsed_products.search_title),
+                            category_url         = COALESCE(excluded.category_url, parsed_products.category_url),
+                            category_title       = COALESCE(excluded.category_title, parsed_products.category_title),
+                            id_seller            = COALESCE(excluded.id_seller, parsed_products.id_seller),
+                            ggsel_fee_pct        = COALESCE(excluded.ggsel_fee_pct, parsed_products.ggsel_fee_pct),
+                            ggsel_fee_source     = COALESCE(excluded.ggsel_fee_source, parsed_products.ggsel_fee_source)
                     """, (
                         p.external_id, p.name[:300], p.name[:300], extra.get("original_desc"),
-                        p.price, my_price, category or p.category, p.url, p.seller,
+                        p.price, my_price, cat_slug_val, p.url, p.seller,
+                        str(seller_id_val), seller_rating_val,
                         p.rating, p.sales_count or 0, final_image,
                         p.price, p.profit_score,
                         extra.get("images_json"),
@@ -1726,7 +2510,44 @@ class ParserEngine:
                         extra.get("quantity_available"),
                         extra.get("seller_url"),
                         extra.get("published_at"),
-                        now, now, now, cat_id
+                        breadcrumb_val,
+                        int(extra.get("reviews_count") or 0),
+                        now, now, now, cat_id,
+                        source_profile, source_email, source_uid,
+                        int(extra.get("reviews_good_count") or 0),
+                        int(extra.get("reviews_bad_count") or 0),
+                        extra.get("first_review_at"),
+                        extra.get("last_review_at"),
+                        extra.get("payment_methods"),
+                        ggsel_fee_pct_val,  # agency_fee = реальная комиссия категории
+                        int(extra.get("options_count") or 0),
+                        extra.get("options_json"),
+                        extra.get("price_old"),
+                        extra.get("price_usd"),
+                        extra.get("price_eur"),
+                        extra.get("from_gsellers"),
+                        extra.get("is_noindex"),
+                        extra.get("seller_registered_at"),
+                        extra.get("seller_attestat"),
+                        now,  # detail_enriched_at
+                        shop_name_val,
+                        shop_rating_val,
+                        shop_registered_at_val,
+                        shop_positive_reviews_val,
+                        shop_negative_reviews_val,
+                        shop_url_val,
+                        shop_products_count_val,
+                        p.catalog_position,
+                        p.catalog_page,
+                        id_section_val,
+                        content_type_id_val,
+                        content_type_name_val,
+                        search_title_val,
+                        category_url_val,
+                        category_title_val,
+                        id_seller_val,
+                        ggsel_fee_pct_val,
+                        ggsel_fee_source_val,
                     ))
                     saved_dicts.append({
                         "product_id":     p.external_id,
@@ -1736,7 +2557,7 @@ class ParserEngine:
                         "image_url":      final_image,
                         "sales_count":    p.sales_count or 0,
                         "seller_rating":  p.rating or 0.0,
-                        "reviews_count":  0,
+                        "reviews_count":  int(extra.get("reviews_count") or 0),
                     })
 
                     # Локальное кэширование фото: скачиваем сразу во время парсинга
@@ -1853,3 +2674,726 @@ def get_engine() -> ParserEngine:
     return _engine_singleton
 
 
+# ══════════════════════════════════════════════════════════════════════════════
+# Full Scan — параллельный обход всех content_type категорий воркерами
+# ══════════════════════════════════════════════════════════════════════════════
+
+# Все активные content_type_id в порядке убывания размера
+FULL_SCAN_CONTENT_TYPES: List[int] = [
+    2,   # Keys          ~82k
+    48,  # Gifts         ~78k
+    19,  # DLC           ~52k
+    54,  # Purchasing-for-account ~35k
+    1,   # Accounts      ~27k
+    10,  # Item          ~12k
+    25,  # Rent          ~10k
+    33,  # Activation    ~10k
+    9,   # Currency      ~9k
+    8,   # Payment cards ~8k
+    11,  # Services      ~4k
+    18,  # Subscriptions ~3.5k
+    6,   # Bonus codes   ~1.5k
+    52,  # Gift card     ~1.6k
+    26,  # Promo codes   ~600
+    62,  # QR code       ~600
+    42,  # Sale          ~700
+    57,  # Purchase subscription ~270
+    55,  # Hosting       ~105
+]
+
+# Маппинг content_type_id → читаемое название
+FULL_SCAN_CT_NAMES: Dict[int, str] = {
+    2:  "Keys",
+    48: "Gifts",
+    19: "DLC",
+    54: "Purchasing for account",
+    1:  "Accounts",
+    10: "Item",
+    25: "Rent",
+    33: "Activation",
+    9:  "Currency",
+    8:  "Payment cards",
+    11: "Services",
+    18: "Subscription services",
+    6:  "Bonus codes",
+    52: "Gift card",
+    26: "Promo codes",
+    62: "QR code",
+    42: "Sale",
+    57: "Purchase subscription",
+    55: "Hosting",
+}
+
+_full_scan_state: dict = {
+    "running":       False,
+    "stopped":       True,
+    "thread":        None,
+    "workers_count": 0,
+    "workers":       [],
+    "total_saved":   0,
+    "total_found":   0,
+    "ct_done":       [],
+    "ct_remaining":  [],
+    "started_at":    None,
+    "finished_at":   None,
+    "last_error":    None,
+    "run_ai":        False,
+}
+_full_scan_lock = threading.Lock()
+
+
+def full_scan_start(
+    run_ai: bool = False,
+    ct_ids: Optional[List[int]] = None,
+    workers_per_account: int = 4,
+    sort: str = "sortByRec",
+) -> dict:
+    """
+    Запускает параллельный полный прогон всего каталога.
+
+    ct_ids              — список content_type_id (default: FULL_SCAN_CONTENT_TYPES)
+    workers_per_account — потоков на один аккаунт (default: 4)
+    run_ai              — прогонять AI-обогащение после сохранения
+    sort                — сортировка API (sortByRec | popular | new)
+    """
+    from .ggsel_api_client import load_all_accounts, make_client
+
+    st = _full_scan_state
+    with _full_scan_lock:
+        if st["running"] and not st["stopped"]:
+            return {"ok": False, "error": "Full scan уже запущен"}
+
+        ids      = list(ct_ids or FULL_SCAN_CONTENT_TYPES)
+        accounts = load_all_accounts()
+        total_workers = min(len(accounts) * workers_per_account, len(ids))
+
+        st.update({
+            "running":       True,
+            "stopped":       False,
+            "workers_count": total_workers,
+            "workers":       [],
+            "total_saved":   0,
+            "total_found":   0,
+            "ct_done":       [],
+            "ct_remaining":  list(ids),
+            "started_at":    datetime.utcnow().isoformat(),
+            "finished_at":   None,
+            "last_error":    None,
+            "run_ai":        run_ai,
+        })
+
+    t = threading.Thread(
+        target=_full_scan_master,
+        args=(ids, run_ai, total_workers, workers_per_account, accounts, sort),
+        daemon=True,
+        name="full-scan-master",
+    )
+    with _full_scan_lock:
+        st["thread"] = t
+    t.start()
+
+    return {
+        "ok":                True,
+        "categories":        len(ids),
+        "accounts":          len(accounts),
+        "workers_per_account": workers_per_account,
+        "total_workers":     total_workers,
+        "run_ai":            run_ai,
+    }
+
+
+def full_scan_stop() -> dict:
+    with _full_scan_lock:
+        _full_scan_state["stopped"] = True
+        _full_scan_state["running"] = False
+    return {"ok": True, "message": "Full scan остановлен"}
+
+
+def full_scan_status() -> dict:
+    with _full_scan_lock:
+        return {k: v for k, v in _full_scan_state.items() if k != "thread"}
+
+
+def _full_scan_master(
+    ct_ids: List[int],
+    run_ai: bool,
+    num_workers: int,
+    workers_per_account: int,
+    accounts: list,
+    sort: str,
+) -> None:
+    """Мастер-поток: создаёт воркеры, раздаёт категории интерливингом."""
+    from .ggsel_api_client import make_client
+
+    st = _full_scan_state
+
+    # Интерливинг: категории распределяются по воркерам по кругу
+    partitions: List[List[int]] = [[] for _ in range(num_workers)]
+    for i, ct_id in enumerate(ct_ids):
+        partitions[i % num_workers].append(ct_id)
+
+    def account_for(wid: int) -> dict:
+        return accounts[(wid // workers_per_account) % len(accounts)]
+
+    with _full_scan_lock:
+        st["workers"] = [
+            {
+                "worker_id":    wid,
+                "account":      account_for(wid)["name"],
+                "ct_id":        None,
+                "ct_name":      None,
+                "page":         0,
+                "ct_done":      [],
+                "saved":        0,
+            }
+            for wid in range(num_workers)
+        ]
+
+    log.info("[FullScan] Старт: %d категорий, %d воркеров (%d аккаунтов × %d)",
+             len(ct_ids), num_workers, len(accounts), workers_per_account)
+
+    threads = []
+    for wid in range(num_workers):
+        if not partitions[wid]:
+            continue
+        client = make_client(account_for(wid))
+        t = threading.Thread(
+            target=_full_scan_worker,
+            args=(wid, partitions[wid], client, account_for(wid)["name"], run_ai, sort),
+            daemon=True,
+            name=f"full-scan-w{wid}",
+        )
+        threads.append(t)
+        t.start()
+
+    for t in threads:
+        t.join()
+
+    with _full_scan_lock:
+        st["running"]     = False
+        st["stopped"]     = True
+        st["finished_at"] = datetime.utcnow().isoformat()
+
+    log.info("[FullScan] Готово. Итого сохранено: %d", st["total_saved"])
+
+
+def _full_scan_worker(
+    wid: int,
+    ct_ids: List[int],
+    client,
+    account_name: str,
+    run_ai: bool,
+    sort: str,
+) -> None:
+    """Один воркер: последовательно обходит свои content_type категории."""
+    from .dedup import is_fresh, is_rejected, invalidate_name_cache
+
+    st      = _full_scan_state
+    eng     = get_engine()
+    w_state = st["workers"][wid]
+
+    log.info("[W%d/%s] Старт. Категорий: %s", wid, account_name, ct_ids)
+
+    for ct_id in ct_ids:
+        if st["stopped"]:
+            break
+
+        ct_name = FULL_SCAN_CT_NAMES.get(ct_id, str(ct_id))
+        with _full_scan_lock:
+            w_state.update({"ct_id": ct_id, "ct_name": ct_name, "page": 0})
+            st["ct_remaining"] = [c for c in st["ct_remaining"] if c != ct_id]
+
+        log.info("[W%d/%s] Категория ct=%d (%s)", wid, account_name, ct_id, ct_name)
+        seen_ids: set = set()
+        page = 0
+        consecutive_empty = 0
+
+        while not st["stopped"]:
+            page += 1
+            with _full_scan_lock:
+                w_state["page"] = page
+
+            try:
+                items = client.get_products_by_type(
+                    content_type_id=ct_id,
+                    page=page,
+                    limit=100,
+                    currency="wmz",
+                    sort=sort,
+                )
+            except Exception as e:
+                with _full_scan_lock:
+                    st["last_error"] = f"W{wid}: ct={ct_id} page={page}: {e}"
+                log.warning("[W%d/%s] ct=%d page=%d ошибка: %s",
+                            wid, account_name, ct_id, page, e)
+                break
+
+            if not items:
+                consecutive_empty += 1
+                if consecutive_empty >= 3:
+                    log.info("[W%d/%s] ct=%d завершена на стр.%d",
+                             wid, account_name, ct_id, page)
+                    break
+                continue
+            consecutive_empty = 0
+
+            with _full_scan_lock:
+                st["total_found"] += len(items)
+
+            batch = []
+            for item_idx, ap in enumerate(items):
+                eid = str(ap.id_goods)
+                if not eid or eid in seen_ids:
+                    continue
+                if is_fresh(eid):
+                    continue
+                if is_rejected(eid):
+                    continue
+                seen_ids.add(eid)
+
+                p = client.to_engine_product(ap, category=ct_name)
+                if not p:
+                    continue
+                p.profit_score = _calc_raw_score(
+                    sales_count=ap.cnt_sell,
+                    seller_rating=float(ap.rating or 0),
+                    reviews_count=0,
+                    in_stock=ap.is_active,
+                )
+                # Позиция в каталоге: абсолютный номер в выдаче API
+                p.catalog_page     = page
+                p.catalog_position = (page - 1) * 100 + item_idx + 1
+                batch.append(p)
+
+            if batch:
+                saved = eng._save_batch(batch, ct_name)
+                with _full_scan_lock:
+                    st["total_saved"]  += len(saved)
+                    w_state["saved"]   += len(saved)
+                invalidate_name_cache()
+
+                if run_ai and saved:
+                    eng._ai_enrich_batch(saved)
+
+            time.sleep(random.uniform(0.5, 1.5))
+
+        with _full_scan_lock:
+            w_state["ct_done"].append(ct_id)
+            st["ct_done"].append(ct_id)
+
+    log.info("[W%d/%s] Завершён. Сохранено: %d", wid, account_name, w_state["saved"])
+
+
+# ══════════════════════════════════════════════════════════════════════════════
+# Section Scan — сканирование по подкатегориям (id_section) из БД
+# ══════════════════════════════════════════════════════════════════════════════
+
+_section_scan_state: dict = {
+    "running":             False,
+    "stopped":             True,
+    "thread":              None,
+    "workers_count":       0,
+    "workers_per_account": 4,
+    "workers":             [],
+    "total_sections":      0,
+    "sections_done":       0,
+    "sections_remaining":  0,
+    "total_saved":         0,
+    "total_found":         0,
+    "started_at":          None,
+    "last_error":          None,
+    "run_ai":              False,
+}
+_section_scan_lock = threading.Lock()
+
+
+def section_scan_start(
+    run_ai: bool = False,
+    workers_per_account: int = 4,
+    ct_filter: Optional[List[int]] = None,
+) -> dict:
+    """
+    Запускает сканирование по секциям (подкатегориям) из БД.
+
+    Собирает уникальные (id_section, content_type_id) из уже сохранённых товаров,
+    затем для каждой секции дообирает то, чего ещё нет.
+
+    ct_filter — если задан, берёт секции только для этих content_type_id.
+    """
+    from .ggsel_api_client import load_all_accounts
+    from .db_init import get_db_path
+
+    st = _section_scan_state
+    with _section_scan_lock:
+        if st["running"] and not st["stopped"]:
+            return {"ok": False, "error": "Секцион-скан уже запущен"}
+
+    conn = sqlite3.connect(get_db_path(), timeout=15.0)
+    try:
+        if ct_filter:
+            placeholders = ",".join("?" for _ in ct_filter)
+            rows = conn.execute(
+                f"SELECT DISTINCT id_section, content_type_id "
+                f"FROM parsed_products "
+                f"WHERE id_section IS NOT NULL AND content_type_id IN ({placeholders}) "
+                f"ORDER BY id_section",
+                ct_filter,
+            ).fetchall()
+        else:
+            rows = conn.execute(
+                "SELECT DISTINCT id_section, content_type_id "
+                "FROM parsed_products "
+                "WHERE id_section IS NOT NULL "
+                "ORDER BY id_section"
+            ).fetchall()
+    finally:
+        conn.close()
+
+    sections: List[tuple] = [
+        (int(r[0]), int(r[1]) if r[1] else 0,
+         FULL_SCAN_CT_NAMES.get(int(r[1]) if r[1] else 0, str(r[1])))
+        for r in rows
+    ]
+
+    if not sections:
+        return {"ok": False, "error": "Нет секций в БД — сначала запустите Full Scan"}
+
+    accounts = load_all_accounts()
+    total_workers = min(len(accounts) * workers_per_account, len(sections))
+
+    with _section_scan_lock:
+        st.update({
+            "running":             True,
+            "stopped":             False,
+            "workers_count":       total_workers,
+            "workers_per_account": workers_per_account,
+            "workers":             [],
+            "total_sections":      len(sections),
+            "sections_done":       0,
+            "sections_remaining":  len(sections),
+            "total_saved":         0,
+            "total_found":         0,
+            "started_at":          datetime.utcnow().isoformat(),
+            "last_error":          None,
+            "run_ai":              run_ai,
+        })
+
+    t = threading.Thread(
+        target=_section_scan_master,
+        args=(sections, run_ai, total_workers, workers_per_account, accounts, ct_filter),
+        daemon=True,
+        name="section-scan-master",
+    )
+    with _section_scan_lock:
+        st["thread"] = t
+    t.start()
+
+    return {
+        "ok":                  True,
+        "total_sections":      len(sections),
+        "accounts":            len(accounts),
+        "workers_per_account": workers_per_account,
+        "total_workers":       total_workers,
+        "run_ai":              run_ai,
+    }
+
+
+def section_scan_stop() -> dict:
+    with _section_scan_lock:
+        _section_scan_state["stopped"] = True
+        _section_scan_state["running"] = False
+    return {"ok": True, "message": "Секцион-скан остановлен"}
+
+
+def section_scan_status() -> dict:
+    with _section_scan_lock:
+        return {k: v for k, v in _section_scan_state.items() if k != "thread"}
+
+
+def _get_new_sections(known: set, ct_filter: Optional[List[int]] = None) -> List[tuple]:
+    """Получить секции из БД, которых ещё нет в known."""
+    from .db_init import get_db_path
+
+    conn = sqlite3.connect(get_db_path(), timeout=15.0)
+    try:
+        if ct_filter:
+            ph = ",".join("?" for _ in ct_filter)
+            rows = conn.execute(
+                f"SELECT DISTINCT id_section, content_type_id FROM parsed_products "
+                f"WHERE id_section IS NOT NULL AND content_type_id IN ({ph})",
+                ct_filter,
+            ).fetchall()
+        else:
+            rows = conn.execute(
+                "SELECT DISTINCT id_section, content_type_id FROM parsed_products "
+                "WHERE id_section IS NOT NULL"
+            ).fetchall()
+    finally:
+        conn.close()
+
+    return [
+        (int(r[0]), int(r[1]) if r[1] else 0,
+         FULL_SCAN_CT_NAMES.get(int(r[1]) if r[1] else 0, str(r[1])))
+        for r in rows if int(r[0]) not in known
+    ]
+
+
+def _run_section_wave(
+    sections: List[tuple],
+    num_workers: int,
+    workers_per_account: int,
+    accounts: List[dict],
+    run_ai: bool,
+    wave: int,
+) -> None:
+    """Запускает одну волну воркеров для заданных секций и ждёт завершения."""
+    from .ggsel_api_client import make_client
+
+    st = _section_scan_state
+    actual_workers = min(num_workers, len(sections))
+    partitions: List[List[tuple]] = [[] for _ in range(actual_workers)]
+    for i, sec in enumerate(sections):
+        partitions[i % actual_workers].append(sec)
+
+    def account_for(wid: int) -> dict:
+        return accounts[(wid // workers_per_account) % len(accounts)]
+
+    with _section_scan_lock:
+        st["workers"] = [
+            {
+                "worker_id":     wid,
+                "account":       account_for(wid)["name"],
+                "section_id":    None,
+                "ct_id":         None,
+                "ct_name":       None,
+                "page":          0,
+                "sections_done": [],
+            }
+            for wid in range(actual_workers)
+        ]
+
+    log.info("[SectionScan] Волна %d: %d секций, %d воркеров",
+             wave, len(sections), actual_workers)
+
+    threads = []
+    for wid in range(actual_workers):
+        if not partitions[wid]:
+            continue
+        acc    = account_for(wid)
+        client = make_client(acc)
+        t = threading.Thread(
+            target=_section_scan_worker,
+            args=(wid, partitions[wid], client, acc["name"], run_ai),
+            daemon=True,
+            name=f"section-scan-w{wid}",
+        )
+        threads.append(t)
+        t.start()
+
+    for t in threads:
+        t.join()
+
+
+def _section_scan_master(
+    sections: List[tuple],
+    run_ai: bool,
+    num_workers: int,
+    workers_per_account: int,
+    accounts: List[dict],
+    ct_filter: Optional[List[int]] = None,
+) -> None:
+    """
+    Мастер-поток с итеративным обнаружением новых секций.
+    После каждой волны проверяет появились ли новые секции в БД и запускает следующую волну.
+    """
+    st    = _section_scan_state
+    known: set = {s[0] for s in sections}
+    wave  = 1
+
+    while not st["stopped"]:
+        _run_section_wave(sections, num_workers, workers_per_account, accounts, run_ai, wave)
+        if st["stopped"]:
+            break
+
+        new_sections = _get_new_sections(known, ct_filter)
+        if not new_sections:
+            log.info("[SectionScan] Волна %d завершена, новых секций нет. Полное покрытие!", wave)
+            break
+
+        log.info("[SectionScan] Волна %d: обнаружено %d новых секций, запускаем волну %d",
+                 wave, len(new_sections), wave + 1)
+        for s in new_sections:
+            known.add(s[0])
+        sections = new_sections
+        with _section_scan_lock:
+            st["total_sections"]     += len(new_sections)
+            st["sections_remaining"] += len(new_sections)
+        wave += 1
+
+    with _section_scan_lock:
+        st["running"] = False
+        st["stopped"] = True
+    log.info("[SectionScan] Завершён. Волн: %d. Итого сохранено: %d",
+             wave, st["total_saved"])
+
+
+def _section_scan_worker(
+    wid: int,
+    sections: List[tuple],
+    client,
+    account_name: str,
+    run_ai: bool,
+) -> None:
+    """Один воркер: последовательно обходит свои секции со smart-skip."""
+    from .dedup import is_fresh, is_rejected, invalidate_name_cache
+    from .db_init import get_db_path
+
+    st      = _section_scan_state
+    eng     = get_engine()
+    w_state = st["workers"][wid]
+
+    log.info("[SW%d/%s] Старт. Секций: %d", wid, account_name, len(sections))
+
+    try:
+        for section_id, ct_id, ct_name in sections:
+            if st["stopped"]:
+                break
+
+            with _section_scan_lock:
+                w_state.update({"section_id": section_id, "ct_id": ct_id,
+                                "ct_name": ct_name, "page": 0})
+
+            # ── Smart skip ────────────────────────────────────────────────────
+            try:
+                conn_check = sqlite3.connect(get_db_path(), timeout=5.0)
+                row = conn_check.execute(
+                    "SELECT COUNT(*), MAX(last_parsed_at) FROM parsed_products WHERE id_section=?",
+                    (section_id,)
+                ).fetchone()
+                db_count   = row[0]
+                last_parsed = row[1] or ""
+                conn_check.close()
+
+                today = datetime.utcnow().strftime("%Y-%m-%d")
+                if db_count > 0 and last_parsed.startswith(today):
+                    log.info("[SW%d/%s] ⏭ SKIP section=%d [%s] — спаршено сегодня (%d товаров)",
+                             wid, account_name, section_id, ct_name, db_count)
+                    w_state["sections_done"].append(section_id)
+                    with _section_scan_lock:
+                        st["sections_done"]     += 1
+                        st["sections_remaining"] = max(0, st["sections_remaining"] - 1)
+                    continue
+
+                api_total = client.get_total_by_section(section_id, ct_id)
+                if api_total > 0 and db_count >= api_total:
+                    log.info("[SW%d/%s] ⏭ SKIP section=%d [%s] — БД:%d >= API:%d",
+                             wid, account_name, section_id, ct_name, db_count, api_total)
+                    w_state["sections_done"].append(section_id)
+                    with _section_scan_lock:
+                        st["sections_done"]     += 1
+                        st["sections_remaining"] = max(0, st["sections_remaining"] - 1)
+                    continue
+                else:
+                    log.info("[SW%d/%s] ▶ section=%d [%s] БД:%d API:%d — парсим",
+                             wid, account_name, section_id, ct_name, db_count, api_total)
+            except Exception as e:
+                log.warning("[SW%d/%s] ошибка проверки section=%d: %s",
+                            wid, account_name, section_id, e)
+
+            # ── Пагинация секции ──────────────────────────────────────────────
+            seen_ids: set = set()
+            page = 0
+            consecutive_empty = 0
+
+            while not st["stopped"]:
+                page += 1
+                with _section_scan_lock:
+                    w_state["page"] = page
+
+                try:
+                    items = client.get_products_by_section(
+                        section_id=section_id,
+                        content_type_id=ct_id,
+                        page=page,
+                        limit=100,
+                        currency="wmz",
+                    )
+                except Exception as e:
+                    with _section_scan_lock:
+                        st["last_error"] = f"SW{wid}: {e}"
+                    log.warning("[SW%d/%s] section=%d page=%d ошибка: %s",
+                                wid, account_name, section_id, page, e)
+                    break
+
+                if not items:
+                    consecutive_empty += 1
+                    if consecutive_empty >= 3:
+                        log.info("[SW%d/%s] section=%d завершена на стр.%d",
+                                 wid, account_name, section_id, page)
+                        break
+                    continue
+                consecutive_empty = 0
+
+                with _section_scan_lock:
+                    st["total_found"] += len(items)
+
+                batch = []
+                for ap in items:
+                    eid = str(ap.id_goods)
+                    if not eid or eid in seen_ids:
+                        continue
+                    if is_fresh(eid):
+                        continue
+                    if is_rejected(eid):
+                        continue
+                    seen_ids.add(eid)
+                    p = client.to_engine_product(ap, category=ct_name)
+                    if p:
+                        p.profit_score = _calc_raw_score(
+                            ap.cnt_sell, float(ap.rating or 0), 0, ap.is_active
+                        )
+                        batch.append(p)
+
+                skipped = len(items) - len(batch)
+                if batch:
+                    saved = eng._save_batch(batch, ct_name)
+                    with _section_scan_lock:
+                        st["total_saved"] += len(saved)
+                        total_now = st["total_saved"]
+                    invalidate_name_cache()
+
+                    for s in saved:
+                        log.info(
+                            "[SW%d/%s] ✓ NEW [%s] %s | $%.2f | продаж:%d | итого:%d",
+                            wid, account_name,
+                            s.get("content_type_name") or ct_name,
+                            (s.get("title") or "")[:60],
+                            s.get("price_usd") or 0,
+                            s.get("sales_count") or 0,
+                            total_now,
+                        )
+
+                    if run_ai and saved:
+                        eng._ai_enrich_batch(saved)
+
+                log.info(
+                    "[SW%d/%s] section=%d стр.%d | товаров:%d | новых:%d | пропущено:%d",
+                    wid, account_name, section_id, page,
+                    len(items), len(batch) if batch else 0, skipped,
+                )
+
+            w_state["sections_done"].append(section_id)
+            with _section_scan_lock:
+                st["sections_done"]     += 1
+                st["sections_remaining"] = max(0, st["sections_remaining"] - 1)
+            log.info("[SW%d/%s] section=%d готово. Страниц:%d. Сохранено:%d",
+                     wid, account_name, section_id, page, st["total_saved"])
+
+    except Exception as e:
+        with _section_scan_lock:
+            st["last_error"] = f"SW{wid} fatal: {e}"
+        log.exception("[SW%d/%s] фатальная ошибка: %s", wid, account_name, e)
+    finally:
+        with _section_scan_lock:
+            w_state["section_id"] = None
+        log.info("[SW%d/%s] Завершён.", wid, account_name)

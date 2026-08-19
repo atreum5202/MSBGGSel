@@ -1,7 +1,7 @@
-# PROJECT_DOC — GGselV7 Техническая документация
+# PROJECT_DOC — GGselMSB Техническая документация
 
 > Последнее обновление: 2026-08-03
-> Антидетект: **MSB** (Multi-Session Browser) — `FinalProject/Controller/MSB/`
+> Антидетект: **MSB** (Multi-Session Browser) — `MSBWorkshop/MSB/`
 > Порт MSB API: `http://127.0.0.1:17248`
 
 ---
@@ -9,7 +9,7 @@
 ## Общая архитектура (AI Dropshipping Пайплайн)
 
 ```
-GGselV7 (полностью автоматизированная система дропшиппинга)
+GGselMSB (полностью автоматизированная система дропшиппинга)
     │
     │  HTTP REST API (:17248)
     ▼
@@ -26,9 +26,9 @@ MSB (персональный антидетект)
 4. **Авто-выгрузка**: Товар отправляется на нашу витрину (API V1/V2).
 5. **Цикл продажи**: Клиент покупает -> Мы видим чаты -> Авто/ручной выкуп оригинала -> Передача ключа клиенту -> Фиксация профита.
 
-GGselV7 **не содержит** собственной логики работы с браузером.
+GGselMSB **не содержит** собственной логики работы с браузером.
 Всё что связано с антидетектом, прокси, отпечатками — это MSB.
-GGselV7 работает исключительно как "Мозг" торговых операций.
+GGselMSB работает исключительно как "Мозг" торговых операций.
 
 ---
 
@@ -40,12 +40,13 @@ GGselV7 работает исключительно как "Мозг" торго
 |------|----------|
 | `app.py` | Flask-приложение (порт 5000), точка входа |
 | `config.py` | Вся конфигурация из `.env` |
-| `warm_profiles.py` | CLI-прогрев куков ggsel.net через MSB Warmer API |
-| `warmer_routes.py` | Flask Blueprint `/api/warmer/*` — управление прогревом из UI |
 | `watchdog.py` | Перезапуск app.py при падении |
-| `pipeline_top100.py` | CLI: воронка отбора топ-100 товаров |
-| `start.vbs` | Запуск стека (MSB + GGselV7) |
-| `stop.bat` | Остановка |
+| `cookie_autorefresh.py` | Фоновый демон авто-обновления куков продавца |
+| `cookie_status_routes.py` | Flask Blueprint `/api/cookie/*` — статус и обновление куков |
+| `bulk_parse.py` | Параллельный загрузчик товаров конкурентов с ggsel.net |
+| `parse_all.py` | Оркестратор: запускает 5 воркеров bulk_parse.py |
+| `start.vbs` | Запуск стека (Flask + watchdog), открывает браузер |
+| `restart_flask.bat` | Перезапуск Flask без остановки всего стека |
 
 ### parser/ — Парсер ggsel.net
 
@@ -57,7 +58,6 @@ GGselV7 работает исключительно как "Мозг" торго
 | `msb_client.py` | Низкоуровневый REST-клиент MSB API |
 | `msb_cookies.py` | Кэш Qrator-куков ggsel.net, получение из MSB |
 | `profile_pool.py` | Пул профилей MSB с ротацией и anti-hijack защитой |
-| `profile_warmer.py` | «Умный» нагул профиля через Claude Vision + MSB |
 | `ggsel_parser.py` | HTML→структура: категории, товары, предложения конкурентов |
 | `ggsel_publisher.py` | Публикация и редактирование товаров через ggsel API |
 | `economics.py` | Расчёт маржи, прибыли, фильтры воронки |
@@ -67,7 +67,7 @@ GGselV7 работает исключительно как "Мозг" торго
 | `category_catalog.py` | Кэш категорий ggsel.net |
 | `competitor_scanner.py` | Сканирование конкурентов по категориям |
 | `content_gen.py` | AI-генерация описаний и AI-фото товаров (через Gemini Imagen API) |
-| `morelogin_gemini.py` | Браузерная автоматизация gemini.google.com через CDP + MoreLogin. Сердце пиплайна AI-фото. |
+| `gemini_browser.py` | Браузерная автоматизация gemini.google.com через CDP + MSB. AI-фото через Gemini Imagen. |
 | `dedup.py` | Дедупликация предложений |
 | `event_logger.py` | Логирование событий парсера |
 | `my_shop_scraper.py` | Скрапинг собственного магазина |
@@ -75,18 +75,13 @@ GGselV7 работает исключительно как "Мозг" торго
 | `telemetry.py` | Локальная телеметрия |
 | `tg_bot.py` | Уведомления в Telegram |
 
-### bot/ — Telegram-бот
+### tools/ — Инструменты диагностики
 
-Управление GGselV7 через Telegram: запуск парсера, статус, топ товары.
-
-### scratch/ — Скрипты автоматизации и интеграции MSB
-
-**Официальная подсистема (не удалять!)**, отвечающая за:
-- Автоматическую регистрацию аккаунтов на ggsel.net (`ggsel_register.js`).
-- Интеграцию с MSB по протоколу CDP (папка `lib/`).
-- Авторизацию Outlook аккаунтов (`outlook_login.js`).
-- Выполнение массовых задач по всем профилям (`run_all_profiles.js`).
-- Рабочую зону (scratch) для временных скриптов, диагностики прокси и отладки парсера.
+| Файл | Описание |
+|------|----------|
+| `cdp_monitor.py` | Мониторинг CDP трафика профиля в реальном времени |
+| `network_monitor.py` | Мониторинг сетевых запросов через MSB NetworkCapture |
+| `take_shot.py` | Снимок экрана активного профиля через CDP |
 
 ---
 
@@ -152,7 +147,7 @@ static/
 
 ```json
 {
-  "gemini_browser_group": "GeminiGroup",  // название группы профилей MoreLogin
+  "gemini_browser_group": "Gmail",  // группа Google-аккаунтов в MSB для Gemini AI-фото
   "server": { "local_port": 5000 }
 }
 ```
@@ -161,7 +156,7 @@ static/
 
 ---
 
-## API эндпоинты GGselV7
+## API эндпоинты GGselMSB
 
 Базовый URL: `http://127.0.0.1:5000`
 
@@ -176,13 +171,13 @@ static/
 | GET | `/api/parser/logs` | Логи парсера (последние N строк) |
 | GET | `/api/parser/profiles` | Статус профилей в пуле (MSB) |
 
-### Прогрев куков
+### Куки
 
 | Метод | Путь | Описание |
 |-------|------|----------|
-| POST | `/api/warmer/start` | Запустить прогрев через MSB |
-| GET | `/api/warmer/status` | Статус прогрева |
-| POST | `/api/warmer/stop` | Остановить прогрев |
+| GET | `/api/cookie/status` | Статус куков продавца |
+| POST | `/api/cookie/open-browser` | Открыть браузер для ручного обновления куков |
+| POST | `/api/cookie/refresh` | Авто-обновление куков через CDP |
 
 ### Товары
 
@@ -199,21 +194,20 @@ static/
 ## Поток данных (Бизнес-логика)
 
 ```
-1. warm_profiles.py       → MSB /api/warmer/start (Прогрев куки)
+1. cookie_autorefresh.py  → Авто-получение Qrator-куков через MSB CDP
 
-2. parser_engine.py       → Запуск пула (Топ-100 конкурентов)
-   └── msb_fetcher.py     → Сбор данных через антидетект MSB
+2. bulk_parse.py (×5)     → Параллельный парсинг конкурентов через GGseller-профили
+   └── msb_fetcher.py     → HTTP-запросы через куки MSB антидетекта
 
 3. economics.py           → Фильтрация по маржинальности
-                            (Конкурент + Комиссии = Розничная Цена)
+                            (Цена конкурента + Комиссии = Наша розничная цена)
 
-4. content_gen.py         → Передача в Gemini (API/MCP)
-                            Уникализация описания, адаптация SEO
+4. content_gen.py         → Генерация описаний и AI-фото (gemini_browser.py + CDP)
 
-5. ggsel_publisher.py     → POST /deals через API V1/V2
+5. ggsel_publisher.py     → Публикация через API V1/V2
                             Авто-выгрузка на витрину
 
-6. order_processor.py     → (План) Цикл обработки: Покупка -> Перепродажа -> Выдача.
+6. order_processor.py     → (План) Цикл: Покупка → Перепродажа → Выдача ключа.
 ```
 
 ---
@@ -235,13 +229,8 @@ PARSER_WORKERS=3               # Параллельных потоков пар�
 PARSER_DELAY_MIN=2             # Минимальная пауза между запросами (сек)
 PARSER_DELAY_MAX=7             # Максимальная пауза
 
-# ── Прогрев ───────────────────────────────────────────────────
-WARM_POLL_INTERVAL=5           # Интервал опроса статуса прогрева (сек)
-WARM_TIMEOUT=600               # Таймаут прогрева (сек)
-
-# ── Telegram бот ──────────────────────────────────────────────
-TG_BOT_TOKEN=...
-TG_CHAT_ID=...
+# ── Куки продавца ────────────────────────────────────────────
+MSB_COOKIE_TTL=900             # Время жизни куков продавца (сек)
 
 # ── Разное ────────────────────────────────────────────────────
 FLASK_DEBUG=false
@@ -252,14 +241,14 @@ LOG_LEVEL=INFO
 
 ## Зависимости
 
-GGselV7 зависит от MSB. MSB должен быть запущен перед стартом GGselV7.
+GGselMSB зависит от MSB. MSB должен быть запущен перед стартом GGselMSB.
 
 ```
-MSB (антидетект)          → FinalProject/Controller/MSB/
-GGselV7 (дропшиппинг)    → GGsellerFinal/GGselV7/
+MSB (антидетект)          → MSBWorkshop/MSB/
+GGselMSB (дропшиппинг) → MSBWorkshop/GGselMSB/
 ```
 
-MSB не зависит от GGselV7 — антидетект самостоятельный.
+MSB не зависит от GGselMSB — антидетект самостоятельный.
 Любой другой проект тоже может использовать MSB через его REST API.
 
 ---
@@ -305,14 +294,11 @@ node run_all_profiles.js --group GGSeller --delay 15
 
 ```bat
 # 1. Сначала запускаем MSB
-FinalProject\Controller\MSB\start.vbs
+MSBWorkshop\MSB\start.vbs
 
-# 2. Греем профили
-cd GGsellerFinal\GGselV7
-python warm_profiles.py
+# 2. Запускаем GGselMSB
+cd MSBWorkshop\GGselMSB
+start.vbs  # ← тихий запуск Flask + watchdog + открывает браузер
 
-# 3. Запускаем GGselV7
-start.vbs
-```
-
-Или всё через `FinalProject/start.bat` если он настроен на оба проекта.
+# Или через MSB Workspace (one-click):
+# POST http://127.0.0.1:17248/workspace/launch

@@ -111,7 +111,7 @@ const VIEWS = [
   'docs',
   'dashboard', 'offers', 'queue', 'orders', 'promo-codes',
   'messages', 'reviews', 'finance', 'ads-campaigns', 'ads-stats',
-  'settings', 'parser', 'moderation', 'logs', 'status', 'warmer', 'msb', 'deals'
+  'settings', 'parser', 'moderation', 'approval', 'logs', 'status', 'warmer', 'msb', 'deals'
 ];
 const loaded = new Set();
 let currentView = 'dashboard';
@@ -179,16 +179,17 @@ function loadView(name) {
     'dashboard':      loadDashboard,
     'promo-codes': loadPromoCodes,
     'profile': loadProfile,
-    'offer-edit': () => {},
-    'docs': () => {},
+    'offer-edit': () => Promise.resolve(),
+    'docs': () => Promise.resolve(),
     'offers':         loadOffers,
     'orders':         loadOrders,
     'messages':       loadChats,
     'reviews':        loadReviews,
     'finance':        loadFinance,
-    'settings':       () => {},
+    'settings':       () => Promise.resolve(),
     'parser':         loadParser,
     'moderation':     loadModeration,
+    'approval':       loadApproval,
     'deals':          loadDeals,
     'logs':           loadLogs,
     'status':         loadStatus,
@@ -1546,7 +1547,34 @@ async function loadChats() {
   }
 }
 
+let _chatsRawItems = [];
+const chatProductCache = {};   // null = failed, object = success, undefined = not fetched
+const _chatProductFetching = new Set(); // track in-progress fetches
+
+async function getProductInfo(productId) {
+  if (!productId) return null;
+  if (chatProductCache[productId] !== undefined) return chatProductCache[productId];
+  if (_chatProductFetching.has(productId)) return null;
+  _chatProductFetching.add(productId);
+  try {
+    const r = await fetch(`/api/v1/product/${productId}/data`);
+    const d = await r.json();
+    if (d.status_code === 200 && d.raw && d.raw.product) {
+      chatProductCache[productId] = {
+        name: d.raw.product.name,
+        image: d.raw.product.preview_imgs?.[0]?.url || ''
+      };
+      _chatProductFetching.delete(productId);
+      return chatProductCache[productId];
+    }
+  } catch (e) {}
+  chatProductCache[productId] = null;
+  _chatProductFetching.delete(productId);
+  return null;
+}
+
 function renderChatsList(items) {
+  _chatsRawItems = items;
   const c = document.getElementById('chats-list-container');
   if (!c) return;
   
@@ -1557,19 +1585,41 @@ function renderChatsList(items) {
   
   c.innerHTML = items.map(chat => {
     const isAct = chat.id == activeChatId;
-    // buyer name is email from GGSEL
     const buyerName = esc(chat.buyer || 'Покупатель');
-    // last_message_date is a datetime string
     const lastDate = chat.last_message_date ? fmtDate(chat.last_message_date) : '';
     const unreadDot = chat.unread > 0 ? `<span style="color:var(--red); font-weight:bold;"> •${chat.unread}</span>` : '';
+    
+    const pInfo = chatProductCache[chat.product_id];
+    let prodHtml = '';
+    if (pInfo) {
+      prodHtml = `
+        <div style="display:flex; align-items:center; gap:8px; margin-top:6px;">
+          ${pInfo.image ? `<img src="${esc(pInfo.image)}" style="width:30px; height:30px; object-fit:cover; border-radius:4px;">` : `<div style="width:30px; height:30px; background:var(--bg); border-radius:4px;"></div>`}
+          <div style="font-size:11px; color:var(--text-faint); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;" title="${esc(pInfo.name)}">${esc(pInfo.name)}</div>
+        </div>
+      `;
+    } else {
+      prodHtml = chat.product_id ? `<div style="font-size:11px; color:var(--text-faint); margin-top:4px;">Товар: ${chat.product_id}</div>` : '';
+    }
+
     return `
       <div class="chat-list-item" style="padding:15px; border-bottom:1px solid var(--border); cursor:pointer; background:${isAct ? 'var(--hover-bg)' : 'transparent'}; transition:background 0.2s;" onclick="openChat('${chat.id}')">
         <div style="font-weight:600; font-size:14px; margin-bottom:3px;">${buyerName}${unreadDot}</div>
-        ${chat.product_id ? `<div style="font-size:11px; color:var(--text-faint);">Товар: ${chat.product_id}</div>` : ''}
         <div style="font-size:11px; color:var(--text-dim); margin-top:3px;">${lastDate}</div>
+        ${prodHtml}
       </div>
     `;
   }).join('');
+
+  // trigger fetches for uncached product IDs
+  const uniqueIds = [...new Set(items.map(c => c.product_id).filter(Boolean))];
+  uniqueIds.forEach(pid => {
+    if (chatProductCache[pid] === undefined && !_chatProductFetching.has(pid)) {
+      getProductInfo(pid).then(res => {
+        if (res) renderChatsList(_chatsRawItems);
+      });
+    }
+  });
 }
 
 async function openChat(id) {
@@ -1577,7 +1627,39 @@ async function openChat(id) {
   activeChatId = id;
   loadChats();
   
-  document.getElementById('chat-title').textContent = 'Диалог #' + id;
+  const chat = _chatsRawItems.find(c => c.id == id);
+  let titleHtml = 'Диалог #' + id;
+  if (chat && chat.product_id) {
+    const pInfo = chatProductCache[chat.product_id];
+    if (pInfo) {
+      titleHtml = `
+        <div style="display:flex; align-items:center; gap:10px;">
+          ${pInfo.image ? `<img src="${esc(pInfo.image)}" style="width:40px; height:40px; object-fit:cover; border-radius:6px;">` : ''}
+          <div style="display:flex; flex-direction:column;">
+            <span style="font-size:14px; font-weight:600;">${esc(chat.buyer || 'Покупатель')}</span>
+            <a href="https://ggsel.net/catalog/product/${chat.product_id}" target="_blank" style="font-size:12px; color:var(--primary); text-decoration:none; max-width: 400px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;" title="${esc(pInfo.name)}">${esc(pInfo.name)}</a>
+          </div>
+        </div>
+      `;
+    } else {
+      titleHtml = `
+        <div style="display:flex; flex-direction:column;">
+          <span style="font-size:14px; font-weight:600;">${esc(chat.buyer || 'Покупатель')}</span>
+          <a href="https://ggsel.net/catalog/product/${chat.product_id}" target="_blank" style="font-size:12px; color:var(--primary); text-decoration:none;">Товар #${chat.product_id}</a>
+        </div>
+      `;
+    }
+  } else if (chat) {
+      titleHtml = `
+        <div style="display:flex; flex-direction:column;">
+          <span style="font-size:14px; font-weight:600;">${esc(chat.buyer || 'Покупатель')}</span>
+        </div>
+      `;
+  }
+  
+  document.getElementById('chat-title').innerHTML = titleHtml;
+  document.getElementById('chat-order-link').innerHTML = chat?.order_id ? `<a href="https://seller.ggsel.com/dashboard/orders/${chat.order_id}" target="_blank" style="text-decoration:none;">Заказ #${chat.order_id}</a>` : '';
+  
   const c = document.getElementById('chat-messages-container');
   c.innerHTML = '<div class="loader"><div class="spinner"></div></div>';
   
@@ -2350,8 +2432,10 @@ window.runMsbTest       = runMsbTest;
 // ═══════════════════════════════════════════════════
 //  MODAL HELPERS
 // ═══════════════════════════════════════════════════
-function openModal(html) {
-  $('#modal-content').innerHTML = html;
+function openModal(html, extraClass) {
+  const m = $('#modal-content');
+  m.className = 'modal' + (extraClass ? ' ' + extraClass : '');
+  m.innerHTML = html;
   $('#modal-bg').classList.add('active');
 }
 function closeModal() { $('#modal-bg').classList.remove('active'); }
@@ -2386,6 +2470,9 @@ async function loadParser() {
   
   // Загружаем дерево категорий
   loadCategoriesTree();
+
+  // Статистика категорий ggsel
+  loadCategoryStats();
   
   // Кнопки обновления категорий и комиссий
   $('#btn-refresh-categories')?.addEventListener('click', async () => {
@@ -2415,6 +2502,10 @@ async function loadParser() {
   await refreshParserProducts();
   await refreshParsedProducts();
   await refreshParserRuns();
+
+  // Экономика парсера: текущая конфигурация
+  await loadParserEcon();
+  $('#btn-parser-econ-refresh')?.addEventListener('click', () => loadParserEcon());
 
   // Profit slider
   const slider = $('#parser-profit-slider');
@@ -2460,6 +2551,54 @@ async function loadParser() {
     const lbl = $('#parser-autorefresh-label');
     if (lbl) lbl.textContent = isRunning ? 'авто-обновление' : 'авто-обновление';
   }, 2000);
+
+  // ── Табы типа парсинга (Товары / Автовыдача / Пополнение) ──────────────
+  const parserTypeTabs = $$('[data-parser-type]', document.getElementById('view-parser'));
+  let currentParserType = localStorage.getItem('parser_type') || 'keys';
+
+  function applyParserType(type) {
+    currentParserType = type;
+    localStorage.setItem('parser_type', type);
+    // Табы
+    parserTypeTabs.forEach(tab => {
+      const isActive = tab.dataset.parserType === type;
+      tab.classList.toggle('active', isActive);
+      tab.style.color = isActive ? 'var(--text)' : 'var(--text-muted)';
+      tab.style.background = isActive ? 'var(--bg-elevated)' : '';
+      tab.style.border = isActive ? '1px solid var(--border)' : '1px solid transparent';
+    });
+    // Спец. панели
+    const topupPanel = $('#parser-topup-panel');
+    const autoPanel  = $('#parser-autodelivery-panel');
+    if (topupPanel)  topupPanel.style.display  = type === 'topup'        ? '' : 'none';
+    if (autoPanel)   autoPanel.style.display   = type === 'autodelivery' ? '' : 'none';
+    // Подсказка в поле категории
+    const querySub = $('#parser-input-query')?.parentElement?.querySelector('.muted');
+    if (querySub) {
+      if (type === 'topup') {
+        querySub.textContent = 'Введи категорию пополнений: steam-wallet, playstation-wallet, google-play...';
+      } else if (type === 'autodelivery') {
+        querySub.textContent = 'Парсятся только товары с autoselling=true';
+      } else {
+        querySub.textContent = 'Если указано — ищем по всему сайту через /search';
+      }
+    }
+  }
+
+  parserTypeTabs.forEach(tab => {
+    tab.addEventListener('click', () => applyParserType(tab.dataset.parserType));
+  });
+  // Применяем сохранённый тип при входе
+  applyParserType(currentParserType);
+
+  // Передаём тип парсинга при запуске — подмешиваем в startParser
+  const _origStartParser = window.startParser;
+  window.startParser = async function() {
+    // Сохраняем тип в data-атрибуте кнопки чтобы routes.py мог его читать
+    const btn = $('#btn-parser-start');
+    if (btn) btn.dataset.parserType = currentParserType;
+    return _origStartParser ? _origStartParser() : undefined;
+  };
 }
 
 // Debounce helper
@@ -2516,7 +2655,6 @@ async function refreshParserStatus() {
 
     const setText = (id, v) => { const e = $('#'+id); if (e) e.textContent = String(v ?? 0); };
     setText('parser-stat-saved', s.products_saved);
-    setText('parser-stat-ai',    s.products_ai_enriched);
     setText('parser-stat-pages', s.pages_scanned);
     setText('parser-stat-errors',s.errors_count);
 
@@ -2662,114 +2800,156 @@ function renderParserProducts(items) {
     t.innerHTML = `<div class="empty" style="padding:40px 20px;"><div class="empty-icon" style="font-size:32px;margin-bottom:10px;">&#9697;</div><div style="font-weight:500;margin-bottom:4px;">Нет товаров</div><div class="muted" style="font-size:12px;">Нажми «Старт» чтобы запустить парсер</div></div>`;
     return;
   }
-  const rows = items.map(p => {
-    const title       = p.generated_title || p.title || '—';
-    const statusBadgeHtml = statusBadgeFor(p.status);
+  t.innerHTML = items.map(p => buildParserCardHtml(p)).join('');
 
-    // ── Цены: source_price (зачёркнутый) → my_price (жирный)
-    const src = (p.source_price && p.source_price > 0) ? p.source_price : p.price;
-    let priceHtml;
-    if (p.my_price && p.my_price > 0 && src && src > 0 && Math.abs(p.my_price - src) > 0.01) {
-      priceHtml = `<span style="text-decoration:line-through; color:#999; font-size:11px;">${fmt(src)}</span> <b style="color:var(--green);">${fmt(p.my_price)}</b> ₽`;
-    } else if (p.my_price && p.my_price > 0) {
-      priceHtml = `<b>${fmt(p.my_price)}</b> ₽`;
-    } else if (p.price) {
-      priceHtml = `${fmt(p.price)} ₽`;
-    } else {
-      priceHtml = '—';
-    }
-
-    // ── Profit Score бейдж (цветной)
-    const profit = (p.profit_score !== null && p.profit_score !== undefined) ? Number(p.profit_score) : null;
-    let profitHtml;
-    if (profit === null || isNaN(profit)) {
-      profitHtml = '<span class="profit-score low">—</span>';
-    } else {
-      let cls = 'profit-score';
-      if (profit >= 70) cls += ' high';       // зелёный
-      else if (profit >= 40) cls += ' mid';   // жёлтый
-      else cls += ' low';                     // красный
-      profitHtml = `<span class="${cls}" title="AI profit score 0-100">★ ${fmt(profit, 0)}</span>`;
-    }
-
-    // ── Продажи
-    const salesHtml   = p.sales_count !== null && p.sales_count !== undefined
-      ? fmt(p.sales_count, 0)
-      : '—';
-
-    // ── Рейтинг звёздочками
-    const rating = (p.rating !== null && p.rating !== undefined) ? Number(p.rating) : null;
-    let ratingHtml = '—';
-    if (rating !== null && !isNaN(rating) && rating > 0) {
-      const full = Math.max(0, Math.min(5, Math.round(rating)));
-      const stars = '★'.repeat(full) + '☆'.repeat(5 - full);
-      ratingHtml = `<span title="Рейтинг продавца ${rating.toFixed(1)}/5" style="color:#f5b50a;">${stars}</span> <span class="muted" style="font-size:11px;">${rating.toFixed(1)}</span>`;
-    }
-
-    // ── В наличии
-    const inStockHtml = p.in_stock
-      ? `<span class="badge approved" style="font-size:10px;">✓ да</span>`
-      : `<span class="badge rejected" style="font-size:10px;">✗ нет</span>`;
-    const url         = p.url ? `<a href="${esc(p.url)}" target="_blank" rel="noopener" class="link" title="Открыть на сайте">↗</a>` : '';
-    const imgUrl      = p.local_image_path || p.generated_image_url || p.image_url;
-    const img         = imgUrl
-      ? `<img src="${esc(imgSrc(imgUrl))}" class="cover-thumb" onerror="this.style.display='none'" alt="">`
-      : '';
-
-    const canApprove  = p.status !== 'approved';
-    const canReject   = p.status !== 'rejected';
-
-    return `<tr id="parser-row-${esc(p.product_id)}">
-      <td style="width:44px; padding:8px 6px 8px 14px;">${img}</td>
-      <td style="max-width:280px;">
-        <div style="font-weight:500; line-height:1.35;">${esc(title)}</div>
-        <div class="muted" style="font-size:11px; margin-top:2px;">${esc(p.product_id)} ${url}</div>
-      </td>
-      <td style="white-space:nowrap;">${priceHtml}</td>
-      <td>${profitHtml}</td>
-      <td style="white-space:nowrap;">${ratingHtml}</td>
-      <td>${salesHtml}</td>
-      <td>${inStockHtml}</td>
-      <td>${statusBadgeHtml}</td>
-      <td>
-        <div style="display:flex; gap:4px;">
-          ${canApprove ? `<button class="btn-approve" data-parser-approve="${esc(p.product_id)}">✓</button>` : ''}
-          ${canReject  ? `<button class="btn-reject"  data-parser-reject="${esc(p.product_id)}">✕</button>` : ''}
-          <button class="btn btn-sm" data-parser-view="${esc(p.product_id)}">…</button>
-        </div>
-      </td>
-    </tr>`;
-  }).join('');
-
-  t.innerHTML = `
-    <table>
-      <thead>
-        <tr>
-          <th style="width:44px;"></th>
-          <th>Название</th>
-          <th>Цена</th>
-          <th>Score</th>
-          <th>Рейтинг</th>
-          <th>Продажи</th>
-          <th>Наличие</th>
-          <th>Статус</th>
-          <th style="width:90px;"></th>
-        </tr>
-      </thead>
-      <tbody>${rows}</tbody>
-    </table>
-  `;
-
-  // Bind events
+  // Bind events on the card grid
   t.querySelectorAll('[data-parser-approve]').forEach(b => {
-    b.addEventListener('click', () => approveProduct(b.dataset.parserApprove, b));
+    b.addEventListener('click', e => { e.stopPropagation(); approveProduct(b.dataset.parserApprove, b); });
   });
   t.querySelectorAll('[data-parser-reject]').forEach(b => {
-    b.addEventListener('click', () => rejectProduct(b.dataset.parserReject, b));
+    b.addEventListener('click', e => { e.stopPropagation(); rejectProduct(b.dataset.parserReject, b); });
   });
   t.querySelectorAll('[data-parser-view]').forEach(b => {
-    b.addEventListener('click', () => viewParserProduct(b.dataset.parserView));
+    b.addEventListener('click', e => { e.stopPropagation(); viewParserProduct(b.dataset.parserView); });
   });
+  // Click on card opens detail modal
+  t.querySelectorAll('[data-parser-row]').forEach(row => {
+    row.addEventListener('click', () => viewParserProduct(row.dataset.parserRow));
+  });
+}
+
+/**
+ * Карточка товара в стиле ggsel:
+ *  [Image] | Title (h2)
+ *          | Breadcrumb (категория)
+ *          | ★ 4.9 (22) · 882 продаж · 5 отзывов
+ *          | 1 155 ₽  156 ₽
+ *          | [Short description 2-3 строки]
+ *          | Продавец: Joe · ★ 4.9
+ *          | ✓ Approve   ✕ Reject   ↗ Open
+ *
+ * Без AI-формы, без редактируемых полей, без «Данных для публикации».
+ */
+function buildParserCardHtml(p) {
+  const pid = p.product_id;
+  const title = p.generated_title || p.original_title || p.title || '—';
+
+  // ── Изображение: ТОЛЬКО оригинал (локальный кэш → оригинал с ggsel).
+  //    НЕ показываем generated_image_url — это AI/рестайл, в Парсере он не нужен.
+  const imgSrc0 = p.local_image_path || p.image_url;
+  const imgHtml = imgSrc0
+    ? `<img class="pcard-img" src="${esc(imgSrc(imgSrc0))}" alt="${esc(title)}" loading="lazy" onerror="this.parentElement.classList.add('pcard-noimg');this.remove();">`
+    : `<div class="pcard-noimg"><svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>`;
+
+  // ── Крошки: приоритет у p.breadcrumb (полный путь с детальной страницы),
+  //    fallback — p.category (категория со страницы списка, может быть с ›)
+  let crumbsHtml = '';
+  const crumbSource = (p.breadcrumb && String(p.breadcrumb).trim()) || p.category || '';
+  if (crumbSource) {
+    const parts = String(crumbSource).split(/\s*[›>»/\\|]\s*/).map(s => s.trim()).filter(Boolean);
+    if (parts.length === 1) {
+      crumbsHtml = `<div class="pcard-crumbs"><span>${esc(parts[0])}</span></div>`;
+    } else {
+      crumbsHtml = `<div class="pcard-crumbs">${parts.map(c => `<span>${esc(c)}</span>`).join('<span class="pcard-crumb-sep">›</span>')}</div>`;
+    }
+  }
+
+  // ── Рейтинг звёздочками
+  const rating = (p.rating !== null && p.rating !== undefined) ? Number(p.rating) : null;
+  let ratingHtml = '';
+  if (rating !== null && !isNaN(rating) && rating > 0) {
+    const full = Math.max(0, Math.min(5, Math.round(rating)));
+    const stars = '★'.repeat(full) + '☆'.repeat(5 - full);
+    ratingHtml = `<span class="pcard-stars" title="Рейтинг ${rating.toFixed(1)}/5">${stars}</span>
+                  <span class="pcard-rating-num">${rating.toFixed(1)}</span>`;
+  }
+
+  // ── Цена: ТОЛЬКО исходная с ggsel (source_price → price), без пересчёта my_price.
+  const srcPrice = (p.source_price && p.source_price > 0) ? p.source_price : p.price;
+  const priceHtml = srcPrice
+    ? `<span class="pcard-price-new">${fmt(srcPrice)} ₽</span>`
+    : `<span class="pcard-price-new">—</span>`;
+
+  // ── Продажи / отзывы (как на ggsel)
+  const salesTxt = (p.sales_count !== null && p.sales_count !== undefined && p.sales_count !== '')
+    ? `${fmt(p.sales_count, 0)} продаж`
+    : '';
+  const reviewsTxt = (p.reviews_count !== null && p.reviews_count !== undefined && p.reviews_count !== '')
+    ? `${p.reviews_count} отзыв${_pluralReviews(p.reviews_count)}`
+    : '';
+  const metaParts = [];
+  if (ratingHtml) metaParts.push(`<span class="pcard-meta-item">${ratingHtml}</span>`);
+  if (salesTxt)   metaParts.push(`<span class="pcard-meta-item">${esc(salesTxt)}</span>`);
+  if (reviewsTxt) metaParts.push(`<span class="pcard-meta-item">${esc(reviewsTxt)}</span>`);
+  const metaLine = metaParts.length
+    ? `<div class="pcard-meta">${metaParts.join('<span class="pcard-dot">·</span>')}</div>`
+    : '';
+
+  // ── Описание (короткое, 3 строки)
+  const desc = p.original_desc || p.generated_desc || '';
+  const descHtml = desc
+    ? `<div class="pcard-desc">${esc(desc.slice(0, 360))}${desc.length > 360 ? '…' : ''}</div>`
+    : '';
+
+  // ── Продавец
+  const sellerName = p.seller_name || p.seller || '';
+  const sellerRating = (p.seller_rating !== null && p.seller_rating !== undefined) ? Number(p.seller_rating) : null;
+  const sellerRatingTxt = sellerRating !== null && !isNaN(sellerRating) ? `★ ${sellerRating.toFixed(1)}` : '';
+  const sellerSalesTxt = (p.shop_products_count !== null && p.shop_products_count !== undefined)
+    ? `${fmt(p.shop_products_count, 0)} тов.`
+    : '';
+  const sellerParts = [];
+  if (sellerName)    sellerParts.push(`<span class="pcard-seller-name">${esc(sellerName)}</span>`);
+  if (sellerRatingTxt) sellerParts.push(`<span class="pcard-seller-rating">${sellerRatingTxt}</span>`);
+  if (sellerSalesTxt)  sellerParts.push(`<span class="pcard-seller-sales">${sellerSalesTxt}</span>`);
+  const sellerHtml = sellerParts.length
+    ? `<div class="pcard-seller"><span class="pcard-seller-label">Продавец:</span> ${sellerParts.join(' · ')}</div>`
+    : '';
+
+  // ── Аккаунт-источник (через какой MSB-профиль спарсен)
+  const srcProfile = p.source_profile_name || '';
+  const srcEmail   = p.source_account_email || '';
+  const srcUid     = p.source_ggsel_user_id || '';
+  let sourceHtml = '';
+  if (srcProfile || srcEmail) {
+    const profilePart = srcProfile ? `<span style="font-weight:600;color:var(--primary-color);">${esc(srcProfile)}</span>` : '';
+    const emailPart   = srcEmail   ? `<span style="color:var(--text-muted);">${esc(srcEmail)}</span>` : '';
+    const uidPart     = srcUid     ? `<span style="color:var(--text-faint);font-size:10px;">#${esc(srcUid)}</span>` : '';
+    const parts = [profilePart, emailPart, uidPart].filter(Boolean);
+    sourceHtml = `<div class="pcard-source" title="MSB-профиль через который спарсен товар | будет использоваться для автопокупки">
+      <span style="font-size:10px;color:var(--text-faint);">&#128100; Источник:</span>
+      ${parts.join('<span style="color:var(--border);margin:0 3px;">|</span>')}
+    </div>`;
+  }
+
+  // ── Статус (бейдж)
+  const statusBadgeHtml = statusBadgeFor(p.status);
+
+  return `
+  <article class="pcard" id="parser-row-${esc(pid)}" data-parser-row="${esc(pid)}" title="Клик — подробности">
+    <div class="pcard-image">${imgHtml}${statusBadgeHtml ? `<div class="pcard-status">${statusBadgeHtml}</div>` : ''}</div>
+    <div class="pcard-body">
+      ${crumbsHtml}
+      <h3 class="pcard-title">${esc(title)}</h3>
+      ${metaLine}
+      <div class="pcard-price">${priceHtml}</div>
+      ${descHtml}
+      ${sellerHtml}
+      ${sourceHtml}
+      <div class="pcard-actions">
+        <span class="muted" style="font-size:11px;">Клик — карточка товара</span>
+      </div>
+    </div>
+  </article>`;
+}
+
+// Склонение «отзыв»: 1 отзыв, 2/3/4 отзыва, 5+ отзывов (с учётом 11-14)
+function _pluralReviews(n) {
+  const mod10 = n % 10;
+  const mod100 = n % 100;
+  if (mod10 === 1 && mod100 !== 11) return '';
+  if (mod10 >= 2 && mod10 <= 4 && (mod100 < 12 || mod100 > 14)) return 'а';
+  return 'ов';
 }
 
 async function approveProduct(pid, btn) {
@@ -2861,184 +3041,196 @@ async function viewParserProduct(pid) {
     const d = await api(`/api/parser/products/${encodeURIComponent(pid)}`);
     const p = d.product || {};
 
+    const title = p.original_title || p.title || '—';
+    const imgUrl0 = p.local_image_path || p.image_url;
+
     // ── Галерея: images_json → массив; fallback на image_url
     let galleryImgs = [];
     if (p.images_json) {
       try { galleryImgs = JSON.parse(p.images_json); } catch (e) { galleryImgs = []; }
     }
-    if (!galleryImgs.length && p.image_url) galleryImgs = [p.image_url];
-    const galleryHtml = galleryImgs.length
-      ? `<div style="display:flex; gap:6px; overflow-x:auto; padding:4px 0;">
-           ${galleryImgs.map(u => `<a href="${esc(u)}" target="_blank" rel="noopener"><img src="${esc(imgSrc(u))}" style="width:80px; height:80px; object-fit:cover; border-radius:6px; border:1px solid rgba(255,255,255,0.1);" onerror="this.style.opacity=0.3"></a>`).join('')}
-         </div>`
-      : '<div class="muted" style="font-size:12px;">Нет изображений</div>';
+    if (!galleryImgs.length && imgUrl0) galleryImgs = [imgUrl0];
 
-    // ── Кнопка "Купить у донора" — открывает p.url в новой вкладке
-    const donorBtn = p.url
-      ? `<a href="${esc(p.url)}" target="_blank" rel="noopener" class="btn btn-primary" style="background:var(--green); border-color:var(--green); color:#000; font-weight:600;">🛒 Купить у донора</a>`
-      : '';
+    // ── Крошки: приоритет p.breadcrumb (полный путь), иначе собираем из URL
+    let crumbParts = [];
+    if (p.breadcrumb && String(p.breadcrumb).trim()) {
+      crumbParts = String(p.breadcrumb).split(/\s*[›>»/\\|]\s*/).map(s => s.trim()).filter(Boolean);
+    } else if (p.category) {
+      crumbParts = String(p.category).split(/\s*[›>»/\\|]\s*/).map(s => s.trim()).filter(Boolean);
+    }
+    // Добавляем «Home» в начало, как на ggsel
+    if (crumbParts.length && crumbParts[0].toLowerCase() !== 'home') {
+      crumbParts.unshift('Home');
+    }
 
-    // ── AI-блок
-    const ps = (p.profit_score !== null && p.profit_score !== undefined) ? Number(p.profit_score) : null;
-    let aiBlockHtml;
-    if (ps === null || isNaN(ps)) {
-      aiBlockHtml = `<div class="muted" style="font-style:italic;">AI обогащение не выполнено (нет profit_score)</div>`;
-    } else {
-      let psCls = 'low';
-      if (ps >= 70) psCls = 'high';
-      else if (ps >= 40) psCls = 'mid';
-      const margin = (p.recommended_margin_pct !== null && p.recommended_margin_pct !== undefined)
-        ? `${fmt(p.recommended_margin_pct, 1)}%` : '—';
-      const risk = p.risk_level || '—';
-      const riskReason = p.risk_reason || '';
-      const riskColor = risk === 'low' ? 'var(--green)' : risk === 'high' ? 'var(--red)' : '#f5b50a';
-      aiBlockHtml = `
-        <div class="form-row">
-          <label>Profit Score</label>
-          <div>
-            <div style="display:flex; align-items:center; gap:8px;">
-              <div style="flex:1; height:10px; background:rgba(255,255,255,0.08); border-radius:5px; overflow:hidden;">
-                <div class="profit-score ${psCls}" style="height:100%; width:${Math.max(0, Math.min(100, ps))}%; background:currentColor;"></div>
-              </div>
-              <span class="profit-score ${psCls}" style="font-size:13px;">★ ${fmt(ps, 0)}</span>
-            </div>
-          </div>
-        </div>
-        <div class="form-grid">
-          <div class="form-row">
-            <label>Рекомендуемая наценка</label>
-            <div style="font-weight:600;">${margin}</div>
-          </div>
-          <div class="form-row">
-            <label>Риск</label>
-            <div>
-              <span style="color:${riskColor}; font-weight:600; text-transform:uppercase; font-size:11px;">${esc(risk)}</span>
-              ${riskReason ? `<div class="muted" style="font-size:11px; margin-top:2px;">${esc(riskReason)}</div>` : ''}
-            </div>
-          </div>
-        </div>
+    // ── Рейтинг звёздочками (как на ggsel)
+    const rating = (p.rating !== null && p.rating !== undefined) ? Number(p.rating) : null;
+    let ratingHtml = '';
+    if (rating !== null && !isNaN(rating) && rating > 0) {
+      const full = Math.max(0, Math.min(5, Math.round(rating)));
+      const stars = '★'.repeat(full) + '☆'.repeat(5 - full);
+      ratingHtml = `
+        <span class="ggsel-stars">${stars}</span>
+        <span class="ggsel-rating-num">${rating.toFixed(1)}</span>
       `;
     }
 
-    // ── Характеристики (properties_json)
+    // ── Мета: продажи / отзывы
+    const salesTxt = (p.sales_count !== null && p.sales_count !== undefined && p.sales_count !== '')
+      ? `${fmt(p.sales_count, 0)}${(p.sales_count >= 100) ? '+' : ''} sales`
+      : '';
+    const reviewsTxt = (p.reviews_count !== null && p.reviews_count !== undefined && p.reviews_count !== '')
+      ? `<a href="${esc(p.url || '#')}" target="_blank" rel="noopener" class="ggsel-link">${p.reviews_count} reviews</a>`
+      : '';
+    const metaParts = [];
+    if (ratingHtml) metaParts.push(`<span class="ggsel-meta-item">${ratingHtml}</span>`);
+    if (salesTxt)   metaParts.push(`<span class="ggsel-meta-item">${esc(salesTxt)}</span>`);
+    if (reviewsTxt) metaParts.push(`<span class="ggsel-meta-item">${reviewsTxt}</span>`);
+    const metaLine = metaParts.length
+      ? `<div class="ggsel-meta">${metaParts.join('<span class="ggsel-dot">·</span>')}</div>`
+      : '';
+
+    // ── Продавец
+    const sellerName = p.seller_name || p.shop_name || '—';
+    const sellerRating = (p.seller_rating !== null && p.seller_rating !== undefined) ? Number(p.seller_rating)
+                       : (p.shop_rating  !== null && p.shop_rating  !== undefined) ? Number(p.shop_rating)
+                       : null;
+    const sellerReviewsCnt = (p.seller_rating !== null) ? null
+                            : ((p.shop_positive_reviews != null) ? p.shop_positive_reviews : null);
+    const sellerSalesTxt = (p.shop_products_count !== null && p.shop_products_count !== undefined)
+      ? `${fmt(p.shop_products_count, 0)} sales`
+      : ((p.sales_count !== null && p.sales_count !== undefined) ? `${fmt(p.sales_count, 0)} sales` : '—');
+    // ── Сток: приоритет у явного quantity_available; иначе по флагу in_stock;
+    //    если in_stock тоже null/undefined — НЕ показываем "Out of stock" по умолчанию,
+    //    а ставим нейтральную кнопку (FIX 2026-08-16: раньше для null показывало "Out of stock"
+    //    даже когда товар реально в наличии — баг UI, не парсера).
+    const stockTxt = (p.quantity_available !== null && p.quantity_available !== undefined && p.quantity_available > 0)
+      ? `В наличии: ${p.quantity_available} шт.`
+      : (p.in_stock === true ? 'В наличии' :
+         p.in_stock === false ? 'Нет в наличии' : 'Наличие уточняйте');
+    const stockBtn = (p.quantity_available !== null && p.quantity_available !== undefined && p.quantity_available > 0)
+      ? `<button class="ggsel-stock-btn ggsel-stock-in">В наличии</button>`
+      : (p.in_stock === true  ? `<button class="ggsel-stock-btn ggsel-stock-in">В наличии</button>`
+       : p.in_stock === false ? `<button class="ggsel-stock-btn" disabled>Out of stock</button>`
+                              : `<button class="ggsel-stock-btn ggsel-stock-unknown">Уточнить наличие</button>`);
+
+    // ── Описание (полное, с эмодзи)
+    const desc = p.original_desc || '';
+    const descHtml = desc
+      ? `<div class="ggsel-desc">${_formatGselDesc(desc)}</div>`
+      : `<div class="muted">Описание отсутствует</div>`;
+
+    // ── Характеристики
     let propsHtml = '';
     if (p.properties_json) {
       try {
         const props = JSON.parse(p.properties_json);
         if (Array.isArray(props) && props.length) {
           propsHtml = `
-            <div class="form-row">
-              <label>Характеристики (${props.length})</label>
-              <table class="tbl" style="font-size:12px;">
-                <tbody>
-                  ${props.map(pr => `<tr><td style="color:var(--text-faint); width:40%;">${esc(pr.key || '')}</td><td>${esc(pr.value || '')}</td></tr>`).join('')}
-                </tbody>
-              </table>
-            </div>
-          `;
+            <div class="ggsel-section">
+              <h3 class="ggsel-section-title">Характеристики</h3>
+              <div class="ggsel-props">
+                ${props.map(pr => `<div class="ggsel-prop"><span class="ggsel-prop-key">${esc(pr.key || '')}</span><span class="ggsel-prop-val">${esc(pr.value || '')}</span></div>`).join('')}
+              </div>
+            </div>`;
         }
       } catch (e) { /* ignore */ }
     }
-    if (!propsHtml) propsHtml = '';
 
-    // ── Продавец
-    const sellerBlock = `
-      <div class="form-grid">
-        <div class="form-row">
-          <label>Продавец</label>
-          <div>
-            ${esc(p.seller_name || '—')}
-            ${p.seller_url ? `<a href="${esc(p.seller_url)}" target="_blank" rel="noopener" class="link" style="font-size:11px; margin-left:6px;">↗ магазин</a>` : ''}
-          </div>
-        </div>
-        <div class="form-row">
-          <label>В наличии</label>
-          <div>${p.quantity_available !== null && p.quantity_available !== undefined ? fmt(p.quantity_available, 0) + ' шт.' : '—'}</div>
-        </div>
-      </div>
-    `;
+    // ── Отзывы (секция как на ggsel, но без самих отзывов — нет парсинга)
+    const reviewsHeader = (p.reviews_count !== null && p.reviews_count !== undefined && p.reviews_count !== '')
+      ? `Reviews ${p.reviews_count}`
+      : 'Reviews';
+    const reviewsHtml = `
+      <div class="ggsel-section ggsel-reviews-section">
+        <h2 class="ggsel-reviews-title">${esc(reviewsHeader)}</h2>
+        <a href="${esc(p.url || '#')}" target="_blank" rel="noopener" class="ggsel-link">
+          Смотреть отзывы на ggsel ↗
+        </a>
+      </div>`;
+
+    // ── Кнопка «Открыть на ggsel»
+    const openBtn = p.url
+      ? `<a href="${esc(p.url)}" target="_blank" rel="noopener" class="ggsel-open-btn">↗ Открыть оригинал на ggsel</a>`
+      : '';
+
+    // ── Крошки
+    const crumbsHtml = crumbParts.length
+      ? `<nav class="ggsel-breadcrumbs">${crumbParts.map((c, i) => {
+          const isLast = i === crumbParts.length - 1;
+          return isLast
+            ? `<span class="ggsel-crumb ggsel-crumb-current">${esc(c)}</span>`
+            : `<a class="ggsel-crumb" href="${esc(p.url ? p.url.split('/').slice(0, -1).join('/') : 'https://ggsel.net')}" target="_blank" rel="noopener">${esc(c)}</a>`;
+        }).join('<span class="ggsel-crumb-sep">›</span>')}</nav>`
+      : '';
+
+    // ── Главное изображение
+    const mainImgHtml = imgUrl0
+      ? `<img class="ggsel-main-img" src="${esc(imgSrc(imgUrl0))}" alt="${esc(title)}" onerror="this.classList.add('ggsel-img-broken');this.replaceWith(Object.assign(document.createElement('div'),{className:'ggsel-noimg',innerHTML:'<svg width=42 height=42 viewBox=\\'0 0 24 24\\' fill=\\'none\\' stroke=\\'currentColor\\' stroke-width=\\'1.5\\'><rect x=\\'3\\' y=\\'3\\' width=\\'18\\' height=\\'18\\' rx=\\'2\\'/><circle cx=\\'8.5\\' cy=\\'8.5\\' r=\\'1.5\\'/><polyline points=\\'21 15 16 10 5 21\\'/></svg>'}));">`
+      : `<div class="ggsel-noimg"><svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>`;
 
     const html = `
       <div class="modal-head">
-        <h2 style="margin:0;">📦 ${esc(p.title || pid)}</h2>
+        <h2 style="margin:0; font-size:16px;">📄 Копия товара с ggsel</h2>
         <button class="modal-close" onclick="closeModal()">✕</button>
       </div>
-      <div style="padding:18px; max-height:70vh; overflow-y:auto;">
-        ${galleryHtml}
-        ${donorBtn ? `<div style="margin:10px 0 14px 0;">${donorBtn}</div>` : ''}
-        <div class="form-row">
-          <label>ID</label>
-          <div><code>${esc(p.product_id)}</code></div>
-        </div>
-        <div class="form-row">
-          <label>Оригинальное название</label>
-          <div>${esc(p.original_title || p.title || '—')}</div>
-        </div>
-        <div class="form-row">
-          <label>AI-название</label>
-          <div style="color:var(--green);">${esc(p.generated_title || '—')}</div>
-        </div>
-        <div class="form-row">
-          <label>AI-описание</label>
-          <div style="white-space:pre-wrap;">${esc(p.generated_desc || '—')}</div>
-        </div>
-        <div class="form-row">
-          <label>Теги</label>
-          <div>${esc(p.generated_tags || '—')}</div>
-        </div>
-        <div class="form-grid">
-          <div class="form-row">
-            <label>Категория</label>
-            <div>${esc(p.category || '—')}</div>
-          </div>
-          <div class="form-row">
-            <label>Опубликовано</label>
-            <div>${esc(p.published_at || '—')}</div>
-          </div>
-          <div class="form-row">
-            <label>Цена источника</label>
-            <div>
-              ${p.source_price || p.price
-                ? `<span style="${(p.my_price && p.my_price > 0) ? 'text-decoration:line-through; color:#999;' : ''}">${fmt(p.source_price || p.price)}</span> ₽`
-                : '—'}
+      <div class="ggsel-modal">
+        ${crumbsHtml}
+        <div class="ggsel-grid">
+          <div class="ggsel-image">${mainImgHtml}</div>
+          <div class="ggsel-info">
+            <h1 class="ggsel-title">${esc(title)}</h1>
+            ${metaLine}
+            <div class="ggsel-fav">♡ <span>Add to favorites</span></div>
+            <div class="ggsel-notice">
+              <div class="ggsel-notice-title">ⓘ Important notice</div>
+              <div class="ggsel-notice-text">
+                Any third-party trademarks, brand names, and product names referenced on this website
+                are used solely to identify the relevant goods/services and, where applicable, to indicate
+                intended purpose or compatibility…
+              </div>
+              <div class="ggsel-notice-more">Read more ⌄</div>
             </div>
           </div>
-          <div class="form-row">
-            <label>Моя цена</label>
-            <div style="font-weight:600; color:var(--green);">${fmt(p.my_price)} ₽</div>
+          <div class="ggsel-seller">
+            <div class="ggsel-seller-row">
+              <div class="ggsel-seller-name">${esc(sellerName)}</div>
+              ${sellerRating !== null ? `<div class="ggsel-seller-rating">★ <b>${sellerRating.toFixed(1)}</b>${sellerReviewsCnt ? ` <span class="muted">(${sellerReviewsCnt})</span>` : ''}</div>` : ''}
+            </div>
+            <div class="ggsel-seller-sales">${esc(sellerSalesTxt)}</div>
+            ${stockBtn}
+            <div class="ggsel-secure">🛡 All transactions on ggsel are secure</div>
+            <div class="ggsel-stock-info muted">${esc(stockTxt)}</div>
           </div>
         </div>
-        ${sellerBlock}
-        ${(function(){
-          if (!p.shop_name && !p.shop_rating && !p.shop_products_count) return '';
-          let h = '<div class="shop-info-block" style="margin:10px 0;">';
-          h += '<div class="shop-info-header">🏪 Магазин продавца</div>';
-          if (p.shop_name) h += '<div class="shop-info-row"><span class="shop-label">Название:</span> ' + (p.shop_url ? '<a href="' + esc(p.shop_url) + '" target="_blank" class="link">' + esc(p.shop_name) + '</a>' : esc(p.shop_name)) + '</div>';
-          if (p.shop_rating) h += '<div class="shop-info-row"><span class="shop-label">Рейтинг:</span> ⭐ ' + fmt(p.shop_rating,2) + '</div>';
-          if (p.shop_products_count) h += '<div class="shop-info-row"><span class="shop-label">Товаров:</span> ' + p.shop_products_count + '</div>';
-          if (p.shop_registered_at) h += '<div class="shop-info-row"><span class="shop-label">С нами с:</span> ' + esc(p.shop_registered_at) + '</div>';
-          if (p.shop_positive_reviews != null) { h += '<div class="shop-info-row"><span class="shop-label">Отзывы:</span> <span class="positive">+' + p.shop_positive_reviews + '</span>'; if (p.shop_negative_reviews != null) h += ' / <span class="negative">-' + p.shop_negative_reviews + '</span>'; h += '</div>'; }
-          h += '</div>';
-          return h;
-        })()}
+
+        ${descHtml}
+
         ${propsHtml}
-        <h3 style="margin:18px 0 8px 0; font-size:14px; color:var(--blue);">🤖 AI-оценка выгодности</h3>
-        ${aiBlockHtml}
-        <div class="form-row">
-          <label>URL источника</label>
-          ${p.url ? `<a href="${esc(p.url)}" target="_blank" rel="noopener" class="link">${esc(p.url)}</a>` : '—'}
+
+        ${reviewsHtml}
+
+        <div class="ggsel-footer">
+          ${openBtn}
+          <span class="muted" style="font-size:12px;">ID: <code>${esc(pid)}</code></span>
         </div>
-        <div class="form-row">
-          <label>Создан / Обновлён</label>
-          <div class="muted">${fmtDate(p.created_at)} → ${fmtDate(p.updated_at)}</div>
-        </div>
-        ${p.ai_error ? `<div class="form-row"><label>AI ошибка</label><div style="color:var(--red);">${esc(p.ai_error)}</div></div>` : ''}
       </div>
     `;
-    openModal(html);
+    openModal(html, 'modal-wide');
   } catch (e) {
     setParserActionStatus('Ошибка: ' + e.message, 'err');
   }
+}
+
+/**
+ * Рендерит оригинальное описание с ggsel с эмодзи и переносами строк.
+ * Эмодзи (🇺🇸, ✅, 🔑, …) проходят через esc() без изменений.
+ * Переносы строк сохраняются (white-space: pre-wrap).
+ */
+function _formatGselDesc(text) {
+  if (!text) return '';
+  // Безопасно экранируем, но сохраняем переносы строк
+  return esc(text);
 }
 
 async function deleteParserProduct(pid) {
@@ -3140,7 +3332,6 @@ async function startParser() {
   const category = $('#parser-input-category')?.value || '';
   const quantity = parseInt($('#parser-input-quantity')?.value || '20', 10);
   const maxPages = parseInt($('#parser-input-pages')?.value || '3', 10);
-  const runAi    = $('#parser-input-ai')?.value === 'true';
 
   if (!query && !category) {
     setParserActionStatus('Укажи query или category', 'err');
@@ -3153,7 +3344,7 @@ async function startParser() {
     const d = await fetch('/api/parser/start', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ query, category, quantity, max_pages: maxPages, run_ai: runAi }),
+      body: JSON.stringify({ query, category, quantity, max_pages: maxPages, run_ai: false, parser_type: localStorage.getItem('parser_type') || 'keys' }),
     });
     const j = await d.json();
     if (j.ok) {
@@ -3181,6 +3372,83 @@ async function stopParser() {
   } catch (e) {
     setParserActionStatus('Ошибка: ' + e.message, 'err');
   }
+}
+
+/**
+ * Загружает экономические параметры парсера с /api/parser/config
+ * и рисует компактную панель вверху раздела «Парсер».
+ */
+async function loadParserEcon() {
+  const box = $('#parser-econ-params');
+  if (!box) return;
+  box.innerHTML = `<div class="muted">Загрузка параметров…</div>`;
+  try {
+    const cfg = await api('/api/parser/config');
+    const p = (cfg && cfg.pipeline) || {};
+    const def = (cfg && cfg.parser) || {};
+    const acc = (cfg && cfg.msb) || {};
+    const rl = (cfg && cfg.rate_limit) || {};
+
+    // Достаём ENV-значения, fallback на разумные дефолты
+    const targetMargin    = p.target_net_margin ?? p.target_margin ?? 0.20;
+    const minProfit       = p.min_expected_profit_rub ?? p.min_net_profit ?? 50;
+    const paymentFee      = p.payment_fee ?? p.payment_fee_compat ?? 0.027;
+    const withdrawalFee   = p.withdrawal_fee ?? 0.02;
+    const taxPct          = p.tax_pct ?? 0.0;
+    const riskReserve     = p.risk_reserve ?? 0.05;
+    const fixedCosts      = p.fixed_costs_rub ?? 0.0;
+    // Комиссия категории берётся из последних спарсенных (для справки)
+    // cat_fees_updated — mtime cat_fees.json
+    const catFeesMtime    = cfg.cat_fees_updated;
+    const catFeesStr      = catFeesMtime
+      ? new Date(catFeesMtime * 1000).toLocaleString('ru-RU')
+      : '—';
+
+    // Округление (берём из шаблона через server-side; если нет — из ROUND_TO)
+    const roundTo = window.__ECON__?.round_to ?? 1;
+    const roundLabel = (roundTo === 1) ? '1 ₽' : (roundTo === 2 ? '0.01 ₽' : `${Math.pow(10, -roundTo)} ₽`);
+
+    // Лимиты парсинга
+    const maxQty = def.max_quantity ?? 100;
+    const maxPages = def.max_pages ?? 10;
+
+    const totalFee = paymentFee + withdrawalFee; // без category (она per-товар)
+    const rows = [
+      { k: 'Комиссия категории',   v: 'per-категория (ggsel API)', hint: 'из cat_fees.json' },
+      { k: 'Комиссия платежей',    v: _pct(paymentFee),   hint: 'PAYMENT_FEE_PCT' },
+      { k: 'Комиссия вывода',      v: _pct(withdrawalFee), hint: 'WITHDRAWAL_FEE_PCT' },
+      { k: 'Налог',                v: _pct(taxPct),       hint: 'TAX_PCT' },
+      { k: 'Резерв возвратов',     v: _pct(riskReserve),  hint: 'RISK_RESERVE_PCT' },
+      { k: 'Фикс. расходы',        v: `${fmt(fixedCosts, 2)} ₽`, hint: 'FIXED_COSTS_RUB' },
+      { k: 'Целевая маржа',        v: _pct(targetMargin), hint: 'TARGET_MARGIN_PCT' },
+      { k: 'Мин. чистая прибыль',  v: `${fmt(minProfit, 0)} ₽`, hint: 'MIN_NET_PROFIT_RUB' },
+      { k: 'Округление цены',      v: roundLabel,          hint: 'ROUND_TO' },
+      { k: 'Лимит товаров / запуск', v: `${maxQty} шт.`,   hint: 'PARSER_MAX_QUANTITY' },
+      { k: 'Лимит страниц',        v: `${maxPages} стр.`,  hint: 'PARSER_MAX_PAGES' },
+    ];
+
+    box.innerHTML = `
+      <div class="econ-grid">
+        ${rows.map(r => `
+          <div class="econ-item">
+            <div class="econ-k">${esc(r.k)}</div>
+            <div class="econ-v">${esc(r.v)}</div>
+            <div class="econ-h">${esc(r.hint)}</div>
+          </div>
+        `).join('')}
+      </div>
+      <div class="muted" style="font-size:11px; margin-top:8px;">
+        Сумма комиссий (без category):
+        <b>${_pct(totalFee)}</b> · Комиссии категорий обновлены: ${esc(catFeesStr)}
+      </div>`;
+  } catch (e) {
+    box.innerHTML = `<div class="muted" style="color:var(--red);">Не удалось загрузить: ${esc(e.message)}</div>`;
+  }
+}
+
+function _pct(v) {
+  if (v === null || v === undefined || isNaN(v)) return '—';
+  return `${(Number(v) * 100).toFixed(2)}%`;
 }
 
 async function loadParserStats() {
@@ -3213,7 +3481,7 @@ async function loadParserStats() {
             <div class="muted">старт: ${fmtDate(last.started_at)}</div>
             <div class="muted">финиш: ${fmtDate(last.finished_at)}</div>
             <div class="muted">q="${esc(last.query || '')}" cat="${esc(last.category || '')}"</div>
-            <div class="muted">сохранено: ${last.products_saved || 0} · AI: ${last.products_ai_enriched || 0}</div>
+            <div class="muted">сохранено: ${last.products_saved || 0}</div>
             ${last.errors ? `<div class="muted" style="color:var(--red);">ошибки: ${esc(last.errors)}</div>` : ''}
           ` : '<div class="muted">Нет запусков</div>'}
         </div>
@@ -3579,13 +3847,53 @@ $('#btn-parser-refresh')?.addEventListener('click', async () => {
   await refreshParserRuns();
   setStatus('Парсер обновлён', 'ok');
 });
+
+/**
+ * Очистить все спарсенные товары из БД.
+ * Требует двойного подтверждения — операция необратима.
+ */
+$('#btn-parser-clear')?.addEventListener('click', async () => {
+  const btn = $('#btn-parser-clear');
+  // Сначала узнаём сколько товаров в БД
+  let count = 0;
+  try {
+    const d = await api('/api/parser/products?limit=1&page=1');
+    count = d.total || 0;
+  } catch (e) { /* ignore */ }
+
+  if (count === 0) {
+    setParserActionStatus('База и так пустая', 'ok');
+    return;
+  }
+
+  const msg = `Удалить ВСЕ спарсенные товары (${count} шт.)?\n\nЭто действие нельзя отменить.`;
+  if (!confirm(msg)) return;
+  if (!confirm('Точно? Данные пропадут безвозвратно.')) return;
+
+  const orig = btn?.innerHTML;
+  if (btn) { btn.disabled = true; btn.innerHTML = '⏳ Очищаю…'; }
+  try {
+    const r = await fetch('/api/parser/products?confirm=YES', { method: 'DELETE' });
+    const j = await r.json();
+    if (j.ok) {
+      setParserActionStatus(`🗑 Удалено ${j.deleted} товаров из БД`, 'ok');
+      await refreshParserProducts();
+      await refreshParserRuns();
+    } else {
+      setParserActionStatus('Ошибка: ' + (j.error || 'unknown'), 'err');
+    }
+  } catch (e) {
+    setParserActionStatus('Ошибка: ' + e.message, 'err');
+  } finally {
+    if (btn) { btn.disabled = false; btn.innerHTML = orig || '🗑 Очистить'; }
+  }
+});
 $('#btn-parser-clear-form')?.addEventListener('click', () => {
   const setVal = (id, v) => { const e = document.getElementById(id); if (e) e.value = v; };
   setVal('parser-input-query', '');
   setVal('parser-input-category', '');
   setVal('parser-input-quantity', '20');
   setVal('parser-input-pages', '3');
-  setVal('parser-input-ai', 'true');
   setParserActionStatus('', '');
 });
 $('#parser-products-search')?.addEventListener('input', () => {
@@ -3892,6 +4200,328 @@ window.mlProvision = mlProvision;
 
 
 // ═══════════════════════════════════════════════════════════════════════════
+//  APPROVAL MODULE — вкладка "Одобрение" (товары на модерации — просмотр и одобрение)
+// ═══════════════════════════════════════════════════════════════════════════
+
+let _approvalAllItems = [];
+let _approvalPollTimer = null;
+
+async function loadApproval() {
+  _approvalAllItems = [];
+
+  const feed = $('#approval-feed');
+  if (!feed) return;
+  feed.innerHTML = '<div class="loader"><div class="spinner"></div>Загрузка...</div>';
+
+  // Кнопки
+  const btnRefresh    = $('#btn-approval-refresh');
+  const btnPublishAll = $('#btn-approval-publish-all');
+  const searchEl      = $('#approval-search');
+
+  if (btnRefresh)    btnRefresh.onclick    = () => _approvalRefresh();
+  if (btnPublishAll) btnPublishAll.onclick = _approvalApproveAll;
+  if (searchEl)      searchEl.oninput      = _approvalFilter;
+
+  // Текст кнопки «Опубликовать все» переименуем в «Одобрить все»
+  if (btnPublishAll) btnPublishAll.textContent = '✓ Одобрить все';
+
+  // Первая загрузка + авто-обновление каждые 15с
+  await _approvalFetch();
+  clearInterval(_approvalPollTimer);
+  _approvalPollTimer = setInterval(() => {
+    if (currentView === 'approval') _approvalFetch(true);
+  }, 15000);
+}
+
+async function _approvalRefresh() {
+  const feed = $('#approval-feed');
+  if (feed) feed.innerHTML = '<div class="loader"><div class="spinner"></div>Загрузка...</div>';
+  await _approvalFetch();
+}
+
+async function _approvalFetch(silent = false) {
+  const feed = $('#approval-feed');
+  try {
+    const data = await api('/api/parser/products?status=pending&limit=200&page=1');
+    _approvalAllItems = data.items || data.products || [];
+    _approvalRender(_approvalAllItems);
+  } catch (e) {
+    console.error('loadApproval:', e);
+    if (!silent && feed) {
+      feed.innerHTML = `<div style="padding:40px;text-align:center;color:#f87171;">Ошибка загрузки: ${esc(e.message)}</div>`;
+    }
+  }
+}
+
+function _approvalFilter() {
+  const q = ($('#approval-search')?.value || '').toLowerCase().trim();
+  const filtered = q
+    ? _approvalAllItems.filter(p => (p.generated_title || p.title || '').toLowerCase().includes(q))
+    : _approvalAllItems;
+  _approvalRender(filtered);
+}
+
+function _approvalRender(items) {
+  const feed    = $('#approval-feed');
+  const countEl = $('#approval-count');
+  const lmWrap  = $('#approval-load-more-wrap');
+  if (!feed) return;
+  if (countEl) countEl.textContent = `${items.length} товаров`;
+  if (lmWrap)  lmWrap.style.display = 'none';
+
+  if (!items.length) {
+    feed.innerHTML = `<div style="padding:60px 20px;text-align:center;">
+      <div style="font-size:40px;margin-bottom:12px;">📋</div>
+      <div style="font-size:15px;font-weight:600;margin-bottom:6px;">Нет товаров на модерации</div>
+      <div class="muted" style="font-size:13px;">Товары появятся здесь после парсинга</div>
+    </div>`;
+    return;
+  }
+
+  feed.innerHTML = `<div class="aprv-grid">${items.map(_approvalCardHtml).join('')}</div>`;
+
+  // Привязываем события
+  feed.querySelectorAll('[data-appr-approve]').forEach(btn => {
+    btn.addEventListener('click', () => _approvalApproveOne(btn.dataset.apprApprove, btn));
+  });
+  feed.querySelectorAll('[data-appr-reject]').forEach(btn => {
+    btn.addEventListener('click', () => _approvalRejectOne(btn.dataset.apprReject, btn));
+  });
+  feed.querySelectorAll('[data-appr-view]').forEach(btn => {
+    btn.addEventListener('click', () => viewParserProduct(btn.dataset.apprView));
+  });
+  // Toggle autoselling label in approval cards
+  feed.querySelectorAll('[data-field="is_autoselling"]').forEach(chk => {
+    const lbl = chk.closest('label')?.querySelector('.mod-api-toggle-label');
+    chk.addEventListener('change', () => {
+      if (lbl) lbl.textContent = chk.checked ? lbl.dataset.on : lbl.dataset.off;
+    });
+  });
+}
+
+function _approvalCardHtml(p) {
+  const pid   = p.product_id || p.id || '';
+  const title = esc(p.generated_title || p.title || '—');
+  const desc  = p.generated_desc || p.original_desc || '';
+  const price = p.my_price || p.sell_price || p.price || 0;
+  const src   = p.source_price || p.price || 0;
+  const margin = p.expected_net_margin_pct != null ? (p.expected_net_margin_pct * 100).toFixed(1) + '%' : null;
+  const profit = p.expected_profit_rub != null ? fmt(p.expected_profit_rub) + ' ₽' : null;
+  const score  = p.profit_score != null ? Number(p.profit_score) : null;
+  const imgUrl = p.local_image_path || p.generated_image_url || p.image_url || '';
+  const sellerName = p.seller_name || p.shop_name || '';
+  const rating = p.rating || p.shop_rating || null;
+  const sales  = p.sales_count != null ? p.sales_count : null;
+  const category = p.category || '';
+  const aiScore = p.ai_score != null ? Number(p.ai_score) : null;
+  const aiReason = p.ai_reason || '';
+
+  // Парсим теги
+  let tagsArr = [];
+  if (p.generated_tags) {
+    try { tagsArr = typeof p.generated_tags === 'string' ? JSON.parse(p.generated_tags) : p.generated_tags; } catch {}
+  }
+  if (!tagsArr.length && p.tags) {
+    try { tagsArr = typeof p.tags === 'string' ? JSON.parse(p.tags) : p.tags; } catch {}
+  }
+
+  const imgHtml = imgUrl
+    ? `<div style="position:relative;overflow:hidden;height:170px;background:#0f172a;flex-shrink:0;">
+        <img src="${esc(imgSrc(imgUrl))}" onerror="this.parentElement.innerHTML='<div style=\\'height:170px;display:flex;align-items:center;justify-content:center;font-size:36px;color:#475569;\\'>🖼</div>'" style="width:100%;height:100%;object-fit:cover;" alt="">
+       </div>`
+    : `<div style="height:100px;display:flex;align-items:center;justify-content:center;font-size:36px;color:#475569;background:#0f172a;flex-shrink:0;">🖼</div>`;
+
+  // Цена
+  let priceHtml = '';
+  if (price && src && Math.abs(price - src) > 0.01) {
+    priceHtml = `<span style="text-decoration:line-through;color:#64748b;font-size:11px;">${fmt(src)} ₽</span>&nbsp;<b style="color:#4ade80;font-size:15px;">${fmt(price)} ₽</b>`;
+  } else if (price) {
+    priceHtml = `<b style="color:#4ade80;font-size:15px;">${fmt(price)} ₽</b>`;
+  }
+
+  // Score бейдж
+  let scoreBadge = '';
+  if (score !== null) {
+    const cls = score >= 70 ? '#22c55e' : score >= 40 ? '#f59e0b' : '#f87171';
+    scoreBadge = `<span style="font-size:11px;font-weight:600;padding:2px 7px;border-radius:20px;background:${cls}22;color:${cls};border:1px solid ${cls}55;">★ ${score}</span>`;
+  }
+
+  // AI score бейдж
+  let aiScoreBadge = '';
+  if (aiScore !== null) {
+    const cls = aiScore >= 8 ? '#22c55e' : aiScore >= 6 ? '#f59e0b' : '#f87171';
+    aiScoreBadge = `<span style="font-size:11px;font-weight:600;padding:2px 7px;border-radius:20px;background:${cls}22;color:${cls};border:1px solid ${cls}55;" title="${esc(aiReason)}">AI ${aiScore}/10</span>`;
+  }
+
+  // Маржа / прибыль строка
+  const econHtml = (margin || profit)
+    ? `<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:4px;">
+        ${margin ? `<span style="font-size:11px;color:#94a3b8;">Маржа: <b style="color:#e2e8f0;">${margin}</b></span>` : ''}
+        ${profit ? `<span style="font-size:11px;color:#94a3b8;">Прибыль: <b style="color:#4ade80;">${profit}</b></span>` : ''}
+       </div>` : '';
+
+  // Продавец / рейтинг
+  const sellerHtml = sellerName
+    ? `<div style="font-size:11px;color:#64748b;margin-top:2px;">
+        ${esc(sellerName)}${rating ? ` · ★ ${Number(rating).toFixed(1)}` : ''}${sales != null ? ` · ${sales} продаж` : ''}
+       </div>` : '';
+
+  // Категория
+  const catHtml = category
+    ? `<div style="font-size:10px;color:#475569;margin-top:2px;">${esc(category)}</div>` : '';
+
+  // Теги
+  const tagsHtml = tagsArr.length
+    ? `<div style="display:flex;flex-wrap:wrap;gap:4px;margin-top:6px;">${tagsArr.slice(0,5).map(t => `<span style="font-size:10px;padding:1px 6px;border-radius:20px;background:#1e3a5f;color:#7dd3fc;">${esc(String(t))}</span>`).join('')}</div>`
+    : '';
+
+  // Описание (краткое)
+  const descHtml = desc
+    ? `<div style="font-size:12px;color:#94a3b8;line-height:1.4;margin-top:4px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;">${esc(desc.slice(0, 200))}</div>`
+    : '';
+
+  // ── API поля для публикации
+  const apCatId   = p.publish_category_id || p.category_id || '';
+  const apDigKey  = p.digital_key || p.product_key || '';
+  const apAutosel = p.is_autoselling !== undefined ? p.is_autoselling : true;
+  const apApiBlock = `<div class="mod-api-fields-block" style="margin-top:8px;">
+    <div class="mod-api-fields-header">📤 Данные для публикации</div>
+    <div class="mod-api-field ${apCatId ? '' : 'mod-api-field--empty'}">
+      <div class="mod-field-label">Категория (ID) <span class="mod-api-required">обязательно</span></div>
+      <input class="mod-api-input" type="text" value="${esc(String(apCatId))}" data-field="publish_category_id" data-pid="${esc(pid)}" placeholder="Авто-определение по slug…">
+      ${p.category ? `<div style="font-size:10px;color:var(--text-muted);margin-top:2px;">Донор: ${esc(p.category)}</div>` : ''}
+    </div>
+    <div class="mod-api-field">
+      <div class="mod-field-label">Тип выдачи <span class="mod-api-required">обязательно</span></div>
+      <label class="mod-api-toggle">
+        <input type="checkbox" data-field="is_autoselling" data-pid="${esc(pid)}" ${apAutosel ? 'checked' : ''}>
+        <span class="mod-api-toggle-track"></span>
+        <span class="mod-api-toggle-label" data-on="⚡ Автовыдача" data-off="👤 Ручная выдача">${apAutosel ? '⚡ Автовыдача' : '👤 Ручная выдача'}</span>
+      </label>
+    </div>
+    <div class="mod-api-field ${apDigKey ? '' : 'mod-api-field--empty'}">
+      <div class="mod-field-label">Товар / ключ <span class="mod-api-required">обязательно</span></div>
+      <textarea class="mod-api-textarea" data-field="digital_key" data-pid="${esc(pid)}" placeholder="Ключ, аккаунт, данные — то что получит покупатель…" rows="2">${esc(apDigKey)}</textarea>
+      ${apDigKey ? '' : '<div class="mod-api-missing">⚠ Не заполнено — публикация заблокирована</div>'}
+    </div>
+  </div>`;
+
+  return `<div class="aprv-card" id="appr-card-${esc(pid)}" style="display:flex;flex-direction:column;">
+    ${imgHtml}
+    <div style="padding:12px;flex:1;display:flex;flex-direction:column;gap:4px;min-height:0;">
+      <div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center;">
+        ${scoreBadge}${aiScoreBadge}
+      </div>
+      ${catHtml}
+      <div style="font-weight:600;font-size:13px;line-height:1.35;margin-top:2px;">${title}</div>
+      ${sellerHtml}
+      ${descHtml}
+      ${tagsHtml}
+      <div style="margin-top:6px;">${priceHtml}</div>
+      ${econHtml}
+      ${apApiBlock}
+      <div style="display:flex;gap:6px;margin-top:auto;padding-top:10px;flex-wrap:wrap;">
+        <button class="btn btn-sm" data-appr-view="${esc(pid)}" title="Открыть карточку" style="flex:0 0 auto;">🔍</button>
+        <button class="btn btn-sm" data-appr-reject="${esc(pid)}" style="flex:0 0 auto;color:#f87171;border-color:#f8717133;">✕ Отклонить</button>
+        <button class="btn btn-primary btn-sm" data-appr-approve="${esc(pid)}" style="flex:1;min-width:80px;">✓ Одобрить</button>
+      </div>
+    </div>
+  </div>`;
+}
+
+async function _approvalApproveOne(pid, btn) {
+  if (btn) { btn.disabled = true; btn.textContent = '⏳...'; }
+  try {
+    // Сохраняем редактируемые поля из карточки одобрения
+    const card = document.getElementById(`appr-card-${pid}`);
+    if (card) {
+      const catEl    = card.querySelector(`[data-field="publish_category_id"][data-pid="${pid}"]`);
+      const autoselEl= card.querySelector(`[data-field="is_autoselling"][data-pid="${pid}"]`);
+      const digKeyEl = card.querySelector(`[data-field="digital_key"][data-pid="${pid}"]`);
+      const edits = {};
+      if (catEl)     edits.publish_category_id = catEl.value.trim() || null;
+      if (autoselEl) edits.is_autoselling      = autoselEl.checked;
+      if (digKeyEl)  edits.digital_key         = digKeyEl.value.trim();
+      if (Object.keys(edits).length > 0) {
+        await fetch(`/api/parser/products/${encodeURIComponent(pid)}`, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(edits),
+        });
+      }
+    }
+    const r = await fetch(`/api/parser/products/${encodeURIComponent(pid)}/approve`, { method: 'POST' });
+    const d = await r.json();
+    if (d.ok) {
+      showToast('✓ Одобрено', 'success');
+      const card = document.getElementById(`appr-card-${pid}`);
+      if (card) {
+        card.style.transition = 'opacity 0.4s';
+        card.style.opacity = '0';
+        setTimeout(() => {
+          _approvalAllItems = _approvalAllItems.filter(p => (p.product_id || p.id) !== pid);
+          _approvalRender(_approvalAllItems);
+        }, 400);
+      }
+    } else {
+      showToast(`Ошибка: ${d.error || 'unknown'}`, 'error');
+      if (btn) { btn.disabled = false; btn.textContent = '✓ Одобрить'; }
+    }
+  } catch (e) {
+    showToast('Ошибка: ' + e.message, 'error');
+    if (btn) { btn.disabled = false; btn.textContent = '✓ Одобрить'; }
+  }
+}
+
+async function _approvalRejectOne(pid, btn) {
+  if (btn) { btn.disabled = true; btn.textContent = '⏳...'; }
+  try {
+    const r = await fetch(`/api/parser/products/${encodeURIComponent(pid)}/reject`, { method: 'POST' });
+    const d = await r.json();
+    if (d.ok || r.ok) {
+      showToast('Отклонено', 'error');
+      const card = document.getElementById(`appr-card-${pid}`);
+      if (card) {
+        card.style.transition = 'opacity 0.4s';
+        card.style.opacity = '0';
+        setTimeout(() => {
+          _approvalAllItems = _approvalAllItems.filter(p => (p.product_id || p.id) !== pid);
+          _approvalRender(_approvalAllItems);
+        }, 400);
+      }
+    } else {
+      showToast(`Ошибка: ${d.error || 'unknown'}`, 'error');
+      if (btn) { btn.disabled = false; btn.textContent = '✕ Отклонить'; }
+    }
+  } catch (e) {
+    showToast('Ошибка: ' + e.message, 'error');
+    if (btn) { btn.disabled = false; btn.textContent = '✕ Отклонить'; }
+  }
+}
+
+async function _approvalApproveAll() {
+  const btn = $('#btn-approval-publish-all');
+  if (!_approvalAllItems.length) { showToast('Нет товаров', 'error'); return; }
+  if (!confirm(`Одобрить все ${_approvalAllItems.length} товаров?`)) return;
+  if (btn) { btn.disabled = true; btn.textContent = '⏳...'; }
+  let ok = 0, fail = 0;
+  for (const p of [..._approvalAllItems]) {
+    const pid = p.product_id || p.id;
+    try {
+      const r = await fetch(`/api/parser/products/${encodeURIComponent(pid)}/approve`, { method: 'POST' });
+      const d = await r.json();
+      if (d.ok) ok++; else fail++;
+    } catch { fail++; }
+  }
+  showToast(`Одобрено: ${ok}, ошибок: ${fail}`, ok > 0 ? 'success' : 'error');
+  if (btn) { btn.disabled = false; btn.textContent = '✓ Одобрить все'; }
+  await _approvalFetch();
+}
+
+window.publishAllApproved = _approvalApproveAll;
+
+
+// ═══════════════════════════════════════════════════════════════════════════
 //  MODERATION MODULE — вкладка "Модерация товаров"
 // ═══════════════════════════════════════════════════════════════════════════
 
@@ -4011,6 +4641,14 @@ function renderModerationCards(items) {
     pair.querySelector('.mod-restyle-btn')?.addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); doRestyleImage(pid, pair); });
     // AI-рерайт текста
     pair.querySelector('.mod-btn-regen')?.addEventListener('click', () => doRegenText(pid, pair));
+    // Toggle autoselling label update
+    const _autoTgl = pair.querySelector('[data-field="is_autoselling"][data-pid="' + pid + '"]');
+    if (_autoTgl) {
+      const _autoLbl = _autoTgl.closest('label')?.querySelector('.mod-api-toggle-label');
+      _autoTgl.addEventListener('change', () => {
+        if (_autoLbl) _autoLbl.textContent = _autoTgl.checked ? _autoLbl.dataset.on : _autoLbl.dataset.off;
+      });
+    }
   });
 }
 
@@ -4050,6 +4688,9 @@ function buildCardPairHtml(p, idx) {
   const genDesc    = p.generated_desc  || p.original_desc || '';
   const genTags    = p.generated_tags  || p.tags || '';
   const myPrice    = p.my_price || p.price || '';
+  const genCatId   = p.publish_category_id || p.category_id || '';
+  const genDigKey  = p.digital_key || p.product_key || '';
+  const genAutosel = p.is_autoselling !== undefined ? p.is_autoselling : true;
 
   let genImgSrc  = p.generated_image_url || p.local_image_path || p.image_url;
   // Для локальных AI-картинок добавляем cache-buster на основе updated_at,
@@ -4089,6 +4730,15 @@ function buildCardPairHtml(p, idx) {
       <div class="mod-field-label">Описание</div>
       <div class="mod-card-desc">${origDesc}</div>
     </div>
+    <div style="font-size:11px; color:var(--text-muted); background:rgba(255,255,255,0.03); padding:8px; border-radius:6px; display:grid; grid-template-columns: 1fr 1fr; gap:6px; line-height: 1.3;">
+      ${p.seller_name ? `<div>Продавец: <span style="color:#eee">${esc(p.seller_name)}</span> ${p.seller_rating ? `(${fmt(p.seller_rating,1)}★)` : ''}</div>` : ''}
+      ${p.shop_name ? `<div>Магазин: <span style="color:#eee">${esc(p.shop_name)}</span> ${p.shop_products_count ? `[${p.shop_products_count} тов]` : ''}</div>` : ''}
+      ${p.delivery_type ? `<div>Выдача: <span style="color:#eee">${esc(p.delivery_type)}</span></div>` : ''}
+      ${p.quantity_available !== undefined && p.quantity_available !== null ? `<div>Наличие: <span style="color:#eee">${p.quantity_available} шт</span></div>` : (p.in_stock ? `<div>Наличие: <span style="color:#eee">Есть</span></div>` : '')}
+      ${p.sales_count ? `<div>Продажи: <span style="color:#eee">${p.sales_count}</span></div>` : ''}
+      ${p.reviews_count ? `<div>Отзывы: <span style="color:#eee">${p.reviews_count}</span></div>` : ''}
+      ${p.published_at ? `<div>Добавлен: <span style="color:#eee">${esc(p.published_at).split(' ')[0]}</span></div>` : ''}
+    </div>
     <div class="mod-price-row">
       <span class="mod-field-label" style="margin:0">Цена</span>
       <span class="mod-price-orig">${origPrice}</span>
@@ -4127,6 +4777,27 @@ function buildCardPairHtml(p, idx) {
         <input class="mod-tags-input" type="text" value="${esc(genTags)}" data-field="generated_tags" data-pid="${esc(pid)}" placeholder="тегб1, тегб2...">
       </div>
     </div>` : ''}
+    <div class="mod-api-fields-block">
+      <div class="mod-api-fields-header">📤 Данные для публикации API</div>
+      <div class="mod-api-field ${genCatId ? '' : 'mod-api-field--empty'}">
+        <div class="mod-field-label">Категория (ID) <span class="mod-api-required">обязательно</span></div>
+        <input class="mod-api-input" type="text" value="${esc(String(genCatId))}" data-field="publish_category_id" data-pid="${esc(pid)}" placeholder="Авто-определение по slug…">
+        ${p.category ? `<div style="font-size:10px;color:var(--text-muted);margin-top:2px;">Категория донора: ${esc(p.category)}</div>` : ''}
+      </div>
+      <div class="mod-api-field">
+        <div class="mod-field-label">Тип выдачи <span class="mod-api-required">обязательно</span></div>
+        <label class="mod-api-toggle">
+          <input type="checkbox" data-field="is_autoselling" data-pid="${esc(pid)}" ${genAutosel ? 'checked' : ''}>
+          <span class="mod-api-toggle-track"></span>
+          <span class="mod-api-toggle-label" data-on="⚡ Автовыдача" data-off="👤 Ручная выдача">${genAutosel ? '⚡ Автовыдача' : '👤 Ручная выдача'}</span>
+        </label>
+      </div>
+      <div class="mod-api-field ${genDigKey ? '' : 'mod-api-field--empty'}">
+        <div class="mod-field-label">Товар / ключ (digital_key) <span class="mod-api-required">обязательно</span></div>
+        <textarea class="mod-api-textarea" data-field="digital_key" data-pid="${esc(pid)}" placeholder="Введите ключ, аккаунт, данные — то что получит покупатель…" rows="3">${esc(genDigKey)}</textarea>
+        ${genDigKey ? '' : '<div class="mod-api-missing">⚠ Не заполнено — публикация заблокирована</div>'}
+      </div>
+    </div>
   </div>
 
   <!-- ДЕЙСТВИЯ -->
@@ -4151,15 +4822,21 @@ async function collectEdits(pid) {
   // Собираем актуальные значения из редактируемых полей
   const feed = $('#moderation-feed');
   if (!feed) return {};
-  const titleEl = feed.querySelector(`[data-field="generated_title"][data-pid="${pid}"]`);
-  const descEl  = feed.querySelector(`[data-field="generated_desc"][data-pid="${pid}"]`);
-  const priceEl = feed.querySelector(`[data-field="my_price"][data-pid="${pid}"]`);
-  const tagsEl  = feed.querySelector(`[data-field="generated_tags"][data-pid="${pid}"]`);
+  const titleEl  = feed.querySelector(`[data-field="generated_title"][data-pid="${pid}"]`);
+  const descEl   = feed.querySelector(`[data-field="generated_desc"][data-pid="${pid}"]`);
+  const priceEl  = feed.querySelector(`[data-field="my_price"][data-pid="${pid}"]`);
+  const tagsEl   = feed.querySelector(`[data-field="generated_tags"][data-pid="${pid}"]`);
+  const catEl    = feed.querySelector(`[data-field="publish_category_id"][data-pid="${pid}"]`);
+  const autoselEl= feed.querySelector(`[data-field="is_autoselling"][data-pid="${pid}"]`);
+  const digKeyEl = feed.querySelector(`[data-field="digital_key"][data-pid="${pid}"]`);
   return {
-    ...(titleEl ? { generated_title: titleEl.textContent.trim() } : {}),
-    ...(descEl  ? { generated_desc:  descEl.textContent.trim()  } : {}),
-    ...(priceEl ? { my_price: Number(priceEl.value) || 0 }        : {}),
-    ...(tagsEl  ? { generated_tags: tagsEl.value.trim() }         : {}),
+    ...(titleEl   ? { generated_title:      titleEl.textContent.trim() }             : {}),
+    ...(descEl    ? { generated_desc:        descEl.textContent.trim()  }             : {}),
+    ...(priceEl   ? { my_price:              Number(priceEl.value) || 0 }             : {}),
+    ...(tagsEl    ? { generated_tags:        tagsEl.value.trim() }                   : {}),
+    ...(catEl     ? { publish_category_id:   catEl.value.trim() || null }            : {}),
+    ...(autoselEl ? { is_autoselling:        autoselEl.checked }                     : {}),
+    ...(digKeyEl  ? { digital_key:           digKeyEl.value.trim() }                 : {}),
   };
 }
 
@@ -5675,6 +6352,80 @@ function switchProfileTab(tab) {
 // ═══════════════════════════════════════════════════
 //  SETTINGS (Stage 8)
 // ═══════════════════════════════════════════════════
+async function loadCategoryStats() {
+  try {
+    const r = await fetch('/api/parser/fullscan/category-stats');
+    const d = await r.json();
+    if (!d.ok) return;
+
+    // Обновляем stat-карточку в шапке
+    const grandEl = document.getElementById('cat-stat-grand-total');
+    const subEl   = document.getElementById('cat-stat-sub');
+    if (grandEl) grandEl.textContent = (d.grand_total || 0).toLocaleString('ru-RU');
+    if (subEl)   subEl.textContent   = `${d.categories_count || 0} категорий`;
+
+    // Показываем таблицу
+    const widget = document.getElementById('category-stats-widget');
+    const body   = document.getElementById('category-stats-body');
+    if (!widget || !body) return;
+    widget.style.display = '';
+
+    const top = (d.top_categories || []).slice(0, 20);
+    const ts  = d.last_scan_at ? new Date(d.last_scan_at).toLocaleString('ru-RU') : '—';
+
+    body.innerHTML = `
+      <div class="muted" style="font-size:12px; margin-bottom:10px;">Обновлено: ${ts} &nbsp;&bull;&nbsp; всего категорий в БД: ${d.categories_count || 0}</div>
+      <table style="width:100%; border-collapse:collapse; font-size:13px;">
+        <thead>
+          <tr style="border-bottom:1px solid var(--border-soft); color:var(--text-muted); font-size:11px; text-transform:uppercase; letter-spacing:.04em;">
+            <th style="padding:4px 8px; text-align:left; font-weight:500;">Категория</th>
+            <th style="padding:4px 8px; text-align:right; font-weight:500;">Товаров</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${top.map(c => `
+            <tr style="border-bottom:1px solid var(--border-soft);">
+              <td style="padding:5px 8px;">
+                <a href="https://ggsel.net/catalog/${c.slug}" target="_blank"
+                   style="color:var(--accent); text-decoration:none;">${c.title || c.slug}</a>
+                <span class="muted" style="font-size:11px; margin-left:4px;">${c.slug}</span>
+              </td>
+              <td style="padding:5px 8px; text-align:right; font-weight:600; font-variant-numeric:tabular-nums;">${(c.total||0).toLocaleString('ru-RU')}</td>
+            </tr>`).join('')}
+        </tbody>
+        <tfoot>
+          <tr style="border-top:2px solid var(--border);">
+            <td style="padding:6px 8px; font-weight:600; color:var(--text-muted); font-size:12px;">ИТОГО (топ-${top.length})</td>
+            <td style="padding:6px 8px; text-align:right; font-weight:700; color:var(--accent);">${(d.grand_total||0).toLocaleString('ru-RU')}</td>
+          </tr>
+        </tfoot>
+      </table>`;
+  } catch(e) { console.error('loadCategoryStats:', e); }
+}
+
+async function scanCategoryStats(event) {
+  const btn = document.getElementById('btn-cat-stats-scan') || (event && event.target);
+  if (btn) { btn.disabled = true; btn.textContent = '\u23F3 Сканирую...'; }
+  try {
+    await fetch('/api/parser/fullscan/category-stats/scan', {method:'POST', headers:{'Content-Type':'application/json'}, body:'{}'});
+    const poll = setInterval(async () => {
+      try {
+        const r = await fetch('/api/parser/fullscan/category-stats/status');
+        const d = await r.json();
+        if (!d.running) {
+          clearInterval(poll);
+          if (btn) { btn.disabled = false; btn.innerHTML = '&#8635; Пересканировать'; }
+          loadCategoryStats();
+        } else {
+          if (btn) btn.textContent = `\u23F3 ${d.progress||0} / ${d.total_slugs||'?'}`;
+        }
+      } catch(e) { /* keep polling */ }
+    }, 2000);
+  } catch(e) {
+    if (btn) { btn.disabled = false; btn.innerHTML = '&#8635; Пересканировать'; }
+  }
+}
+
 async function switchSettingsTab(tab) {
   document.querySelectorAll('.stab-content').forEach(el => el.style.display = 'none');
   const target = document.getElementById('stab-' + tab);

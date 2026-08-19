@@ -1,0 +1,157 @@
+{
+  "roblox": {
+    "url": "https://ggsel.net/catalog/roblox",
+    "totals_found": [
+      6282
+    ],
+    "counts_found": [],
+    "items_counts": [],
+    "total_items": [],
+    "tovar_nums": [],
+    "ld_types": [
+      "BreadcrumbList",
+      "Product",
+      "ItemList"
+    ],
+    "og_desc": [
+      "Подписка, Robux и платные функции для Roblox — мгновенная доставка, автодоступ, бонусы за покупки. Покупай у проверенных продавцов с отзывами. Защита сделки и удобная оплата 💳",
+      "Подписка, Robux и платные функции для Roblox — мгновенная доставка, автодоступ, бонусы за покупки. Покупай у проверенных продавцов с отзывами. Защита сделки и удобная оплата 💳"
+    ],
+    "ctx_snippet": "null,\"buy_box_id\":null,\"payment_code\":null,\"payment_url\":null,\"sort\":[1,0,1.01,2147483647,999,3,102690299],\"autoselling\":false,\"in_favorites\":false}],\"total\":6282},\"dataUpdateCount\":1,\"dataUpdatedAt\":1787068611005,\"error\":null,\"errorUpdateCount\":0,\"e"
+  },
+  "minecraft": {
+    "url": "https://ggsel.net/catalog/minecraft",
+    "totals_found": [
+      738
+    ],
+    "counts_found": [
+      8800,
+      330,
+      3500,
+      7000,
+      660,
+      1720,
+      990
+    ],
+    "items_counts": [],
+    "total_items": [],
+    "tovar_nums": [],
+    "ld_types": [
+      "BreadcrumbList",
+      "Product",
+      "ItemList"
+    ],
+    "og_desc": [],
+    "ctx_snippet": ":false,\"seller\":{\"id_seller\":139798508,\"name_seller\":null,\"date_registration\":null,\"attestat\":null,\"rating\":null,\"attestat_type\":null,\"cnt_sell\":0}}],\"total\":738}],\"pageParams\":[1]},\"dataUpdateCount\":1,\"dataUpdatedAt\":1787068612412,\"error\":null,\"erro"
+  },
+  "valorant": {
+    "url": "https://ggsel.net/catalog/valorant",
+    "totals_found": [
+      1,
+      12
+    ],
+    "counts_found": [],
+    "items_counts": [],
+    "total_items": [],
+    "tovar_nums": [],
+    "ld_types": [
+      "BreadcrumbList",
+      "Product",
+      "ItemList"
+    ],
+    "og_desc": [
+      "Личные аккаунты Valorant с гарантией и редкими скинами 🎯. Более 1 предложений, 0 отзывов. Быстрая выдача, безопасная сделка — ggsel",
+      "Личные аккаунты Valorant с гарантией и редкими скинами 🎯. Более 1 предложений, 0 отзывов. Быстрая выдача, безопасная сделка — ggsel"
+    ],
+    "ctx_snippet": "e,\"sku_id\":null,\"buy_box_id\":null,\"payment_code\":null,\"payment_url\":null,\"sort\":[1,0,0,9,4000,0,102694047],\"autoselling\":false,\"in_favorites\":false}],\"total\":1},\"dataUpdateCount\":1,\"dataUpdatedAt\":1787068613917,\"error\":null,\"errorUpdateCount\":0,\"erro"
+  },
+  "gta-5": {
+    "url": "https://ggsel.net/catalog/gta-5",
+    "totals_found": [
+      521
+    ],
+    "counts_found": [
+      800,
+      100,
+      900,
+      200,
+      300,
+      750,
+      175,
+      400,
+      500,
+      600
+    ],
+    "items_counts": [],
+    "total_items": [],
+    "tovar_nums": [],
+    "ld_types": [
+      "BreadcrumbList",
+      "Product",
+      "ItemList"
+    ],
+    "og_desc": [],
+    "ctx_snippet": "on\":false,\"seller\":{\"id_seller\":283504,\"name_seller\":null,\"date_registration\":null,\"attestat\":null,\"rating\":null,\"attestat_type\":null,\"cnt_sell\":0}}],\"total\":521}],\"pageParams\":[1]},\"dataUpdateCount\":1,\"dataUpdatedAt\":1787068615777,\"error\":null,\"erro"
+  },
+  "spotify": {
+    "error": "HTTP 404"
+  },
+  "brawl-stars": {
+    "url": "https://ggsel.net/catalog/brawl-stars",
+    "totals_found": [
+      511
+    ],
+    "counts_found": [],
+    "items_counts": [],
+    "total_items": [],
+    "tovar_nums": [],
+    "ld_types": [
+      "BreadcrumbList",
+      "Product",
+      "ItemList"
+    ],
+    "og_desc": [],
+    "ctx_snippet": "se,\"sku_id\":null,\"buy_box_id\":null,\"payment_code\":null,\"payment_url\":null,\"sort\":[1,0,0,3,188,1,102652069],\"autoselling\":false,\"in_favorites\":false}],\"total\":511},\"dataUpdateCount\":1,\"dataUpdatedAt\":1787068618752,\"error\":null,\"errorUpdateCount\":0,\"er"
+  },
+  "steam": {
+    "url": "https://ggsel.net/catalog/steam",
+    "totals_found": [
+      604
+    ],
+    "counts_found": [],
+    "items_counts": [],
+    "total_items": [],
+    "tovar_nums": [],
+    "ld_types": [
+      "BreadcrumbList",
+      "Product",
+      "ItemList"
+    ],
+    "og_desc": [
+      "Полные аккаунты Steam с популярными играми и деньгами на балансе! 🎮 CS2, Dota 2, Cyberpunk 2077 — мгновенная доставка. 604 вариантов, отзывы: 142195.",
+      "Полные аккаунты Steam с популярными играми и деньгами на балансе! 🎮 CS2, Dota 2, Cyberpunk 2077 — мгновенная доставка. 604 вариантов, отзывы: 142195."
+    ],
+    "ctx_snippet": "_id\":null,\"buy_box_id\":null,\"payment_code\":null,\"payment_url\":null,\"sort\":[1,0,0.4,15,16.061,11,102111933],\"autoselling\":false,\"in_favorites\":false}],\"total\":604},\"dataUpdateCount\":1,\"dataUpdatedAt\":1787068619927,\"error\":null,\"errorUpdateCount\":0,\"er"
+  },
+  "steam-games": {
+    "url": "https://ggsel.net/catalog/steam-games",
+    "totals_found": [
+      10000,
+      10814
+    ],
+    "counts_found": [],
+    "items_counts": [],
+    "total_items": [],
+    "tovar_nums": [],
+    "ld_types": [
+      "BreadcrumbList",
+      "Product",
+      "ItemList"
+    ],
+    "og_desc": [
+      "Купить игры Steam у проверенных продавцов с отзывами и гарантией. Быстрая доставка. Покупайте игры для платформы Steam с выгодой на маркетплейсе GGsel!",
+      "Купить игры Steam у проверенных продавцов с отзывами и гарантией. Быстрая доставка. Покупайте игры для платформы Steam с выгодой на маркетплейсе GGsel!"
+    ],
+    "ctx_snippet": "\"sku_id\":null,\"buy_box_id\":null,\"payment_code\":null,\"payment_url\":null,\"sort\":[1,0,7.99,1,599,1875,5075834],\"autoselling\":true,\"in_favorites\":false}],\"total\":10814},\"dataUpdateCount\":1,\"dataUpdatedAt\":1787068621132,\"error\":null,\"errorUpdateCount\":0,\""
+  }
+}

@@ -43,10 +43,7 @@ from config import (
     FIXED_COSTS_RUB,
     ENABLED_CATEGORY_IDS,
 )
-try:
-    from pipeline_top100 import ai_select_categories as _ai_select_cats
-except Exception:
-    _ai_select_cats = None
+_ai_select_cats = None  # pipeline_top100 removed
 
 
 # ─── App & logging ───────────────────────────────────────────────────────────
@@ -318,12 +315,27 @@ def normalize_sale(s):
 
 @app.route("/")
 def index():
+    # Параметры экономики для отображения в шапке Парсера
+    import os as _os_e
+    _econ = {
+        "round_to":             int(_os_e.getenv("ROUND_TO", "1")),
+        "target_margin_pct":    float(_os_e.getenv("TARGET_MARGIN_PCT", "0.15")),
+        "min_net_profit_rub":   float(_os_e.getenv("MIN_NET_PROFIT_RUB", "50.0")),
+        "payment_fee_pct":      float(_os_e.getenv("PAYMENT_FEE_PCT", "0.027")),
+        "withdrawal_fee_pct":   float(_os_e.getenv("WITHDRAWAL_FEE_PCT", "0.02")),
+        "tax_pct":              float(_os_e.getenv("TAX_PCT", "0.0")),
+        "risk_reserve_pct":     float(_os_e.getenv("RISK_RESERVE_PCT", "0.05")),
+        "fixed_costs_rub":      float(_os_e.getenv("FIXED_COSTS_RUB", "0.0")),
+    }
+    _round_label = "1 ₽" if _econ["round_to"] == 1 else ("0.01 ₽" if _econ["round_to"] == 2 else f"{10**(-_econ['round_to']):g} ₽")
     return render_template(
         "index.html",
         seller_id=GGSEL_SELLER_ID,
         api_key_preview=GGSEL_API_KEY[:8] + "…" + GGSEL_API_KEY[-4:],
         api_key_full=GGSEL_API_KEY,
         base_url=BASE_URL,
+        econ=_econ,
+        econ_round_label=_round_label,
     )
 
 
@@ -441,9 +453,9 @@ _SELLER_COOKIES_PATH = Path(__file__).parent / "data" / "seller_cookies.json"
 @app.route("/api/cookie/open-browser", methods=["POST"])
 def api_cookie_open_browser():
     """
-    Открывает браузер MSB из группы "Seller" ВИДИМО.
-    Пользователь вручную заходит в свой магазин, куки снимаются через CDP.
-    Qrator-безопасно: реальный браузер с нормальным fingerprint.
+    Открывает браузер MSB из группы SellerGGsel (видимый режим, launchMode=visible).
+    Пользователь вручную навигирует в seller.ggsel.com, куки снимаются через CDP и сохраняются.
+    launchMode visible — намеренно: человек должен видеть браузер и может взаимодействовать. Qrator-безопасно.
     """
     import threading as _threading
     result = {}
@@ -471,7 +483,7 @@ def api_cookie_open_browser():
 
                 profile_id = seller_profile_ids[0]
 
-                # 2. Запустить браузер ВИДИМО (окно открывается на экране)
+                # 2. Запустить браузер в видимом режиме (окно открывается на экране — пользователь должен видеть)
                 await cl.start_profile(profile_id, launchMode="visible")
                 await _aio.sleep(3)  # дать браузеру открыться
 
@@ -1295,10 +1307,19 @@ def api_parsed_products():
         cursor = conn.cursor()
 
         query = """
-            SELECT product_id, title, source_price, sell_price,
-                   expected_profit_rub, expected_net_margin_pct,
-                   category_id, status, is_top
-            FROM parsed_products
+            SELECT p.product_id, p.title, p.source_price, p.sell_price,
+                   p.my_price, p.expected_profit_rub, p.expected_net_margin_pct,
+                   p.category_id, p.category, p.breadcrumb,
+                   p.status, p.is_top, p.image_url, p.url,
+                   p.seller_name, p.sales_count, p.rating,
+                   p.ggsel_fee_pct, p.payment_fee_pct,
+                   p.expected_profit_rub, p.risk_level,
+                   p.approval_status, p.offer_id,
+                   p.created_at, p.updated_at,
+                   sc.title as category_title,
+                   sc.path as category_path
+            FROM parsed_products p
+            LEFT JOIN seller_categories sc ON sc.id = p.category_id
             WHERE 1=1
         """
         params = []
@@ -1319,15 +1340,32 @@ def api_parsed_products():
         items = []
         for row in rows:
             items.append({
-                "product_id": row["product_id"],
-                "title": row["title"],
-                "source_price": row["source_price"],
-                "sell_price": row["sell_price"],
-                "expected_profit_rub": row["expected_profit_rub"],
-                "expected_net_margin_pct": row["expected_net_margin_pct"],
-                "category_id": row["category_id"],
-                "status": row["status"],
-                "is_top": bool(row["is_top"])
+                "product_id":             row["product_id"],
+                "title":                  row["title"],
+                "source_price":           row["source_price"],
+                "sell_price":             row["sell_price"],
+                "my_price":               row["my_price"],
+                "expected_profit_rub":    row["expected_profit_rub"],
+                "expected_net_margin_pct":row["expected_net_margin_pct"],
+                "category_id":            row["category_id"],
+                "category":               row["category"],
+                "breadcrumb":             row["breadcrumb"],
+                "category_title":         row["category_title"],
+                "category_path":          row["category_path"],
+                "status":                 row["status"],
+                "approval_status":        row["approval_status"],
+                "is_top":                 bool(row["is_top"]),
+                "image_url":              row["image_url"],
+                "url":                    row["url"],
+                "seller_name":            row["seller_name"],
+                "sales_count":            row["sales_count"],
+                "rating":                 row["rating"],
+                "ggsel_fee_pct":          row["ggsel_fee_pct"],
+                "payment_fee_pct":        row["payment_fee_pct"],
+                "risk_level":             row["risk_level"],
+                "offer_id":               row["offer_id"],
+                "created_at":             row["created_at"],
+                "updated_at":             row["updated_at"],
             })
 
         conn.close()
@@ -1336,58 +1374,7 @@ def api_parsed_products():
         return jsonify({"ok": False, "error": str(e)}), 500
 
 
-# ═══════════════════════════════════════════════════════════════════════════
-#  API: TELEGRAM BOT
-# ═══════════════════════════════════════════════════════════════════════════
 
-@app.route("/api/bot/generate_code", methods=["POST"])
-def api_bot_generate_code():
-    """Генерирует одноразовый код для привязки Telegram-бота (10 мин)."""
-    try:
-        from bot.db import generate_connect_code
-        code = generate_connect_code("default")
-        return jsonify({"ok": True, "code": code, "expires_in_sec": 600})
-    except Exception as e:
-        return jsonify({"ok": False, "error": str(e)}), 500
-
-
-@app.route("/api/bot/status")
-def api_bot_status():
-    """Статус Telegram-бота: привязан ли чат, сколько товаров в очереди."""
-    try:
-        from bot.db import get_first_chat_id, get_queue_count, get_approved_count
-        chat_id = get_first_chat_id()
-        return jsonify({
-            "ok": True,
-            "linked": chat_id is not None,
-            "chat_id": chat_id,
-            "queue_count": get_queue_count(),
-            "approved_count": get_approved_count(),
-        })
-    except Exception as e:
-        return jsonify({"ok": False, "error": str(e)}), 500
-
-
-@app.route("/api/bot/ping", methods=["POST"])
-def api_bot_ping():
-    """Heartbeat от бота — просто подтверждаем что он онлайн."""
-    return jsonify({"ok": True, "ts": int(__import__("time").time())})
-
-
-@app.route("/api/bot/notify", methods=["POST"])
-def api_bot_notify():
-    """Отправить произвольное уведомление через бота (для watchdog / внешних скриптов)."""
-    data = request.get_json() or {}
-    text  = (data.get("text") or "").strip()
-    level = data.get("level", "info")
-    if not text:
-        return jsonify({"ok": False, "error": "text is required"}), 400
-    try:
-        from bot.bot import send_notification_sync
-        send_notification_sync(text, level=level)
-        return jsonify({"ok": True})
-    except Exception as e:
-        return jsonify({"ok": False, "error": str(e)}), 500
 
 
 # ═══════════════════════════════════════════════════════════════════════════
@@ -1755,7 +1742,7 @@ def api_test_all():
 
 @app.route("/api/test_msb")
 def api_test_msb():
-    """MSB API диагностика — только MSB эндпоинты (порт 17248)."""
+    """MSB API diagnostics - MSB endpoints only (port 17248)."""
     from config import MSB_API_BASE, MSB_API_TOKEN as _msb_token
     import requests as _req
 
@@ -1990,7 +1977,7 @@ AI_WORKSPACE_PROFILE_ID = "1873432d-b054-48a6-a031-b2bacc0fe77d"
 
 @app.route("/api/msb/ai-workspace/launch", methods=["POST"])
 def api_ai_workspace_launch():
-    """POST /api/msb/ai-workspace/launch — запустить профиль AI Workspace в MSB."""
+    """POST /api/msb/ai-workspace/launch - launch AI Workspace profile in MSB."""
     import asyncio as _aio
     from parser.msb_client import MsbClient
 
@@ -2011,15 +1998,7 @@ def api_ai_workspace_launch():
         return jsonify({"ok": False, "error": str(e)}), 500
 
 
-# ═══════════════════════════════════════════════════════════════════════════
-#  Cookie Warmer Blueprint (проксирует в MSB)
-# ═══════════════════════════════════════════════════════════════════════════
-try:
-    from warmer_routes import warmer_bp
-    app.register_blueprint(warmer_bp)
-    log.info("Cookie Warmer blueprint registered (delegates to MSB)")
-except Exception as e:
-    log.warning("Warmer blueprint failed: %s", e)
+
 
 # ═══════════════════════════════════════════════════════════════════════
 #  Cookie Auto-Refresh (background scheduler)
@@ -2479,101 +2458,7 @@ def api_reminders():
         return jsonify({'ok': False, 'error': str(e)[:300]}), 500
 
 
-# =============================================================================
-#  ШАГ 5: Pipeline Top-100 — запуск из интерфейса
-# =============================================================================
-_pipeline_poll_lock = threading.Lock()
 
-
-def _create_pipeline_run(cats: list[int]) -> int:
-    import sqlite3 as _s3
-    from parser.db_init import get_db_path as _gdp
-    conn = _s3.connect(_gdp(), timeout=10)
-    try:
-        cur = conn.execute(
-            "INSERT INTO parser_runs (started_at, status, query, category, quantity, max_pages) "
-            "VALUES (?, 'running', ?, 'pipeline_top100', 0, 0)",
-            (datetime.utcnow().isoformat(), json.dumps({"cats": cats}, ensure_ascii=False)),
-        )
-        conn.commit()
-        return int(cur.lastrowid)
-    finally:
-        conn.close()
-
-
-def _finish_pipeline_run(run_id: int, status: str, errors: str = "") -> None:
-    import sqlite3 as _s3
-    from parser.db_init import get_db_path as _gdp
-    conn = _s3.connect(_gdp(), timeout=10)
-    try:
-        conn.execute(
-            "UPDATE parser_runs SET status=?, finished_at=?, errors=? WHERE run_id=?",
-            (status, datetime.utcnow().isoformat(), errors[:2000], run_id),
-        )
-        conn.commit()
-    finally:
-        conn.close()
-
-
-def _run_pipeline_background(run_id: int, cats: list[int]) -> None:
-    cmd = [sys.executable, str(_ROOT_DIR / "pipeline_top100.py"), "--step", "all"]
-    if cats:
-        cmd.append("--cats")
-        cmd.extend(str(c) for c in cats)
-    try:
-        proc = subprocess.run(
-            cmd,
-            cwd=str(_ROOT_DIR),
-            capture_output=True,
-            text=True,
-            encoding="utf-8",
-            errors="replace",
-        )
-        err_tail = (proc.stderr or proc.stdout or "")[-1500:]
-        if proc.returncode == 0:
-            _finish_pipeline_run(run_id, "done", err_tail)
-        else:
-            _finish_pipeline_run(run_id, "error", err_tail or f"exit code {proc.returncode}")
-    except Exception as exc:
-        _finish_pipeline_run(run_id, "error", str(exc)[:1500])
-
-
-@app.route("/api/pipeline/run", methods=["POST"])
-def api_pipeline_run():
-    if not _PARSER_DEPS_OK:
-        return jsonify({"ok": False, "error": "parser_deps_missing"}), 503
-    body = request.get_json(silent=True) or {}
-    cats = body.get("cats")
-    if cats is None:
-        cats = list(ENABLED_CATEGORY_IDS or [])
-    else:
-        try:
-            cats = [int(c) for c in cats]
-        except (TypeError, ValueError):
-            return jsonify({"ok": False, "error": "cats must be a list of integers"}), 400
-    # AI выбирает категории если whitelist пуст
-    if not cats and _ai_select_cats:
-        try:
-            from parser.db_init import get_db_path as _gdp_ai
-            cats = _ai_select_cats(_gdp_ai(), n=5)
-            log.info('AI выбрал категории для пайплайна: %s', cats)
-        except Exception as _ai_err:
-            log.warning('AI выбор категорий ошибка: %s', _ai_err)
-
-    if not cats:
-        return jsonify({
-            "ok": False,
-            "error": "Whitelist пуст — укажите cats в body или заполните ENABLED_CATEGORY_IDS",
-        }), 400
-
-    run_id = _create_pipeline_run(cats)
-    threading.Thread(
-        target=_run_pipeline_background,
-        args=(run_id, cats),
-        daemon=True,
-        name=f"pipeline-{run_id}",
-    ).start()
-    return jsonify({"run_id": run_id, "status": "started"})
 
 
 @app.route("/api/pipeline/status/<int:run_id>", methods=["GET"])

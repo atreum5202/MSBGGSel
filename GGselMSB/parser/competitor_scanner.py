@@ -60,6 +60,7 @@ from .parser_engine import (
 from .msb_cookies import QratorCookieMiddleware
 from .pricing import calculate_my_price
 from .dedup import is_fresh, is_rejected
+from .category_resolver import find_seller_category_id
 
 # AI: V7 content_gen.enrich_product(raw_product) -> dict
 # Подпись GGSeller: process_product(raw_product) -> dict (другая, но поля похожие)
@@ -318,47 +319,29 @@ class CompetitorScanner:
         self._parser = GGselHTMLParser()
         self._max_pages = max_pages
         self._msb: Optional[QratorCookieMiddleware] = None
-        self._msb_r                     conn.execute("""
-                        INSERT INTO parsed_products (
-                            product_id, title, price, my_price, category, url,
-                            in_stock, sales_count, source_price, is_top, updated_at, last_parsed_at, approval_status
-                        )
-                        VALUES (?, ?, ?, ?, ?, ?, 1, ?, ?, ?, datetime('now'), datetime('now'), 'pending')
-                        ON CONFLICT(product_id) DO UPDATE SET
-                            price        = excluded.price,
-                            my_price     = excluded.my_price,
-                            sales_count  = excluded.sales_count,
-                            source_price = excluded.source_price,
-                            is_top       = excluded.is_top,
-                            updated_at   = datetime('now'),
-                            last_parsed_at = datetime('now')
-                    """, (
-                        p.external_id, p.name, p.price, my_price, p.category, p.url,
-                        p.sales_count or 0, p.price, is_top,
-                    ))
+        self._msb_r = None  # placeholder, populated in connect_msb()
 
-                    raw_product = {
-                        "product_id": p.external_id,
-                        "title": p.name,
-                        "description": "",
-                        "image_url": p.image_url,
-                    }
-                    enriched = _adapt_enrich(raw_product)
-                    conn.execute("""
-                        UPDATE parsed_products SET
-                            generated_title     = ?,
-                            generated_desc      = ?,
-                            generated_image_url = ?,
-                            status              = ?,
-                            approval_status     = CASE WHEN approval_status IN ('approved', 'rejected', 'published') THEN approval_status ELSE 'pending' END
-                        WHERE product_id = ?
-                    """, (
-                        enriched.get("generated_title"),
-                        enriched.get("generated_desc"),
-                        enriched.get("generated_image_url"),
-                        enriched.get("status", "pending"),
-                        enriched["product_id"],
-                    ))�тегория / продавец / карточка товара)."""
+    def _resolve_category(self, slug: Optional[str]) -> int:
+        """Резолвит slug → ggsel_digi_catalog (fallback 33833 = "Цифровые товары > Другое").
+
+        Использует category_resolver.find_seller_category_id.
+        Возвращает int или 33833 (fallback).
+        """
+        FALLBACK_SELLER_ID = 33833
+        if not slug:
+            return FALLBACK_SELLER_ID
+        try:
+            cid = find_seller_category_id(slug)
+        except Exception as e:
+            log.warning("[scanner] resolver failed for slug=%r: %s", slug, e)
+            cid = None
+        if not cid:
+            log.debug("[scanner] no match for slug=%r → fallback %s", slug, FALLBACK_SELLER_ID)
+            return FALLBACK_SELLER_ID
+        return int(cid)
+
+    def scan_url(self, url: str) -> ParseResult:
+        """Сканирует одну страницу (категория / продавец / карточка товара)."""
         log.info("→ Фетчим: %s", url)
         fetch = self._fetcher.fetch(url)
         if not fetch.success:
@@ -385,26 +368,53 @@ class CompetitorScanner:
             conn.execute("PRAGMA synchronous=NORMAL")
 
             for p in new_products:
-                my_price = calculate_my_price(p.price, p.category or "default")
+                extra = p.extra or {}
+
+                # Реальный slug категории товара из детальной цепочки API;
+                # fallback — slug запроса (p.category), если обогащение не прошло
+                real_cat_slug = extra.get("category_slug") or p.category or ""
+
+                # category_id: приоритет — обогащённый через _resolve_category_id,
+                # затем id_section из API-листинга (всегда присутствует),
+                # fallback — резолв по slug через category_resolver
+                cat_id_from_extra = (
+                    extra.get("category_id")
+                    or (int(extra["id_section"]) if extra.get("id_section") else None)
+                )
+                if cat_id_from_extra:
+                    seller_cat_id = int(cat_id_from_extra)
+                else:
+                    seller_cat_id = self._resolve_category(real_cat_slug or p.category)
+
+                my_price = calculate_my_price(p.price, seller_cat_id)
                 is_top = 1 if p.external_id in top5_ids else 0
+
+                # breadcrumb из extra (строится в _enrich_one / to_engine_product)
+                breadcrumb_val = extra.get("breadcrumb") or ""
+
                 try:
                     # V7 schema: parsed_products. product_id = external_id.
                     conn.execute("""
                         INSERT INTO parsed_products (
                             product_id, title, price, my_price, category, url,
-                            in_stock, sales_count, source_price, is_top, updated_at, last_parsed_at
+                            category_id, breadcrumb, in_stock, sales_count, source_price, is_top,
+                            updated_at, last_parsed_at
                         )
-                        VALUES (?, ?, ?, ?, ?, ?, 1, ?, ?, ?, datetime('now'), datetime('now'))
+                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, 1, ?, ?, ?, datetime('now'), datetime('now'))
                         ON CONFLICT(product_id) DO UPDATE SET
                             price        = excluded.price,
                             my_price     = excluded.my_price,
+                            category     = excluded.category,
+                            category_id  = excluded.category_id,
+                            breadcrumb   = COALESCE(NULLIF(excluded.breadcrumb,''), parsed_products.breadcrumb),
                             sales_count  = excluded.sales_count,
                             source_price = excluded.source_price,
                             is_top       = excluded.is_top,
                             updated_at   = datetime('now'),
                             last_parsed_at = datetime('now')
                     """, (
-                        p.external_id, p.name, p.price, my_price, p.category, p.url,
+                        p.external_id, p.name, p.price, my_price, real_cat_slug, p.url,
+                        seller_cat_id, breadcrumb_val,
                         p.sales_count or 0, p.price, is_top,
                     ))
 

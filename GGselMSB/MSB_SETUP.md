@@ -1,7 +1,7 @@
 # MSB_SETUP.md — Подключение антидетекта MSB к парсеру
 
-> **Что это:** Парсер ggsel.net в `GGselV7/` использует локальный антидетект
-> `Controller/MSB` для обхода Qrator WAF. Без MSB парсер переключается на
+> **Что это:** Парсер ggsel.net в `GGselMSB/` использует локальный антидетект
+> `MSB` для обхода Qrator WAF. Без MSB парсер переключается на
 > CffiFetcher (fallback, без Qrator-куков).
 >
 > **Когда читать:** перед первым запуском парсера, или при проблемах с Qrator.
@@ -14,7 +14,7 @@
 |---|---|---|
 | **MSB** | Обычное приложение MSB | Основной антидетект |
 | **MSB API** | `http://127.0.0.1:17248` | Local REST API |
-| **MSB (Fallback)** | `Controller\MSB` | Альтернативный локальный антидетект |
+| **MSB (Fallback)** | `MSBWorkshop\MSB` | Альтернативный локальный антидетект |
 | **Python deps** | httpx, curl-cffi, dotenv, bs4 | Уже в `requirements.txt` |
 
 ---
@@ -24,7 +24,7 @@
 ### Вариант A: Silent (рекомендуется, без окна)
 
 ```cmd
-cd C:\Users\Atreum\Desktop\FinalProject\Controller\MSB
+cd C:\Users\Atreum\Desktop\MSBWorkshop\MSB
 silent.bat
 ```
 
@@ -66,10 +66,10 @@ stop.bat
 
 ---
 
-## 🚀 Шаг 2: Запустить GGselV7
+## 🚀 Шаг 2: Запустить GGselMSB
 
 ```cmd
-cd C:\Users\Atreum\Desktop\FinalProject\GGselV7
+cd C:\Users\Atreum\Desktop\MSBWorkshop\GGselMSB
 python app.py
 ```
 
@@ -247,7 +247,7 @@ GET /api/parser/msb/rate
 
 **Причина:** MSB не запущен или не на том порту.
 **Решение:**
-1. `cd C:\Users\Atreum\Desktop\FinalProject\Controller\MSB && silent.bat`
+1. `cd C:\Users\Atreum\Desktop\MSBWorkshop\MSB && silent.bat`
 2. Проверь `curl http://127.0.0.1:17248/profiles`
 3. Проверь порт: `netstat -ano | findstr 17248` (должен быть LISTENING)
 4. Лог MSB: `%APPDATA%\MSB\logs\msb.log`
@@ -282,7 +282,7 @@ GET /api/parser/msb/rate
 - CaptchaHandler попробует solve_via_msb автоматически (POST `/profiles/:id/runScenario {solveCaptcha: true}`)
 - На момент написания этого документа MSB scenario `ggsel-login` **НЕ ЧИТАЕТ `params.solveCaptcha`** — флаг игнорируется
 - Workaround: вручную `POST /api/parser/msb/refresh/<id>` — scenario перезапустится с большим таймаутом, Qrator re-rolls challenge
-- TODO: добавить чтение `params.solveCaptcha` в `Controller\MSB\src\main\lib\scenarios\ggselLogin.js` (если есть 2Captcha API ключ)
+- TODO: добавить чтение `params.solveCaptcha` в `MSBWorkshop\MSB\src\main\lib\scenarios\ggselLogin.js` (если есть 2Captcha API ключ)
 
 ### `rate_state.json` не обновляется
 
@@ -305,7 +305,7 @@ POST /api/parser/msb/rate/reset
 
 # Или вручную:
 # Удалить data/rate_state.json
-# Перезапустить GGselV7 (pool переинициализируется)
+# Перезапустить GGselMSB (pool переинициализируется)
 ```
 
 ---
@@ -331,10 +331,10 @@ curl http://127.0.0.1:5000/api/parser/telemetry/stats
 tail -f $APPDATA\MSB\logs\msb.log
 
 # Лог парсера
-tail -f C:\Users\Atreum\Desktop\FinalProject\GGselV7\data\logs\parser.log
+tail -f C:\Users\Atreum\Desktop\MSBWorkshop\GGselMSB\data\logs\parser.log
 
 # Лог пула профилей
-tail -f C:\Users\Atreum\Desktop\FinalProject\GGselV7\data\logs\profiles.log
+tail -f C:\Users\Atreum\Desktop\MSBWorkshop\GGselMSB\data\logs\profiles.log
 ```
 
 ### Что смотреть
@@ -392,7 +392,7 @@ MSB (начиная с 08-2026) принимает явный `launchMode` в `P
 ## 🧪 Запуск тестов
 
 ```cmd
-cd C:\Users\Atreum\Desktop\FinalProject\GGselV7
+cd C:\Users\Atreum\Desktop\MSBWorkshop\GGselMSB
 python -m pytest tests/ -v
 ```
 
@@ -417,7 +417,7 @@ python tests\verify_e2e.py
 ## 📁 Структура файлов
 
 ```
-C:\Users\Atreum\Desktop\FinalProject\GGselV7\
+C:\Users\Atreum\Desktop\MSBWorkshop\GGselMSB\
 ├── config.py                       ← все настройки (MSB, rate, telemetry, captcha)
 ├── app.py                          ← Flask + parser_bp
 ├── MSB_SETUP.md                    ← этот файл

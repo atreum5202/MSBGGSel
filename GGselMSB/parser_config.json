@@ -938,7 +938,7 @@
   },
   "pipeline": {
     "candidates_output": "data/candidates.json",
-    "categories_cache": "C:\\Users\\Atreum\\Desktop\\MySoft\\GGselMSB\\categories_cache.json",
+    "categories_cache": "C:\\Users\\Atreum\\Desktop\\MSBWorkshop\\GGselMSB\\data\\categories_cache.json",
     "enabled_category_ids": [
       47488,
       34063,
@@ -966,10 +966,10 @@
   "pool": {
     "max_hits": 80,
     "profile_ids": [
-      "2084336484026486784",
-      "2084336479580524544",
-      "2084336475029704704",
-      "2084336471078670336"
+      "f02f6f3b-1eea-433e-a8a7-1ac19dc6a703",
+      "3c78ff92-3887-40d4-8214-c9fd012fd65b",
+      "f93f3b3d-a125-4100-981f-9bb92a4c0ce6",
+      "663260eb-e838-45c9-881c-96cf09113ef6"
     ],
     "rest_sec": 300,
     "skip_running": true

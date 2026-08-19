@@ -1,5 +1,68 @@
-GGselMSB/data/pipeline.log
+# ── Секреты и чувствительные данные ─────────────────────────────────────────
+.env
+data/seller_cookies.json
+data/ggsel_tokens.json
+data/rate_state.json
+API_KEYS.md
 
-# Logs
-GGselMSB/logs/
-GGselMSB/data/logs/
+# ── База данных ───────────────────────────────────────────────────────────────
+data/db/
+*.db
+*.db-wal
+*.db-shm
+
+# ── Кэш изображений и медиа ──────────────────────────────────────────────────
+data/images/
+static/products/
+static/generated/
+
+# ── Логи ─────────────────────────────────────────────────────────────────────
+logs/
+data/logs/
+data/pipeline.log
+*.log
+
+# ── Кэши парсера (генерируются на лету) ──────────────────────────────────────
+data/telemetry/
+data/bulk_parse_progress_*.json
+data/deep_scout_results.json
+data/deep_scan_log.txt
+data/all_slugs_found.json
+data/catalog_count.json
+data/categories_index.json
+data/category_stats.json
+data/_audit_*.py
+data/_audit_*.txt
+data/ggsel_endpoints.json
+data/ggselLogin_backup.js
+
+# ── Python ────────────────────────────────────────────────────────────────────
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+.pytest_cache/
+
+# ── IDE ───────────────────────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ── OS ────────────────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+nul
+
+# ── Временные файлы отладки (паттерн _*) ─────────────────────────────────────
+# Оставляем нужные утилиты (_check_launch.py, _sync_missing_cats.py и т.д.)
+# Исключаем только очевидный мусор
+_diag_out.json
+_prod_raw.json
+temp.json
+tmp_*.html
+*.bak

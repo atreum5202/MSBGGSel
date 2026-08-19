@@ -34,6 +34,19 @@ Flask blueprint с эндпоинтами для парсера.
   POST /api/parser/auto/start         — запустить авто-пилот (mode=test|turbo)
   POST /api/parser/auto/stop          — остановить авто-пилот
   GET  /api/parser/auto/status        — статус авто-пилота
+  POST /api/parser/fullscan/start     — запустить полный скан (все категории, воркеры)
+  POST /api/parser/fullscan/stop      — остановить полный скан
+  GET  /api/parser/fullscan/status    — статус полного скана + прогресс воркеров
+  GET  /api/parser/fullscan/categories           — список content_type категорий
+  GET  /api/parser/fullscan/category-stats        — статистика категорий из БД
+  POST /api/parser/fullscan/category-stats/scan   — запустить скан всех категорий
+  GET  /api/parser/fullscan/category-stats/status — статус скана
+  POST /api/parser/section-scan/start  — сканирование по подкатегориям (id_section) из БД
+  POST /api/parser/section-scan/stop   — остановить
+  GET  /api/parser/section-scan/status — статус + progress_pct
+  POST /api/parser/price-scan/start    — полный сбор каталога (~384k) через ценовые диапазоны
+  POST /api/parser/price-scan/stop     — остановить
+  GET  /api/parser/price-scan/status   — статус price scan
 """
 from __future__ import annotations
 
@@ -52,6 +65,14 @@ from urllib.parse import urlparse
 from flask import Blueprint, jsonify, request
 
 from . import get_engine, get_db_path, init_db, MAX_QUANTITY_HARD_CAP
+from .parser_engine import (
+    full_scan_start, full_scan_stop, full_scan_status,
+    section_scan_start, section_scan_stop, section_scan_status,
+    FULL_SCAN_CONTENT_TYPES, FULL_SCAN_CT_NAMES,
+)
+from .price_scan import (
+    price_scan_start, price_scan_stop, price_scan_status,
+)
 from .category_catalog import get_leaf_category, search_leaf_categories
 
 parser_bp = Blueprint("parser", __name__, url_prefix="/api/parser")
@@ -143,7 +164,7 @@ def start():
         max_pages = int(body.get("max_pages") or 3)
     except (TypeError, ValueError):
         max_pages = 3
-    run_ai = bool(body.get("run_ai", True))
+    run_ai = bool(body.get("run_ai", False))
 
     if not query and not category:
         return jsonify({
@@ -418,6 +439,37 @@ def delete_product(product_id: str):
         conn.close()
     if deleted == 0:
         return jsonify({"ok": False, "error": "not found"}), 404
+    return jsonify({"ok": True, "deleted": deleted})
+
+
+@parser_bp.route("/products", methods=["DELETE"])
+def delete_all_products():
+    """
+    DELETE /api/parser/products?status=parsed&confirm=YES
+    Без `confirm=YES` отвечает 400 — защита от случайного клика.
+    По умолчанию чистит ВСЕ товары. Опциональный ?status= чистит только этот статус.
+    Возвращает: { ok: true, deleted: N }
+    """
+    if request.args.get("confirm") != "YES":
+        return jsonify({
+            "ok": False,
+            "error": "Требуется confirm=YES для очистки всех товаров"
+        }), 400
+
+    status_filter = (request.args.get("status") or "").strip()
+    where = ""
+    params: List[Any] = []
+    if status_filter:
+        where = "WHERE status = ? OR approval_status = ?"
+        params = [status_filter, status_filter]
+
+    conn = sqlite3.connect(get_db_path(), timeout=10.0)
+    try:
+        cur = conn.execute(f"DELETE FROM parsed_products {where}", params)
+        conn.commit()
+        deleted = cur.rowcount
+    finally:
+        conn.close()
     return jsonify({"ok": True, "deleted": deleted})
 
 
@@ -1808,3 +1860,236 @@ def auto_stop():
 def auto_status():
     s = {k: v for k, v in _autopilot_state.items() if k != "thread"}
     return jsonify(s)
+
+
+# ═══════════════════════════════════════════════════════════════════════════
+#  Full Scan — параллельный обход всех content_type категорий воркерами
+# ═══════════════════════════════════════════════════════════════════════════
+
+@parser_bp.route("/fullscan/start", methods=["POST"])
+def fullscan_start():
+    """
+    POST /api/parser/fullscan/start
+    Body (все опциональны):
+      {
+        "run_ai":             false,
+        "workers_per_account": 4,
+        "sort":               "sortByRec",
+        "ct_ids":             [2, 48, 19]   // конкретные content_type_id, иначе все 19
+      }
+    """
+    from .parser_engine import full_scan_start, full_scan_status, FULL_SCAN_CONTENT_TYPES
+
+    body = request.get_json(silent=True) or {}
+
+    # Если full scan уже активен
+    st = full_scan_status()
+    if st.get("running") and not st.get("stopped"):
+        return jsonify({
+            "ok": False,
+            "error": "Full scan уже запущен",
+            "status": st,
+        }), 409
+
+    run_ai = bool(body.get("run_ai", False))
+    workers_per_account = max(1, min(int(body.get("workers_per_account") or 4), 16))
+    sort = str(body.get("sort") or "sortByRec")
+
+    raw_ct = body.get("ct_ids")
+    if raw_ct and isinstance(raw_ct, list):
+        try:
+            ct_ids = [int(x) for x in raw_ct]
+        except (TypeError, ValueError):
+            return jsonify({"ok": False, "error": "ct_ids должен быть списком чисел"}), 400
+    else:
+        ct_ids = None  # все
+
+    result = full_scan_start(
+        run_ai=run_ai,
+        ct_ids=ct_ids,
+        workers_per_account=workers_per_account,
+        sort=sort,
+    )
+    code = 200 if result.get("ok") else 409
+    return jsonify(result), code
+
+
+@parser_bp.route("/fullscan/stop", methods=["POST"])
+def fullscan_stop():
+    """POST /api/parser/fullscan/stop"""
+    from .parser_engine import full_scan_stop
+    return jsonify(full_scan_stop())
+
+
+@parser_bp.route("/fullscan/status", methods=["GET"])
+def fullscan_status():
+    """
+    GET /api/parser/fullscan/status
+    Возвращает:
+      {
+        running, stopped, workers_count,
+        workers: [{worker_id, account, ct_id, ct_name, page, saved, ct_done}],
+        total_saved, total_found,
+        ct_done, ct_remaining,
+        started_at, finished_at, last_error, run_ai
+      }
+    """
+    from .parser_engine import full_scan_status, FULL_SCAN_CT_NAMES, FULL_SCAN_CONTENT_TYPES
+    st = full_scan_status()
+    # Добавляем читаемые имена категорий для фронта
+    st["ct_names"] = FULL_SCAN_CT_NAMES
+    st["all_ct_ids"] = FULL_SCAN_CONTENT_TYPES
+    return jsonify(st)
+
+
+@parser_bp.route("/fullscan/categories", methods=["GET"])
+def fullscan_categories():
+    """
+    GET /api/parser/fullscan/categories
+    Список всех поддерживаемых content_type с именами.
+    """
+    from .parser_engine import FULL_SCAN_CONTENT_TYPES, FULL_SCAN_CT_NAMES
+    cats = [
+        {"ct_id": ct_id, "name": FULL_SCAN_CT_NAMES.get(ct_id, str(ct_id))}
+        for ct_id in FULL_SCAN_CONTENT_TYPES
+    ]
+    return jsonify({"ok": True, "categories": cats})
+
+
+@parser_bp.route("/fullscan/category-stats", methods=["GET"])
+def fullscan_category_stats():
+    """
+    GET /api/parser/fullscan/category-stats?slug=roblox
+    Возвращает статистику категорий из БД.
+    slug — опциональный фильтр по конкретному slug.
+    """
+    from .category_stats import get_stats, get_summary
+    slug = request.args.get("slug")
+    if slug:
+        all_stats = get_stats()
+        filtered = [s for s in all_stats if s["slug"] == slug]
+        return jsonify({"ok": True, "data": filtered, "count": len(filtered)})
+    summary = get_summary()
+    return jsonify({"ok": True, **summary})
+
+
+@parser_bp.route("/fullscan/category-stats/scan", methods=["POST"])
+def fullscan_category_stats_scan():
+    """
+    POST /api/parser/fullscan/category-stats/scan
+    Запускает фоновый скан всех категорий.
+    Body (опционально): {"profile_id": "UUID"}
+    """
+    from .category_stats import start_scan_background
+    body = request.get_json(silent=True) or {}
+    profile_id = body.get("profile_id")
+    result = start_scan_background(profile_id=profile_id)
+    return jsonify(result)
+
+
+@parser_bp.route("/fullscan/category-stats/status", methods=["GET"])
+def fullscan_category_stats_status():
+    """
+    GET /api/parser/fullscan/category-stats/status
+    Статус текущего/последнего скана.
+    """
+    from .category_stats import get_scan_status
+    return jsonify({"ok": True, **get_scan_status()})
+
+
+# ══════════════════════════════════════════════════════════════════════════════
+# Section Scan — сканирование по подкатегориям (id_section) из БД
+# ══════════════════════════════════════════════════════════════════════════════
+
+@parser_bp.route("/section-scan/start", methods=["POST"])
+def section_scan_start_route():
+    """
+    POST /api/parser/section-scan/start
+
+    Сканирование по секциям (подкатегориям) из БД.
+    Для каждой секции: smart-skip если уже парсилось сегодня или db_count >= api_total.
+    После волны — ищет новые секции и повторяет (iterative wave discovery).
+
+    Body (optional):
+      run_ai              bool       — AI-обогащение после сохранения (default false)
+      workers_per_account int        — воркеров на аккаунт (default 4)
+      ct_filter           list[int]  — фильтр content_type_id (default все)
+    """
+    body                = request.get_json(silent=True) or {}
+    run_ai              = bool(body.get("run_ai", False))
+    workers_per_account = int(body.get("workers_per_account", 4))
+    ct_filter           = body.get("ct_filter")
+    if ct_filter is not None:
+        try:
+            ct_filter = [int(x) for x in ct_filter]
+        except (TypeError, ValueError):
+            return jsonify({"ok": False, "error": "ct_filter должен быть списком чисел"}), 400
+    result = section_scan_start(
+        run_ai=run_ai,
+        workers_per_account=workers_per_account,
+        ct_filter=ct_filter,
+    )
+    return jsonify(result), 200 if result.get("ok") else 409
+
+
+@parser_bp.route("/section-scan/stop", methods=["POST"])
+def section_scan_stop_route():
+    """POST /api/parser/section-scan/stop"""
+    return jsonify(section_scan_stop())
+
+
+@parser_bp.route("/section-scan/status", methods=["GET"])
+def section_scan_status_route():
+    """GET /api/parser/section-scan/status"""
+    st    = section_scan_status()
+    total = st.get("total_sections", 0)
+    done  = st.get("sections_done", 0)
+    st["progress_pct"] = round(done / total * 100, 1) if total else 0
+    return jsonify(st)
+
+
+# ══════════════════════════════════════════════════════════════════════════════
+# Price Scan — адаптивное ценовое разбиение для полного сбора каталога
+# ══════════════════════════════════════════════════════════════════════════════
+
+@parser_bp.route("/price-scan/start", methods=["POST"])
+def price_scan_start_route():
+    """
+    POST /api/parser/price-scan/start
+
+    Запускает Price Scan — единственный способ получить весь каталог (~384k товаров).
+    Стандартный Full Scan ограничен ~10k/категорию; Price Scan обходит это через
+    фильтры min_price/max_price с бинарным разбиением диапазонов.
+
+    Body (optional):
+      workers_per_account  int        — воркеров на аккаунт (default 4)
+      enrich               bool       — запускать detail+review обогащение (default true)
+      ct_ids               list[int]  — фильтр content_type_id (default все)
+    """
+    body                = request.get_json(silent=True) or {}
+    workers_per_account = int(body.get("workers_per_account", 4))
+    enrich              = bool(body.get("enrich", True))
+    ct_ids              = body.get("ct_ids")
+    if ct_ids is not None:
+        try:
+            ct_ids = [int(x) for x in ct_ids]
+        except (TypeError, ValueError):
+            return jsonify({"ok": False, "error": "ct_ids должен быть списком чисел"}), 400
+    result = price_scan_start(
+        workers_per_account=workers_per_account,
+        enrich=enrich,
+        ct_ids=ct_ids,
+    )
+    return jsonify(result), 200 if result.get("ok") else 409
+
+
+@parser_bp.route("/price-scan/stop", methods=["POST"])
+def price_scan_stop_route():
+    """POST /api/parser/price-scan/stop"""
+    return jsonify(price_scan_stop())
+
+
+@parser_bp.route("/price-scan/status", methods=["GET"])
+def price_scan_status_route():
+    """GET /api/parser/price-scan/status"""
+    return jsonify(price_scan_status())

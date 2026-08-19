@@ -551,3 +551,123 @@
 {"ts":"2026-08-13T13:39:39.179514Z","epoch":1786628379.1795146,"event":"parser.page_fetched","profile_id":"0a0b0ca0-daea-48ce-995d-20ac5771e97d","status":200,"latency_ms":1311,"rate_delay":2.0,"is_challenge":false,"url":"https://ggsel.net/catalog/product/eset-nod32-internet-security-global-kliuc-3-mesiaca-2-ustroistva-102655565"}
 {"ts":"2026-08-13T13:39:45.541396Z","epoch":1786628385.5413964,"event":"parser.page_fetched","profile_id":"0a0b0ca0-daea-48ce-995d-20ac5771e97d","status":200,"latency_ms":625,"rate_delay":2.0,"is_challenge":false,"url":"https://ggsel.net/catalog/product/eset-nod32-internet-security-2-goda-5032273"}
 {"ts":"2026-08-13T13:40:06.547505Z","epoch":1786628406.5475056,"event":"parser.run_complete","total_products":10,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cascade"}
+{"ts":"2026-08-14T04:40:35.275251Z","epoch":1786682435.2762477,"event":"parser.start","query":"steam","category":"","quantity":5}
+{"ts":"2026-08-14T04:41:39.241113Z","epoch":1786682499.2411137,"event":"parser.cookies_refreshed","profile_id":"c0d425d6-2170-41b2-9c06-32311ad9709d","source":"msb","took_ms":11750,"cookies_count":11}
+{"ts":"2026-08-14T04:41:45.836195Z","epoch":1786682505.8361952,"event":"parser.page_fetched","profile_id":"c0d425d6-2170-41b2-9c06-32311ad9709d","status":200,"latency_ms":2109,"rate_delay":4.0,"is_challenge":false,"url":"https://ggsel.net/catalog/steam"}
+{"ts":"2026-08-14T04:41:47.731895Z","epoch":1786682507.7318954,"event":"parser.run_complete","total_products":5,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cascade"}
+{"ts":"2026-08-14T04:41:52.983067Z","epoch":1786682512.9830673,"event":"parser.run_complete","total_products":5,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"api_client"}
+{"ts":"2026-08-14T04:45:06.114414Z","epoch":1786682706.114414,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"api_client"}
+{"ts":"2026-08-14T11:08:20.959995Z","epoch":1786705700.959996,"event":"parser.run_complete","total_products":15,"total_pages":3,"duration_sec":0,"status":"done","fetcher_used":"api_client"}
+{"ts":"2026-08-14T11:12:55.089065Z","epoch":1786705975.0890658,"event":"parser.run_complete","total_products":29,"total_pages":5,"duration_sec":0,"status":"done","fetcher_used":"api_client"}
+{"ts":"2026-08-14T11:13:05.416430Z","epoch":1786705985.4164305,"event":"parser.run_complete","total_products":0,"total_pages":5,"duration_sec":0,"status":"done","fetcher_used":"api_client"}
+{"ts":"2026-08-16T14:15:01.943571Z","epoch":1786889701.943571,"event":"parser.start","query":"","category":"exitlag","quantity":10}
+{"ts":"2026-08-16T14:15:03.456768Z","epoch":1786889703.4567683,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-08-16T14:15:06.985340Z","epoch":1786889706.9853404,"event":"parser.run_complete","total_products":10,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cascade"}
+{"ts":"2026-08-16T14:15:11.845106Z","epoch":1786889711.8451061,"event":"parser.start","query":"","category":"jetbrains","quantity":10}
+{"ts":"2026-08-16T14:15:12.665415Z","epoch":1786889712.6654158,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-08-16T14:15:16.139250Z","epoch":1786889716.1392508,"event":"parser.run_complete","total_products":10,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cascade"}
+{"ts":"2026-08-16T14:15:20.768489Z","epoch":1786889720.7684894,"event":"parser.start","query":"","category":"autodesk","quantity":10}
+{"ts":"2026-08-16T14:15:21.640502Z","epoch":1786889721.6405022,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-08-16T14:15:25.319078Z","epoch":1786889725.3190784,"event":"parser.run_complete","total_products":10,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cascade"}
+{"ts":"2026-08-16T16:16:40.170540Z","epoch":1786897000.17054,"event":"parser.start","query":"","category":"clash-royale-9584","quantity":10}
+{"ts":"2026-08-16T16:16:40.819796Z","epoch":1786897000.819796,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-08-16T16:16:44.497234Z","epoch":1786897004.4972346,"event":"parser.run_complete","total_products":10,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cascade"}
+{"ts":"2026-08-16T16:16:49.306261Z","epoch":1786897009.3062615,"event":"parser.start","query":"","category":"honkai-star-rail","quantity":10}
+{"ts":"2026-08-16T16:16:50.152129Z","epoch":1786897010.152129,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-08-16T16:16:53.669465Z","epoch":1786897013.6694653,"event":"parser.run_complete","total_products":10,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cascade"}
+{"ts":"2026-08-16T16:16:58.111935Z","epoch":1786897018.111935,"event":"parser.start","query":"","category":"grand-theft-auto-5-first","quantity":10}
+{"ts":"2026-08-16T16:16:58.971716Z","epoch":1786897018.9717162,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-08-16T16:17:01.957799Z","epoch":1786897021.9577997,"event":"parser.run_complete","total_products":10,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cascade"}
+{"ts":"2026-08-16T16:41:17.014825Z","epoch":1786898477.0148258,"event":"parser.start","query":"","category":"honkai-star-rail","quantity":10}
+{"ts":"2026-08-16T16:41:17.792623Z","epoch":1786898477.792623,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-08-16T16:41:21.266639Z","epoch":1786898481.266639,"event":"parser.run_complete","total_products":10,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cascade"}
+{"ts":"2026-08-16T16:41:25.444460Z","epoch":1786898485.4444609,"event":"parser.start","query":"","category":"valorant-9149","quantity":10}
+{"ts":"2026-08-16T16:41:26.223697Z","epoch":1786898486.2236974,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-08-16T16:41:29.667017Z","epoch":1786898489.6670177,"event":"parser.run_complete","total_products":10,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cascade"}
+{"ts":"2026-08-16T16:41:34.419742Z","epoch":1786898494.419742,"event":"parser.start","query":"","category":"adobe-creative-cloud","quantity":10}
+{"ts":"2026-08-16T16:41:35.105336Z","epoch":1786898495.1053364,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-08-16T16:41:38.962591Z","epoch":1786898498.962592,"event":"parser.run_complete","total_products":10,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cascade"}
+{"ts":"2026-08-16T17:15:20.651949Z","epoch":1786900520.65195,"event":"parser.start","query":"","category":"game-currency","quantity":10}
+{"ts":"2026-08-16T17:15:21.595675Z","epoch":1786900521.5956752,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-08-16T17:15:25.256810Z","epoch":1786900525.2568104,"event":"parser.run_complete","total_products":10,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cascade"}
+{"ts":"2026-08-16T17:15:29.795267Z","epoch":1786900529.7952673,"event":"parser.start","query":"","category":"games-steam","quantity":10}
+{"ts":"2026-08-16T17:15:30.360500Z","epoch":1786900530.3605003,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-08-16T17:15:33.457100Z","epoch":1786900533.4571009,"event":"parser.run_complete","total_products":10,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cascade"}
+{"ts":"2026-08-16T17:15:37.672122Z","epoch":1786900537.6721225,"event":"parser.start","query":"","category":"standoff-2","quantity":10}
+{"ts":"2026-08-16T17:15:38.396628Z","epoch":1786900538.3966286,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-08-16T17:15:41.844039Z","epoch":1786900541.844039,"event":"parser.run_complete","total_products":10,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cascade"}
+{"ts":"2026-08-16T17:19:48.388156Z","epoch":1786900788.3881567,"event":"parser.start","query":"","category":"grand-theft-auto-vi","quantity":10}
+{"ts":"2026-08-16T17:19:50.174630Z","epoch":1786900790.1746304,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-08-16T17:19:53.561403Z","epoch":1786900793.5614033,"event":"parser.run_complete","total_products":10,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cascade"}
+{"ts":"2026-08-16T17:19:57.764591Z","epoch":1786900797.764592,"event":"parser.start","query":"","category":"grand-theft-auto-5-first","quantity":10}
+{"ts":"2026-08-16T17:19:58.732219Z","epoch":1786900798.7322197,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-08-16T17:20:02.255835Z","epoch":1786900802.255835,"event":"parser.run_complete","total_products":10,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cascade"}
+{"ts":"2026-08-16T17:20:06.909990Z","epoch":1786900806.9099898,"event":"parser.start","query":"","category":"minecraft-10054","quantity":10}
+{"ts":"2026-08-16T17:20:07.637844Z","epoch":1786900807.6378448,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-08-16T17:20:09.167709Z","epoch":1786900809.1677094,"event":"parser.run_complete","total_products":10,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cascade"}
+{"ts":"2026-08-16T17:28:21.040812Z","epoch":1786901301.0408127,"event":"parser.start","query":"","category":"mobile-legends","quantity":10}
+{"ts":"2026-08-16T17:28:22.856474Z","epoch":1786901302.8564749,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-08-16T17:28:25.961131Z","epoch":1786901305.961131,"event":"parser.run_complete","total_products":10,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cascade"}
+{"ts":"2026-08-16T17:28:30.219090Z","epoch":1786901310.2190907,"event":"parser.start","query":"","category":"mobile-games","quantity":10}
+{"ts":"2026-08-16T17:28:31.021505Z","epoch":1786901311.0215054,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-08-16T17:28:35.189495Z","epoch":1786901315.1894953,"event":"parser.run_complete","total_products":10,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cascade"}
+{"ts":"2026-08-16T17:28:40.445589Z","epoch":1786901320.4455893,"event":"parser.start","query":"","category":"grand-theft-auto-5-first","quantity":10}
+{"ts":"2026-08-16T17:28:41.206453Z","epoch":1786901321.2064533,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-08-16T17:28:44.125012Z","epoch":1786901324.1260297,"event":"parser.run_complete","total_products":10,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cascade"}
+{"ts":"2026-08-16T17:33:35.209835Z","epoch":1786901615.2098355,"event":"parser.start","query":"","category":"call-of-duty-mobile","quantity":10}
+{"ts":"2026-08-16T17:33:36.229833Z","epoch":1786901616.2298338,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-08-16T17:33:39.638114Z","epoch":1786901619.6381145,"event":"parser.run_complete","total_products":10,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cascade"}
+{"ts":"2026-08-16T17:33:44.164874Z","epoch":1786901624.1648746,"event":"parser.start","query":"","category":"brawl-stars-9063","quantity":10}
+{"ts":"2026-08-16T17:33:45.079146Z","epoch":1786901625.079147,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-08-16T17:33:48.258978Z","epoch":1786901628.2589784,"event":"parser.run_complete","total_products":10,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cascade"}
+{"ts":"2026-08-16T17:33:53.128771Z","epoch":1786901633.1287715,"event":"parser.start","query":"","category":"mobile-legends","quantity":10}
+{"ts":"2026-08-16T17:33:53.970407Z","epoch":1786901633.9704072,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-08-16T17:33:58.027151Z","epoch":1786901638.0271513,"event":"parser.run_complete","total_products":10,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cascade"}
+{"ts":"2026-08-16T19:05:35.852213Z","epoch":1786907135.8522136,"event":"parser.start","query":"","category":"red-dead-redemption-2-10191","quantity":10}
+{"ts":"2026-08-16T19:05:37.080408Z","epoch":1786907137.0804086,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-08-16T19:05:39.654528Z","epoch":1786907139.6545281,"event":"parser.run_complete","total_products":10,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cascade"}
+{"ts":"2026-08-16T19:05:45.187939Z","epoch":1786907145.1879396,"event":"parser.start","query":"","category":"europa-universalis-v","quantity":10}
+{"ts":"2026-08-16T19:05:46.479859Z","epoch":1786907146.4798594,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-08-16T19:05:49.521330Z","epoch":1786907149.5213308,"event":"parser.run_complete","total_products":10,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cascade"}
+{"ts":"2026-08-16T19:05:54.160517Z","epoch":1786907154.160518,"event":"parser.start","query":"","category":"albion-online","quantity":10}
+{"ts":"2026-08-16T19:05:55.194057Z","epoch":1786907155.1940572,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-08-16T19:06:02.541683Z","epoch":1786907162.5416832,"event":"parser.run_complete","total_products":10,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cascade"}
+{"ts":"2026-08-16T19:11:58.955883Z","epoch":1786907518.955883,"event":"parser.start","query":"","category":"mobile-legends","quantity":10}
+{"ts":"2026-08-16T19:12:01.337809Z","epoch":1786907521.3378098,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-08-16T19:12:04.876363Z","epoch":1786907524.8763635,"event":"parser.run_complete","total_products":10,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cascade"}
+{"ts":"2026-08-16T19:12:10.014922Z","epoch":1786907530.0149229,"event":"parser.start","query":"","category":"minecraft-10054","quantity":10}
+{"ts":"2026-08-16T19:12:11.112932Z","epoch":1786907531.1129324,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-08-16T19:12:13.100875Z","epoch":1786907533.1008759,"event":"parser.run_complete","total_products":10,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cascade"}
+{"ts":"2026-08-16T19:12:18.600038Z","epoch":1786907538.6000378,"event":"parser.start","query":"","category":"software-for-gamers-and-streaming","quantity":10}
+{"ts":"2026-08-16T19:12:19.739476Z","epoch":1786907539.7394764,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-08-16T19:12:23.134624Z","epoch":1786907543.1346247,"event":"parser.run_complete","total_products":10,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cascade"}
+{"ts":"2026-08-17T05:58:31.381016Z","epoch":1786946311.3810165,"event":"parser.start","query":"steam","category":"","quantity":1}
+{"ts":"2026-08-17T05:58:33.265697Z","epoch":1786946313.2656972,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-08-17T05:58:35.892485Z","epoch":1786946315.8924856,"event":"parser.run_complete","total_products":1,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cascade"}
+{"ts":"2026-08-17T07:08:14.536040Z","epoch":1786950494.5360403,"event":"parser.run_complete","total_products":2,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"api_client"}
+{"ts":"2026-08-17T07:09:10.078124Z","epoch":1786950550.0781248,"event":"parser.start","query":"","category":"standoff-2","quantity":10}
+{"ts":"2026-08-17T07:09:11.130449Z","epoch":1786950551.1304488,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-08-17T07:09:19.012083Z","epoch":1786950559.0120835,"event":"parser.run_complete","total_products":10,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cascade"}
+{"ts":"2026-08-17T07:09:23.967511Z","epoch":1786950563.967512,"event":"parser.start","query":"","category":"game-currency","quantity":10}
+{"ts":"2026-08-17T07:09:25.121150Z","epoch":1786950565.1211503,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-08-17T07:09:32.213911Z","epoch":1786950572.2139113,"event":"parser.run_complete","total_products":10,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cascade"}
+{"ts":"2026-08-17T07:09:36.463320Z","epoch":1786950576.4633205,"event":"parser.start","query":"","category":"jetbrains","quantity":10}
+{"ts":"2026-08-17T07:09:37.571464Z","epoch":1786950577.5714648,"event":"parser.error","error_type":"no_cookies","detail":"пул вернул None"}
+{"ts":"2026-08-17T07:09:44.956927Z","epoch":1786950584.9569275,"event":"parser.run_complete","total_products":10,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"cascade"}
+{"ts":"2026-08-17T07:11:43.941631Z","epoch":1786950703.941632,"event":"parser.run_complete","total_products":10,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"api_client"}
+{"ts":"2026-08-17T07:12:18.906702Z","epoch":1786950738.9067028,"event":"parser.run_complete","total_products":10,"total_pages":2,"duration_sec":0,"status":"done","fetcher_used":"api_client"}
+{"ts":"2026-08-17T07:12:27.751798Z","epoch":1786950747.7517986,"event":"parser.run_complete","total_products":0,"total_pages":2,"duration_sec":0,"status":"done","fetcher_used":"api_client"}
+{"ts":"2026-08-17T07:33:56.732620Z","epoch":1786952036.73262,"event":"parser.run_complete","total_products":2,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"api_client"}
+{"ts":"2026-08-17T07:36:13.365994Z","epoch":1786952173.3659942,"event":"parser.run_complete","total_products":10,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"api_client"}
+{"ts":"2026-08-17T07:37:39.361530Z","epoch":1786952259.3615305,"event":"parser.run_complete","total_products":10,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"api_client"}
+{"ts":"2026-08-17T07:38:14.706089Z","epoch":1786952294.7060895,"event":"parser.run_complete","total_products":10,"total_pages":2,"duration_sec":0,"status":"done","fetcher_used":"api_client"}
+{"ts":"2026-08-17T07:38:23.612579Z","epoch":1786952303.612579,"event":"parser.run_complete","total_products":0,"total_pages":2,"duration_sec":0,"status":"done","fetcher_used":"api_client"}
+{"ts":"2026-08-17T07:47:00.065115Z","epoch":1786952820.065116,"event":"parser.run_complete","total_products":2,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"api_client"}
+{"ts":"2026-08-17T08:43:49.388571Z","epoch":1786956229.388572,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"api_client"}
+{"ts":"2026-08-17T08:44:20.377345Z","epoch":1786956260.377345,"event":"parser.run_complete","total_products":3,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"api_client"}
+{"ts":"2026-08-17T08:45:26.538910Z","epoch":1786956326.5389102,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"api_client"}
+{"ts":"2026-08-17T08:45:44.551432Z","epoch":1786956344.5514326,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"api_client"}
+{"ts":"2026-08-17T08:46:27.052336Z","epoch":1786956387.0523365,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"api_client"}
+{"ts":"2026-08-17T08:46:49.620381Z","epoch":1786956409.6203816,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"api_client"}
+{"ts":"2026-08-17T08:47:22.089004Z","epoch":1786956442.089004,"event":"parser.run_complete","total_products":0,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"api_client"}
+{"ts":"2026-08-17T08:48:14.987910Z","epoch":1786956494.9879098,"event":"parser.run_complete","total_products":8,"total_pages":1,"duration_sec":0,"status":"done","fetcher_used":"api_client"}

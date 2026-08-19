@@ -1,4 +1,0 @@
-{
-  "error": "string argument should contain only ASCII characters",
-  "raw": "\u0005\u000f�{\"data\":{\"whitelisted_ips\":\"\"}}\u0003"
-}
